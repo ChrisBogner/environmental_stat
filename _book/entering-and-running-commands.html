@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>4 Entering and running commands | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.7.4/header-attrs.js"></script><script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="SoSe 2021">Environmental Statistics</a>:
+        <small class="text-muted">SoSe 2021</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preface</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li><a class="" href="using-r-markdown-files.html"><span class="header-section-number">3</span> Using R Markdown files</a></li>
+<li><a class="active" href="entering-and-running-commands.html"><span class="header-section-number">4</span> Entering and running commands</a></li>
+<li><a class="" href="data-types--a-brief-intro.html"><span class="header-section-number">5</span> Data types- a brief intro</a></li>
+<li><a class="" href="practice-on-your-own.html"><span class="header-section-number">6</span> Practice on your own!</a></li>
+<li><a class="" href="turning-in-your-work.html"><span class="header-section-number">7</span> Turning in your work</a></li>
+<li><a class="" href="logging-out-of-the-server.html"><span class="header-section-number">8</span> Logging out of the Server</a></li>
+<li><a class="" href="literatur.html">Literatur</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="entering-and-running-commands" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Entering and running commands<a class="anchor" aria-label="anchor" href="#entering-and-running-commands"><i class="fas fa-link"></i></a>
+</h1>
+<p>The code chunks are where you put R code in a R Markdown file. So far, your “knitted” file (your output document file) doesn’t show anything, because we did not put any content in the code chunks yet!</p>
+<p>Using your first code chunk, type the following command to create a new variable called <code>x</code> with the value of 6.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">6</span></code></pre></div>
+<p>The arrow <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> is called an <strong>ASSIGNMENT OPERATOR</strong>, and tells R to save an object called <code>x</code> that has the value of 6. This is similar to saving a value in a graphing calculator.</p>
+<blockquote>
+<p>Note that whatever you want to save must always be to the left of the assignment operator!!</p>
+</blockquote>
+<p>To actually <strong>RUN</strong> this command in your console, you have a few options:</p>
+<ul>
+<li>click on the green triangle in the code chunk</li>
+<li>highlight the code and hit <code>Control-Enter</code> on a PC or <code>Command-Return</code> on a Mac</li>
+</ul>
+<p>Think of “running” code in your console as telling R “do this.”</p>
+<div id="license">
+<p>Note that you now have a new object in your workspace, called x!</p>
+</div>
+<div class="inline-figure"><img src="figures/workspacex.png" style="width:100.0%"></div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="using-r-markdown-files.html"><span class="header-section-number">3</span> Using R Markdown files</a></div>
+<div class="next"><a href="data-types--a-brief-intro.html"><span class="header-section-number">5</span> Data types- a brief intro</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#entering-and-running-commands"><span class="header-section-number">4</span> Entering and running commands</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Environmental Statistics</strong>: SoSe 2021" was written by Christina Bogner. It was last built on 2021-04-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
