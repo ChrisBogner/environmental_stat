@@ -1,0 +1,2458 @@
+\documentclass{article}
+\usepackage{fullpage, amssymb, url, natbib, pdfpages, lastpage, lscape, bbm}
+\usepackage[colorlinks = true, linkcolor = blue, urlcolor  = blue, citecolor = blue, anchorcolor = blue]{hyperref}
+
+\setlength{\parindent}{0pt}
+
+%\pagenumbering{gobble}
+% All questions from 2016-09 Fall (inclusive) to present
+
+\begin{document}
+
+<<include=FALSE>>=
+library(tidyverse)
+library(scales)
+library(moderndive)
+library(knitr)
+library(patchwork)
+library(babynames)
+opts_chunk$set(concordance=TRUE, warning = FALSE, message = FALSE)
+
+# Set rounding to 2 digits
+options(digits=2)
+
+# Load all data
+DD_vs_SB_orig <- read_csv("Data/DD_vs_SB.csv")
+bw_orig <- read_csv("Data/BigWoods2015.csv")
+africa <- read_csv("Data/africa_results.csv") %>%
+  mutate(priming_number = ifelse(priming_number == "Primed with 14 countries", "14 countries", "94 countries")) %>%
+  rename(
+    priming = priming_number,
+    countries = how_many_countries
+    )
+evals_orig <- evals
+
+# gapminder
+library(gapminder)
+gapminder2007 <- gapminder %>%
+  filter(year == 2007) %>%
+  select(country, continent, lifeExp)
+@
+
+\begin{center}
+\textbf{SDS 192 Introduction Data Sciences: Midterm II}\\
+\textbf{Friday October 4th 5pm through Sunday October 6th 11:55pm, 2019}\\
+\end{center}
+
+\vspace{0.25in}
+
+\begin{center}
+{\Large
+\begin{tabular}{|l||l|c|}
+  \hline
+  Question & Points & Points Deducted\\
+  \hline\hline
+  1 & 9 = 5 + 2 + 2&  \\
+	\hline\hline
+	Total & 34 & \\
+	\hline
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.5in}
+
+\noindent\textbf{Instructions:}
+\begin{itemize}
+\item This midterm lasts {\bf 140 minutes}, including transit time to the writing area. \textbf{Timestamps will be verified; exams whose timestamps indicate more than 140 minutes will be penalized.}
+\item There are \pageref{LastPage} pages in this midterm. Please restaple the pages \textbf{in the correct order}.
+\item This exam is closed-book, to be individually completed and without the aid of the internet or mobile phones. You are allowed colored pens/pencils.
+\item In case of potential errors or ambiguity on the exam, please note them, state your assumptions, and use your best judgement.
+\end{itemize}
+
+\noindent\textbf{Honor Code Statement:} Smith College expects all students to be honest and committed to the principles of academic and intellectual integrity in their preparation and submission of course work and examinations. Students and faculty at Smith are part of an academic community defined by its commitment to scholarship, which depends on scrupulous and attentive acknowledgment of all sources of information, and honest and respectful use of college resources.\\
+
+\noindent\textbf{Dishonest Examination Behavior:} The unauthorized giving or receiving of information during examinations or quizzes (this applies to all types, such as written, oral, lab or take-home) is dishonest examination behavior. \\
+
+\noindent\textbf{Signature:} I have read the above instructions and agree to abide by the Honor Code in taking this exam.  I will not speak with anyone about the exam until after the midterm period is over. \\
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{cr}
+  \hspace{5in} & (Printed Name) \\
+  \hline \\
+  \\
+  \\
+  \hspace{5in} & (Signature) \\
+  \hline \\
+\end{tabular}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%
+% Short Answer
+%
+%------------------------------------------------------------------------------
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Short Answer}
+%
+%------------------------------------------------------------------------------
+%-----------------------------------
+\noindent \textbf{a)} In terms of the ``Grammar of Graphics'' what is a statistical graphic?
+\vspace{4.5cm}
+
+
+%-----------------------------------
+\noindent \textbf{b)} What is the chief difference between a barplot and a histogram?
+\vspace{4.5cm}
+
+
+%-----------------------------------
+\noindent \textbf{c)} What is \textbf{overplotting}? Name the two ways seen in class to deal with it.
+\vspace{7cm}
+
+
+%-----------------------------------
+\noindent \textbf{c)} We saw in class that there are two ways to create a barplot using {{\tt ggplot}}: either using {{\tt geom\_bar()}} or using {{\tt geom\_col()}}. Illustrate the need for these two different ways using simple data frame examples.
+\vspace{4cm}
+
+
+%-----------------------------------
+\noindent \textbf{d)}  A smoother allows one to focus on a trend in graphic by separating out the \textit{A} from the \textit{B}. What are:\\
+\vspace{0.5cm}
+\noindent \textit{A}: \line(1,0){400}\\
+\vspace{0.5cm}
+\noindent \textit{B}: \line(1,0){400}
+\vspace{7cm}
+
+
+%-----------------------------------
+\noindent \textbf{a)} Researchers are looking at the effect of a drug on heart
+attacks.  They first split patients in the study into low-risk and high-risk
+groups, then randomly assign half the patients from each group to the control
+and the other half to the treatment, as shown in the figure below.
+
+\begin{center}
+\includegraphics[width=3in]{Figures/blocking.png}
+\end{center}
+
+\vspace{0.5cm}
+\noindent This is an example of: \line(1,0){300}.\\
+
+
+%-----------------------------------
+\noindent \textbf{b)} Alfred Kinsey, a sexologist in the 1940's, wants to study
+the sexual behavior of American males. After interviewing a number of males, he
+asks them to refer other men they know and conducts interviews with them. He repeats
+this process until 5500 men are interviewed. From an analysis of this data, he
+declares that ``10\% of all American males are exclusively homosexual.'' Comment
+on his research design specifically in two sentences or less, using language from this course.
+
+\vspace{7cm}
+
+
+
+%-----------------------------------
+\noindent \textbf{a)} Say a class of 30 introductory statistics students took a test where the median score was 17 and the interquartile range was 0. What are the 25th and 75th percentiles of test scores? Hint: A picture may help.\\
+\vspace{4cm}
+
+
+%-----------------------------------
+\noindent \textbf{b)} Recall in Problem Set 02 you created the following scatterplot visualizing the relationship between
+
+\begin{itemize}
+\item the proportion that voted Trump in the 2016 election
+\item the average annual hate crimes per 100,000 population between 2010-2015 as reported by the FBI
+\end{itemize}
+
+for the 50 states and the District of Columbia (DC). Here is what RStudio looks like after running the necessary code in the Console:
+
+<<echo=FALSE, eval=FALSE, warning=FALSE, fig.height=4, highlight=FALSE>>=
+library(ggplot2)
+library(fivethirtyeight)
+ggplot(data = hate_crimes, mapping = aes(x = share_vote_trump, y = avg_hatecrimes_per_100k_fbi)) +
+  geom_point()
+@
+
+\vspace{0.25cm}
+
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/hate_crimes.png}
+\end{center}
+
+\vspace{0.25cm}
+
+Other than by counting the number of points, based on the above output how can we know the number of points that are in above plot?
+
+\vspace{4cm}
+
+
+%-----------------------------------
+\noindent \textbf{d)} For which of the following pairs of variables would you visualize with a scatterplot? Circle which pairs.
+
+\begin{itemize}
+\item Pair 1: ``Distance from school in miles'' and ``mode of transportation to school (bike, walking, bus)”
+\item Pair 2: ``Number of years at a job'' and ``Salary''
+\item Pair 3: ``Years experience playing an instrument'' and ``number of mistakes made playing a song''
+\item Pair 4: ``Number of years since a person retired'' and ``favorite sport''
+\end{itemize}
+
+
+%-----------------------------------
+\noindent \textbf{c)} What is the chief difference between an experiment being
+blinded vs double-blinded?
+\vspace{6cm}
+
+
+%-----------------------------------
+\noindent \textbf{d)} An analysis of Middlebury faculty salaries shows that on average women get paid significantly less than men. However, an astute statistician observes that
+
+\begin{itemize}
+\item Younger faculty tend to get paid less than older faculty due to seniority.
+\item Amongst the younger faculty, there is better representation of women because of shifts in the labor pool and hiring practices.
+\end{itemize}
+
+In this example, age is an example of what?
+\vspace{6cm}
+
+
+%-----------------------------------
+\noindent \textbf{e)} (Continued from part d) Thus an analysis of Middlebury faculty salaries should \underline{\hspace{4cm}} for age.\\
+
+
+%-----------------------------------
+\noindent \textbf{c)} The example from class where we studied the causal effect of shoes on the likelihood of waking up with a headache is an observational study. Why is it an observational study? \textbf{Answer in one sentence}.\\
+\vspace{4cm}
+
+
+%-----------------------------------
+\noindent \textbf{d)} Below we have a standard Normal $Z$-curve along with 5 vertical dashed lines at $z$ = -1.96, -1, 0, 1, and 1.96 cutting the $x$-axis into 6 segments. In the plot below, write down the 6 proportion of values under the $Z$-curve in each of the 6 segments. Hint: Your 6 proportions should sum to 100\%.\\
+
+<<echo=FALSE, fig.height=3, fig.width=6>>=
+ggplot(tibble(x = c(qnorm(0.0001), qnorm(1-0.0001))), aes(x)) +
+  stat_function(fun = dnorm, geom = "line") +
+  coord_cartesian(xlim = c(-3,3)) +
+  labs(x="z", y="") +
+  geom_vline(xintercept = c(-1.96, -1, 0, 1, 1.96), linetype = "dashed", alpha = 0.3) +
+  geom_hline(yintercept = 0) +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  ) +
+  labs(title = "Standard normal curve")
+@
+
+
+%-----------------------------------
+\noindent \textbf{a)} Analysis of Variance (ANOVA) compares $k$ group means for the following hypothesis test:
+\begin{eqnarray*}
+&& H_0: \mu_1 = \mu_2 = \ldots = \mu_k\\
+\mbox{vs.}&& H_A: \mbox{At least one of the $k$ means is different}
+\end{eqnarray*}
+
+For example, in class we compared the mean life expectancy of countries in $k=5$ continents. What other statistical technique covered in this course would allow us to similarly compare group means?
+
+\vspace{2cm}
+
+
+%-----------------------------------
+\noindent \textbf{b)} Say you are in a hypothesis testing situation and your estimate of the standard error is \textit{underestimating} the true value of the standard error.  Which of the following statements are true:
+
+\begin{enumerate}
+\item[I:] You will be more likely to incorrectly reject $H_0$.
+\item[II:] You will be more likely to incorrectly fail to reject $H_0$.
+\item[III:] It makes no difference.
+\end{enumerate}
+
+
+%-----------------------------------
+\noindent \textbf{c)} Designed experiments, clinicial trials, and A/B tests are concerned with random $X$ whereas polls and surveys are concerned with random $Y$. What are $X$ and $Y$?\\
+\vspace{3cm}
+
+
+%-----------------------------------
+\noindent \textbf{d)} A \textit{test statistic} is a $X$ of the population parameter of interest used for hypothesis testing. What is $X$?\\
+\vspace{2cm}
+
+
+%-----------------------------------
+\noindent \textbf{f)} The \textit{null distribution} used in hypothesis testing for computing $p$-values is the $X$ distribution of the test statistic assuming $Y$. What are $X$ and $Y$?
+
+
+%-----------------------------------
+\noindent \textbf{i)} Name all 4 conditions for inference for regression.\\
+\vspace{4cm}
+
+
+%-----------------------------------
+\noindent \textbf{j)} Say you have data on the price of three kinds of fruit in a data frame \verb#fruits#. Is this data in ``tidy'' format? If not, rewrite the data frame so that it is. \\
+
+<<echo = FALSE>>=
+tibble(
+  Date = as.Date('2009-01-01') + 0:1,
+  `Apple` = dollar(c(173.55, 172.61)/100),
+  `Orange` = dollar(c(171.58, 173.89)/100),
+  `Melon` = dollar(c(173.65, 174.87)/100)
+) %>%
+  gather(Type, Price, -Date) %>%
+  kable()
+@
+\vspace{5cm}
+
+
+%-----------------------------------
+\noindent \textbf{a)} For each of these five regression scenarios, name an appropriate visualization (along with any distinguishing features) that graphically summarizes the relationship between the outcome variable $y$ and the explanatory/predictor variable(s).
+
+\begin{enumerate}
+\item Simple linear regression with one numerical predictor
+\item Simple linear regression with one categorical predictor
+\item Multiple regression with two numerical predictors
+\item Multiple regression with one categorical and one numerical predictor
+\item Multiple regression with two categorical predictors
+\end{enumerate}
+\vspace{7cm}
+
+
+%-----------------------------------
+\noindent \textbf{b)} Consider the following hypothetical study. Say you collect two variables of information from a population of interest: $y = $ life expectancy and $x = $ annual income out of college measured in units of thousands of dollars. You find that
+
+\begin{enumerate}
+\item the correlation coefficient is 0.25
+\item the fitted regression line $\widehat{y} = 45 + 0.5 x$
+\end{enumerate}
+
+Write down what the following two quantities would be if $x$ was not measured in units of thousands of dollars, but measured in units of dollars:
+
+\begin{enumerate}
+\item the correlation coefficient
+\item the fitted slope $b_1$ of the regression line $\widehat{y} = b_0 + b_1 x$
+\end{enumerate}
+
+
+%-----------------------------------
+\noindent \textbf{c)} Name one situation when doing data analysis/modeling where $\log10$-transformations are useful? Answer in \textbf{20 words} or less.\\
+\vspace{5cm}
+
+
+%-----------------------------------
+\noindent \textbf{d)} Say we perform a regression to model an instructors' teaching score as a function of their beauty score, and obtain the following residual plot on the left which exhibits heteroskedasticity. Draw a \textit{rough} sketch of what the scatterplot of $x$ and $y$ would look like given that the red line is the fitted regression line.\\
+
+<<echo=FALSE, fig.height=9/3>>=
+evals <- evals_orig %>%
+  select(score, ethnicity, gender, language, age, bty_avg, rank)
+temp <- evals
+# temp$`Example 1` <- ((evals$bty_avg-5)^2 - 6 + rnorm(nrow(evals), 0, 0.5))*0.4
+# temp$`Example 2` <- (rnorm(nrow(evals), 0, 0.075*evals$bty_avg^2))*0.4
+
+# temp <- temp %>%
+#   select(bty_avg, `Example 1`, `Example 2`) %>%
+#   gather(type, eps, -bty_avg)
+# ggplot(temp, aes(x=bty_avg, y=eps)) +
+#   geom_point() +
+#   labs(x="Beauty Score", y="Residual") +
+#   geom_hline(yintercept=0, col="blue", size =1) +
+#   facet_wrap(~type)
+
+temp$`Example 1` <- ((evals$bty_avg-5)^2 - 6 + rnorm(nrow(evals), 0, 0.5))*0.4
+temp$`Example 2` <- (rnorm(nrow(evals), 0, 0.023*evals$bty_avg^2))*0.4
+plot1 <- ggplot(temp, aes(x=bty_avg, y=`Example 2`)) +
+  geom_point() +
+  labs(x="x: Beauty score", y="Residual") +
+  geom_hline(yintercept=0, col="blue", size =1)
+plot2 <- ggplot(temp, aes(x=bty_avg, y=score)) +
+  labs(x="x: Beauty score", y="y: Teaching score") +
+  geom_smooth(method="lm", col="red", se=FALSE) +
+  coord_cartesian(ylim=c(3, 5.5))
+plot1 + plot2
+@
+
+
+
+
+%-----------------------------------
+\noindent \textbf{e)} Say we perform a residual analysis of a regression model and find that the residuals exhibit very strong heteroskedasticity as above. What implications does this have for the results of our analysis?\\
+\vspace{3cm}
+
+
+
+%-----------------------------------
+\noindent \textbf{d)} Name two different reasons (one for each type of study we've seen in class) why it's difficult to establish the causal effect of college on future earnings.
+
+
+%-----------------------------------
+\noindent \textbf{f)} For each scenario, determine the random sampling method used by the managers at a large company who wished to know the percentage of employees who feel ``extremely satisfied'' to work there:
+
+\begin{enumerate}
+\item Use the company email directory to contact 150 employees from among those employed for less than 5 years, 150 from among those employed for 5--10 years, and 150 from among those employed for more than 10 years.
+\item Use the company email directory to contact every 50th employee on the list.
+\item Select several divisions of the company at random. Within each division, draw a simple random sample of employees to contact.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%
+% Data visualization
+%
+%------------------------------------------------------------------------------
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Five Named Graphs}
+%
+%------------------------------------------------------------------------------
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/FNG2.png}
+\end{center}
+
+What are:
+
+
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Barplots}
+%
+%------------------------------------------------------------------------------
+
+Say you have a data frame called {\tt example} that has 3 variables, 4 rows, and a header row.
+
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
+example <- tibble(
+  fruit = c("apple", "apple", "orange", "orange"),
+  city = c("Toronto", "Montreal", "Toronto", "Montreal"),
+  number = c(5, 7, 4, 3)
+)
+example %>%
+  kable()
+@
+
+Draw what the visualization resulting from the following code looks like:
+
+<<eval = FALSE>>=
+ggplot(data = example, mapping = aes(x = fruit)) +
+  geom_bar() +
+  labs(x = "Fruit type", y = "Number")
+@
+
+
+Draw what the visualization resulting from the following code looks like:
+
+<<eval = FALSE>>=
+ggplot(data = example, mapping = aes(x = fruit, y = number)) +
+  geom_col() +
+  labs(x = "Fruit type", y = "Number")
+@
+
+Draw what the visualization resulting from the following code looks like:
+
+<<eval = FALSE>>=
+ggplot(data = example, mapping = aes(x = fruit, y = number, fill = city)) +
+  geom_col(position = "dodge") +
+  labs(x = "Fruit type", y = "Number", fill = "City")
+@
+
+
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{America Runs on Starbucks?}
+%
+%------------------------------------------------------------------------------
+
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
+# Load DD vs SB data, get FIPS codes of counties of interest, and only consider
+# these
+DD_vs_SB <- DD_vs_SB_orig %>%
+  select(Geo_FIPS, med_inc, sbper1000, per1000) %>%
+  rename(
+    FIPS = Geo_FIPS,
+    Starbucks = sbper1000,
+    `Dunkin Donuts` = per1000
+  ) %>%
+  gather(Type, shops_per_1000, -c(FIPS, med_inc))
+
+# FIPS of 6 counties
+county_names <- DD_vs_SB$FIPS %>%
+  as.character() %>%
+  str_sub(1,5) %>%
+  unique()
+@
+
+<<echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE>>=
+# Load counties map, but only for MA
+# counties_shp <- us_counties()
+# counties_data <- counties_shp@data
+# counties_polygon <- tidy(counties_shp, region="geoid")
+# counties <- left_join(counties_polygon, counties_data, by=c("id"="geoid"))
+# counties <- counties %>%
+#   filter(state_name == "Massachusetts")
+#
+# # Filter county map to just 6 counties of
+# counties_interest <- counties %>%
+#   filter(id %in% county_names)
+@
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=16/3, fig.height=9/3>>=
+# ggplot() +
+#   geom_polygon(data=counties_interest, aes(x=long, y=lat, group=group), fill="lightblue") +
+#   geom_path(data=counties, aes(x=long, y=lat, group=group), col="black") +
+#   coord_map() +
+#   theme_bw() +
+#   labs(x="longitude", y="latitude", title="Six Eastern Counties in MA")
+@
+
+A researcher from eastern Massachusetts is a big Starbucks fan. She has a suspicion that Starbucks tend to locate in richer neighborhoods, while this is not the case for Dunkin Donuts. She writes code to pull data from the internet about all 1024 census tracts (areas where decennial census data are collected) in Eastern Massachusetts. She summarizes her results in the following graphic: % in 6 Eastern Massachusetts counties, specifically Bristol, Essex, Middlesex, Norfolk, Plymouth, and Suffolk counties. She summarizes her results in the following graphic:
+
+\begin{center}
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8*1.1, fig.height=3.5*1.1>>=
+ggplot(DD_vs_SB, aes(x=med_inc, y=shops_per_1000)) +
+  geom_point(aes(col=Type)) +
+  facet_wrap(~Type) +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(x="Median Household Income", y="# of shops per 1000 people",
+       title="Coffee/Cafe Comparison in Eastern MA") +
+  scale_color_manual(values=c("orange", "forestgreen"))
+@
+\end{center}
+
+\begin{itemize}
+\item[a)] Write out the elements of the ``Grammar of Graphics'' that need to be
+specified to create this graphic. You do not need to specify the axes labels, the plot title, nor the regression lines
+\item[c)] Assuming there are no missing data, how many rows are in the data frame that we input into the {{\tt ggplot()}} function?
+\item[d)] Does the presented visualization support or contradict the researcher's suspicion? Why?
+\end{itemize}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Boxplots}
+%
+%------------------------------------------------------------------------------
+The asking prices for a sample of 15 textbooks currently being sold are listed below. For convenience, the data have been ordered:
+
+\vspace{0.25cm}
+
+<<echo=FALSE>>=
+prices <- c(-11, 12, 15, 20, 20,
+            30, 30, 30, 30, 40,
+            40, 40, 40, 41, 51)
+matrix(prices, nrow = 15) %>%
+  t() %>%
+  kable()
+@
+
+\vspace{0.25cm}
+
+\noindent Furthermore, the following three \textit{summary statistics} have been computed:
+
+\vspace{0.25cm}
+
+<<echo=FALSE>>=
+tibble(prices = prices) %>%
+  summarize(
+    `1st quartile` = quantile(prices, probs=0.25, type = 2),
+    `Average` = mean(prices),
+    `3rd quartile` = quantile(prices, probs=0.75, type = 2)
+  ) %>%
+  kable()
+@
+
+\vspace{0.25cm}
+
+\noindent \textbf{a)} What is the interquartile range (IQR) for this data?\\
+
+\noindent \textbf{b)} Is the IQR a measure of center or a measure of spread of a numerical variable? Circle your response.\\
+
+\noindent \textbf{c)} Draw the boxplot for this dataset. Be sure to mark all relevant numerical values:\\
+
+<<echo=FALSE, fig.height=4>>=
+tibble(prices = prices) %>%
+  ggplot(aes(x = "", y = prices)) +
+  geom_boxplot() +
+  coord_flip(ylim = c(-20, 50)) +
+  labs(x = "", y = "price (in thousands of dollars)") +
+  theme(axis.ticks = element_blank(), axis.text.y = element_blank()) +
+  scale_y_continuous(breaks = seq(-10, 50, by=10))
+@
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Car Prices}
+%
+%------------------------------------------------------------------------------
+The asking prices (in thousands of dollars) for a sample of 15 cars currently being sold are listed below. For convenience, the data have been ordered:
+
+\vspace{0.25cm}
+
+<<echo=FALSE>>=
+prices <- c(11, 12, 20, 25, 25,
+            30, 30, 30, 30, 35,
+            35, 35, 35, 39, 39)
+matrix(prices, nrow = 15) %>%
+  t() %>%
+  kable()
+@
+
+\vspace{0.25cm}
+
+\noindent Furthermore, the following three \textit{summary statistics} have been computed:
+
+\vspace{0.25cm}
+
+<<echo=FALSE>>=
+tibble(prices = prices) %>%
+  summarize(
+    `1st quartile` = quantile(prices, probs=0.25, type = 2),
+    `2nd quartile` = quantile(prices, probs=0.5, type = 2),
+    `3rd quartile` = quantile(prices, probs=0.75, type = 2)
+  ) %>%
+  kable()
+@
+
+\vspace{0.25cm}
+
+\noindent \textbf{a)} What is the interquartile range (IQR) for this data?\\
+
+\noindent \textbf{b)} Is the IQR a measure of center or a measure of spread of a numerical variable? Circle your response.\\
+
+\noindent \textbf{c)} Draw the boxplot for this dataset:\\
+
+<<echo=FALSE, fig.height=4>>=
+tibble(prices = prices) %>%
+  ggplot(aes(x = "", y = prices)) +
+  # geom_boxplot() +
+  coord_flip(ylim = c(-10, 50)) +
+  labs(x = "", y = "price (in thousands of dollars)") +
+  theme(axis.ticks = element_blank(), axis.text.y = element_blank()) +
+  scale_y_continuous(breaks = seq(-10, 50, by=10))
+@
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Babynames}
+%
+%------------------------------------------------------------------------------
+
+The {{\tt babynames}} dataset contains all babynames used more than 5 times for any given year, split by sex (as recorded by the Social Security), for the years 1880 through 2015. Here is a preview of the first 10 rows:\\
+
+
+<<echo=FALSE>>=
+babynames_subset <- babynames %>%
+  filter(name %in% c("Riley", "Casey"))
+babynames_subset %>%
+  slice(1:10) %>%
+  kable()
+@
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8*1.1, fig.height=3.5*1.1>>=
+ggplot(babynames_subset, aes(x=year, y=prop, col=sex)) +
+  geom_line() +
+  facet_wrap(~name) +
+  labs(x = "Year", y = "Proportion", title = "Comparison of Casey and Riley")
+@
+
+\vspace{0.25cm}
+
+\noindent Furthermore, the following three \textit{summary statistics} have been computed:
+
+\vspace{0.25cm}
+
+<<echo=FALSE>>=
+tibble(prices = prices) %>%
+  summarize(
+    `1st quartile` = quantile(prices, probs=0.25, type = 2),
+    `2nd quartile` = quantile(prices, probs=0.5, type = 2),
+    `3rd quartile` = quantile(prices, probs=0.75, type = 2)
+  ) %>%
+  kable()
+@
+
+\vspace{0.25cm}
+
+\noindent \textbf{a)} What is the interquartile range (IQR) for this data?\\
+
+\noindent \textbf{b)} Is the IQR a measure of center or a measure of spread of a numerical variable? Circle your response.\\
+
+\noindent \textbf{c)} Draw the boxplot for this dataset:\\
+
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Family income by city}
+%
+%------------------------------------------------------------------------------
+NPR recently posted an article titled ``How Much (Or Little) The Middle Class Makes, In 30 U.S. Cities.''  It included the image on the following page.
+
+\begin{enumerate}
+\item[a)] This image most closely resembles what statistical visualization we've seen?
+\item[b)] Which city has the third highest mean family income?
+\item[c)] Which four cities have the highest income disparity in the US?
+\item[d)] Quantify this income disparity for only one of the four chosen cities in part c) using a summary statistic of your choice.
+\item[e)] What proportion of Nashville families had a family income of \$100K or more?
+\item[f)] What proportion of Nashville families had a family income of \$80K or more?
+\end{enumerate}
+
+\noindent \textbf{WRITE YOUR RESPONSES BELOW:}
+
+\includepdf[pages={1}]{Figures/child.pdf}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Gapminder}
+%
+%------------------------------------------------------------------------------
+Consider a subset of the {{\tt gapminder}} dataset we've seen numerous times in class:
+
+<<echo=TRUE, warning=FALSE, message=FALSE, fig.width=8*1.1, fig.height=3.5*1.1>>=
+library(gapminder)
+gapminder_subset <- gapminder %>%
+  filter(year %in% c(1957, 2007))
+gapminder_subset
+@
+
+Using this data, we can create the following plot:\\
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8*1.1, fig.height=3.5*1.1>>=
+ggplot(gapminder_subset, aes(x = gdpPercap, y = lifeExp, col = continent, size = pop)) +
+  geom_point() +
+  scale_x_log10(labels = scales::comma) +
+  labs(
+    x = "GDP per capita", y = "Life expectancy",
+    color = "Continent", size = "Population"
+  ) +
+  facet_wrap(~year)
+@
+
+\newpage
+
+\noindent \textbf{a)} Write out \textbf{in bullet point form} all the elements of the ``Grammar of Graphics'' that need to be specified in a {{\tt ggplot()}} function call to create this graphic. Note
+
+\begin{itemize}
+\item You don't need to write code, you only need to specify all components of the graphic.
+\item There is no need to specify the x and y axes labels.
+\end{itemize}
+
+\noindent \textbf{b)} Why does the x-axis increase on a multiplicative scale (1000, 10000, 100000) instead of an additive scale (Ex: 1000, 2000, 3000)?
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Maps}
+%
+%------------------------------------------------------------------------------
+Say you are walking around the Forestry Department at the University of Michigan and you see the following visualization posted on a bulletin board.\\
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+bw <- bw_orig %>%
+  tbl_df() %>%
+  # Define dbh and growth variables
+  mutate(
+    dbh08 = gbh08/pi,
+    dbh14 = gbh14/pi
+    ) %>%
+  select(x, y, species, dbh08, dbh14) %>%
+  gather(year, dbh, dbh08, dbh14) %>%
+  filter(species %in% c("Red Oak", "American Beech")) %>%
+  mutate(
+    year=ifelse(year=="dbh08", "2008", "2014")
+    ) %>%
+  rename(size=dbh)
+
+ggplot(data=bw, aes(x=x, y=y, size=size, shape=species)) +
+  geom_point() +
+  facet_wrap(~year) +
+  labs(x = "", y = "", title="Edwin S. George Forestry Reserve Map",
+       size = "size in cm") +
+  scale_size(range = c(0, 2)) +
+  # scale_colour_brewer(palette = "Set3") +
+  theme_bw()
+@
+
+\noindent \textbf{a)} The geometric object of this visualization is ``points.'' Map all the aesthetic attributes of this visualization to variables of a hypothetical dataset as is required by the ``grammar of graphics'' and identify all other additional components that you need to specify to create this visualization. You may treat the title of the visualization and the legends as given.
+
+\vspace{6cm}
+
+% \noindent \textbf{b)} What is the chief comparison being made in this plot? Answer in \textbf{one sentence}.
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Histograms}
+%
+%------------------------------------------------------------------------------
+In a statistics class with 140 students, the professor records how much money (in dollars) each student has in their possession during the first class of the semester. The histogram shown below represents the data they collected: \\
+
+<<echo=FALSE, fig.height=4>>=
+money <- c(
+  rep(5, times = 60),
+  rep(15, times = 42),
+  rep(25, times = 20),
+  rep(35, times = 5),
+  rep(45, times = 2),
+  rep(55, times = 5),
+  rep(105, times = 6)
+)
+tibble(money = money) %>%
+  ggplot(aes(x = money)) +
+  geom_histogram(binwidth = 10, boundary = 0) +
+  labs(x = "?", y = "?")
+@
+
+\noindent \textbf{a)} What is the variable on the horizontal (x) axis?\\
+
+\vspace{2cm}
+
+\noindent \textbf{b)} What is the quantity on the vertical (y) axis?\\
+
+\vspace{2cm}
+
+\noindent \textbf{c)} The height of the second bar is 42. What does that tell us? Say precisely in \textbf{one sentence}.\\
+
+\vspace{4cm}
+
+\noindent \textbf{d)} Fill in the blanks: The median amount of money possessed is between \$ \line(1,0){50}\\
+and \$ \line(1,0){50}. Show work or briefly explain your reasoning.
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Histograms}
+%
+%------------------------------------------------------------------------------
+
+\noindent \textbf{a)} Which of these two histograms exhibits more variability in the variable {{\tt x}}?
+\vspace{0.5cm}
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8, fig.height=4.5>>=
+library(broom)
+library(tidyverse)
+example <- tibble(
+  x = c(rep(3, 1), rep(4, 4), rep(5, 10), rep(6, 4), rep(7, 1), rep(3:7, each=4)),
+  group = c(rep("A", 20), rep("B", 20))
+)
+
+ggplot(data=example, aes(x=x)) +
+  geom_histogram(bins=5, col="black") +
+  facet_wrap(~group)
+
+# example %>%
+#   group_by(group, x) %>%
+#   count()
+@
+
+\vspace{5cm}
+
+\noindent \textbf{b)} Write the rough pseudo-code of the {{\tt ggplot()}} command
+that created the above plot, in particular specifying all elements of the ``Grammar of Graphics.''
+If you feel confident writing the code directly, then feel free to do so.
+\vspace{0.5cm}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Exploratory data analysis via visualizations}
+%
+%------------------------------------------------------------------------------
+
+Continuing the previous {{\tt africa}} question, for the remainder of this midterm let the outcome variable $y$ be the number of countries a student guesses.\\
+
+\noindent \textbf{a)} Name an ideal exploratory data visualization for the relationship between $y$ and {{\tt height}}.
+
+\vspace{2.5cm}
+
+\noindent \textbf{b)} We present an exploratory boxplot of the relationship between $y$ and {{\tt priming}}. It is a fact that there is more variation in responses amongst the students primed with the number 94. How is this apparent in the visualization? Compute the approximate values of a \textit{summary statistic} we've seen in class to justify your answer.
+
+\vspace{0.25cm}
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4.5, fig.width=8, fig.align='center'>>=
+ggplot(africa, aes(x = priming, y = countries)) +
+  geom_boxplot() +
+  labs(x = "Priming number", y = "Number of countries in Africa guess",
+       title = "Relationship between number of countries guessed and priming number") +
+  scale_y_continuous(breaks = seq(0, 130, by=20))
+@
+\vspace{0.25cm}
+
+\newpage
+\noindent \textbf{c)} The following graphic is created by the (incomplete) code snippet
+below.
+
+\vspace{0.25cm}
+<<eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, fig.height=4.5, fig.width=8>>=
+ggplot(africa, aes(x = height, y = countries)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Height (in inches)", y = "Number of countries in Africa guess",
+       title = "Relationship between number of countries guessed and height")
+@
+\vspace{0.25cm}
+
+\begin{large}
+\begin{verbatim}
+ggplot(africa, aes(AAA, BBB)) +
+  geom_CCC() +
+  geom_DDD(method = "lm", se = FALSE) +
+  labs(x = "Height (in inches)", y = "Number of countries in Africa guessed")
+\end{verbatim}
+\end{large}
+
+What precise code should be in place of {{\tt AAA}}, {{\tt BBB}}, {{\tt CCC}}, and {{\tt DDD}} in order to create this plot?
+
+\vspace{5cm}
+
+\noindent \textbf{d)} While an exploratory scatterplot of the relationship between $y$ and {{\tt year}} would be valid since {{\tt year}} is numerical, why would a (vertical) boxplot with {{\tt year}} on the x-axis also be acceptable \textit{for this particular dataset}? Answer in one sentence.
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%
+% Data wrangling
+%
+%------------------------------------------------------------------------------
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Babynames}
+%
+%------------------------------------------------------------------------------
+Recall the {{\tt babynames}} dataset that contains all babynames used more than 5 times for any given year, split by sex, for the years 1880 through 2015. Here is a preview of the first 10 rows:\\
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8*1.1, fig.height=3.5*1.1>>=
+library(babynames)
+babynames %>%
+  slice(1:10) %>%
+  kable()
+@
+
+\hspace{0.5cm}\\
+
+\textbf{START WRITING YOUR RESPONSES WHERE INDICATED BELOW.}\\
+
+\noindent \textbf{a)} Write the pseudocode that is going to compute the total number of babies born between 1950 and 2000 that are named ``Riley.''\\
+
+\noindent \textbf{b)} You want to compare the degree to which the names ``Casey'' and ``Riley'' have been ``unisex'' names for all years between 1950 to 2000, in other words the focus is on the degree to which the names have been used by both sexes. Write the pseudocode for the data wrangling and specify all the elements of the grammar of graphics that is going to generate an appropriate visualization. Hint: Draw the visualization first.\\
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Weather Data}
+%
+%------------------------------------------------------------------------------
+\noindent \textbf{a)} The {{\tt weather}} data set in the {{\tt nycflights13}} package contains hourly meterological data for the three NYC airports (EWR, JFK, and LGA) for every day in 2013.  We present a snapshot of the data below, but only for the first 6 rows in the data set. What variables are needed to uniquely identify each observation?
+
+\vspace{0.5cm}
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8, fig.height=4.5>>=
+library(nycflights13)
+weather %>%
+  select(origin, year, month, day, hour, temp, humid, wind_speed, precip, pressure, visib) %>%
+  head() %>%
+  knitr::kable()
+@
+
+\vspace{5cm}
+
+\noindent \textbf{b)} Write down the arithmetic operation you would enter into a calculator to compute the number rows that the {{\tt weather}} data set has (not including the header row). An example of an arithmetic operation is $10 \times 7 + 6$.
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{``Tidy'' Data}
+%
+%------------------------------------------------------------------------------
+
+Say your collaborator in biology sends you an Excel spreadsheet with the
+contents below. This data is \textbf{not} in tidy format. Rewrite this spreadsheet data
+so that it is in tidy format. To minimize writing you may use abbreviations. For example
+in place of ``Allactaga balikunica'' write ``Al.Ba.''
+
+\begin{center}
+\includegraphics[width=8cm]{Figures/tidy.png}
+\end{center}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Alcohol consumption globally}
+%
+%------------------------------------------------------------------------------
+
+\noindent \textbf{a)} The following table of presents average annual alcohol consumption per individual
+for two countries. The table is not in ``tidy'' format. Rewrite it so that it is.
+\vspace{0.5cm}
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8, fig.height=4.5>>=
+library(fivethirtyeight)
+data(drinks)
+drinks %>%
+  select(country, beer_servings, spirit_servings, wine_servings) %>%
+  slice(1:2) %>%
+  kable()
+@
+
+\vspace{9cm}
+
+\noindent \textbf{b)} The above table only has data for the first two alphabetically listed countries.  However the complete dataset has information for all 193 countries. A social scientist wants a visualization that will allow the reader to compare beer vs spirit vs wine consumption worldwide. Draw a rough sketch of an effective graphic to display this. There is no need to write the code/pseudocode that will construct this graphic, just sketch the graphic.
+\vspace{0.5cm}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{NYC flights}
+%
+%------------------------------------------------------------------------------
+Recall the {{\tt airports}}, {{\tt planes}}, {{\tt flights}}, {{\tt weather}}, and {{\tt airlines}} datasets in the {{\tt nycflights13}} package containing  information about all 336,776 domestic flights that left one of three NYC airports (EWR, JFK, and LGA) in 2013. Furthermore, recall the following graphic showing how theses datasets are related.
+
+\begin{center}
+\includegraphics[width=4in]{Figures/relational-nycflights.png}
+\end{center}
+
+\noindent Also, consider the following R output given the names of the variables/
+columsn in each dataset.
+
+<<echo=TRUE, warning=FALSE, message=FALSE, fig.width=8*1.1, fig.height=3.5*1.1>>=
+library(nycflights13)
+names(airports)
+names(planes)
+names(flights)
+names(weather)
+names(airlines)
+@
+
+\newpage
+\begin{itemize}
+\item[a)] Which datasets are you going to need to compute the available seat
+miles (sum over all flights of the number of seats $\times$ the number of
+miles flown) for United Airlines in 2013?
+\item[b)] Write down the pseudocode that is going to merge the {{\tt flights}} and {{\tt weather}} datasets so that on top of information for all 336,776 flights, we have information of the weather conditions at the time of each flight's departure.
+\item[c)] Write the pseudocode that will output a table displaying the
+median departure delay for each airline leaving Newark
+(airport code {{\tt EWR}}).
+% \item[d)] Name a graphic that would best show all the information contained in the tables in part c).
+%\item[d)] Write the pseudocode that will tabulate the mean humidity level recorded for all flights leaving New York City in July 2013.
+\end{itemize}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Titanic}
+%
+%------------------------------------------------------------------------------
+
+You are presented with data on the Titanic disaster of 1912 in a data frame {{\tt Titanic}}, which cross-classifies survival vs death by class, sex, and age. Write down the \textit{pseudocode} of the commands that will output a table comparing survival vs death counts for the following three scenarios:
+
+\begin{itemize}
+\item[a)] by sex
+\item[b)] by sex and class and age
+\item[c)] to answer the question if the ``women and children''-first policy of the White Star Line Company (the company that ran the Titanic) held true or not.
+\end{itemize}
+
+Note: you don't need to calculate the output table, just write the pseudocode that would produce it where the more concise the pseudocode the better. Here is what the {{\tt Titanic}} data looks like:\\
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8, fig.height=4.5>>=
+data(Titanic)
+Titanic %>% tbl_df() %>% kable()
+@
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Unisex Names}
+%
+%------------------------------------------------------------------------------
+Write the pseudocode that is going to generate an appropriate visualization to compare the trends in the ``unisex''iness (not a measure of gender ambiguous sexiness, but rather the degree to which a name is used by both sexes) of the names ``Casey'' and ``Riley'' from 1950 to 2014. As a hint, here are the first 10 rows of the {{\tt babynames}} dataset.\\
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.width=8*1.1, fig.height=3.5*1.1>>=
+library(babynames)
+babynames %>% slice(1:10) %>% kable()
+@
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Exploratory data analysis via data wrangling}
+%
+%------------------------------------------------------------------------------
+
+Recall the Google Forms survey you completed where:
+
+\begin{itemize}
+\item Students with an odd birthday (Ex: Nov 15th) were first asked if there are more or less than \textbf{14 countries} in Africa and then asked to guess how many countries there are in Africa.
+\item Students with an even birthday (Ex: Nov 14th) were first asked if there are more or less than \textbf{94 countries} in Africa and then asked to guess how many countries there are in Africa.
+\end{itemize}
+
+Let's refer to the numbers 14 and 94 as ``priming'' numbers since survey participants were ``primed'' with them in order to influence the number of countries they guessed. Furthermore all students were also asked their height (in inches), their graduation year (2019, 2020, 2021, or 2022), and whether or not they had previously been to Africa. A total of 41 students responded and the results are saved in a data frame {{\tt africa}} with 41 rows:
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+set.seed(76)
+africa
+@
+
+\noindent \textbf{a)} Write the pseudocode that will allow you to wrangle {{\tt africa}} to obtain the median number of countries guessed for each of the two priming groups:
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+africa %>%
+  group_by(priming) %>%
+  summarize(median_guess = median(countries))
+@
+
+\newpage
+\noindent \textbf{b)} Write the pseudocode that will allow you to wrangle {{\tt africa}} to obtain only the year, priming group, and number of countries guessed for only the first-year students (class of 2022):
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+africa %>%
+  # Order doesn't matter
+  filter(year == 2022) %>%
+  select(year, priming, countries)
+@
+
+\vspace{6cm}
+
+\noindent \textbf{c)} Write the pseudocode that will allow you to wrangle {{\tt africa}} so that the rows are reordered from the largest number of countries guessed to the smallest (note we only show the first 5 out of 41 rows in the output below):
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+africa  %>%
+  arrange(desc(countries)) %>%
+  slice(1:5)
+@
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%
+% Regression
+%
+%------------------------------------------------------------------------------
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Regression with a numerical explanatory variable}
+%
+%------------------------------------------------------------------------------
+Recall our teaching evaluation dataset seen in class. We're interested in fitting a model of teaching score (evaluated by students) as a function of instructor age.
+
+<<eval=TRUE, echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+ggplot(data = evals, mapping = aes(x = age, y = score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Instructor age", y = "Teaching score")
+@
+
+<<eval=TRUE, echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+model_score <- lm(score ~ age, data = evals)
+get_regression_table(model_score)
+@
+
+\noindent \textbf{a)} Interpret the {{\tt intercept}} term in the {{\tt estimate}} column of the regression table.
+
+\vspace{6cm}
+
+\noindent \textbf{b)} Give the precise interpretation of the slope for {{\tt age}} in the {{\tt estimate}} column of the regression table.
+
+\vspace{6.5cm}
+
+\noindent \textbf{c)} The regression line visualized in the above figure is considered the ``best fitting line'' through these points. By what criteria do we mean ``best''?
+
+\vspace{6.5cm}
+
+\noindent \textbf{d)} What is the correlation coefficient of {{\tt age}} and {{\tt score}}? Is it positive or negative?
+
+\vspace{4cm}
+
+\noindent \textbf{e)} Consider the first row of the following output. Write down the equation that computes the first value of {{\tt score\_hat}}: {{\tt 4.25}}.
+
+<<eval=TRUE, echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+model_points <- get_regression_points(model_score)
+model_points
+@
+
+\vspace{4cm}
+
+\noindent \textbf{f)} Write down the equation that computes the first value of {{\tt residual}}: {{\tt 0.452}}.
+
+\vspace{5cm}
+
+\noindent \textbf{g)} Write down the data wrangling pseudocode to apply to {{\tt model\_points}} to compute the value of the criteria described in part c).
+
+\hspace{1cm}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Seattle House Prices}
+%
+%------------------------------------------------------------------------------
+Recall the Seattle House Prices dataset you saw in the DataCamp course ``Modeling with Data in the Tidyverse.''  where the sale price of 21,613 homes sold between May 2014 and May 2015 in King County WA is provided along with other information; let's only consider 3 of these variables: sale price, the square footage of living space, and the condition of the house (1 = worst, \ldots, 5 = best).  Before we begin this question, let's perform a little data wrangling.
+
+<<>>=
+library(moderndive)
+house_prices <- house_prices %>%
+  mutate(
+    log10_price = log10(price),
+    log10_size = log10(sqft_living)
+  ) %>%
+  select(log10_price, log10_size, condition)
+@
+
+Now let's look at a random sample of 5 out of the \Sexpr{comma(nrow(house_prices))} rows:\\
+
+<<echo=FALSE>>=
+house_prices %>%
+  sample_n(5) %>%
+  kable()
+@
+
+\noindent \\
+
+We are interested in modeling the outcome variable $y = $ log10 of house price in dollars as a function of two explanatory variables:
+\begin{enumerate}
+\item $x_1$: numerical explanatory/predictor variable log10 of the square footage of the house
+\item $x_2$: categorical explanatory/predictor variable condition
+\end{enumerate}
+
+You fit an interaction model, both graphically and using a regression model. Note the last 4 rows of the regression table got truncated; they should read \verb#log10_size:condition2# through \verb#log10_size:condition5#.\\
+
+<<echo=FALSE, fig.height=9/2.5, fig.width=16/2.5, cache=TRUE>>=
+house_prices %>%
+  ggplot(aes(x = log10_size, y = log10_price, col = condition)) +
+  geom_point(alpha = 0.10) +
+  labs(x = "log10(square feet of living space)", y = "log10(price in dollars)", color = "Condition",
+       title = "Seattle House Prices") +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_brewer(palette = "Set3")
+@
+
+
+<<echo=TRUE>>=
+house_price_model <- lm(log10_price ~ log10_size * condition, data = house_prices)
+get_regression_table(house_price_model)
+@
+
+\noindent \textbf{a)} Why did we \verb#log10()# transform the house price and house size in square feet variables first?\\
+
+\vspace{4cm}
+
+\noindent \textbf{b)} Using the numerical values in the above regression table, write the equation for the line for houses of condition 1.\\
+
+\vspace{4cm}
+
+\noindent \textbf{c)} Using the numerical values in the above regression table, write the equation for the line for houses of condition 5.\\
+
+\vspace{4cm}
+
+
+\noindent \textbf{d)} Say a house get puts on the market in Seattle and you know nothing other than its size is 1000 square feet and it is of condition 5. What is the above model's prediction of this house's sale price in dollars?
+
+\vspace{7cm}
+
+\noindent \textbf{e)} Say instead you ran the following regression model below. Write down what all the elements of the \verb#term# variable would be in the resulting regression table.\\
+
+<<echo=TRUE, eval=FALSE>>=
+house_price_model <- lm(log10_price ~ log10_size + condition, data = house_prices)
+get_regression_table(house_price_model)
+@
+
+\vspace{4cm}
+
+
+
+
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Regression model using priming number}
+%
+%------------------------------------------------------------------------------
+
+Continuing the previous {{\tt africa}} question, we fit a regression where $y$ is the number of countries guessed and $x$ indicates which ``priming group'' a student was a part of:
+
+<<echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+model_countries_priming <- lm(countries ~ priming, data = africa)
+get_regression_table(model_countries_priming)
+@
+
+\noindent \textbf{a)} What does the {{\tt intercept}} term in the {{\tt estimate}} column of the regression table tell us? Answer in one sentence.
+
+\vspace{4cm}
+
+\noindent \textbf{b)} What does the {{\tt priming94 countr\char`\~}} term in the {{\tt estimate}} column of the regression table tell us? Answer in one sentence.
+
+\vspace{4cm}
+
+\noindent \textbf{c)} Say instead of using only two priming numbers, we used three: 0, 14, and 94 countries. In other words, we assigned students to one of three priming groups. Write down what the three terms in the left-most {{\tt term}} column of the above regression table would now be.
+
+\vspace{3cm}
+
+\newpage
+\noindent \textbf{d)} Say you perform data wrangling to compute the mean number of countries guessed for each of the two priming groups. What are {{\tt XXX}} and {{\tt YYY}} in the table below? Your answers should be numerical values. Show your work.
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+africa %>%
+  group_by(priming) %>%
+  summarize(mean_guess = mean(countries)) %>%
+  mutate(mean_guess = ifelse(priming == "14 countries", "XXX", "YYY"))
+@
+
+\vspace{4cm}
+
+
+\noindent \textbf{e)} Say we run the following code and focus only on the first two rows out of the output (out of 41), corresponding to the first two students in the {{\tt africa}} dataset. What are {{\tt XXX}}, {{\tt YYY}}, {{\tt AAA}}, and {{\tt BBB}} below? Your answers should be numerical values. Show your work.
+
+<<eval=FALSE, echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+get_regression_points(model_countries_priming)
+@
+<<eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+get_regression_points(model_countries_priming) %>%
+  slice(1:2) %>%
+  mutate(countries_hat = c("XXX", "AAA"), residual = c("YYY", "BBB"))
+@
+
+\vspace{5cm}
+
+\newpage
+\noindent \textbf{f)} Do you think the number of countries guessed by those primed by ``14'' differs \textit{significantly} from the number of countries guessed by those primed with ``94''? Why? You will receive full credit for merely making a good faith attempt at answering. A ``right answer'' is not expected as you don't have the tools to answer this question \ldots yet.
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Regression model using height}
+%
+%------------------------------------------------------------------------------
+
+Continuing the previous {{\tt africa}} question, say you run the following regression instead, using {{\tt height}} instead of {{\tt priming}} as the explanatory/predictor variable:
+
+<<eval=TRUE, echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+model_countries_height <- lm(countries ~ height, data = africa)
+get_regression_table(model_countries_height)
+@
+
+\noindent \textbf{a)} Interpret the {{\tt intercept}} term in the {{\tt estimate}} column of the regression table, both mathematically and practically speaking (``practically'' meaning in context of the data).
+
+\vspace{6cm}
+
+\noindent \textbf{b)} Give the precise interpretation of the slope for {{\tt height}} in the {{\tt estimate}} column of the regression table.
+
+\vspace{6cm}
+
+\newpage
+\noindent \textbf{c)} Say we run the following code and present only the first row of the output (out of 41 rows), corresponding to the first student in {{\tt africa}}. What are {{\tt XXX}} and {{\tt YYY}}? Your answers should be numerical values. Show your work.
+
+<<eval=FALSE, echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+get_regression_points(model_countries_height)
+@
+<<eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+get_regression_points(model_countries_height) %>%
+  slice(1) %>%
+  mutate(countries_hat = "XXX", residual = "YYY")
+@
+
+\vspace{6cm}
+
+\noindent \textbf{d)} Based on the regression model above, someone predicts that someone of height 54 inches will guess 62 countries. Why might this prediction inappropriate? Base your answer only on the various output of the analysis/model so far, and not prior knowledge or hypotheses you may have about the relationship between height and knowledge of the number of countries in Africa.
+
+\vspace{3cm}
+
+\newpage
+\noindent \textbf{e)} What would it mean for the relationship between height and the number of countries guessed if the slope for {{\tt height}} in the table above were 0? Answer in practical and not mathematical terms (``practical'' meaning in context of the data).
+
+
+\vspace{5cm}
+
+\noindent \textbf{f)} Do you think the observed slope for {{\tt height}} of {{\tt -1.86}} is \textit{significantly} different from 0? Why? You will receive full credit for merely making a good faith attempt at answering. A ``right answer'' is not expected as you don't have the tools to answer this question \ldots yet.
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Teaching Evals}
+%
+%------------------------------------------------------------------------------
+
+<<echo=FALSE>>=
+evals <- evals_orig %>%
+  select(score, age, rank)
+@
+
+Recall the teaching evaluation data from class. We are interested in modeling the outcome variable $y$ = teaching \verb#score# as a function of two explanatory variables:
+\begin{enumerate}
+\item $x_1$: numerical explanatory/predictor variable of the instructor's \verb#age#
+\item $x_2$: categorical explanatory/predictor of the instructor's \verb#rank#: \verb#teaching#, \verb#tenure track# (AKA junior professor), or \verb#tenured# (AKA senior professor)
+\end{enumerate}
+
+Let's look at a random sample of 5 out of the \Sexpr{nrow(evals)} rows of this dataset:\\
+
+<<echo=FALSE>>=
+evals %>%
+  sample_n(5) %>%
+  kable()
+@
+
+\vspace{0.25cm}
+
+Here is a visualization of the interaction model \ldots
+
+<<echo=FALSE, fig.height=9/2.5, fig.width=16/2.5, cache=TRUE>>=
+ggplot(evals, aes(x = age, y = score, col = rank)) +
+  geom_point() +
+  labs(x = "Age", y = "Teaching score", linetype = "Rank", title = "Teaching evals") +
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = rank)) +
+  scale_color_brewer(palette = "Set2") +
+  guides(col=FALSE)
+@
+
+\newpage
+
+\ldots and the corresponding regression table. Note that the second to last row got truncated and should read \verb#age:ranktenure track#.
+
+<<echo=TRUE>>=
+model_1 <- lm(score ~ age * rank, data = evals)
+get_regression_table(model_1)
+@
+
+
+\noindent \textbf{a)} Using the numerical values in the above regression table, write the equation of the regression line for instructors with the rank \verb#teaching#. Since you do not have a calculator, you do not need to perform the arithmetic. However write down all the arithmetic operations you would enter into a calculator.\\
+
+\vspace{4cm}
+
+\noindent \textbf{b)} Using the numerical values in the above regression table, write the equation of the regression line for instructors with the rank \verb#tenured#. Since you do not have a calculator, you do not need to perform the arithmetic. However write down all the arithmetic operations you would enter into a calculator.\\
+
+\vspace{4cm}
+
+
+\noindent \textbf{c)} Interpret the slope for \verb#age# -0.008.\\
+
+\vspace{4cm}
+
+\newpage
+\noindent \textbf{d)} Say there is a tenure track instructor of age 50 who just joins UT Austin. What is the fitted value $\widehat{y}$ = $\widehat{\mbox{score}}$ for this instructor? i.e. What is their predicted teaching score? You \textbf{must} write a single numerical answer. Justify your answer. Hint: you don't need perform any arithmetic. \\
+
+\vspace{7cm}
+
+\noindent \textbf{e)} Say instead you ran the following regression model code. Write down what all the elements of the \verb#term# variable in the resulting regression table.
+
+<<echo=TRUE, eval=FALSE>>=
+model_2 <- lm(score ~ age + rank, data = evals)
+get_regression_table(model_2)
+@
+
+\vspace{4cm}
+
+\noindent \textbf{f)} Why might \textit{some} people consider it reasonable to choose \verb#model_2# over \verb#model_1# to explain teaching score?
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Life Expectancy}
+%
+%------------------------------------------------------------------------------
+Note: for this question, you do not need to do the arithmetic (adding, subtracting, multiplying, dividing), but rather write down what you would enter into a calculator if you had one. Let's consider the {{\tt gapminder}} development data, but only for the year 2007. Let's look at a random sample of 5 out of the \Sexpr{nrow(gapminder2007)} rows of this dataset:\\
+
+<<echo=FALSE>>=
+set.seed(76)
+gapminder2007 %>%
+  sample_n(5) %>%
+  kable()
+@
+
+\noindent \\
+
+We are interested in modeling the relationship between the outcome variable $y = $ life expectancy in years and the categorical explanatory variable $x = $ continent. You fit a following regression and obtain the following regression table rounded to the nearest integer:\\
+
+<<echo=FALSE>>=
+lm(lifeExp ~ continent, data=gapminder2007) %>%
+  get_regression_table()
+@
+
+\noindent \\
+
+\noindent \textbf{a)} What is the fitted value $\widehat{y}$ of life expectancy in years for any given country in:
+
+\begin{enumerate}
+\item Africa
+\item Asia
+\item Europe
+\end{enumerate}
+
+\noindent \textbf{b)} What is the residual for the following three countries?
+
+\begin{enumerate}
+\item Nambia
+\item Iran
+\item Italy
+\end{enumerate}
+
+\noindent \textbf{c)} What is the mean life expectancy for countries in the following continents:
+
+\begin{enumerate}
+\item Africa
+\item Asia
+\item Europe
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%
+% Sampling
+%
+%------------------------------------------------------------------------------
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Sampling Scenarios}
+%
+%------------------------------------------------------------------------------
+
+Consider the three scenarios below
+
+\begin{itemize}
+\item \textbf{Scenario 1}: You want to know the proportion of the balls in a sampling bowl of 2400 balls that are red. To this end, you mix the bowl first and use a shovel with 50 slots to pull out 50 balls. We observe that 20 of them are red.
+\item \textbf{Scenario 2}: We want to know the average year of minting of \textbf{all} pennies currently being used in the US. To this end, you go to Florence Bank in Downtown Northampton and ask the cashier to exchange a ten dollar bill for 1000 pennies. We observe that the average year of minting of these pennies is 2013.56
+\item \textbf{Scenario 3}: The instructor of SDS/MTH 220 wants to know what the effects are of priming with the numbers 14 and 94 on the number of countries Smith students guess are in Africa. To this end he conducts a priming experiment with all 38 of his students as done in class. He obtains the following fitted regression line based on the regression table output below:
+\begin{eqnarray*}
+\widehat{y} &=& b_0 + b_1 \times x\\
+\widehat{\mbox{countries}} &=& b_0 + b_1\times \mathbbm{1}\left(\mbox{primed with 94}\right)\\
+\widehat{\mbox{countries}} &=& 29.5 + 34.7\times  \mathbbm{1}\left(\mbox{primed with 94}\right)\\
+\end{eqnarray*}
+\end{itemize}
+
+<<echo=TRUE, warning=FALSE, message=FALSE, fig.height=4>>=
+model_countries_priming <- lm(countries ~ priming, data = africa)
+get_regression_table(model_countries_priming)
+@
+
+\vspace{2cm}
+
+\noindent \textbf{a)} On the next page there is a table. For all cells with a question mark, fill in what those values should be.
+
+\newpage
+
+\begin{landscape}
+\begin{Large}
+\begin{table}[]
+\begin{tabular}{l||l|l|l}
+Scenario  & 1 & 2 & 3 \\
+\hline\hline
+Population & $N = $ ? & $N = $ ? & $N = $ ? \\
+&&&\\
+&&&\\
+&&&\\
+&&&\\
+\hline
+Population parameter name & ? & ? & Population slope \\
+&&&\\
+&&&\\
+&&&\\
+&&&\\
+\hline
+Population parameter & ? & ? & $\beta_1$ \\
+mathematical notation &&&\\
+&&&\\
+&&&\\
+&&&\\
+\hline
+Sample size & $n = $ ? & $n = $ ? & $n = $ ? \\
+&&&\\
+&&&\\
+&&&\\
+&&&\\
+\hline
+Point estimate name & ? & ? & Fitted slope     \\
+&&&\\
+&&&\\
+&&&\\
+&&&\\
+\hline
+Point estimate & ? & ? & $b_1$ \\
+mathematical notation &&&\\
+&&&\\
+&&&\\
+&&&\\
+\hline
+Point estimate & ? \hspace{5cm} & ? \hspace{5cm} & ? \hspace{5cm} \\
+numerical value &&&\\
+&&&\\
+&&&\\
+&&&\\
+\hline\hline
+\end{tabular}
+\end{table}
+\end{Large}
+\end{landscape}
+
+\newpage
+
+\noindent \textbf{b)} Is the point estimate for the population parameter in Scenario 1 a good one? Why or why not? Answer in three sentences or less.
+
+\vspace{6cm}
+
+
+\noindent \textbf{c)} Is the point estimate for the population parameter in Scenario 2 a good one? Why or why not? Answer in three sentences or less.
+
+\vspace{6cm}
+
+
+\noindent \textbf{d)} Is the point estimate for the population parameter in Scenario 3 a good one? Why or why not? Answer in three sentences or less.
+
+\vspace{6cm}
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Sampling Distribution}
+%
+%------------------------------------------------------------------------------
+
+\noindent \textbf{a)} Recall the virtual \texttt{bowl} consisting of 2400 balls from the \texttt{moderndive} package. Let's show the first 10 rows of the data set:
+
+<<echo=TRUE>>=
+bowl
+@
+
+From this virtual bowl we can draw virtual samples using the \texttt{rep\_sample\_n()} function. For example:
+
+<<echo=TRUE>>=
+bowl %>%
+  rep_sample_n(size = 3, reps = 2)
+@
+
+Recall that we ran a simulation creating the sampling distribution of $\widehat{p}$ based on 1000 samples of size $n=50$ drawn using the virtual shovel:\\
+
+<<echo=FALSE, fig.width=16/2.5, fig.height=9/2.5>>=
+virtual_samples <- bowl %>%
+  rep_sample_n(size = 50, reps = 1000)
+virtual_prop_red <- virtual_samples %>%
+  group_by(replicate) %>%
+  summarize(red = sum(color == "red")) %>%
+  mutate(prop_red = red / 50)
+ggplot(virtual_prop_red, aes(x = prop_red)) +
+  geom_histogram(binwidth = 0.05, color = "white") +
+  labs(x = "Sample proportion red based on n = 50",
+       title = "Sampling distribution of p-hat")
+@
+
+Write out the pseudocode that will produce the visualization of the above sampling distribution. Feel free to write in actual code if you like. Hint: your pseudocode should start with \texttt{bowl} and use the \texttt{rep\_sample\_n()} function from earlier.
+
+\newpage
+
+\noindent \textbf{b)} What will happen to the above sampling distribution if we used a virtual shovel with $n=100$ slots?
+
+\vspace{5cm}
+
+\noindent \textbf{c)} What is the standard deviation of the above sampling distribution called?
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{U.S. Elections}
+%
+%------------------------------------------------------------------------------
+
+Buzzfeed News performed a poll of 1024 individuals a week before the election to
+try to determine the percentage support for Candidate X and found that 47.8\% supported
+Candidate X.
+
+\begin{enumerate}
+\item Who is the population?
+\item What is the population parameter?
+\item What is the sample?
+\item What is the statistic?
+\item Under what conditions are the results based on the sample generalizable to the population?
+\end{enumerate}
+\vspace{5cm}
+
+
+
+
+
+\newpage
+\includepdf[pages={1-2}]{Figures/obama.pdf}
+%------------------------------------------------------------------------------
+%
+\section{Polling}
+%
+%------------------------------------------------------------------------------
+The previous two pages are an NPR article reporting the results of a Harvard University Institute of Politics poll conducted in between October 30 and November 11, 2013 of millennials' (adults aged 18-29) approval of President Obama's job performance.\\
+
+\noindent \textbf{a)} Who is the study population?\\
+
+\vspace{3cm}
+
+%----
+
+\noindent \textbf{b)} What is the name/terminology for the population parameter of interest described in the second paragraph?\\
+
+\vspace{3cm}
+
+%----
+
+\noindent \textbf{c)} What is the mathematical notation for the population parameter of interest described in the second paragraph?\\
+
+\vspace{3cm}
+
+%----
+
+\noindent \textbf{d)} Say we had access to infinite resources, what would be the best way to measure the population parameter of interest?\\
+
+\vspace{3cm}
+
+%----
+
+\noindent \textbf{e)} What is the best way to ensure that the sample of $n$ young Americans is representative of the study population?\\
+
+\vspace{3cm}
+
+%----
+
+\noindent \textbf{f)} What is the name/terminology of the point estimate/sample statistic for this poll?\\
+
+\vspace{3cm}
+
+%----
+
+\noindent \textbf{g)} What is the mathematical notation for the point estimate/sample statistic for this poll?\\
+
+\vspace{3cm}
+
+%----
+
+\noindent \textbf{h)} What is the numerical value of the point estimate/sample statistic for the poll referred to in the second paragraph?\\
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Sampling}
+%
+%------------------------------------------------------------------------------
+Consider the following \textbf{hypothetical} extension of the previous question on the poll of Obama's approval ratings among young Americans in 2013. Say the following 1000 polling companies conduct polls on the same dates as the Harvard poll, using the same sampling methodology and the same sample size $n = 2089$. You observe the following results:
+
+\begin{itemize}
+\item Poll 1: Gallup finds that out of their sample of size $n$, 844 young Americans approve of Obama.
+\item Poll 2: Ipsos finds that out of their sample of size $n$, 857 young Americans approve of Obama.
+\item $\ldots$
+\item Poll 1000: Monmouth University finds that out of their sample of size $n$, 871 young Americans approve of Obama.
+\end{itemize}
+
+Based on these 1000 polls based on samples of size $n$, you compute 1000 values of $\widehat{p}$. You plot these in a histogram:
+
+<<echo=FALSE, fig.width=16/2.5, fig.height=9/2.5>>=
+set.seed(79)
+p <- 0.425
+n <- 2089
+p_hats <- rbinom(1000, n, p)/n
+ggplot(tibble(p_hat=p_hats), aes(x=p_hat)) +
+  geom_histogram(binwidth = 0.005) +
+  labs(x=expression(hat(p)), y="Count", title="1000 values of p-hat based on 1000 samples of size n") +
+  coord_cartesian(xlim=c(p-0.075, p+0.075))
+@
+
+
+\newpage
+
+
+\noindent \textbf{a)} The above normal-shaped distribution is called the ``\textbf{X}'' of the sample proportion $\widehat{p}$. It shows the results of a simulation illustrating how different values of $\widehat{p}$ vary from sample to sample due to sampling variation. What is ``\textbf{X}''?\\
+
+\vspace{3cm}
+
+%-----
+
+\noindent \textbf{b)} If the sampling in all cases is done in a representative fashion, what is the name of the value where this histogram centered? Do not give the numerical value, which one can observe is 0.425, rather the appropriate terminology. Hint: the answer is not simply the ``mean'' or ``median.''\\
+
+\vspace{3cm}
+
+%-----
+
+\noindent \textbf{c)} What is the precise name of the term that quantifies the spread of the histogram above.\\
+
+\vspace{3cm}
+
+%-----
+
+\textbf{d)} What would happen to this histogram if the sample size were $n=5000$?\\
+
+\vspace{3cm}
+
+%-----
+
+\noindent \textbf{e)} Assuming the sampling is done at random, would observing a poll with $\widehat{p} = 0.40$ be more likely when the sample size of the poll is 2089 or 5000?\\
+
+\vspace{3cm}
+
+%-----
+
+\newpage
+\textbf{f)} Why are the polling results better when using a sample size of $n=5000$ instead of $n=2089$?\\
+
+\vspace{3cm}
+
+%-----
+
+\textbf{g)} Bringing things back to real life and focusing on what we would do in practice, we would \textit{not} take 1000 different samples of size $n=2089$ and compute 1000 different values of $\widehat{p}$, but instead take only a single sample of $n=2089$? How can we still study variation in the $\widehat{p}$ due to sampling variation using only a single sample? \textbf{Answer in two sentences or less}.
+
+\vspace{4cm}
+
+%-----
+
+\textbf{h)} There is actually a mathematical formula for the term in part c). Which is the correct formula for this term: A) $\sqrt{p(1-p)}$ or B) $\sqrt{\frac{p(1-p)}{n}}$? How do you know this?\\
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%
+% Statistical inference
+%
+%------------------------------------------------------------------------------
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Putting it all together: ``Formatting is off''}
+%
+%------------------------------------------------------------------------------
+The office of the president of a small liberal arts college in New England wants to promote the public launch of a fundraising campaign to all alumni. In particular, they would like the email to include a quote by American novelist and essayist Marilynne Robinson, followed by a link to donate money. However, the president is concerned that the formatting of the email will affect the ``click-through rate'' of the link: the proportion of those receiving the email that follow through and click on the link. In particular, they are \textbf{very} concerned about any possible differences in click-through rates arising due to the formatting of the quote attribution. So the office creates the two versions of the same email where the only difference is the quote attribution:
+
+\begin{center}
+\textbf{Version 1}:\\
+\includegraphics[width=\textwidth]{Figures/A.png}
+\textbf{Version 2}:\\
+\includegraphics[width=\textwidth]{Figures/B.png}
+\end{center}
+
+Here is the sequence of events:
+
+\begin{itemize}
+\item They randomly select 25,138 alumni from the alumni database to send emails to.
+\item From these 25,138 alumni, they randomly choose 12,460 alumni and send them email Version 1. They send Version 2 to the remaining 12,678 alumni.
+\item Of those alumni who received Version 1 10,578 followed through and clicked the link for a rate of 84.9\%. Of those alumni who received Version 2 11,169 followed through and clicked the link for a rate of 88.1\%.
+\end{itemize}
+
+\noindent \textbf{a)} What kind of study are we considering: an observational study or a randomized experiment? Why?\\
+
+\vspace{1cm}
+
+\noindent \textbf{b)} In this scenario, can we establish the \textit{causal} effect (and not just the \textit{associated} effect) of the formatting on click-through rate? Why or why not?\\
+
+\vspace{3cm}
+
+\noindent \textbf{c)} Who is the study population in this scenario?\\
+
+\vspace{1cm}
+
+\noindent \textbf{d)} What is the statistical name of the population parameter of interest in this scenario?
+
+\vspace{1cm}
+
+\noindent \textbf{e)} What is the mathematical notation for the population parameter of interest in this scenario?
+
+\vspace{1cm}
+
+\noindent \textbf{f)} What is the statistical name for the point estimate (AKA sample statistic) of the population parameter of interest in this scenario?
+
+\vspace{1cm}
+
+\noindent \textbf{g)} What is the mathematical notation for the point estimate of interest in this scenario?
+
+\vspace{1cm}
+
+\noindent \textbf{h)} What is the numerical value of the point estimate of interest in this scenario?
+
+\vspace{1cm}
+
+\noindent \textbf{i)} The standard error of the point estimate in this question can roughly be approximated by the mathematical formula when constructing confidence intervals:
+$$
+\mbox{SE}_{\widehat{p}_1 - \widehat{p}_2} \approx \sqrt{ \frac{\widehat{p}_1(1-\widehat{p}_1)}{n_1} + \frac{\widehat{p}_2(1-\widehat{p}_2)}{n_2} }
+$$
+
+Construct a 95\% confidence interval appropriate to answer the president's concerns.\\
+
+\vspace{5cm}
+
+\noindent \textbf{j)} We say that we are ``95\% confident'' that this confidence interval captures the true value of the unknown population parameter. However, we say this as shorthand for the more involved statistical interpretation of a confidence interval. What is this precise statistical interpretation?\\
+
+\vspace{3cm}
+
+\noindent \textbf{k)} Write down the relevant hypothesis test using non-statistical language.\\
+
+\vspace{3cm}
+
+\noindent \textbf{k)} Write down the relevant hypothesis test using mathematical notation.\\
+
+\vspace{3cm}
+
+\noindent \textbf{l)} What is the statistical name of the relevant test statistic in this scenario?\\
+
+\vspace{2cm}
+
+\noindent \textbf{m)} What is the numerical value of the \textit{observed} test statistic in this scenario?\\
+
+\vspace{2cm}
+
+\noindent \textbf{m)} What is being assumed throughout this hypothesis testing scenario?\\
+
+\vspace{3cm}
+
+\noindent \textbf{m)} The standard error of the point estimate in this question can roughly be approximated by the mathematical formula when conducting hypothesis tests:
+$$
+\mbox{SE}_{\widehat{p}_1 - \widehat{p}_2} \approx \sqrt{ \frac{\widehat{p}(1-\widehat{p})}{n_1} + \frac{\widehat{p}(1-\widehat{p})}{n_2} }
+$$
+where $\widehat{p}$ is the \textit{pooled sample proportion} where you pool all observations in both groups into a single group and compute a single proportion:
+\begin{eqnarray*}
+\widehat{p} &=& \frac{\mbox{\# of Version 1 link clicks + \# of Version 2 link clicks}}{n_1 + n_2}
+\end{eqnarray*}
+For hypothesis testing, why is this pooling appropriate?\\
+
+\vspace{2cm}
+
+\noindent \textbf{n)} Draw the null distribution. Hint: while not always the case, the sampling distribution of the point estimate of interest is normally shaped.
+
+\vspace{5cm}
+
+\noindent \textbf{j)} Recall that the president is \textbf{very} concerned about any possible differences in click-through rates arising due to the formatting of the quote attribution. If conducting a hypothesis test, would you use a ``liberal'' $\alpha$ value or a ``conservative'' $\alpha$ value?\\
+
+\vspace{7cm}
+
+\noindent \textbf{k)} Based on your response above, conduct the hypothesis test.\\
+
+\vspace{6cm}
+
+\noindent \textbf{l)} Based on your analysis, what do you tell the President? Keep in mind the President is very busy (monitoring the formatting of emails for example), so they would prefer a shorter response.\\
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Evals continued}
+%
+%------------------------------------------------------------------------------
+Recall the evals data of teaching evaluations of professors. Let say instead that these 463 professors are a randomly chosen set of instructors from all of the University of Texas system and not just UT Austin.
+Consider the following \textit{simple linear regression} using only one numerical explanatory variable:
+
+<<eval=FALSE, echo=TRUE>>=
+score_model <- lm(score ~ age, data = evals)
+get_regression_table(score_model)
+@
+<<eval=TRUE, echo=FALSE>>=
+score_model <- lm(score ~ age, data = evals)
+get_regression_table(score_model) %>%
+  select(term, estimate, std_error, lower_ci, upper_ci) %>%
+  kable()
+@
+
+\noindent \\
+
+\noindent \textbf{a)} Interpret the slope coefficient for age. \\
+
+\vspace{3cm}
+
+\noindent \textbf{b)} Using statistical language, interpret the standard error for the slope for age.\\
+
+\vspace{3cm}
+
+\noindent \textbf{c)} Using non-technical language, interpret the standard error for the slope for age. \\
+
+\vspace{3cm}
+
+
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Hypothesis Testing}
+%
+%------------------------------------------------------------------------------
+
+% SDM Exercises 19.2 and 19.4:
+A friend of yours claims to be psychic. You are skeptical. To test this you take a stack of $n=100$ playing cards and have your friend try to identify the suit, either hearts/diamonds/clubs/spades, without looking. They get 45 out of 100 right. \textbf{Please start writing all your responses where indicated below.}\\
+
+\textbf{a)} Define a hypothesis test in non-statistical terms where $H_0$: Your friend is not psychic.\\
+
+\textbf{b)} Define the corresponding hypothesis test in statistical terms. Hint: it should involve $p$.\\
+
+\textbf{c)} What is the standard error of $\widehat{p}$ used for hypothesis testing in general? \\
+
+\textbf{d)} What is the standard error of $\widehat{p}$ used for this particular hypothesis test?\\
+
+\textbf{e)} Draw the distribution of how different values of $\widehat{p}$ based on different samples of size $n=100$ will behave from sample-to-sample. In particular focus on 1) its shape, 2) its center, and 3) where the middle 95\% of values of $\widehat{p}$ will lie. Be as precise as possible, in other words do not use any ``rules of thumb.''\\
+
+\textbf{f)} In the plot above, mark with a dashed vertical line where the observed value of $\widehat{p}$ lies.\\
+
+\textbf{g)} Even though you don't have access to a computer, make a guess about the conclusion of the hypothesis test. State your conclusions both statistically and in terms of a statement on your friend being psychic.\\
+
+\textbf{h) BONUS} Say you did have access to a computer right now. In order to compute the p-value above exactly, what values of {{\tt A}}, {{\tt B}}, and {{\tt C}} must you input?
+
+<<eval=FALSE, echo=TRUE>>=
+library(mosaic)
+xpnorm(A, mean = B, sd = C)
+@
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Hypothesis Testing}
+%
+%------------------------------------------------------------------------------
+
+\noindent The General Social Survey (GSS) provides information on educational attainment and gender. In a random sample in 2010 of 584 male Americans and a random sample of 118 female Americans, the GSS concluded that males obtained on average 13.66 years of education compared to 12.89 years for females, which leads us to an observed difference of 0.77 years. Layout the ``There is Only One Test'' framework for testing whether these collected samples provide evidence for the claim that male Americans obtain \textit{less} education on average than female Americans, using simulation/computing-based constructions and not mathematical ones. You will not actually be able to conduct this test without a computer, but sketch out the procedure and make a guess as to the test's conclusion using $\alpha=0.1$ as best you can.
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Confidence Intervals}
+%
+%------------------------------------------------------------------------------
+Recall we saw an example of an NPR poll of $n=2089$ young Americans' approval of Obama back in 2013. Of these respondents, 856 said they approved of Obama's job performance.\\
+
+\noindent \textbf{a)} What is the numerical value of $\widehat{p}$, the point estimate of the population proportion $p$ of all young Amercians who approve of Obama's job performance?\\
+
+\vspace{2cm}
+
+\noindent \textbf{b)} Say CBS conducted a similar poll with $n=2089$ and finds that 860 young Americans approve of Obama, leading to one point estimate $\widehat{p}$ of $p$. Say NBC conducted a similar poll with $n=2089$ and finds that 844 young Americans approve of Obama, leading to another point estimate $\widehat{p}$ of $p$. Say Buzzfeed News conducted a similar poll with $n=2089$ and finds that 871 young Americans approve of Obama, leading to yet another point estimate $\widehat{p}$ of $p$. What is the name of the value that quantifies this variability?\\
+
+\vspace{2cm}
+
+\noindent \textbf{c)} Construct a 95\% confidence interval for the population proportion $p$ of all young Americans who approved of Obama's job performance. Note the following mathematical formula approximating the standard error:
+
+\[
+\mbox{SE}_{\widehat{p}} \approx \sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}\\
+\]
+
+\vspace{5cm}
+
+\noindent \textbf{d)} Marc-Edouard Vlasic states ``I read on NPR that back in 2013, as little as 43\% of \textbf{all} young Americans approved of Obama.'' What assumption must be met for Marc-Edouard's statement to be valid?\\
+
+\vspace{5cm}
+
+\noindent \textbf{e)} What assumption about the sampling distribution of $\widehat{p}$ must be met for the confidence interval in part c) to be valid?
+
+\vspace{5cm}
+
+
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Inference for Regression}
+%
+%------------------------------------------------------------------------------
+
+Recall our professor evaluations dataset based on the study from the University of Texas in Austin. In particular, we were interested in explaining a professor's teaching evaluation score using their gender and age as explanatory variables. Here is a random sample of 5 rows out of the $n=463$ professors in dataset:
+
+<<echo=FALSE>>=
+library(moderndive)
+data(evals)
+evals <- evals %>%
+  select(score, gender, age)
+evals %>%
+  sample_n(5)
+@
+
+Recall we fit the following regression model \textit{with an interaction term}:
+
+\begin{eqnarray*}
+\widehat{y} &=& b_0 + b_1 x_1 + b_2 x_2 + b_3 x_1x_2\\
+\widehat{\mbox{score}} &=& b_0 + b_{\mbox{age}} \mbox{age} + b_{\mbox{male}} \mathbbm{1}[\mbox{is male}] + b_{\mbox{age,male}}\mbox{age}\mathbbm{1}[\mbox{is male}] \\
+\end{eqnarray*}
+
+
+Recall the visual representation of the our model. Hint: look at this closely.\\
+
+<<echo=FALSE, fig.height=9/2.7, fig.width=16/2.7>>=
+ggplot(evals, aes(x=age, y=score, col=gender)) +
+  geom_jitter() +
+  labs(x="Age", y="Teaching Score", color="Gender", title="(Jittered) Scatterplot of Teaching Evaluations") +
+  geom_smooth(method="lm", se=FALSE)
+@
+
+Finally, recall the results of the regression with confidence intervals
+
+<<eval=FALSE, echo=TRUE>>=
+evals_model <- lm(score ~ age * gender, data=evals)
+get_regression_table(evals_model)
+@
+<<eval=TRUE, echo=FALSE>>=
+evals_model <- lm(score ~ age * gender, data=evals)
+get_regression_table(evals_model) %>%
+  kable()
+@
+
+\textbf{a)} The table reports a p-value of 0 in the age row. Write down the corresponding hypothesis $H_0 \mbox{ vs } H_A$ in terms of the $\beta_{\mbox{age}}$, the true population associated effect of age on teaching score.\\
+
+\vspace{5cm}
+
+\textbf{b)} The p-value mentioned in part a) is 0. Report what this means for the hypothesis test corresponding to the two hypotheses above. Report this both in 1) statistical terms and 2) language that non-statisticians can understand.\\
+
+\vspace{5cm}
+
+\textbf{c)} Based on these results, among male professors at the University of Austin for every year increase in age, there is an associated X of on average Y units in teaching score. What are X and Y?\\
+
+\vspace{5cm}
+
+\textbf{d)} What conclusion is suggested by the 95\% confidence interval for $\beta_{\mbox{age:gendergmale}}$ of $(0.003, 0.024)$? \\
+
+\vspace{5cm}
+
+\textbf{e)} Say we relaxed the gender categorical variable to allow for the following three levels: female, male, and non-binary, and furthermore say some professors selected the new ``non-binary'' option. Describe precisely how the above plot would change.\\
+
+\vspace{5cm}
+
+\textbf{f) BONUS 1} Describe precisely how the shape of the above regression table would change.\\
+
+\vspace{5cm}
+
+\textbf{g) BONUS 2} The 95\% confidence interval for $\beta_{\mbox{gendermale}}$ is $(-0.968, 0.076)$. Based on values in the table, write down your best guess of the formula that R uses to compute the left end point of -0.968. Your formula and the reported left endpoint of -0.968 should match up to 2 decimal places.\\
+
+
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Regression}
+%
+%------------------------------------------------------------------------------
+You run the code below to analyze departure delays from the 3 New York City airports, but for some weird reason, you only get the incomplete output below. Note AS corresponds to Alaska, F9 corresponds to Frontier, and AA corresponds to American.
+
+<<echo=TRUE, eval=FALSE>>=
+library(dplyr)
+library(nycflights13)
+library(moderndive)
+
+flights_subset <- flights %>%
+  filter(carrier == "AS" | carrier == "F9" | carrier == "AA")
+
+dep_delay_model <- lm(dep_delay ~ carrier, data = flights_subset)
+get_regression_table(dep_delay_model, digits = 3)
+@
+
+<<echo=FALSE, eval=TRUE>>=
+library(dplyr)
+library(nycflights13)
+library(moderndive)
+
+flights_subset <- flights %>%
+  filter(carrier == "AS" | carrier == "F9" | carrier == "AA")
+
+dep_delay_model <- lm(dep_delay ~ carrier, data = flights_subset)
+dep_delay_model_table <- get_regression_table(dep_delay_model)
+
+#dep_delay_model_table$p_value[2] <- NA
+dep_delay_model_table$upper_ci[3] <- NA
+
+dep_delay_model_table %>% knitr::kable(digits = rep(3, 7))
+
+# Used later
+df <- nrow(flights_subset) - 2
+@
+
+\hspace{1cm}\\
+
+\noindent \textbf{a)} Interpret the 11.6 estimate value in the \verb#carrierF9# row (third row, second column). Is its relationship of with the outcome variable meaningful?\\
+
+\vspace{5cm}
+
+\noindent \textbf{b)} Compute the missing right endpoint of the 95\% confidence interval in the \verb#carrierF9# row.\\
+
+\vspace{5cm}
+
+\noindent \textbf{c)} State the scientific conclusion reached based on the now complete 95\% confidence interval.\\
+
+\vspace{5cm}
+
+\noindent \textbf{e)} Write down the hypothesis test corresponding to the \verb#carrierAS# row using mathematical notation. Do not carry out the hypothesis test, simply state the two competing hypotheses. \\
+
+\vspace{5cm}
+
+\noindent \textbf{f)} Say you were given an $\alpha$ cutoff value of 0.01 for the hypothesis test above. Write down the conclusion of this hypothesis test both in statistical terms and using non-statistical language that an airline executive can understand. \\
+
+\vspace{5cm}
+
+\noindent \textbf{c)} In the second row, fifth column there is a p-value missing. What is the hypothesis test corresponding to this missing p-value?\\
+
+\vspace{5cm}
+
+\noindent \textbf{d)} Sketch on the follow plot of the corresponding \textit{null} distribution what the missing p-value in the second row, fifth column is:\\
+
+<<echo=FALSE, fig.height=3, fig.width=6>>=
+library(ggplot2)
+ggplot(data.frame(x = c(qt(0.0001, df=df), qt(1-0.0001, df=df))), aes(x)) +
+  stat_function(fun = dt, geom = "line", args = list(df=df)) +
+  labs(x="test statistic", y="") +
+  theme_bw()
+@
+
+
+\vspace{5cm}
+
+
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%
+% Retired
+%
+%------------------------------------------------------------------------------
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Simulation}
+%
+%------------------------------------------------------------------------------
+
+You are interested in studying the probabilities behind the game of poker. In poker,
+each player is dealt a \textit{hand} of 5 cards chosen at random
+from a deck of 52 cards. Among the stronger cards in poker are the Ace cards (denoted below by A's).
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{Figures/cards.png}
+\end{center}
+
+\noindent \textbf{a)} Say you are playing poker by yourself. Using the tools
+from the {{\tt mosaic}} package, write out the pseudocode of the simulation
+necessary to study the random number of Aces included in a hand of poker across
+many, many, many hands.\\
+
+\noindent \textbf{b)} Write out the pseudocode to generate an appropriate
+graphic to show the \textbf{probability distribution} of the number of aces in a hand of poker
+based on the output of part a) above.\\
+
+\noindent \textbf{c)} Draw as best you can what this graphic looks like.\\
+
+
+
+
+
+\newpage
+%------------------------------------------------------------------------------
+%
+\section{Pennies}
+%
+%------------------------------------------------------------------------------
+Recall the ``sack'' of $N=800$ pennies in the dataframe {{\tt pennies}} from which we virtually sampled $n=50$ pennies from in Problem Set 10.
+
+<<fig.width=16/2.5, fig.height=9/2.5>>=
+library(ggplot2)
+library(dplyr)
+library(moderndive)
+
+mean(pennies$year)
+sd(pennies$year)
+ggplot(pennies, aes(x = year)) +
+  geom_histogram(binwidth = 5) +
+  labs(x = "year", title = "Fig 1: Population distribution of year of 800 pennies") +
+  geom_vline(xintercept = mean(pennies$year), col = "red", size = 1)
+@
+
+
+\textbf{START WRITING YOUR RESPONSES WHERE INDICATED BELOW.}\\
+
+\noindent \textbf{a)} What are the (study) population, the name of the population parameter, the numerical value of the population parameter, the name of the point estimate, the formula for the true standard error, and the numerical value of the true standard error.\\
+
+\noindent \textbf{b)} Say you (virtually) sample $n=50$ pennies from the above population, compute the sample mean, and replace the pennies. Then everyone on your floor does the same. In what range of values do you expect 95\% of the resulting sample means to lie?\\
+
+\noindent \textbf{c)} Say at the end of the day, you have 679 such sample means and you plotted a histogram of it. What is the name (not shape) of this distribution?\\
+
+\noindent \textbf{d)} Why is the distribution of sample means in c) normal even though the population distribution of the $N=800$ pennies is left-skewed as seen above?\\
+
+\noindent \textbf{e)} In practice we would never perform such a simulation; rather we would just take a single sample of size $n$. What is the point of this simulation then?\\
+
+\noindent \textbf{f)} Say all your floormates are germophobes and instead of randomly sampling pennies, they selectively only select the shinier and cleaner pennies. What impact will this have on the distribution in part c)?\\
+
+\noindent \textbf{g)} Say instead the population of interest is not the sack of $800$ pennies, but all pennies in circulation in the US. List the steps needed to construct a 99\% confidence interval for the population parameter of interest based on $n=50$.\\
+
+
+
+
+
+\end{document}
+
+
+

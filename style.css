@@ -1,0 +1,120 @@
+caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+
+.rmdcomment {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5;
+  position:relative;
+}
+
+.rmdcomment:before {
+    content: "\f075";
+    font-family: FontAwesome;
+    left:10px;
+    position:absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+ }
+ 
+.rmdinfo {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #e6f0ff;
+  position:relative;
+}
+
+.rmdinfo:before {
+    content: "\f05a";
+    font-family: FontAwesome;
+    left:10px;
+    position:absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+ }
+
+.rmdalert {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #ffe6f0;
+  position:relative;
+}
+
+.rmdalert:before {
+    content: "\f06a";
+    font-family: FontAwesome;
+    left:10px;
+    position:absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+ }
+ 
+.rmdexample {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f0ffe6;
+  position:relative;
+}
+
+.rmdexample:before {
+    content: "\f055";
+    font-family: FontAwesome;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+ }
+ 
+ .rmdoutcomes {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #ffebcd;
+  position:relative;
+}
+
+.rmdoutcomes:before {
+    content: "\f4d8";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+ }
+ 
+  .rmdsummary {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #ffcd80;
+  position:relative;
+}
+
+.rmdsummary:before {
+    content: "\f13d";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+ }
+ 

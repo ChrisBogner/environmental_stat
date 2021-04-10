@@ -1,0 +1,81 @@
+---
+knit: "bookdown::render_book"
+title: "Datenanalyse mit R"
+subtitle: "SoSe 2021"
+author: "Christina Bogner"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: true
+github-repo: https://github.com/ChrisBogner/datenanalyse.git
+description: "Begleitskript zur Veranstaltung Datenanalyse mit R"
+---
+
+# Vorwort
+
+> "And honey, we're gonna do it in style"
+
+`r tufte::quote_footer('--- Fools Garden')`
+
+## Organisatorisches
+
+```{block, type='rmdinfo'}
+Die Coronaviruspandemie verändert unser Leben und unser Lernen. Die UzK bittet Lehrende, das SoSe 2021 als Hybridsemester zu gestalten. Wir werden unseren Kurs komplett online durchführen. Bitte seien Sie nachsichtig, wenn nicht alles so klappt, wie in Präsenzveranstaltungen. Wir müssen aktuell alle sehr viel dazu lernen in Sachen digitale Lehre. Sie können sicher sein, dass das Geographische Institut bemüht ist, die Lehre so effizient wie möglich weiter laufen zu lassen, damit Sie in Ihrem Studium fortfahren können.
+```
+
+In dieser Veranstaltung werden wir folgende Werkzeuge verwenden:
+
+1.  **ILIAS**: die Online-Lernplattform der UzK. Entweder sind Sie bereits automatisch in dem Kurs registriert oder werden von mir per Hand angemeldet.
+2.  **Campuswire**: die Live-Chatplattform dient der allgemeinen Kommunikation und der Selbstorganisation des Lernens. Verwenden Sie diese, um Fragen mit Ihren Kommilitonen und mir zu diskutieren. Sie sollten eine Einladungsmail zu Campuswire erhalten haben.
+3.  **Zoom**: die Videokonferenz-Software werden wir für live Einführungen nutzen. Die Anmeldemodalitäten sind auf den Kursseiten in ILIAS erklärt.
+
+## Verwendete Literatur
+
+Wir werden in diesem Kurs hauptsächlich das freie, englischsprachige Buch [ModernDive: Statistical Inference via Data Science](https://moderndive.com/) benutzen [@ModernDive]. Bitte lassen Sie sich nicht davon abschrecken, dass das Buch englischsprachig ist. Es ist sehr gut verständlich und bietet einen modernen Zugang zur Datenanalyse. Als Zweitbuch werden wir @Sauer2019 nutzen.
+
+Ab und an werde ich Ihnen auch andere Literatur empfehlen. Für Ihren Abschlussbericht werden Sie auch selbständig weitere Literatur recherchieren.
+
+## Sinn und Unsinn dieses Skripts
+
+Dieses Skript ist ein lebendiges Begleitdokument des Kurses. Es wird laufend angepasst und aktualisiert.
+
+Ich nutze verschiedene Farbkästen, um wichtige Stellen hervorzuheben:
+
+```{block, type='rmdinfo'}
+Infoblock
+```
+
+<br>
+
+```{block, type='rmdalert'}
+Achtung, wichtig!
+```
+
+<br>
+
+```{block, type='rmdexample'}
+Beispielblock
+```
+
+<br>
+
+```{block, type='rmdoutcomes'}
+Lernziele
+```
+
+<!-- <br> -->
+
+<!-- ```{block, type='rmdsummary'} -->
+<!-- Zusammenfassung -->
+<!-- ``` -->
+
+## Inspiration und Quellen
+
+Dieses Skript baut stark auf folgenden freien Quellen auf:
+
+- r4ds: @r4ds
+- ModernDive: @ModernDive
+
+Den Autoren dieser Bücher gilt ein großer Dank `r fa("heart", fill = "red")`!

@@ -1,0 +1,5 @@
+book_filename: "environmental_stat"
+rmd_files: ["index.Rmd", "01-intro.Rmd",
+"20-biblio.Rmd"]
+before_chapter_script: ["helper_functions.R"]
+delete_merged_file: true

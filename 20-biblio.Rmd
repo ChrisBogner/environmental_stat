@@ -1,0 +1,9 @@
+`r if (knitr:::is_html_output()) '
+# Literatur {-}
+'`
+
+<!-- --- -->
+<!-- nocite: '@Beinke2016' -->
+<!-- ... -->
+
+<div id="refs"></div>

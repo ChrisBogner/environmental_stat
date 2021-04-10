@@ -1,0 +1,49 @@
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+
+\usepackage{xcolor}
+\usepackage{mdframed}
+\setlength{\fboxsep}{.8em}
+
+%\definecolor{shadecolor}{rgb}{0.94, 0.97, 1.0}
+
+\newenvironment{rmdinfo}{
+  \definecolor{info}{rgb}{0.94, 0.97, 1.0}  %  	Alice blue
+  \color{black}
+  \begin{mdframed}[backgroundcolor = info]}
+ {\end{mdframed}}
+
+\newenvironment{rmdalert}{
+  \definecolor{alert}{rgb}{0.96, 0.76, 0.76}  % babypink
+  \color{black}
+  \begin{mdframed}[backgroundcolor = alert]}
+ {\end{mdframed}}
+
+
+\newenvironment{rmdexample}{
+  \definecolor{example}{rgb}{0.0, 0.8, 0.6}  % Caribbean green
+  \color{black}
+  \begin{mdframed}[backgroundcolor = example]}
+ {\end{mdframed}}
+ 
+ 
+\newenvironment{rmdoutcomes}{
+  \definecolor{outcomes}{rgb}{1.0, 0.92, 0.8}  % Blanched Almond
+  \color{black}
+  \begin{mdframed}[backgroundcolor = outcomes]}
+ {\end{mdframed}}
+
+\newenvironment{rmdsummary}{
+  \definecolor{summary}{rgb}{1.0, 0.8, 0.5}  % 
+  \color{black}
+  \begin{mdframed}[backgroundcolor = summary]}
+ {\end{mdframed}}
+ 
+ 
