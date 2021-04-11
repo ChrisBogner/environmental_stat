@@ -51,7 +51,7 @@ This is now saved in the `notebooks` folder **on the server**.
 
 Notebooks have the great advantage to offer the preview of your work. Just click the `Preview` button. The preview is refreshed every time you save your notebook.
 
-## Other output
+## Other output options
 You can also produce different outputs from your R Notebook because it is a normal R Markdown file and supports different output formats. However, if you produce an .html output, the `Preview` button will disappear! To bring it back, you need to edit the header of your R Notebook file to `output: html_notebook`.
 
 ```{block, type='rmdinfo'}
@@ -97,7 +97,7 @@ knitr::include_graphics('figures/workspace.png')
 ```
 
 
-## A brief intro to data types
+## A brief recap of data types
 
 So far you have made a numeric variable `x`. There many other types of data objects you can make in R.
 
@@ -124,7 +124,7 @@ v * 3
 
 ## Practice on your own!
 
-To complete this problem set you will next run through some Exercises, and submit a knitted `.html` file with answers all the Exercises. Please make a **header** for each of these Exercises. If you need to answer an Exercise with text, type the text **below** the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk **below** the header, and put the code in the greyed out box. 
+To complete this problem set you will next run through some Exercises, and submit your R Notebook file with answers to all the Exercises. Please make a **header** for each of these Exercises. If you need to answer an Exercise with text, type the text **below** the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk **below** the header, and put the code in the greyed out box. 
 
 
 ```{block, type='rmdalert'}
@@ -170,8 +170,6 @@ v + 2
 ```{r}
 music <- c("bluegrass", "funk", "folk")
 ```
-
-
 
 
 1. Now let's practice some basic formatting. Using <a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">this formatting tips page</a> figure out how to put the following into your lab report. These all can get typed into the white section, where text goes. **Hint:** To put  **each of these on its own line!** hit a hard return between each line of text!!!!!!!!

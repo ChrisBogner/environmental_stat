@@ -40,7 +40,7 @@ In this course, we will use the following tools:
 
 
 ## Literature {-}
-We will be using the book [ModernDive: Statistical Inference via Data Science](https://moderndive.com/) [@ModernDive] mainly. Additionally, I will recomment from time to time [R for Data Science](https://r4ds.had.co.nz/) [@r4ds]. For your report, you will do an additional literature search depending on your topic.
+We will be using the book [ModernDive: Statistical Inference via Data Science](https://moderndive.com/) [@ModernDive] mainly. Additionally, I will recommend from time to time [R for Data Science](https://r4ds.had.co.nz/) [@r4ds] and [OpenIntro Statistics](https://www.openintro.org/book/os/) [@Diez2019]. For your report, you will do an additional literature search depending on your topic.
 
 
 ## Why this script {-}
@@ -79,11 +79,13 @@ Learning outcomes
 
 ## Acknowledgements {-}
 
-This scripts is heavily based on the free material provided by 
+This script is based on the free material provided by 
 
-- ModernDive: @ModernDive and their free Problem Sets (https://moderndive.github.io/moderndive_labs/index.html) and
+- ModernDive: @ModernDive and their free Problem Sets authored by Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay (https://moderndive.github.io/moderndive_labs/index.html)
 
-- r4ds: @r4ds
+- R for Dtaa Science (r4ds): @r4ds
+
+- Data Sicence in a Box (https://datasciencebox.org/) and the free book by @Diez2019
 
 One cannot thank those people enough for their contribution to the `r fa("r-project", fill = "steelblue")` community `r fa("heart", fill = "red")`!
 

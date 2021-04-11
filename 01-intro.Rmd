@@ -10,6 +10,7 @@ library(knitr)
 - Upload and download files from the server
 - Use R as a calculator
 - Create first objects in R
+- Do you very first plot
 ```
 
 The goal this week is to introduce you to R and RStudio which you'll be using throughout the course both to learn statistical concepts and to analyze real data. To clarify which is which: R is the name of the programming language itself and RStudio is a convenient interface.
@@ -77,12 +78,34 @@ knitr::include_graphics('figures/files_export.png')
 knitr::include_graphics('figures/files_download.png')
 ```
 
-## Logging out of the Server
-There are a lot of stats classes and students using the Server. To keep it as fast as possible, it is best if you sign out when you are done. To do so follow all the same steps for closing an R Markdown document as above: 
 
-- Save all your work. 
-- Click on the orange button in the far right corner of the screen to quit R 
-- Choose **don't save** for the **Workspace image**
+## Practice on your own!
+
+To complete this problem set you will next run through some Exercises, and submit your R script (i.e. .R file) with answers to all the Exercises. If you need to type text, don't forget to use the comment sign `#` before typing your text so that R will not misinterpret your text as commands.
+
+```{block, type='rmdalert'}
+Remember to save your work as you go along! Click the save button in the upper left hand corner of the window.
+```
+
+We will start the exercises \@ref(rob1) and \@ref(rob2) in class. Finish the exercises on your own and produce your first plot in exercise \@ref(firstplot) `r emo::ji('smile')`.
+
+## Turning in your work
+- Save your R script and download the .R file to your computer.
+- Upload your .R file to ILIAS. You will find an upload option in today's session.
+- You should receive a solution file after the deadline.
+
+```{block, type='rmdalert'}
+Be sure to upload before the deadline!
+```
+
+
+
+## Logging out of the server
+There are other classes and students using the server. To keep it as fast as possible, it is best if you sign out when you are done. To do so follow all the same steps for closing an R Markdown document as above: 
+
+- Save all your work, i.e. the R document.
+- Click on the orange button in the far right corner of the screen to quit R.
+- Choose **don't save** for the **Workspace image**.
 - When the browser refreshes, you can click on the button `Sign Out` next to your login in the top right. 
 - You are signed out! 
 

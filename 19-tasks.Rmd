@@ -1,0 +1,74 @@
+# Additional exercises
+
+## Introduction to R and RStudio Server Pro
+
+### Rob's account book {#rob1}
+
+The young master student Rob Stat thinks seriously about his mother's advice to monitor his expenses. He begins by writing down what he spends during the week in the Mensa:
+
+<br>
+
+```{r, results='asis', echo = F}
+
+tab <- tibble(`Day of week` = c('Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday'), `Amount spent (€)` = c(2.57, 2.90, 2.73, 3.23, 3.90))
+knitr::kable(tab, 
+             #format = 'latex',
+             caption = "Rob's account book", booktabs = T,
+             format.args = list(decimal.mark = '.')) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F,
+                position = "left")
+```
+
+
+- Generate a vector of Rob's expenses and assign it to the variable `expenses`. Use the function `c()` and use the numeric expenses only, not the days of the week.
+- How much did Rob spend during this week? Use the function `sum()`.
+- Rob seems to have spent the smallest amount on Tuesday. How much would he have spent if he paid that much every day of the week? Use the array notation with the square brackets.
+
+Unfortunately, Rob misspelled the amount on Tuesday. Actually, he invited his girl friend for lunch and paid 7.95 € instead of 2.90 €.
+
+- Correct Rob's typo.
+- How does the result change?
+
+### Missing values {#rob2}
+
+R codes missing values as `NA`. Rob ate in the Mensa last Monday, but forgot to write down the amount.
+
+```{r, results='asis', echo = F}
+
+tab <- tibble(`Day of week` = c('Monday, 9 March', 'Tuesday, 10 March', 'Wednesday, 11 March', 'Thrusday, 12 March', 'Friday, 13 March', 'Monday, 16 March'), `Amount spent (€)` = c(2.57, 2.90, 2.73, 3.23, 3.90, NA))
+knitr::kable(tab, 
+             #format = 'latex',
+             caption = "Rob's account book, cont.", booktabs = T,
+             format.args = list(decimal.mark = '.')) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F,
+                position = "left")
+```
+
+- How does NA change the calculated sum?
+- Read what happens when the data contains NAs by calling help on `sum`, i.e. type `?sum` in R console.
+- Correct your call to `sum()` accordingly.
+
+### Your very first plot {#firstplot}
+In particular in the beginning of learning R language you should not forget why you are doing it. Because R is really beautiful and you want to analyse and learn from real data. 
+
+Even if you don't fully understand the following code, just copy and paste it into your .R file and let it run!
+
+```{r, echo = T, results = 'hide', fig.show='hide'}
+library(gapminder)
+
+gapminder2007 <- gapminder %>% 
+  filter(year == 2007)
+
+ggplot(gapminder2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
+  geom_point() +
+  scale_x_log10() +
+  xlab('GDP per capita') +
+  ylab('Life expectancy') +
+  labs(title = 'Gapminder data for the year 2007')
+  
+```
+
+- What is the data set about. Use help like this `?gapminder`.
+- What do the colours represent?
+- What does the size of the circles represent?
+- How would you describe the relationship between the GDP per capita and Life expectancy?
