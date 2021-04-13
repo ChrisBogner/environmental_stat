@@ -38,6 +38,16 @@ In this course, we will use the following tools:
 
 **RStudio Server Pro**: a server with a running R and RStudio installation. We will be working there.
 
+## Intended learning outcomes (ILOs) {-}
+At the end of this course you should be able to
+
+```{block, type='rmdoutcomes'}
+- Write simple R scripts for data analysis.
+- Explain statistical methods learnt in this course.
+- Apply statistical methods learnt in this course.
+- Apply selected methods to a new data set and write a report.
+```
+
 
 ## Literature {-}
 We will be using the book [ModernDive: Statistical Inference via Data Science](https://moderndive.com/) [@ModernDive] mainly. Additionally, I will recommend from time to time [R for Data Science](https://r4ds.had.co.nz/) [@r4ds] and [OpenIntro Statistics](https://www.openintro.org/book/os/) [@Diez2019]. For your report, you will do an additional literature search depending on your topic.
@@ -68,7 +78,7 @@ This is an example
 <br>
 
 ```{block, type='rmdoutcomes'}
-Learning outcomes
+Learning outcomes, also for single sessions
 ```
 
 <!-- <br> -->

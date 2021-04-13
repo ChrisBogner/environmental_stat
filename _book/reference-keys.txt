@@ -7,8 +7,8 @@ fig:files-download
 fig:r-notebook
 fig:rmarkdown-file
 fig:workspace
-tab:unnamed-chunk-26
 tab:unnamed-chunk-27
+tab:unnamed-chunk-28
 introduction-to-r-and-rstudio-server-pro
 opening-rstudio-server-pro
 the-rstudio-interface

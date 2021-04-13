@@ -49,11 +49,12 @@ knitr::kable(tab,
 - Correct your call to `sum()` accordingly.
 
 ### Your very first plot {#firstplot}
-In particular in the beginning of learning R language you should not forget why you are doing it. Because R is really beautiful and you want to analyse and learn from real data. 
+In particular in the beginning of learning R you should not forget why you are doing it. Because R is really beautiful and you want to analyse and learn from real data. 
 
 Even if you don't fully understand the following code, just copy and paste it into your .R file and let it run!
 
 ```{r, echo = T, results = 'hide', fig.show='hide'}
+library(tidyverse)
 library(gapminder)
 
 gapminder2007 <- gapminder %>% 
