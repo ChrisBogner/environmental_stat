@@ -1,10 +1,5 @@
 # Introduction to R and RStudio Server Pro
 
-```{r include = F}
-library(knitr) 
-```
-
-
 ```{block, type='rmdoutcomes'}
 - Login into the RStudio Server Pro
 - Upload and download files from the server
@@ -13,7 +8,7 @@ library(knitr)
 - Do you very first plot
 ```
 
-The goal this week is to introduce you to R and RStudio which you'll be using throughout the course both to learn statistical concepts and to analyze real data. To clarify which is which: R is the name of the programming language itself and RStudio is a convenient interface.
+The goal this week is to introduce you to R and RStudio which you'll be using throughout the course both to learn statistical concepts and to analyse real data. To clarify which is which: R is the name of the programming language itself and RStudio is a convenient interface.
 
 Today we begin with the fundamental building blocks of R and RStudio: the interface, creating and saving files, and basic commands.
 

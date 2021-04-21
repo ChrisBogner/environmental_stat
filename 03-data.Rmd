@@ -1,0 +1,105 @@
+# What is data?
+
+```{block, type='rmdoutcomes'}
+- Install an R package
+- Load an installed data set
+- Explore a data set and recognize the type of its variables
+```
+
+Data can be anything `r emo::ji('smile')`. Usually we will store data in a rectangular form, i.e. variables in columns and observations in rows. There are two dedicated object formats to store data, namely `data.frame()` and `tibble()`. They have both similar characteristics, however, the tibble is considered the modern form of a data frame and offers some advantages (details later).
+
+In this chapter, we will have a look at a data set called `palmerpenguins`. It is provided in a dedicated package, so let's install this package first.
+
+## Installing R packages
+Packages that are available on the official [CRAN](https://www.r-project.org/) (Comprehensive R Archive Network) can be installed with function `install.packages('name_of_the_package')`. It is important to provide the name of the package in quotes (single or double).
+
+```{r, eval = F}
+install.packages('palmerpenguins')
+```
+
+To load a package, use the function `library(name_of_the_package)`, this time without quotes!
+
+```{r}
+library(palmerpenguins)
+```
+
+## Welcome the penguins!
+
+```{r penguins, echo = F, fig.cap = 'Artwork by `@allison_horst`', fig.width = 6, out.width = "100%"}
+knitr::include_graphics('figures/lter_penguins.png')
+```
+
+The package has a dedicated [website](https://allisonhorst.github.io/palmerpenguins/) that is really worth visiting. The package contains two data sets, we will explore the shorter one, called `penguins`. To load a data set installed with a package, use the function `data("name_of_data_set")`. Be sure to put the name of the data set in quotes (single or double).
+```{r}
+data("penguins")
+```
+
+Let's have a look at the object `penguins`.
+```{r}
+penguins
+```
+
+This object is a tibble and contains a data set with 344 rows and 8 columns, meaning we have 8 variables measured on 344 animals. The first column contains the variable `species` that, you guessed it, shows the species of the animal. This variable is a so-called `factor` (indicated by `<fct>` below species). It means, it contains categorical information and has a certain number (usually a small one) of distinct values called `levels`. The levels in this case are
+```{r}
+levels(penguins$species)
+```
+
+The above code uses the **`$` sign to access a whole column** (i.e. variable) in the data set. This is very handy and an alternative to the square bracket method. The syntax is `name_of_data_set$name_of_variable`.
+
+There are also numerical variables in the tibble. A numerical variable can be continuous,  e.g. `bill_length_mm` (indicated by `<dbl>` meaning double), meaning that it contains decimal numbers or discrete, e.g. `year` (indicated by `<int>` meaning integer), meaning that it contains integers (whole numbers).
+
+To summarize the data set, we can use the function `summary()`.
+```{r}
+summary(penguins)
+```
+
+## The square braces revisited
+
+You already know how to access a certain position inside a vector. A tibble is a tow-dimensional object, it has rows and columns. To access a particular measurement, you need to provide both, its row and its column index. The following code picks the value in the first row and third column:
+```{r}
+penguins[1, 3]
+```
+
+
+## Let's see them
+
+We will talk much more about data visualisation later. For now, just use the code below to visualize the relationship between the flipper length and the body mass of the animals.
+
+```{r, out.width="90%", warning = F}
+library(ggplot2)
+
+ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, col = species)) +
+  geom_point() +
+  xlab('Flipper length (mm)') +
+  ylab('Body mass (g)')
+  
+```
+
+
+## Practice on your own!
+
+1. How many categorical and how many numerical variables are there? Consult help.
+
+1. How many Gentoo penguins are present in the data set?
+
+1. What is the time span of the measurments?
+
+1. Find the levels of the variable `island`.
+
+1. This is a challenge `r emo::ji('smile')`. Take the code that produced the visualisation of flipper length and the body mass of the animals. Make an educated guess how to change the code such that it produces the visualisation of the bill length vs. body mass. Can you also guess how to adjust the label on the x axis?
+
+
+## Reading assignment
+Chapter 1.3 in @ModernDive.
+
+## Turning in your work
+- Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.
+- Upload your R Notebook to ILIAS. You will find an upload option in today's session.
+- You should receive a solution file after the deadline.
+
+```{block, type='rmdalert'}
+Be sure to upload before the deadline!
+```
+
+## Additional reading
+In case you prefer flights to penguins, you have a look at data exploration in Chapter 1.4 in @ModernDive

@@ -37,16 +37,17 @@ knitr::include_graphics('figures/new_chunk.png')
 ```
 
 ## Saving a file
-I suggest to create a new folder `notebooks` to save all your R Notebooks.
+I suggest to create a new folder `Notebooks` to save all your R Notebooks.
 
 You will complete your lab work in an R Notebook file like this each week, so it is important to learn how to save these files. 
 
 -  Click File > Save As...
--  Browse to the `notebooks` course folder you just created
+-  Browse to the `Notebooks` course folder you just created
 -  Name the file: `Session2_lastname_firstname` (fill in your firstname and lastname)
 -  Click save
 
-This is now saved in the `notebooks` folder **on the server**. 
+This is now saved in the `Notebooks` folder **on the server**. 
+
 ## Preview
 
 Notebooks have the great advantage to offer the preview of your work. Just click the `Preview` button. The preview is refreshed every time you save your notebook.
@@ -55,7 +56,7 @@ Notebooks have the great advantage to offer the preview of your work. Just click
 You can also produce different outputs from your R Notebook because it is a normal R Markdown file and supports different output formats. However, if you produce an .html output, the `Preview` button will disappear! To bring it back, you need to edit the header of your R Notebook file to `output: html_notebook`.
 
 ```{block, type='rmdinfo'}
-Note that there is now a R Notebook file (`.Rmd`) and an html file (`nb.html`) in the `notebook` folder.
+Note that there is now a R Notebook file (`.Rmd`) and an html file (`nb.html`) in the `Notebooks` folder.
 ```
 
 Inspect the preview of your notebook to see how what you typed was formatted. There are lots of tricks for controlling the formatting of the knitted html file. For instance:

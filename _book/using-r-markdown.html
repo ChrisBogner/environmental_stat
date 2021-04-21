@@ -98,26 +98,30 @@ Figure 2.2: An R Notebook
 <h2>
 <span class="header-section-number">2.3</span> Saving a file<a class="anchor" aria-label="anchor" href="#saving-a-file"><i class="fas fa-link"></i></a>
 </h2>
-<p>I suggest to create a new folder <code>notebooks</code> to save all your R Notebooks.</p>
+<p>I suggest to create a new folder <code>Notebooks</code> to save all your R Notebooks.</p>
 <p>You will complete your lab work in an R Notebook file like this each week, so it is important to learn how to save these files.</p>
 <ul>
 <li>Click File &gt; Save As…</li>
-<li>Browse to the <code>notebooks</code> course folder you just created</li>
+<li>Browse to the <code>Notebooks</code> course folder you just created</li>
 <li>Name the file: <code>Session2_lastname_firstname</code> (fill in your firstname and lastname)</li>
 <li>Click save</li>
 </ul>
-<p>This is now saved in the <code>notebooks</code> folder <strong>on the server</strong>.
-## Preview</p>
+<p>This is now saved in the <code>Notebooks</code> folder <strong>on the server</strong>.</p>
+</div>
+<div id="preview" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Preview<a class="anchor" aria-label="anchor" href="#preview"><i class="fas fa-link"></i></a>
+</h2>
 <p>Notebooks have the great advantage to offer the preview of your work. Just click the <code>Preview</code> button. The preview is refreshed every time you save your notebook.</p>
 </div>
-<div id="other-output-options" class="section level2" number="2.4">
+<div id="other-output-options" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.4</span> Other output options<a class="anchor" aria-label="anchor" href="#other-output-options"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Other output options<a class="anchor" aria-label="anchor" href="#other-output-options"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can also produce different outputs from your R Notebook because it is a normal R Markdown file and supports different output formats. However, if you produce an .html output, the <code>Preview</code> button will disappear! To bring it back, you need to edit the header of your R Notebook file to <code>output: html_notebook</code>.</p>
 <div class="rmdinfo">
 <p>
-Note that there is now a R Notebook file (<code>.Rmd</code>) and an html file (<code>nb.html</code>) in the <code>notebook</code> folder.
+Note that there is now a R Notebook file (<code>.Rmd</code>) and an html file (<code>nb.html</code>) in the <code>Notebooks</code> folder.
 </p>
 </div>
 <p>Inspect the preview of your notebook to see how what you typed was formatted. There are lots of tricks for controlling the formatting of the knitted html file. For instance:</p>
@@ -126,9 +130,9 @@ Note that there is now a R Notebook file (<code>.Rmd</code>) and an html file (<
 <li>putting <code>###</code> and a space in front of text makes it a smaller header!</li>
 </ul>
 </div>
-<div id="entering-and-running-commands" class="section level2" number="2.5">
+<div id="entering-and-running-commands" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">2.5</span> Entering and running commands<a class="anchor" aria-label="anchor" href="#entering-and-running-commands"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Entering and running commands<a class="anchor" aria-label="anchor" href="#entering-and-running-commands"><i class="fas fa-link"></i></a>
 </h2>
 <p>The code chunks are where you put R code in an R Markdown file. So far, your preview doesn’t show anything, because we did not put any content in the code chunks yet!</p>
 <p>Using your first code chunk, type the following command to create a new variable called <code>x</code> with the value of 6.</p>
@@ -158,9 +162,9 @@ Figure 2.3: Global environment contains the variable x now
 </p>
 </div>
 </div>
-<div id="a-brief-recap-of-data-types" class="section level2" number="2.6">
+<div id="a-brief-recap-of-data-types" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">2.6</span> A brief recap of data types<a class="anchor" aria-label="anchor" href="#a-brief-recap-of-data-types"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> A brief recap of data types<a class="anchor" aria-label="anchor" href="#a-brief-recap-of-data-types"><i class="fas fa-link"></i></a>
 </h2>
 <p>So far you have made a numeric variable <code>x</code>. There many other types of data objects you can make in R.</p>
 <p>First, copy, paste and run the following command in a new code chunk to make a <strong>character</strong> called <code>favorite_movie</code>. Think of characters as text as opposed to numerical values. Note that I told R that this was a <strong>character</strong> by putting quotation marks around <code>Star_Wars</code>.</p>
@@ -174,9 +178,9 @@ Figure 2.3: Global environment contains the variable x now
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">v</span> <span class="op">*</span> <span class="fl">3</span></code></pre></div>
 </div>
-<div id="practice-on-your-own-1" class="section level2" number="2.7">
+<div id="practice-on-your-own-1" class="section level2" number="2.8">
 <h2>
-<span class="header-section-number">2.7</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>To complete this problem set you will next run through some Exercises, and submit your R Notebook file with answers to all the Exercises. Please make a <strong>header</strong> for each of these Exercises. If you need to answer an Exercise with text, type the text <strong>below</strong> the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk <strong>below</strong> the header, and put the code in the greyed out box.</p>
 <div class="rmdalert">
@@ -238,9 +242,9 @@ Remember to save your work as you go along! Click the save button in the upper l
 <p><strong>Bold like this</strong></p>
 <p>A superscript: R<sup>2</sup></p>
 </div>
-<div id="turning-in-your-work-1" class="section level2" number="2.8">
+<div id="turning-in-your-work-1" class="section level2" number="2.9">
 <h2>
-<span class="header-section-number">2.8</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.9</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Save your R Notebook and download the .Rmd file to your computer. You don’t need to download the .nb.html file.</li>
@@ -265,11 +269,12 @@ Be sure to upload before the deadline!
 <li><a class="nav-link" href="#opening-a-new-r-notebook"><span class="header-section-number">2.1</span> Opening a new R Notebook</a></li>
 <li><a class="nav-link" href="#make-changes-to-a-file"><span class="header-section-number">2.2</span> Make changes to a file</a></li>
 <li><a class="nav-link" href="#saving-a-file"><span class="header-section-number">2.3</span> Saving a file</a></li>
-<li><a class="nav-link" href="#other-output-options"><span class="header-section-number">2.4</span> Other output options</a></li>
-<li><a class="nav-link" href="#entering-and-running-commands"><span class="header-section-number">2.5</span> Entering and running commands</a></li>
-<li><a class="nav-link" href="#a-brief-recap-of-data-types"><span class="header-section-number">2.6</span> A brief recap of data types</a></li>
-<li><a class="nav-link" href="#practice-on-your-own-1"><span class="header-section-number">2.7</span> Practice on your own!</a></li>
-<li><a class="nav-link" href="#turning-in-your-work-1"><span class="header-section-number">2.8</span> Turning in your work</a></li>
+<li><a class="nav-link" href="#preview"><span class="header-section-number">2.4</span> Preview</a></li>
+<li><a class="nav-link" href="#other-output-options"><span class="header-section-number">2.5</span> Other output options</a></li>
+<li><a class="nav-link" href="#entering-and-running-commands"><span class="header-section-number">2.6</span> Entering and running commands</a></li>
+<li><a class="nav-link" href="#a-brief-recap-of-data-types"><span class="header-section-number">2.7</span> A brief recap of data types</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-1"><span class="header-section-number">2.8</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-1"><span class="header-section-number">2.9</span> Turning in your work</a></li>
 </ul>
 
       <div class="book-extra">
@@ -286,7 +291,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-04-13.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-04-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
