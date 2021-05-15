@@ -1,3 +1,22 @@
+h1 {
+    font-family: Helvetica, sans-serif;
+    /* font-weight:bold; */
+}
+
+h2 {
+    font-family: Helvetica, sans-serif;
+    /* font-weight:bold; */
+    margin-top: 24px;
+    font-size: 20pt;
+}
+
+h3 {
+    font-family: Helvetica, sans-serif;
+    /* font-weight:bold; */
+    margin-top: 24px;
+    font-size: 16pt;
+}
+
 caption {
   color: #777;
   margin-top: 10px;

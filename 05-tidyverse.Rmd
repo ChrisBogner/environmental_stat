@@ -1,0 +1,195 @@
+# Explorative workflow with `tidyverse` {#tidyverse}
+
+```{block, type='rmdoutcomes'}
+- Name core packages in `tidyverse`
+- Apply a simple explorative workflow (read, summarize, plot) with `tidyverse`
+- Use functions from `dplyr` for data wrangling
+```
+
+`tidyverse` is a collection of R packages for data analysis (https://www.tidyverse.org/). It shares a common philosophy about how data should be structure and grammar of data manipulation and visualisation. Although it might sound like something alien, `tidyverse` is a regular part of R and its functions can be mixed with base R functions.
+
+The best introduction to `tidyverse` is **R4DS**: "R for Data Science" [@r4ds]. You can read it for free here (https://r4ds.had.co.nz/).
+
+## Core packages
+`tidyverse` comprises 8 core packages that are installed when you call `install.packages('tidyverse')`:
+
+Packages | Description|
+:-------- | :------------ |
+`ggplot2`| data visulaization |
+`dplyr`| data gransformation |
+`tidyr`| data cleaning |
+`readr`| importing data |
+`purrr`| functional programming|
+`tibble`| extension of `data.frame` |
+`stringr`| functions for strings, i.e. text variables  |
+`forcats`| functions for `factor` |
+
+Every packages has a Cheat Sheet, an overview of its functions. To get a package's cheat sheet click on its name (https://www.tidyverse.org/packages/), scroll down to the section Cheatsheet.
+
+Besides its core packages, `tidyverse` also installes a long list of supplementary packages that you can find here: https://www.tidyverse.org/packages/
+
+
+## Exploratory data analysis
+
+Exploratory data analysis is a very important first step in data analysis. Before using any advanced statistical method, exploratory analysis is a must have. It comprises roughly the following steps:
+
+- import and inspect data
+- clean (tidy) data if necessary
+- summarize it and create new variables if necessary
+- plot as many different plots as possible to get a good overview about patterns and data distribution
+
+### Read data, revisited
+
+We load the library `tidyverse` first.
+```{r, message = F, warning = F}
+library(tidyverse)
+```
+
+Last time we used the function `read_delim()` to import data into R. This function is the most general from a whole family of functions, all starting with `read_*`: `read_csv()`, `read_csv2()` etc. They all have their own parameters that you need to verify on the respective help pages if you want to use them.
+
+For this exploratory data analysis we will use data from the German Meteo Service (Deutscher Wetterdienst) that I downloaded on 2020-05-24 (https://www.dwd.de/DE/leistungen/klimadatendeutschland/klimadatendeutschland.html). The data set contains hourly measurements of the relative air humidity (%) and air temperature (°C) for three meteo stations, namely Hof, Frankfurt and Köln-Bonn. The data is named `r file.name("meteo.csv")`.
+
+```{r}
+temp_humid <- read_delim('data/meteo.csv', delim = ';',    trim_ws = T)
+```
+
+`read_delim()` reports on reading the data about the variables it recognizes. This is a good hint to spot for possible problems. Are numerical variables read as `<dbl>`? Are characters recognized as `<char>` etc. In the code above, the parameter `trim_ws = T` removes leading zeroes.
+
+Let's have a showr glimps of the data.
+```{r}
+temp_humid
+```
+The data set contains the following variables:
+
+Variable | Description |
+:--------|:---------------|
+STATIONS_ID | ID of the meteo station |
+MESS_DATUM | date and time of the measurement, formatted as  yyyymmddhh |
+QN_9 | quality flag |
+TT_TU | air temeprature in 2 m height in °C |
+RF_TU | relative air humidity in % |
+eor | end of record (i.e. end of line)
+
+`read_*` always returns a `tibble`.
+```{r}
+class(temp_humid)
+```
+
+### Date and time made easy
+A very useful package to handle date and time is called `lubridate`. It is not part of core packages in `tidyverse` but is installed with the long list of additional packages. We will use it to convert the variable `MESS_DATUM` to a real date-time variable.
+
+The function `ymd_h()` converts character vectors to date-time objects provided they have the format **y**ear, **m**onth, **d**ay, **h**our. There are other function for different other formats; consult help.
+
+```{r, message = F, warning = F}
+library(lubridate)
+
+temp_humid$MESS_DATUM <- ymd_h(temp_humid$MESS_DATUM)
+
+temp_humid
+```
+
+After conversion, the variables is recognised as `<dttm>` for date-time.
+
+### Summarize data
+The three meteo station have the following IDs:
+```{r}
+station_ids <-  c('2261' = 'Hof', '1420' = 'Frankfurt', '2667' = 'Koeln')
+```
+
+We want to know how many measurments per station the data set contains.
+
+```{r}
+temp_humid %>% 
+  group_by(STATIONS_ID) %>% 
+  count()
+```
+
+The operator `%>%` is called **pipe** and is pronounced as **and then**. The code `temp_humid %>% group_by(STATIONS_ID) %>% count()` can be read as: take the object `temp_humid`, group it by `STATIONS_ID` and count the measurments in each group. The pipe operator comes from the package `magrittr` (https://magrittr.tidyverse.org/). It is a core operator in `tidyverse` and makes the code more readable and easier to follow for humans. Perhaps not in the beginning but very soon `r emo::ji('nerd_face')`.
+
+### The grammar of data minipulation -- `dplyr`
+The function `count()` is part of the library `dplyr`, a collection of functions all named after verbs. Thus, it is easy to imagine what the function does `r emo::ji('smile')`). The 5 core functions are:
+
+Function | Meaning |
+:-----------|:-----------|
+`filter()` | filter data according to their vaules  |
+`arrange()` | arrange rows |
+`select()` | select varialbes according to their names |
+`mutate()` | create new variables, possibly using other variables  |
+`summarize()` | summarize data with different functions |
+
+If we want to know how many measurments were recorded for a particular meteo station, we first filter for its ID:
+
+```{r}
+temp_humid %>% 
+  filter(STATIONS_ID == '2667') %>%
+  count()
+```
+
+The function `filter()` accepts logical tests. For every row in `STATION_ID`, `==` checks whether the entry equals 2667. `==` is a logical operator and means *is the left side equals the right sight*.  If this is the case, then `==` returns `TRUE` otherwise it returns `FALSE`. `filter()` selects only those rows where `TRUE` was returned. Other useful logical operators are:
+
+Operator | Meaning |
+:-----------|:-----------|
+`>` | is the left side larger than the right side?|
+`>=` | is the left side larger or equal the right side? |
+`!=`| are left and right sides unequal? |
+
+More logical and boolean operators are handeled in the tutorials (see below) and on help pages of `filter()`.
+
+We can combine several test with the operator **or** `|`, for example. Here, we want to filter all rows containing either ID 2667 or ID 2261:
+```{r}
+temp_humid %>% 
+  filter(STATIONS_ID == '2667' | STATIONS_ID == '2261') %>%
+  group_by(STATIONS_ID) %>% 
+  count()
+```
+
+The same can be achieved by excluding the third station:
+```{r}
+temp_humid %>% 
+  filter(STATIONS_ID != '1420') %>%
+  group_by(STATIONS_ID) %>% 
+  count()
+```
+
+As an alternative, we can use the operator `%in%` which chekcs whether the row contains one of the intries in a vector.
+```{r}
+temp_humid %>% 
+  filter(STATIONS_ID %in% c('2667', '2261')) %>%
+  group_by(STATIONS_ID) %>% 
+  count()
+```
+
+### Visualise
+
+We plot the time series and use a trick to split them along three different plots witht the function `facet_wrap()`. It needs a variable to separate the data into plots and we chose `STATIONS_ID`.
+
+```{r, out.width = "90%"}
+ggplot(data = temp_humid, aes(x = MESS_DATUM, y = TT_TU)) + 
+  geom_line() +
+  facet_wrap(~STATIONS_ID, nrow = 3) +
+  labs(x = 'Time', y = 'Temperature (°C)')
+```
+
+
+## Practice on your own!
+
+1. Do the tutorials "Work with data" from the Primers collection by RStudio Cloud. You can access the tutorials here: https://rstudio.cloud/learn/primers/2
+
+1. Do the tutorials "Visualize Data" from the Primers collection by RStudio Cloud. You can access the tutorials here:https://rstudio.cloud/learn/primers/3
+
+
+## Reading assignment
+Read chapter 3 (to 3.5) in @ModernDive
+
+
+<!-- ## Turning in your work -->
+<!-- - Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file. -->
+<!-- - Upload your R Notebook to ILIAS. You will find an upload option in today's session. -->
+<!-- - You should receive a solution file after the submission. -->
+
+<!-- ```{block, type='rmdalert'} -->
+<!-- Be sure to upload before the deadline! -->
+<!-- ``` -->
+
+<!-- ## Additional reading -->
+

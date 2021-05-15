@@ -1,7 +1,9 @@
 book_filename: "environmental_stat"
 rmd_files: ["index.Rmd", "01-intro.Rmd",
 "02-rmarkdown.Rmd",
-#"03-data.Rmd",
+"03-data.Rmd",
+"04-import-explore-visualize.Rmd",
+"05-tidyverse.Rmd",
 "19-tasks.Rmd", "20-biblio.Rmd"]
 before_chapter_script: ["helper_functions.R"]
 delete_merged_file: true

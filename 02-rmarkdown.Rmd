@@ -10,9 +10,9 @@
 
 When you want to write a paper, you have to open a Word document to type your ideas into, and save your work in. In R we use a document type called an R Markdown document. R Markdown documents are useful for both running code, and annotating the code with comments. The document can be saved, so you can refer back to your code later, and can be used to create other document types (html, word, pdf, or slides) for presenting the results of your analyses. R Markdown provides a way to generate clear and reproducible statistical analyses. 
 
-There are different types of R Markdown documents. We will use the R Notebook the most frequently
+There are different types of R Markdown documents. We will usually use the R Notebook.
 
-To open a new R Notebook, click on the little green plus on the upper left hand, and select R Notebook, as in the image below. You can leave it untitled. 
+To open a new R Notebook, click on the little green plus on the upper left hand and select R Notebook as in the image below. You can leave it untitled. 
 
 ```{r r-notebook, echo = F, fig.cap = 'How to create a new R Notebook', fig.width = 6, out.width = "60%"}
 knitr::include_graphics('figures/r-notebook.png')
@@ -56,7 +56,7 @@ Notebooks have the great advantage to offer the preview of your work. Just click
 You can also produce different outputs from your R Notebook because it is a normal R Markdown file and supports different output formats. However, if you produce an .html output, the `Preview` button will disappear! To bring it back, you need to edit the header of your R Notebook file to `output: html_notebook`.
 
 ```{block, type='rmdinfo'}
-Note that there is now a R Notebook file (`.Rmd`) and an html file (`nb.html`) in the `Notebooks` folder.
+Note that there is now an R Notebook file (`.Rmd`) and an html file (`nb.html`) in the `Notebooks` folder.
 ```
 
 Inspect the preview of your notebook to see how what you typed was formatted. There are lots of tricks for controlling the formatting of the knitted html file. For instance:

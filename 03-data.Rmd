@@ -82,11 +82,11 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, co
 
 1. How many Gentoo penguins are present in the data set?
 
-1. What is the time span of the measurments?
+1. What is the time span of the measurements?
 
 1. Find the levels of the variable `island`.
 
-1. This is a challenge `r emo::ji('smile')`. Take the code that produced the visualisation of flipper length and the body mass of the animals. Make an educated guess how to change the code such that it produces the visualisation of the bill length vs. body mass. Can you also guess how to adjust the label on the x axis?
+1. This is a challenge `r emo::ji('smile')`. Take the code that produced the visualisation of flipper length and the body mass of the animals. Make an educated guess how to change the code such that it produces the visualisation of the bill depth vs. body mass. Can you also guess how to adjust the label on the x axis?
 
 
 ## Reading assignment
@@ -102,4 +102,4 @@ Be sure to upload before the deadline!
 ```
 
 ## Additional reading
-In case you prefer flights to penguins, you have a look at data exploration in Chapter 1.4 in @ModernDive
+In case you prefer flights to penguins, you can have a look at data exploration in Chapter 1.4 in @ModernDive
