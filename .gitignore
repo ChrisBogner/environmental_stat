@@ -1,4 +1,5 @@
 .Rhistory
 .RData
 .Rproj.user
-^_book/
+_book/
+_bookdown_files/

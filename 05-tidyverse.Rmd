@@ -90,7 +90,7 @@ temp_humid
 
 After conversion, the variables is recognised as `<dttm>` for date-time.
 
-### Summarize data
+### Summarize
 The three meteo station have the following IDs:
 ```{r}
 station_ids <-  c('2261' = 'Hof', '1420' = 'Frankfurt', '2667' = 'Koeln')
@@ -104,7 +104,7 @@ temp_humid %>%
   count()
 ```
 
-The operator `%>%` is called **pipe** and is pronounced as **and then**. The code `temp_humid %>% group_by(STATIONS_ID) %>% count()` can be read as: take the object `temp_humid`, group it by `STATIONS_ID` and count the measurments in each group. The pipe operator comes from the package `magrittr` (https://magrittr.tidyverse.org/). It is a core operator in `tidyverse` and makes the code more readable and easier to follow for humans. Perhaps not in the beginning but very soon `r emo::ji('nerd_face')`.
+The operator `%>%` is called **pipe** and is pronounced as **and then**. The code `temp_humid %>% group_by(STATIONS_ID) %>% count()` can be read as: take the object `temp_humid`, group it by `STATIONS_ID` and count the measurments in each group. The pipe operator comes from the package `magrittr` (https://magrittr.tidyverse.org/). It is a core operator in `tidyverse` and makes the code more readable and easier to follow for humans. Perhaps not in the beginning, but very soon `r emo::ji('nerd_face')`.
 
 ### The grammar of data minipulation -- `dplyr`
 The function `count()` is part of the library `dplyr`, a collection of functions all named after verbs. Thus, it is easy to imagine what the function does `r emo::ji('smile')`). The 5 core functions are:
@@ -151,7 +151,7 @@ temp_humid %>%
   count()
 ```
 
-As an alternative, we can use the operator `%in%` which chekcs whether the row contains one of the intries in a vector.
+As an alternative, we can use the operator `%in%` which checks whether the row contains one of the entries in a vector.
 ```{r}
 temp_humid %>% 
   filter(STATIONS_ID %in% c('2667', '2261')) %>%
@@ -161,7 +161,7 @@ temp_humid %>%
 
 ### Visualise
 
-We plot the time series and use a trick to split them along three different plots witht the function `facet_wrap()`. It needs a variable to separate the data into plots and we chose `STATIONS_ID`.
+We plot the time series and use a trick to split them along three different plots with the function `facet_wrap()`. It needs a variable to separate the data into plots and we chose `STATIONS_ID`. The splitting variable must be preceeded by `~`.
 
 ```{r, out.width = "90%"}
 ggplot(data = temp_humid, aes(x = MESS_DATUM, y = TT_TU)) + 
@@ -170,8 +170,94 @@ ggplot(data = temp_humid, aes(x = MESS_DATUM, y = TT_TU)) +
   labs(x = 'Time', y = 'Temperature (°C)')
 ```
 
+### New variables with `mutate()`
+We want to calculate the monthly means and standard deviations of the air temperature and humidity. First, we need to generate the temporal information, namely year and month that will be used to group the temperature values to calculate `mean()` and `sd()`. This can be achieved with the functions `year()`and `month()` from library `lubridate`. The function `mutate()` can create new variables in a data object. 
+
+```{r}
+temp_humid <- temp_humid %>% 
+  mutate(year = year(MESS_DATUM),
+         month = month(MESS_DATUM))
+
+temp_humid
+```
+
+In the next step, we create a new data set and calculate the means and standard deviations. In order to get them *by station, year and month*, we group the data accordingly. To group by several variables, just enumerate them with a comma (no quotation or `c()` necessary).
+
+```{r}
+monthly_means <- temp_humid %>%
+  group_by(STATIONS_ID, year, month) %>% 
+  summarize(mean_T = mean(TT_TU), mean_RH = mean(RF_TU),
+            sd_T = sd(TT_TU), sd_RH = sd(RF_TU))
+
+monthly_means
+```
+
+The new object `monthly_means` is a grouped `tibble`, indicated by *grouped_df* in the output of `str()` that shows the structure of an object.
+
+```{r}
+str(monthly_means)
+```
+
+Some calculations are better done on ungrouped data. Therefore, we remove the grouping. This does not change the data itself.
+
+```{r}
+monthly_means <- ungroup(monthly_means)
+```
+
+To plot the monthly data, we need a proper monthly date object. We will attribute the monthly means to the first of the respective month. Again, `lubridate` helps with this task. The function `parse_dat_time()` is a genral function taking a character string and returning a date-time object. We need to "glue" the variables `year` and `month` together with `paste0()` (yes, it is a zero, not an O!) to form such a string and specify that `orders = 'ym'`, i.e. year before month. Finally, we `relocate()` the new variable `year_month` before the variable `year` for convenience (if not, it will be created as the last varialbe in the data set).
+
+```{r}
+monthly_means <- monthly_means %>%
+  mutate(year_month = parse_date_time(paste0(year, month), orders = 'ym', tz = 'CET')) %>% 
+  relocate(year_month, .before = year)
+
+monthly_means
+```
+Now, we can plot the mean air temperature.
+```{r, out.width = "90%"}
+ggplot(data = monthly_means, aes(x = year_month, y = mean_T, col = factor(STATIONS_ID))) + 
+  geom_line() + 
+  labs(x = 'Time', y = 'Temperature (°C)', color = 'Meteo station')
+```
+
+We can also visualise the standard deviations.
+```{r, out.width = "90%"}
+ggplot(monthly_means, aes(x = year_month, y = mean_T, ymin = mean_T - sd_T, ymax = mean_T + sd_T)) +
+  geom_errorbar() +
+  geom_point() +
+  facet_wrap(~STATIONS_ID, nrow = 3) + 
+  labs(x = 'Time', y = 'Temperature (°C)')
+```
+
+Or use a semi-transparent band to show the variability (standard deviation).
+
+```{r, out.width = "90%"}
+ggplot(monthly_means, aes(x = year_month, y = mean_T, ymin = mean_T - sd_T, ymax = mean_T + sd_T)) +
+  geom_ribbon(alpha = 0.5) +
+  geom_line() +
+  facet_wrap(~STATIONS_ID, nrow = 3) + 
+  labs(x = 'Time', y = 'Temperature (°C)')
+```
+
+One last detail. The titles on top of the facets show the station IDs. When you are not an employee of German Meteo Service, you probably do not know them by hart. It is better to use the city names. The vector `station_ids` is a so called named vector and has the right structure to change the titles in the facets: it assignes to every id its city name, i.e. 2261 = 'Hof'.
+
+```{r}
+station_ids
+```
+
+We use `station_ids` to chante the titles:
+
+```{r, out.width = "90%"}
+ggplot(monthly_means, aes(x = year_month, y = mean_T, ymin = mean_T - sd_T, ymax = mean_T + sd_T)) +
+  geom_ribbon(alpha = 0.5) +
+  geom_line() +
+  facet_wrap(~STATIONS_ID, nrow = 3, labeller = labeller(STATIONS_ID = station_ids)) + 
+  labs(x = 'Time', y = 'Temperature (°C)')
+```
 
 ## Practice on your own!
+
+1. Plot the means and standard deviations of the air humidity instead of air temperature.
 
 1. Do the tutorials "Work with data" from the Primers collection by RStudio Cloud. You can access the tutorials here: https://rstudio.cloud/learn/primers/2
 
@@ -191,5 +277,10 @@ Read chapter 3 (to 3.5) in @ModernDive
 <!-- Be sure to upload before the deadline! -->
 <!-- ``` -->
 
-<!-- ## Additional reading -->
+## Additional reading and videos
 
+- More information on statistical graphical summaries and geoms: R4DS @r4ds: Chapter 5 "Data transformation"
+
+- A live exploratory data analysis by the main author of `tidyverse`, Hadley Wickham. Really informative, but he types too fast `r emo::ji('smile')`.
+
+<iframe width="639" height="302" src="https://www.youtube.com/embed/go5Au01Jrvs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
