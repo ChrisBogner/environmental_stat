@@ -15,7 +15,7 @@ description: "Script for the course Environmental Statistics, based on the mater
 
 # Preface {-}
 
-The most exciting phrase to hear in science, the one that heralds new discoveries, is not 'Eureka!' but 'That's funny...' 
+> The most exciting phrase to hear in science, the one that heralds new discoveries, is not 'Eureka!' but 'That's funny...' 
 `r tufte::quote_footer('--- Isaac Asimov')`
 
 ## Online teaching {-}
@@ -30,7 +30,7 @@ In this course, we will use the following tools:
 **ILIAS**: the moodle platform at the UoC. You should all be registered there already.
 
 
-**Campuswire**: a live chat platform to decrease the number of emails and allow for a more natural exchange between participants and lecturer. You should have received an invitation email, if not, send me an email, please.
+**Campuswire**: a chat platform to decrease the number of emails and allow for a more natural exchange between participants and lecturer. You should have received an invitation email, if not, send me an email, please.
 
 
 **Zoom**: will be used for live presentations. Please check the registration requirements on ILIAS.

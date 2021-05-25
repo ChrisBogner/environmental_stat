@@ -15,8 +15,8 @@ The best introduction to `tidyverse` is **R4DS**: "R for Data Science" [@r4ds]. 
 
 Packages | Description|
 :-------- | :------------ |
-`ggplot2`| data visulaization |
-`dplyr`| data gransformation |
+`ggplot2`| data visualization |
+`dplyr`| data transformation |
 `tidyr`| data cleaning |
 `readr`| importing data |
 `purrr`| functional programming|
@@ -66,7 +66,7 @@ Variable | Description |
 STATIONS_ID | ID of the meteo station |
 MESS_DATUM | date and time of the measurement, formatted as  yyyymmddhh |
 QN_9 | quality flag |
-TT_TU | air temeprature in 2 m height in °C |
+TT_TU | air temperature in 2 m height in °C |
 RF_TU | relative air humidity in % |
 eor | end of record (i.e. end of line)
 
@@ -96,7 +96,7 @@ The three meteo station have the following IDs:
 station_ids <-  c('2261' = 'Hof', '1420' = 'Frankfurt', '2667' = 'Koeln')
 ```
 
-We want to know how many measurments per station the data set contains.
+We want to know how many measurements per station the data set contains.
 
 ```{r}
 temp_humid %>% 
@@ -106,18 +106,18 @@ temp_humid %>%
 
 The operator `%>%` is called **pipe** and is pronounced as **and then**. The code `temp_humid %>% group_by(STATIONS_ID) %>% count()` can be read as: take the object `temp_humid`, group it by `STATIONS_ID` and count the measurments in each group. The pipe operator comes from the package `magrittr` (https://magrittr.tidyverse.org/). It is a core operator in `tidyverse` and makes the code more readable and easier to follow for humans. Perhaps not in the beginning, but very soon `r emo::ji('nerd_face')`.
 
-### The grammar of data minipulation -- `dplyr`
+### The grammar of data manipulation -- `dplyr`
 The function `count()` is part of the library `dplyr`, a collection of functions all named after verbs. Thus, it is easy to imagine what the function does `r emo::ji('smile')`). The 5 core functions are:
 
 Function | Meaning |
 :-----------|:-----------|
-`filter()` | filter data according to their vaules  |
+`filter()` | filter data according to their values  |
 `arrange()` | arrange rows |
-`select()` | select varialbes according to their names |
+`select()` | select variables according to their names |
 `mutate()` | create new variables, possibly using other variables  |
 `summarize()` | summarize data with different functions |
 
-If we want to know how many measurments were recorded for a particular meteo station, we first filter for its ID:
+If we want to know how many measurements were recorded for a particular meteo station, we first filter for its ID:
 
 ```{r}
 temp_humid %>% 
@@ -245,7 +245,7 @@ One last detail. The titles on top of the facets show the station IDs. When you 
 station_ids
 ```
 
-We use `station_ids` to chante the titles:
+We use `station_ids` to change the titles:
 
 ```{r, out.width = "90%"}
 ggplot(monthly_means, aes(x = year_month, y = mean_T, ymin = mean_T - sd_T, ymax = mean_T + sd_T)) +
