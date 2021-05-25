@@ -103,3 +103,9 @@ One cannot thank those people enough for their contribution to the `r fa("r-proj
 ![](https://imgs.xkcd.com/comics/statistics.png){width=70%}
 
 Credit: https://xkcd.com/2400/
+
+<br>
+
+![](figures/Cc-by-nc-sa_icon.svg){width=30%}
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.](https://creativecommons.org/licenses/by-nc-sa/4.0/)
