@@ -8,7 +8,10 @@ bookdown::bs4_book:
         <li><a href="./">Environmental Statistics</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/ChrisBogner/environmental_stat.git %s
+  repo:
+    base: https://github.com/ChrisBogner/environmental_stat.git
+    branch: master
+    subdir: docs
     #download: ["pdf", "epub"]
 
 
@@ -22,8 +25,9 @@ bookdown::gitbook:
         <li><a href="./">Datenanalyse mit R</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/ChrisBogner/environmental_stat.git %s
+    #edit: https://github.com/ChrisBogner/environmental_stat.git
     #download: ["pdf", "epub"]
+
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
