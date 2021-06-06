@@ -10,7 +10,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: true
 repo: 
-    base: https://github.com/ChrisBogner/environmental_stat.git
+    base: https://github.com/ChrisBogner/environmental_stat
     branch: master
     subdir: docs
 description: "Script for the course Environmental Statistics, based on the material by ModernDive"
