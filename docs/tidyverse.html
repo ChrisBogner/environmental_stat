@@ -67,7 +67,7 @@ Use functions from <code>dplyr</code> for data wrangling
 </ul>
 </div>
 <p><code>tidyverse</code> is a collection of R packages for data analysis (<a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>). It shares a common philosophy about how data should be structure and grammar of data manipulation and visualisation. Although it might sound like something alien, <code>tidyverse</code> is a regular part of R and its functions can be mixed with base R functions.</p>
-<p>The best introduction to <code>tidyverse</code> is <strong>R4DS</strong>: “R for Data Science” <span class="citation">(<a href="literature-1.html#ref-r4ds" role="doc-biblioref">Wickham and Grolemund 2021</a>)</span>. You can read it for free here (<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>).</p>
+<p>The best introduction to <code>tidyverse</code> is <strong>r4ds</strong>: “R for Data Science” <span class="citation">(<a href="literature-1.html#ref-r4ds" role="doc-biblioref">Wickham and Grolemund 2021</a>)</span>. You can read it for free here (<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>).</p>
 <div id="core-packages" class="section level2" number="5.1">
 <h2>
 <span class="header-section-number">5.1</span> Core packages<a class="anchor" aria-label="anchor" href="#core-packages"><i class="fas fa-link"></i></a>
@@ -137,7 +137,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <p>Last time we used the function <code>read_delim()</code> to import data into R. This function is the most general from a whole family of functions, all starting with <code>read_*</code>: <code>read_csv()</code>, <code>read_csv2()</code> etc. They all have their own parameters that you need to verify on the respective help pages if you want to use them.</p>
-<p>For this exploratory data analysis we will use data from the German Meteo Service (Deutscher Wetterdienst) that I downloaded on 2020-05-24 (<a href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/klimadatendeutschland.html" class="uri">https://www.dwd.de/DE/leistungen/klimadatendeutschland/klimadatendeutschland.html</a>). The data set contains hourly measurements of the relative air humidity (%) and air temperature (°C) for three meteo stations, namely Hof, Frankfurt and Köln-Bonn. The data is named <span style="font-family: sans-serif; font-size: 14pt">meteo.csv</span>.</p>
+<p>For this exploratory data analysis we will use data from the German Meteo Service (Deutscher Wetterdienst) that I downloaded on 2020-05-24 (<a href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/klimadatendeutschland.html" class="uri">https://www.dwd.de/DE/leistungen/klimadatendeutschland/klimadatendeutschland.html</a>). The data set contains hourly measurements of the relative air humidity (%) and air temperature (°C) for three meteo stations, namely Hof, Frankfurt and Köln-Bonn. The data is named <span style="font-family: sans-serif; font-size: 12pt">meteo.csv</span>.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">temp_humid</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">'data/meteo.csv'</span>, delim <span class="op">=</span> <span class="st">';'</span>,    trim_ws <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -578,7 +578,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-06.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -66,10 +66,58 @@ ggplot(gapminder2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = 
   xlab('GDP per capita') +
   ylab('Life expectancy') +
   labs(title = 'Gapminder data for the year 2007')
-  
 ```
 
 - What is the data set about. Use help like this `?gapminder`.
 - What do the colours represent?
 - What does the size of the circles represent?
 - How would you describe the relationship between the GDP per capita and Life expectancy?
+
+## The big practical: importing, wrangling, summerizing and plotting 
+
+### Temperature along the Dutch coast
+The file `r file.name("Temperatur.csv")` from the book by @Zuur2009a contains measurements of temperature, salinity and content of chlorophyll a at 31 locations along the Dutch coast. You can download the data set [here](https://highstat.com/index.php/a-beginner-s-guide-to-r). The data is provided by the Dutch institute RIKZ (monitoring program MWTL: Monitoring Waterstaatkundige Toestand des Lands), was measured between 1990 and 2005 between 0 and 4 times per month depending on the season. 
+
+- Read the file `r file.name("Temperatur.csv")` into R.
+- Convert the column `Date` to a proper date format. Use the library `lubridate`.
+- Calculate the number of measurements, mean and standard deviations of temperature per monitoring station. Hint: use `n()` inside `summarize()` to get the number of measurements.
+- Plot the mean temperature as a line and add the standard deviation as a band around it.
+- Label the axis appropriately.
+- Save you graph as a pdf file.
+
+
+### Temperature along the Dutch coast, revisited
+- Calculate the monthly means and standard deviations per monitoring station. Hint `group_by(Station, Month)`.
+- Plot the means with an error band in different plots. Hint: use `facet_wrap())`.
+- Save you graph as a pdf file.
+
+
+### Excel data turns tidy
+We will import and tidy World Development Indicators data downloaded from the [World Bank](https://databank.worldbank.org/source/world-development-indicators/preview/on#) on 2021-06-09 for 20 countries. This is an extract only and more data is available.
+
+This exercise will show you how to load excel data directly without converting it to .csv file. The format of the data is a typical non-tidy one and you will wrangle it to a tidy `tibble`. The file is called `r file.name('Data_Extract_From_World_Development_Indicators.xlsx')`.
+
+- First, read the help pages of the function `read_xlsx()` in the library `readxl`. Pay attention to how you can specify the name of the excel sheet you want to read into R.
+- Open the excel sheet and look through the data carefully. How are NAs coded? Which data sheet do you need to read?
+- Read the excel file into R. Call it `wdi`.
+- This data set is not tidy. In particular, the year is coded as column name. Those column names contain the year twice, once as a number and once as [YR NUMBER]. We rename the columns first.
+```{r, eval = F}
+wdi <- wdi %>% 
+  rename_with(.fn = function(x) str_sub(x, start = 1, end = 4), .cols = starts_with('20'))
+```
+
+What does this code mean? Read the help pages for functions `rename_with()`, `str_sub()` and `starts_with()`.
+
+- Pivot the data set to a tidy format: variables in columns and measurements in rows. Use `pivot_longer`.
+```{r, eval = F}
+wdi <- wdi %>%
+  pivot_longer(names_to = 'year', values_to = 'indicator_value', cols = starts_with('20')) %>% 
+  mutate(year = as.numeric(year))
+
+wdi
+```
+
+  What does this code mean? Read the help pages for functions `pivot_longer()` and `as.numeric()`.
+  Why is it necessary to convert `year` with `as.numeric()`?
+
+- Filter for the indicator `GDP (current US$)` and plot the data as time series. Hint: You can also filter for the indicator's code; look it up in the excel file. Label the axis appropriately.

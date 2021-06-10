@@ -25,7 +25,7 @@ file.name <- function(x) {
   if (knitr::is_latex_output()) {
     sprintf("\\texttt{%s}", x)
   } else if (knitr::is_html_output()) {
-    sprintf("<span style='font-family: sans-serif; font-size: 14pt'>%s</span>",
+    sprintf("<span style='font-family: sans-serif; font-size: 12pt'>%s</span>",
             x)
   } else x
 }

@@ -139,7 +139,7 @@ pre code {
 
 
 body {
-    counter-reset: li; /* initialize counter named li */
+    counter-reset: li; /* initialize counter named exercise */
 }
 
 
@@ -157,7 +157,7 @@ ol > li {
 }
 ol > li:before {
     content:"Exercise " counter(li); /* Use the counter as content */
-    counter-increment:li; /* Increment the counter by 1 */
+    counter-increment: li; /* Increment the counter by 1 */
     /* Position and style the number */
     position:absolute;
     top:-2px;

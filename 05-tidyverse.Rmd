@@ -8,7 +8,7 @@
 
 `tidyverse` is a collection of R packages for data analysis (https://www.tidyverse.org/). It shares a common philosophy about how data should be structure and grammar of data manipulation and visualisation. Although it might sound like something alien, `tidyverse` is a regular part of R and its functions can be mixed with base R functions.
 
-The best introduction to `tidyverse` is **R4DS**: "R for Data Science" [@r4ds]. You can read it for free here (https://r4ds.had.co.nz/).
+The best introduction to `tidyverse` is **r4ds**: "R for Data Science" [@r4ds]. You can read it for free here (https://r4ds.had.co.nz/).
 
 ## Core packages
 `tidyverse` comprises 8 core packages that are installed when you call `install.packages('tidyverse')`:

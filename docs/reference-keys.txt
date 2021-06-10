@@ -66,3 +66,7 @@ introduction-to-r-and-rstudio-server-pro-1
 rob1
 rob2
 firstplot
+the-big-practical-importing-wrangling-summerizing-and-plotting
+temperature-along-the-dutch-coast
+temperature-along-the-dutch-coast-revisited
+excel-data-turns-tidy

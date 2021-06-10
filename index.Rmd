@@ -9,11 +9,8 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: true
-repo: 
-    base: https://github.com/ChrisBogner/environmental_stat
-    branch: master
-    subdir: docs
-description: "Script for the course Environmental Statistics, based on the material by ModernDive"
+github-repo: https://github.com/ChrisBogner/environmental_stat
+description: "Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive"
 ---
 
 # Preface {-}
@@ -56,7 +53,7 @@ At the end of this course you should be able to
 We will be using the book [ModernDive: Statistical Inference via Data Science](https://moderndive.com/) [@ModernDive] mainly. Additionally, I will recommend from time to time [R for Data Science](https://r4ds.had.co.nz/) [@r4ds] and [OpenIntro Statistics](https://www.openintro.org/book/os/) [@Diez2019]. For your report, you will do an additional literature search depending on your topic.
 
 
-## Why this script {-}
+## Why these lecture notes {-}
 
 This document is a working and live document that will be updated during the course. It is not comprehensive, but should help you to navigate through the introduction to R and statistics smoothly.
 
@@ -92,7 +89,7 @@ Learning outcomes, also for single sessions
 
 ## Acknowledgements {-}
 
-This script is based on the free material provided by 
+This document is based on the free material provided by 
 
 - ModernDive: @ModernDive and their free Problem Sets authored by Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay (https://moderndive.github.io/moderndive_labs/index.html)
 
