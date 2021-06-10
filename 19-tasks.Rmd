@@ -81,7 +81,8 @@ The file `r file.name("Temperatur.csv")` from the book by @Zuur2009a contains me
 - Read the file `r file.name("Temperatur.csv")` into R.
 - Convert the column `Date` to a proper date format. Use the library `lubridate`.
 - Calculate the number of measurements, mean and standard deviations of temperature per monitoring station. Hint: use `n()` inside `summarize()` to get the number of measurements.
-- Plot the mean temperature as a line and add the standard deviation as a band around it.
+- Calculate the number of measurements, mean and standard deviations of temperature per month.
+- Plot the mean monthly temperature as a line and add the standard deviation as a band around it.
 - Label the axis appropriately.
 - Save you graph as a pdf file.
 
