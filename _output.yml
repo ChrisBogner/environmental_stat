@@ -1,6 +1,6 @@
 bookdown::bs4_book:
   theme:
-    primary: "#0166ff"
+    primary: "#915228"
   css: [style.css, font-awesome.min.css]
   config:
     toc:
@@ -13,8 +13,6 @@ bookdown::bs4_book:
     branch: master
     subdir: docs
     #download: ["pdf", "epub"]
-
-
 
 
 bookdown::gitbook:

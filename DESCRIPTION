@@ -1,0 +1,29 @@
+Package: Lecture notes for the course Environmental Statistices
+Title: This is not a package. the DESCRIPTION helps to compile a list of necessary packages.
+Version: 0.1
+Type: Book
+Authors@R: 
+    person(given = "Christina",
+           family = "Bogner",
+           role = c("aut", "cre"),
+           email = "christina.bogner@uni-koeln.de",
+           comment = c(ORCID = "https://orcid.org/0000-0003-4495-0676"))
+URL: https://github.com/ChrisBogner/environmental_stat
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    tidyverse,
+    gapminder,
+    moderndive,
+    lubridate,
+    infer,
+    dabestr,
+    emojifont
+Remotes:
+    rstudio/bookdown,
+    rstudio/bslib,
+    rstudio/rmarkdown

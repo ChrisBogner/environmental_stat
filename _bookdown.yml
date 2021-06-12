@@ -4,6 +4,7 @@ rmd_files: ["index.Rmd", "01-intro.Rmd",
 "03-data.Rmd",
 "04-import-explore-visualize.Rmd",
 "05-tidyverse.Rmd",
+"06-sampling.Rmd",
 "19-tasks.Rmd", "20-biblio.Rmd"]
 before_chapter_script: ["helper_functions.R"]
 delete_merged_file: true

@@ -40,7 +40,8 @@
 <li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
 <li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
 <li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
-<li><a class="" href="additional-exercises.html"><span class="header-section-number">6</span> Additional exercises</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and uncertainty</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">7</span> Additional exercises</a></li>
 <li><a class="" href="literature-1.html">Literature</a></li>
 </ul>
 
@@ -72,7 +73,7 @@ Basic layout in R Markdown
 <p>To open a new R Notebook, click on the little green plus on the upper left hand and select R Notebook as in the image below. You can leave it untitled.</p>
 <div class="figure">
 <span style="display:block;" id="fig:r-notebook"></span>
-<img src="figures/r-notebook.png" alt="How to create a new R Notebook" width="60%"><p class="caption">
+<img src="figures/r-notebook.png" alt="How to create a new R Notebook" width="40%"><p class="caption">
 Figure 2.1: How to create a new R Notebook
 </p>
 </div>
@@ -140,7 +141,7 @@ Note that there is now an R Notebook file (<code>.Rmd</code>) and an html file (
 </h2>
 <p>The code chunks are where you put R code in an R Markdown file. So far, your preview doesn’t show anything, because we did not put any content in the code chunks yet!</p>
 <p>Using your first code chunk, type the following command to create a new variable called <code>x</code> with the value of 6.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">6</span></code></pre></div>
 <p>The arrow <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> is called an <strong>ASSIGNMENT OPERATOR</strong>, and tells R to save an object called <code>x</code> that has the value of 6. This is similar to saving a value in a graphing calculator.</p>
 <div class="rmdinfo">
@@ -172,14 +173,14 @@ Figure 2.3: Global environment contains the variable x now
 </h2>
 <p>So far you have made a numeric variable <code>x</code>. There many other types of data objects you can make in R.</p>
 <p>First, copy, paste and run the following command in a new code chunk to make a <strong>character</strong> called <code>favorite_movie</code>. Think of characters as text as opposed to numerical values. Note that I told R that this was a <strong>character</strong> by putting quotation marks around <code>Star_Wars</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">favorite_movie</span> <span class="op">&lt;-</span> <span class="st">"Star_Wars"</span></code></pre></div>
 <p>Next, copy, paste and run the following command into a new code chunk.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span></code></pre></div>
 <p>This makes what is called a <strong>vector</strong>, which we have named <code>v</code>. It is a data object that has multiple elements of the same type. This vector contains three numbers, 2, 4, and 6. The <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function says to r to <code>concatenate</code> the values 2, 4, 6, into a single <strong>vector</strong>. Note in the Environment pane that your vector <code>v</code> contains numbers (listed as <code>num</code>).</p>
 <p>You can do math on a vector that contains numbers! For instance, copy, paste and run the following command into a new code chunk. This tells R to multiply each element of the vector <code>v</code> by 3.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">v</span> <span class="op">*</span> <span class="fl">3</span></code></pre></div>
 </div>
 <div id="practice-on-your-own-1" class="section level2" number="2.8">
@@ -192,8 +193,9 @@ Figure 2.3: Global environment contains the variable x now
 Remember to save your work as you go along! Click the save button in the upper left hand corner of the R Markdown window.
 </p>
 </div>
-<ol style="list-style-type: decimal">
-<li>Answer the following with code in a code chunk (no text necessary). Remember that the code is just <strong>instructions</strong> for R. You need to run the code chunk to make R execute those instructions!
+<ol class="exercises"><ol style="list-style-type: decimal">
+<li>
+<p>Answer the following with code in a code chunk (no text necessary). Remember that the code is just <strong>instructions</strong> for R. You need to run the code chunk to make R execute those instructions!</p>
 <ul>
 <li>Create a variable called <code>y</code> with the value of 7</li>
 <li>Multiply <code>x</code> by <code>y</code>, and store the answer in a variable named <code>z</code> like so: <code>z &lt;- x * y</code>
@@ -230,21 +232,20 @@ Remember to save your work as you go along! Click the save button in the upper l
 <li>Go to the <strong>Run</strong> button at the top right of the R Markdown pane, and choose <strong>Run All</strong> (the last option)</li>
 <li>What happened? (please answer with <strong>text</strong>)</li>
 </ul></li>
-<li>Recall the vector <code>v</code> we created earlier. Copy, paste and run the following in a code chunk. What does this code accomplish? (please answer with <strong>text</strong>)</li>
-</ol>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v</span> <span class="op">+</span> <span class="fl">2</span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li>Copy, paste, and run the following code to make a vector called <code>music</code>, that contains music genres. Recall a vector is a data object that has multiple elements of the same type. Here the data type is a <strong>character</strong>. Look in the environment pane. How does R tell us that this vector contains <strong>characters</strong>, not numbers? (please answer with <strong>text</strong>)</li>
-</ol>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">music</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bluegrass"</span>, <span class="st">"funk"</span>, <span class="st">"folk"</span><span class="op">)</span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li>Now let’s practice some basic formatting. Using <a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">this formatting tips page</a> figure out how to put the following into your lab report. These all can get typed into the white section, where text goes. <strong>Hint:</strong> To put <strong>each of these on its own line!</strong> hit a hard return between each line of text!!!!!!!!</li>
-</ol>
-<p><em>Italicize like this</em></p>
-<p><strong>Bold like this</strong></p>
-<p>A superscript: R<sup>2</sup></p>
+<li><p>Recall the vector <code>v</code> we created earlier. Copy, paste and run the following in a code chunk. What does this code accomplish?
+<br><code>v + 2</code>
+<br>
+Please answer with <strong>text</strong>.</p></li>
+<li><p>Copy, paste, and run the following code to make a vector called <code>music</code>, that contains music genres. Recall a vector is a data object that has multiple elements of the same type. Here the data type is a <strong>character</strong>. Look in the environment pane. How does R tell us that this vector contains <strong>characters</strong>, not numbers?
+<br><code>music &lt;- c("bluegrass", "funk", "folk")</code>
+<br>
+Please answer with <strong>text</strong>.</p></li>
+<li><p>Now let’s practice some basic formatting. Using <a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">this formatting tips page</a> figure out how to put the following into your lab report. These all can get typed into the white section, where text goes. <strong>Hint:</strong> To put <strong>each of these on its own line!</strong> hit a hard return between each line of text.
+<br><em>Italicize like this</em>
+<br><strong>Bold like this</strong>
+<br>
+A superscript: R<sup>2</sup></p></li>
+</ol></ol>
 </div>
 <div id="turning-in-your-work-1" class="section level2" number="2.9">
 <h2>
@@ -296,7 +297,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-10.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

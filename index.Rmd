@@ -65,21 +65,23 @@ Infos and tips
 
 <br>
 
+
+```{block, type='rmdoutcomes'}
+Learning outcomes
+```
+
+<br>
+
 ```{block, type='rmdalert'}
 This is important
 ```
 
 <br>
 
-```{block, type='rmdexample'}
-This is an example
+```{block, type='exercises'}
+1. This is an exercise inside a chapter.
 ```
 
-<br>
-
-```{block, type='rmdoutcomes'}
-Learning outcomes, also for single sessions
-```
 
 <!-- <br> -->
 
@@ -87,15 +89,17 @@ Learning outcomes, also for single sessions
 <!-- Zusammenfassung -->
 <!-- ``` -->
 
+<br>
+
 ## Acknowledgements {-}
 
 This document is based on the free material provided by 
 
 - ModernDive: @ModernDive and their free Problem Sets authored by Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay (https://moderndive.github.io/moderndive_labs/index.html)
 
-- R for Dtaa Science (r4ds): @r4ds
+- R for Data Science (r4ds): @r4ds
 
-- Data Sicence in a Box (https://datasciencebox.org/) and the free book by @Diez2019
+- Data Science in a Box (https://datasciencebox.org/) and the free book by @Diez2019
 
 One cannot thank those people enough for their contribution to the `r fa("r-project", fill = "steelblue")` community `r fa("heart", fill = "red")`!
 
@@ -105,6 +109,42 @@ One cannot thank those people enough for their contribution to the `r fa("r-proj
 Credit: https://xkcd.com/2400/
 
 <br>
+
+## Reproducibility {-}
+This book was written in [RStudio](https://www.rstudio.com/products/rstudio/) using [Bookdown](https://bookdown.org/) and compiled in `r R.version.string`. You will need the following packages to reproduce the examples and to work through the exercises:
+
+```{r, echo = FALSE, cache = FALSE}
+# code from ggplot2 book
+# https://github.com/hadley/ggplot2-book/blob/master/introduction.Rmd
+    deps <- desc::desc_get_deps()
+    pkgs <- sort(deps$package[deps$type == "Imports"])
+    pkgs2 <- strwrap(paste(encodeString(pkgs, quote = '"'), collapse = ", "), exdent = 2)
+    install <- paste0(
+      "install.packages(c(\n  ", 
+      paste(pkgs2, "\n", collapse = ""), 
+      "))"
+    )
+```
+
+
+```{r, echo = FALSE, results="asis"}
+# code from ggplot2 book
+# https://github.com/hadley/ggplot2-book/blob/master/introduction.Rmd
+pkgs <- sessioninfo::package_info(pkgs, dependencies = FALSE)
+df <- tibble(
+  package = pkgs$package,
+  version = pkgs$ondiskversion,
+  source = gsub("@", "\\\\@", pkgs$source)
+)
+knitr::kable(df, format = "markdown")
+```
+
+The complete information on the last session to build the book:
+
+```{r, echo = FALSE,}
+sessionInfo()
+```
+
 
 ![](figures/Cc-by-nc-sa_icon.svg){width=30%}
 

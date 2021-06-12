@@ -17,6 +17,10 @@ h3 {
     font-size: 16pt;
 }
 
+body {
+  font-size: 14px;
+}
+
 caption {
   color: #777;
   margin-top: 10px;
@@ -34,8 +38,7 @@ pre code {
 
 
 .rmdcomment {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
+  padding: 1em 1em 0.5em 5em;
   background: #f5f5f5;
   position:relative;
 }
@@ -51,8 +54,7 @@ pre code {
  }
  
 .rmdinfo {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
+  padding: 1em 1em 0.5em 5em;
   background: #e6f0ff;
   position:relative;
 }
@@ -68,8 +70,7 @@ pre code {
  }
 
 .rmdalert {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
+  padding: 1em 1em 0.5em 5em;
   background: #ffe6f0;
   position:relative;
 }
@@ -85,8 +86,7 @@ pre code {
  }
  
 .rmdexample {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
+  padding: 1em 1em 0.5em 5em;
   background: #f0ffe6;
   position:relative;
 }
@@ -102,8 +102,7 @@ pre code {
  }
  
  .rmdoutcomes {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
+  padding: 1em 1em 0.5em 5em;
   background: #ffebcd;
   position:relative;
 }
@@ -120,8 +119,7 @@ pre code {
  }
  
   .rmdsummary {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
+  padding: 1em 1em 0.5em 5em;
   background: #ffcd80;
   position:relative;
 }
@@ -138,80 +136,49 @@ pre code {
  }
 
 
-body {
-    counter-reset: li; /* initialize counter named exercise */
+.exercises {
+  clear: both;
+  list-style: none;
 }
 
+.exercises ol {
+   counter-reset: inst;
+}
 
-ol {
-    margin-left:0; /* Remove the default left margin */
+.exercises ol {
+    margin-left:-10px; /* Remove the default left margin */
     padding-left:0; /* Remove the default left padding */
 }
-ol > li {
+.exercises ol > li {
     position:relative; /* Create a positioning context */
-    margin:0 0 10px 2em; /* Give each list item a left margin to make room for the numbers */
-    padding:10px 80px; /* Add some spacing around the content */
+    margin:0 0 10px 0; /* Give each list item a left margin to make room for the numbers */
+    padding:30px 10px 0 20px; /* Add some spacing around the content: top, right, bottom, left */
     list-style:none; /* Disable the normal item numbering */
-    border-top:2px solid #317EAC;
-    background:rgba(49, 126, 172, 0.1);
+    border-top:2px solid #c9743d;
+    background:#f8ede6;
 }
-ol > li:before {
-    content:"Exercise " counter(li); /* Use the counter as content */
-    counter-increment: li; /* Increment the counter by 1 */
+
+.exercises ol > li::before {
+  content: "Exercise " counter(inst);  /* Use the counter as content */
+  
+  counter-increment: inst 1; /* Increment the counter by 1 */
     /* Position and style the number */
     position:absolute;
     top:-2px;
-    left:-3em;
+    left:-1em;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
     width:7em;
     /* Some space between the number and the content in browsers that support
        generated content but not positioning it (Camino 2 is one example) */
-    margin-right:8px;
-    padding:4px;
-    border-top:2px solid #317EAC;
+    margin-right:4px;
+    padding:1px;
+    border-top:2px solid #c9743d;
     color:#fff;
-    background:#317EAC;
+    background:#c9743d;
     font-weight:bold;
     font-family:"Helvetica Neue", Arial, sans-serif;
     text-align:center;
 }
-li ol,
-li ul {margin-top:6px;}
-ol ol li:last-child {margin-bottom:0;}
 
-.oyo ul {
-    list-style-type:decimal;
-}
-
-hr {
-    border: 1px solid #357FAA;
-}
-
-div#boxedtext {
-    background-color: rgba(86, 155, 189, 0.2);
-    padding: 20px;
-    margin-bottom: 20px;
-    font-size: 10pt;
-}
-
-div#template {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    color: #808080;
-    border:1px solid #808080;
-    padding: 10px 10px;
-    background-color: rgba(128, 128, 128, 0.2);
-    border-radius: 5px;
-}
-
-div#license { 
-    margin-top: 30px;
-    margin-bottom: 30px;
-    color: #4C721D;
-    border:1px solid #4C721D;
-    padding: 10px 10px;
-    background-color: rgba(76, 114, 29, 0.2);
-    border-radius: 5px;
-}

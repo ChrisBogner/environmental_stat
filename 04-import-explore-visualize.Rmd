@@ -7,18 +7,20 @@
 ```
 
 ## Data import from text files
+
 To import a data set from a text file (e.g. .csv, .txt, .dat) into R, we will use the library `readr` which is part of the `tydiverse`. We first load the library.
 
 ```{r, message = F, warning = F}
 library(tidyverse)
 ```
 
-Let's assume that the data is stored in the folder `data`. If this is not your case, change the path accordingly. To load the data, we can chose among several different functions that all start with `read_`. The most generic one is `read_delim()` where we can specify how the columns are separated (delimited) in the data file. 
+Let's assume that the data is stored in the folder `data`. If this is not your case, change the path accordingly. To load the data, we can chose among several different functions that all start with `read_`. The most generic one is `read_delim()` where we can specify how the columns are separated (delimited) in the data file.
+
 ```{r}
 emissions <- read_delim(file = 'data/emissions.csv', delim = ';')
 ```
 
-Let's have a look at the data. This is a data set on greenhouse gas emissions by source sector in the EU that I downloaded from  [eurostat](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=env_air_gge&lang=en) on 2021-04-30. It contains the greenhouse gas emissions in CO~2~ equivalent, in Mio tonnes, per vehicle type. The data base could be a great source for data in your reports `r emo::ji('smile')`.
+Let's have a look at the data. This is a data set on greenhouse gas emissions by source sector in the EU that I downloaded from [eurostat](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=env_air_gge&lang=en) on 2021-04-30. It contains the greenhouse gas emissions in CO~2~ equivalent, in Mio tonnes, per vehicle type. The data base could be a great source for data in your reports `r emo::ji('smile')`.
 
 ```{r}
 emissions
@@ -26,37 +28,40 @@ emissions
 
 The result of reading the data with any function in the library `readr` is always a `tibble`. You can see that none of the variables is a `factor`. This is the default behaviour of `readr`. If you want a variable to be coded as a `factor` then you have to transform it by hand, preferably with functions from the package `forcats`.
 
-Let's have a quick look at the data set. 
+Let's have a quick look at the data set.
+
 ```{r}
 summary(emissions)
 ```
 
 For character variables, `summary()` does not count the frequency of different values. However, we can get this information with the function `unique()`.
+
 ```{r}
 length(unique(emissions$geo))
 ```
 
 The data set contains measurements for 33 EU countries. We can also ask which different types of vehicle are recorded.
+
 ```{r}
 unique(emissions$vehicle)
 ```
 
-
 ## Visualization with the library `ggplot2`
 
-The library `ggplot2` is a powerful package for data visualisation. The name comes from **the grammar of graphics**  and hints at a systematic approach to visualisation. In a nutshell, `ggplot2` defines a statistical graphic as follows:
+The library `ggplot2` is a powerful package for data visualisation. The name comes from **the grammar of graphics** and hints at a systematic approach to visualisation. In a nutshell, `ggplot2` defines a statistical graphic as follows:
 
 > A statistical graphic is a `mapping` of variables in a `data` set to `aes`thetic attributes of `geom`etric objects.
 
 In `ggplot2`, a graphic is build up step by step, starting with a call to the core function `ggplot()`. We have to specify the following elements:
 
-* `data`: the data set containing the variables to be visualised.
+-   `data`: the data set containing the variables to be visualised.
 
-* `aes`: (aesthetic) attributes for the geometric object to be visualised. This can be the x and y variables, colour, shape, grouping variable etc.
+-   `aes`: (aesthetic) attributes for the geometric object to be visualised. This can be the x and y variables, colour, shape, grouping variable etc.
 
-* `geom`: the geometric object we want to plot, i.e. lines, points, bars, boxes etc.
+-   `geom`: the geometric object we want to plot, i.e. lines, points, bars, boxes etc.
 
 ### Line plot
+
 We start with the line plot that is particularly suited for time series. Because plotting 33 countries in one graph is too much, we first filter for France and emissions from cars.
 
 ```{r}
@@ -64,12 +69,12 @@ emissions_france <- emissions %>%
   filter(geo == 'France' & vehicle == 'Fuel combustion in cars')
 ```
 
-
 ```{r, out.width = "90%"}
 ggplot(data = emissions_france, mapping = aes(x = time, y = values))
 ```
 
 This call to `ggplot()` prepares the plotting area as requested, but does not show anything because we did not specify any geometric object. All geometric objects begin with `geom_`. Every further step in building up the plot is appended to the core call by a `+`.
+
 ```{r, out.width = "90%"}
 ggplot(data = emissions_france, mapping = aes(x = time, y = values)) +
   geom_line()
@@ -77,13 +82,15 @@ ggplot(data = emissions_france, mapping = aes(x = time, y = values)) +
 
 This call can be verbalised like following:
 
-- Take the data set `emissions` and map the following attributes:
-    * on the x-axsis the variable `time`
-    * on the y-axsis the variable `values`
-  
-- Plot the data as a line (`geom_line()`)
+-   Take the data set `emissions` and map the following attributes:
+
+    -   on the x-axsis the variable `time`
+    -   on the y-axsis the variable `values`
+
+-   Plot the data as a line (`geom_line()`)
 
 In order for the plot to be useful, we should label the axes correctly (and give it a title, if no figure caption is shown). This is done by adding the function `labs()`.
+
 ```{r, out.width = "90%"}
 ggplot(data = emissions_france, mapping = aes(x = time, y = values)) + 
   geom_line() +
@@ -91,7 +98,9 @@ ggplot(data = emissions_france, mapping = aes(x = time, y = values)) +
 ```
 
 ### Point plot
+
 We can add points to this plot with `geom_point()`. In principle, I wouldn't do it for this time series, but I wan't to show this geom `r emo::ji('smile')`.
+
 ```{r, out.width = "90%"}
 ggplot(data = emissions_france, mapping = aes(x = time, y = values)) + 
   geom_line() +
@@ -100,6 +109,7 @@ ggplot(data = emissions_france, mapping = aes(x = time, y = values)) +
 ```
 
 If we select two countries, then a further aesthetic will be required to distinguish the time series. Let's select France and Italy.
+
 ```{r}
 emissions_france_italy <- emissions %>% 
   filter(geo %in% c('France', 'Italy') & vehicle == 'Fuel combustion in cars')
@@ -116,14 +126,17 @@ ggplot(data = emissions_france_italy, mapping = aes(x = time, y = values, colour
 
 The legend comes for free! We can change the title of the legend by setting `colour = 'Country'` in the call to `labs()`.
 
-
 ## Histogram
+
 Let's have a look at the distribution of emissions in the year 2018. We have to filter the data first.
+
 ```{r}
 emissions_2018 <- emissions %>% 
   filter(time == '2018-01-01')
 ```
+
 We plot the data in a histogram that shows the absolute frequencies of the data (i.e. how many data points fall in a particular interval of emissions). It shows the distribution of a continuous variable. For a histogram, we only specify the x variable, the frequencies are calculated by `geom_histogram()` directly. We specify 25 bins (intervals). If you are not familiar with this kind of statistical summaries, please have a look at the Appendix A in @ModernDive and read the part A.1.5 Distribution.
+
 ```{r}
 ggplot(data = emissions_2018, mapping = aes(x = values)) +
   geom_histogram(bins = 25)
@@ -139,6 +152,7 @@ Lets have a look at this kind of summary plot. How are the emissions distributed
 ggplot(data = emissions, mapping = aes(x = factor(time), y = values)) +
   geom_boxplot()
 ```
+
 Hmmm, the labels on the x axis are really ugly. Let's tune them a little bit (we will do more tuning in later sessions).
 
 ```{r, out.width = "90%",}
@@ -156,31 +170,39 @@ ggplot(data = emissions, mapping = aes(x = vehicle)) +
   geom_bar()
 ```
 
-Admittedly, a boring plot `r emo::ji('smile')`, the number of entries is identical. 
+Admittedly, a boring plot `r emo::ji('smile')`, the number of entries is identical.
 
 ## Practice on your own!
 
+<ol class ="exercises">
 1. The histogram, the boxplot and the barplot plotted above are not labelled correctly. Correct the axis labels and find good titles for the graphs.
 
-2. Plot the time series of GDP from the data set `gapminder` for France and Germany. Filter the data like this: `france_germany <- gapminder %>% filter(country %in% c('France', 'Germany'))`
+2. Plot the time series of GDP from the data set `gapminder` for France and Germany. Filter the data like this:
+<br>
+`france_germany <- gapminder %>% filter(country %in% c('France', 'Germany'))`
 
-3. Plot the life expectancy vs. GDP in 2007, use the data set `gapminder`. Pick the code for filtering the data in task \@ref(firstplot). Use the aesthetics colour and size. Have an educated guess on how to change the title of the legends (or google for it `r emo::ji('smile')`).
+3. Plot the life expectancy vs. GDP in 2007, use the data set `gapminder`. Pick the code for filtering the data in task [ref](firstplot). Use the aesthetics colour and size. Have an educated guess on how to change the title of the legends (or google for it `r emo::ji('smile')`).
 
-4. How is the GDP distributed in Africa and Europe in 2007? Use the data set `gapminder`. Filter the data like this: `africa_europe <- gapminder2007 %>% filter(continent %in% c('Africa', 'Europe'))`. Plot the data as a histogram and use the aesthetic fill instead of colour to distinguish between continents.
+4. How is the GDP distributed in Africa and Europe in 2007? Use the data set `gapminder`. Filter the data like this:
+<br>
+`africa_europe <- gapminder2007 %>% filter(continent %in% c('Africa', 'Europe'))`.
+<br>
+Plot the data as a histogram and use the aesthetic fill instead of colour to distinguish between continents.
 
 5. How is the GDP distributed on different continents in 2007? Use the data set `gapminder`. Plot the data as a boxplot.
 
 6. How many data points does `gapminder` contain per continent? Visualize in a barplot.
-
+</ol>
 
 ## Reading assignment
 
 Chapter 2.1 in @ModernDive
 
 ## Turning in your work
-- Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.
-- Upload your R Notebook to ILIAS. You will find an upload option in today's session.
-- You should receive a solution file after the submission.
+
+-   Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.
+-   Upload your R Notebook to ILIAS. You will find an upload option in today's session.
+-   You should receive a solution file after the submission.
 
 ```{block, type='rmdalert'}
 Be sure to upload before the deadline!

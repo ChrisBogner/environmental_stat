@@ -256,13 +256,13 @@ ggplot(monthly_means, aes(x = year_month, y = mean_T, ymin = mean_T - sd_T, ymax
 ```
 
 ## Practice on your own!
-
+<ol class ="exercises">
 1. Plot the means and standard deviations of the air humidity instead of air temperature.
 
 1. Do the tutorials "Work with data" from the Primers collection by RStudio Cloud. You can access the tutorials here: https://rstudio.cloud/learn/primers/2
 
 1. Do the tutorials "Visualize Data" from the Primers collection by RStudio Cloud. You can access the tutorials here:https://rstudio.cloud/learn/primers/3
-
+</ol>
 
 ## Reading assignment
 Read chapter 3 (to 3.5) in @ModernDive
@@ -281,6 +281,6 @@ Read chapter 3 (to 3.5) in @ModernDive
 
 - More information on statistical graphical summaries and geoms: R4DS @r4ds: Chapter 5 "Data transformation"
 
-- A live exploratory data analysis by the main author of `tidyverse`, Hadley Wickham. Really informative, but he types too fast `r emo::ji('smile')`.
+- A live exploratory data analysis by the main author of `tidyverse`, Hadley Wickham. Really informative, but Dr. Wickham types too fast `r emo::ji('smile')`.
 
 <iframe width="639" height="302" src="https://www.youtube.com/embed/go5Au01Jrvs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

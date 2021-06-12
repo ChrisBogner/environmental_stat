@@ -14,7 +14,7 @@ There are different types of R Markdown documents. We will usually use the R Not
 
 To open a new R Notebook, click on the little green plus on the upper left hand and select R Notebook as in the image below. You can leave it untitled. 
 
-```{r r-notebook, echo = F, fig.cap = 'How to create a new R Notebook', fig.width = 6, out.width = "60%"}
+```{r r-notebook, echo = F, fig.cap = 'How to create a new R Notebook', fig.width = 6, out.width = "40%"}
 knitr::include_graphics('figures/r-notebook.png')
 ```
 
@@ -133,6 +133,8 @@ Remember to save your work as you go along! Click the save button in the upper l
 ```
 
 
+
+<ol class ="exercises">
 1.  Answer the following with code in a code chunk (no text necessary). Remember that the code is just **instructions** for R. You need to run the code chunk to make R execute those instructions!
     -   Create a variable called `y` with the value of 7 
     -   Multiply `x` by `y`, and store the answer in a variable named `z` like so: `z <- x * y`
@@ -161,26 +163,27 @@ Remember to save your work as you go along! Click the save button in the upper l
      - What happened? (please answer with **text**)
      
 
-1.  Recall the vector `v` we created earlier. Copy, paste and run the following in a code chunk. What does this code accomplish? (please answer with **text**)
-```{r eval = F}
-v + 2
-```
+1.  Recall the vector `v` we created earlier. Copy, paste and run the following in a code chunk. What does this code accomplish?
+<br>
+`v + 2`
+<br>
+Please answer with **text**.
 
-1.  Copy, paste, and run the following code to make a vector called `music`, that contains music genres. Recall a vector is a data object that has multiple elements of the same type. Here the data type is a **character**. Look in the environment pane. How does R tell us that this vector contains **characters**, not numbers? (please answer with **text**)
+1.  Copy, paste, and run the following code to make a vector called `music`, that contains music genres. Recall a vector is a data object that has multiple elements of the same type. Here the data type is a **character**. Look in the environment pane. How does R tell us that this vector contains **characters**, not numbers?
+<br>
+`music <- c("bluegrass", "funk", "folk")`
+<br>
+Please answer with **text**.
 
-```{r}
-music <- c("bluegrass", "funk", "folk")
-```
-
-
-1. Now let's practice some basic formatting. Using <a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">this formatting tips page</a> figure out how to put the following into your lab report. These all can get typed into the white section, where text goes. **Hint:** To put  **each of these on its own line!** hit a hard return between each line of text!!!!!!!!
-
-
+1. Now let's practice some basic formatting. Using <a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">this formatting tips page</a> figure out how to put the following into your lab report. These all can get typed into the white section, where text goes. **Hint:** To put  **each of these on its own line!** hit a hard return between each line of text.
+<br>
 *Italicize like this*
-
+<br>
 **Bold like this**
-
+<br>
 A superscript: R^2^
+</ol>
+
 
 ## Turning in your work
 - Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.

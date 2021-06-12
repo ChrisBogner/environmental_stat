@@ -1,0 +1,109 @@
+# Sampling and uncertainty {#sampling}
+
+```{block, type='rmdoutcomes'}
+- Conduct sampling using a computer experiment
+- Explain uncertainty in random sampling
+- Calculate sampling distributions
+```
+
+With this chapter we start our journey into inferential statistics. Inferential statistics or simply **inference** wants to go beyond analysing single data sets It wants to know whether what we have observed in a single data set can generalized to a larger context. Often, this context is called **population**. And such generalization techniques are nothing else than **estimation** of **population parameters**. For example, if you want to know the mean income of a large group of people, you either can ask every person (if you have time and money to do so) or you ask just a cleverly chosen group, a **sample**, and try to estimate from their mean income, the mean income of the whole group.
+
+Another setting where you will want to use inference is doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (**control group**) and some at increased temperature (**treatment group**). You measure their growth and want to know whether the **difference observed is due to chance** or whether this is a real difference. And if this is a real difference, how large is it and how precisely can we estimate it. All these questions can be answered using inference.
+
+We will do inference based on data science and a computer. Nowadays, computational power is usually no longer a problem and cool statistical inference can be done based on computer simulations and so called **resampling** techniques.
+
+In this chapter you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness and uncertainty that underlies real experiments and data.
+
+## Simulating data
+We will simulate our own data set, our own population. We invent the *getsmarter* university with 12000 student. The code below draws random numbers and simulates the following variables:
+
+- `student_id`
+- `gender`
+- `travel_time`: how long do student trave to the univeristy
+- `residence`: do students live in the town = urban or in the countryside = rural
+- `transport`: how do students travel/come to the unviersity
+- `time_lib`: how much time do students spend in the university library
+
+We organise all these variables in a `tibble` that we call `getsmarter_pop`.
+
+Because we draw random numbers using R, every time we rerun the code, new numbers will be generated. To have a reproducible population, we use the function `set.seed()`. It accepts as a parameter an integer. Which integer we use does not really matter as long as we use the same every time we rerun the code. By *setting the seed*, we set the random number generate in R to a certain reproducible state. The numbers are still random, but reproducible `r emo::ji('smile')`.
+```{r}
+set.seed(123)
+
+student_id <- 1:12000
+
+gender <- sample(c('m', 'f'), size = 12000, replace = TRUE)
+  
+travel_time <- c(runif(n = 12000 * 0.8, min = 5, max = 40),
+             runif(n = 12000 * 0.2, min = 60, max = 120))
+
+residence <- sapply(travel_time, function(x) {
+  if(x < 30) 'urban'
+  else 'rural'
+})
+
+transport <- sapply(travel_time, function(x) {
+  if(x <= 10) 'foot'
+  else if(x > 10 & x <= 15) sample(c('foot', 'bike'), size = 1)
+  else if(x > 15 & x <= 45) sample(c('bus', 'bike', 'auto'), size = 1)
+  else sample(c('bus', 'car'), size = 1)
+})
+
+time_lib <- 5 * 60 - 0.7 * travel_time + rnorm(length(travel_time), 0, 20)
+
+getsmarter_pop <- tibble(student_id, gender, residence, transport, travel_time, time_lib)
+
+getsmarter_pop
+```
+
+We will use the following libraries. The library `infer` is a dedicated package for *tidy* inference.
+```{r}
+library(tidyverse)
+library(infer)
+```
+
+We conduct a survey among the students of getsmarter and record the values of the variables listed above. We select the students randomly. Therefore, the data set that we generate through our survey will be a **random sample**. To simulate such a survey, we use the function `rep_sample_n()`. It *samples* *rep*eatedly *n* data points (students in our case) from a given data set (our population `getsmarter_pop`).
+
+Because we sample randomly (and use the random number generator in R to do so), we need to set the seed again for reproducibility.
+
+We will simulate a survey of 50 students (`survey_size <- 50`) and conduct the survey once (`reps = 1`).
+```{r}
+set.seed(345)
+
+survey_size <- 50
+
+survey <- rep_sample_n(getsmarter_pop, size = survey_size, replace = FALSE, reps = 1)
+
+survey
+```
+
+
+
+
+## Practice on your own!
+<ol class ="exercises">
+1. blup
+
+
+</ol>
+
+## Reading assignment
+Read chapter 3 (to 3.5) in @ModernDive
+
+
+<!-- ## Turning in your work -->
+<!-- - Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file. -->
+<!-- - Upload your R Notebook to ILIAS. You will find an upload option in today's session. -->
+<!-- - You should receive a solution file after the submission. -->
+
+<!-- ```{block, type='rmdalert'} -->
+<!-- Be sure to upload before the deadline! -->
+<!-- ``` -->
+
+## Additional reading and videos
+
+- More information on statistical graphical summaries and geoms: R4DS @r4ds: Chapter 5 "Data transformation"
+
+- A live exploratory data analysis by the main author of `tidyverse`, Hadley Wickham. Really informative, but Dr. Wickham types too fast `r emo::ji('smile')`.
+
+<iframe width="639" height="302" src="https://www.youtube.com/embed/go5Au01Jrvs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

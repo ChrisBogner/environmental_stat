@@ -8,8 +8,8 @@ fig:r-notebook
 fig:rmarkdown-file
 fig:workspace
 fig:penguins
-tab:unnamed-chunk-82
-tab:unnamed-chunk-83
+tab:unnamed-chunk-88
+tab:unnamed-chunk-89
 introduction-to-r-and-rstudio-server-pro
 opening-rstudio-server-pro
 the-rstudio-interface
@@ -61,6 +61,11 @@ new-variables-with-mutate
 practice-on-your-own-4
 reading-assignment-3
 additional-reading-and-videos
+sampling
+simulating-data
+practice-on-your-own-5
+reading-assignment-4
+additional-reading-and-videos-1
 additional-exercises
 introduction-to-r-and-rstudio-server-pro-1
 rob1
