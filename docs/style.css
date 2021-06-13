@@ -42,6 +42,8 @@ pre code {
   padding: 1em 1em 0.5em 5em;
   background: #f5f5f5;
   position:relative;
+  border-radius: 10px;
+  margin-bottom: 24px;
 }
 
 .rmdcomment:before {
@@ -58,6 +60,8 @@ pre code {
   padding: 1em 1em 0.5em 5em;
   background: #e6f0ff;
   position:relative;
+  border-radius: 10px;
+  margin-bottom: 24px;
 }
 
 .rmdinfo:before {
@@ -74,6 +78,8 @@ pre code {
   padding: 1em 1em 0.5em 5em;
   background: #ffe6f0;
   position:relative;
+  border-radius: 10px;
+  margin-bottom: 24px;
 }
 
 .rmdalert:before {
@@ -90,6 +96,8 @@ pre code {
   padding: 1em 1em 0.5em 5em;
   background: #f0ffe6;
   position:relative;
+  border-radius: 10px;
+  margin-bottom: 24px;
 }
 
 .rmdexample:before {
@@ -106,6 +114,8 @@ pre code {
   padding: 1em 1em 0.5em 5em;
   background: #ffebcd;
   position:relative;
+  border-radius: 10px;
+  margin-bottom: 24px;
 }
 
 .rmdoutcomes:before {
@@ -123,6 +133,8 @@ pre code {
   padding: 1em 1em 0.5em 5em;
   background: #ffcd80;
   position:relative;
+  border-radius: 10px;
+  margin-bottom: 24px;
 }
 
 .rmdsummary:before {
@@ -157,6 +169,7 @@ pre code {
     list-style:none; /* Disable the normal item numbering */
     border-top:2px solid #c9743d;
     background:#f8ede6;
+    border-radius: 10px;
 }
 
 .exercises ol > li::before {

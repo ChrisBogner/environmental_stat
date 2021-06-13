@@ -244,7 +244,7 @@ $^*$ Sometimes, random sampling is not appropriate and stratified sampling or mo
 1. How large are the proportions of `rural` and `urban` in the population of students from getsmarter. How large are the mean values from the sampling distributions with sample sizes 25, 50 and 100. Compare these figures to the population parameters and compare.
 
 1. The student representatives would like to see more students using a bike or a bus instead of a car. As a first step, they need to know how many students actually use a car.
-
+<br>
 Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion? Compare to the proportion in the population. Hint: Before you calculate the mean of all proportions estimated in the 10000 replicates, use `ungroup()` to delete the grouping by replicates.
 
 </ol>

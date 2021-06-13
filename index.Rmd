@@ -63,20 +63,17 @@ I will use different colour boxes
 Infos and tips
 ```
 
-<br>
 
 
 ```{block, type='rmdoutcomes'}
 Learning outcomes
 ```
 
-<br>
 
 ```{block, type='rmdalert'}
 This is important
 ```
 
-<br>
 
 ```{block, type='exercises'}
 1. This is an exercise inside a chapter.
@@ -89,7 +86,6 @@ This is important
 <!-- Zusammenfassung -->
 <!-- ``` -->
 
-<br>
 
 ## Acknowledgements {-}
 
