@@ -1,4 +1,4 @@
-# Introduction to R and RStudio Server Pro
+# Introduction to R and RStudio Server
 
 ```{block, type='rmdoutcomes'}
 - Login into the RStudio Server Pro

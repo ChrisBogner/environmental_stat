@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>6 Sampling and uncertainty | Environmental Statistics</title>
+<title>6 Sampling and variability | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.8/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -35,12 +35,12 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Preface</a></li>
-<li><a class="" href="introduction-to-r-and-rstudio-server-pro.html"><span class="header-section-number">1</span> Introduction to R and RStudio Server Pro</a></li>
+<li><a class="" href="introduction-to-r-and-rstudio-server.html"><span class="header-section-number">1</span> Introduction to R and RStudio Server</a></li>
 <li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
 <li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
 <li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
 <li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
-<li><a class="active" href="sampling.html"><span class="header-section-number">6</span> Sampling and uncertainty</a></li>
+<li><a class="active" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
 <li><a class="" href="additional-exercises.html"><span class="header-section-number">7</span> Additional exercises</a></li>
 <li><a class="" href="literature-1.html">Literature</a></li>
 </ul>
@@ -52,53 +52,62 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="sampling" class="section level1" number="6">
 <h1>
-<span class="header-section-number">6</span> Sampling and uncertainty<a class="anchor" aria-label="anchor" href="#sampling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Sampling and variability<a class="anchor" aria-label="anchor" href="#sampling"><i class="fas fa-link"></i></a>
 </h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
-Conduct sampling using a computer experiment
+Conduct random sampling using a computer
 </li>
 <li>
-Explain uncertainty in random sampling
+Explain variability in random sampling
 </li>
 <li>
 Calculate sampling distributions
 </li>
+<li>
+Calculate the standard error
+</li>
 </ul>
 </div>
-<p>With this chapter we start our journey into inferential statistics. Inferential statistics or simply <strong>inference</strong> wants to go beyond analysing single data sets It wants to know whether what we have observed in a single data set can generalized to a larger context. Often, this context is called <strong>population</strong>. And such generalization techniques are nothing else than <strong>estimation</strong> of <strong>population parameters</strong>. For example, if you want to know the mean income of a large group of people, you either can ask every person (if you have time and money to do so) or you ask just a cleverly chosen group, a <strong>sample</strong>, and try to estimate from their mean income, the mean income of the whole group.</p>
-<p>Another setting where you will want to use inference is doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (<strong>control group</strong>) and some at increased temperature (<strong>treatment group</strong>). You measure their growth and want to know whether the <strong>difference observed is due to chance</strong> or whether this is a real difference. And if this is a real difference, how large is it and how precisely can we estimate it. All these questions can be answered using inference.</p>
+<p>With this chapter we start our journey into inferential statistics. Inferential statistics or simply <strong>inference</strong> wants to go beyond analysing single data sets. It wants to know whether what we have observed in a single data set can be generalized to a larger context. Often, this context is called <strong>population</strong>. And such generalization techniques are nothing else than <strong>estimation</strong> of <strong>population parameters</strong>. For example, if you want to know the mean income of a large group of people, you either can ask every person (if you have time and money to do so) or you ask just a cleverly chosen group, a <strong>sample</strong>, and try to estimate from their mean income, the mean income of the whole group.</p>
+<p>Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (<strong>control group</strong>) and some at increased temperature (<strong>treatment group</strong>). You measure their growth and want to know whether the <strong>difference observed is due to chance</strong> or whether this is a real difference, an <strong>effect</strong> of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.</p>
 <p>We will do inference based on data science and a computer. Nowadays, computational power is usually no longer a problem and cool statistical inference can be done based on computer simulations and so called <strong>resampling</strong> techniques.</p>
-<p>In this chapter you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness and uncertainty that underlies real experiments and data.</p>
-<div id="simulating-data" class="section level2" number="6.1">
+<p>In this chapter you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness or chance and variability.</p>
+<div id="random-sampling-of-data" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">6.1</span> Simulating data<a class="anchor" aria-label="anchor" href="#simulating-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Random sampling of data<a class="anchor" aria-label="anchor" href="#random-sampling-of-data"><i class="fas fa-link"></i></a>
 </h2>
-<p>We will simulate our own data set, our own population. We invent the <em>getsmarter</em> university with 12000 student. The code below draws random numbers and simulates the following variables:</p>
+<p>We will use the following libraries. The library <code>infer</code> is a dedicated package for <em>tidy</em> inference.</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></code></pre></div>
+<p>We will simulate our own data set, our own population and invent the <em>getsmarter university</em> with 12000 students. The code below draws random numbers and simulates the following variables:</p>
 <ul>
-<li><code>student_id</code></li>
-<li><code>gender</code></li>
 <li>
-<code>travel_time</code>: how long do student trave to the univeristy</li>
+<code>student_id</code>: 1 to 12000</li>
 <li>
-<code>residence</code>: do students live in the town = urban or in the countryside = rural</li>
+<code>gender</code>: <em>m</em>ale or <em>f</em>emale</li>
 <li>
-<code>transport</code>: how do students travel/come to the unviersity</li>
+<code>travel_time</code>: time students travel to the university</li>
 <li>
-<code>time_lib</code>: how much time do students spend in the university library</li>
+<code>residence</code>: type of place of residents, either town = urban or countryside = rural</li>
+<li>
+<code>transport</code>: how students travel/come to the university</li>
+<li>
+<code>time_lib</code>: time students spend in the university library</li>
 </ul>
 <p>We organise all these variables in a <code>tibble</code> that we call <code>getsmarter_pop</code>.</p>
 <p>Because we draw random numbers using R, every time we rerun the code, new numbers will be generated. To have a reproducible population, we use the function <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>. It accepts as a parameter an integer. Which integer we use does not really matter as long as we use the same every time we rerun the code. By <em>setting the seed</em>, we set the random number generate in R to a certain reproducible state. The numbers are still random, but reproducible 😄.</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 
 <span class="va">student_id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12000</span>
-
-<span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'m'</span>, <span class="st">'f'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">12000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
   
 <span class="va">travel_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.8</span>, min <span class="op">=</span> <span class="fl">5</span>, max <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,
              <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.2</span>, min <span class="op">=</span> <span class="fl">60</span>, max <span class="op">=</span> <span class="fl">120</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'m'</span>, <span class="st">'f'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">12000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="va">residence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span> <span class="st">'urban'</span>
@@ -120,79 +129,296 @@ Calculate sampling distributions
 <pre><code>## # A tibble: 12,000 x 6
 ##    student_id gender residence transport travel_time time_lib
 ##         &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
-##  1          1 m      urban     foot             13.5     288.
-##  2          2 m      urban     bike             21.8     293.
-##  3          3 m      rural     bike             34.4     299.
-##  4          4 f      rural     auto             39.7     289.
-##  5          5 m      urban     foot             13.5     284.
-##  6          6 f      urban     bus              26.8     249.
-##  7          7 f      urban     auto             21.1     287.
-##  8          8 f      rural     bike             34.7     302.
-##  9          9 m      rural     bus              30.4     302.
-## 10         10 m      urban     foot             11.7     281.
+##  1          1 f      urban     bus             15.1      294.
+##  2          2 f      rural     bike            32.6      254.
+##  3          3 f      urban     bike            19.3      231.
+##  4          4 m      rural     auto            35.9      245.
+##  5          5 m      rural     bus             37.9      234.
+##  6          6 f      urban     foot             6.59     303.
+##  7          7 f      urban     bus             23.5      284.
+##  8          8 m      rural     auto            36.2      274.
+##  9          9 m      urban     bike            24.3      299.
+## 10         10 f      urban     bus             21.0      282.
 ## # … with 11,990 more rows</code></pre>
-<p>We will use the following libraries. The library <code>infer</code> is a dedicated package for <em>tidy</em> inference.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></code></pre></div>
-<p>We conduct a survey among the students of getsmarter and record the values of the variables listed above. We select the students randomly. Therefore, the data set that we generate through our survey will be a <strong>random sample</strong>. To simulate such a survey, we use the function <code><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n()</a></code>. It <em>samples</em> <em>rep</em>eatedly <em>n</em> data points (students in our case) from a given data set (our population <code>getsmarter_pop</code>).</p>
-<p>Because we sample randomly (and use the random number generator in R to do so), we need to set the seed again for reproducibility.</p>
-<p>We will simulate a survey of 50 students (<code>survey_size &lt;- 50</code>) and conduct the survey once (<code>reps = 1</code>).</p>
+<p>We conduct a survey among the students of getsmarter and record the values of the variables listed above. We select the students randomly. Therefore, the data set that we generate through our survey will be a <strong>random sample</strong>. To simulate such a survey, we use the function <code><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n()</a></code>. It <em>sample</em>s <em>rep</em>eatedly <em>n</em> data points (students in our case) from a given data set (our population <code>getsmarter_pop</code>).</p>
+<p>Because we sample randomly (and use the random number generator in R to do so), we need to set the seed again for reproducibility. We will simulate a survey of 50 students and define the survey size by <code>survey_size &lt;- 50</code>. The survey will be done once, parameter <code>reps = 1</code>, and students can be interviewed only once, parameter <code>replace = FALSE</code>, in the function <code><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n()</a></code>.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
 <span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">50</span>
 
-<span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="va">survey</span></code></pre></div>
+<span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p>The function <code>rep_sample_n</code> returns a grouped <code>tibble</code>. The variable <code>replicate</code> contained only the number 1 because <code>rep = 1</code>. It is an indicator variable of the replication.</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey</span></code></pre></div>
 <pre><code>## # A tibble: 50 x 7
 ## # Groups:   replicate [1]
 ##    replicate student_id gender residence transport travel_time time_lib
 ##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
-##  1         1       1623 m      rural     auto             35.2     250.
-##  2         1       9171 f      rural     auto             35.3     237.
-##  3         1      10207 m      rural     car             111.      184.
-##  4         1       3506 m      urban     auto             16.3     321.
-##  5         1       8892 f      urban     bus              25.6     256.
-##  6         1       5460 f      rural     auto             31.8     261.
-##  7         1       6120 f      rural     bus              30.8     265.
-##  8         1        865 m      urban     auto             17.2     261.
-##  9         1      11586 m      rural     car              79.2     235.
-## 10         1       8153 m      rural     bus              39.4     281.
+##  1         1       1623 m      urban     foot             7.06     299.
+##  2         1       9171 m      urban     bike            11.3      278.
+##  3         1      10207 f      rural     bus            107.       199.
+##  4         1       3506 f      urban     bus             25.0      326.
+##  5         1       8892 f      urban     bus             28.1      259.
+##  6         1       5460 m      urban     bus             23.6      299.
+##  7         1       6120 f      urban     bus             20.0      268.
+##  8         1        865 f      urban     bike            26.6      290.
+##  9         1      11586 m      rural     bus            114.       207.
+## 10         1       8153 f      urban     foot             8.06     297.
 ## # … with 40 more rows</code></pre>
+<p>How many students from the survey live in the town and how many in the countryside?</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">count</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+## # Groups:   residence [2]
+##   residence     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 rural        21
+## 2 urban        29</code></pre>
+<p>Instead of actual numbers, we want to express <code>residence</code> as proportions.</p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   residence  prop
+##   &lt;chr&gt;     &lt;dbl&gt;
+## 1 rural      0.42
+## 2 urban      0.58</code></pre>
+<p>42% of survey participants live in the countryside and 58% in town.</p>
+<p>But which proportions would we obtain if we repeated the survey? Let’s repeat the survey 33 times and observe the variability in <code>residence</code>. This is an unrealistic scenario for real life, however, for a computer experiment no problem. We set <code>reps = 33.</code></p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
+
+<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></code></pre></div>
+<p>Now <code>survey_reps</code> shows 33 replicates and the variable <code>replicate</code> ranges from 1 to 33. The data set has 1650 = 33 <span class="math inline">\(\times\)</span> <code>survey_size</code> rows.</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey_reps</span></code></pre></div>
+<pre><code>## # A tibble: 1,650 x 7
+## # Groups:   replicate [33]
+##    replicate student_id gender residence transport travel_time time_lib
+##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+##  1         1       2079 m      rural     auto             38.8     262.
+##  2         1       1314 m      urban     bike             13.3     301.
+##  3         1       1710 m      urban     auto             26.5     272.
+##  4         1       4386 f      urban     bus              23.9     269.
+##  5         1       9490 m      rural     auto             34.2     262.
+##  6         1      11757 f      rural     bus             102.      227.
+##  7         1      11649 f      rural     bus             111.      202.
+##  8         1       2244 m      rural     bus              38.9     256.
+##  9         1       3652 f      urban     bike             10.3     254.
+## 10         1       3127 m      urban     bike             29.6     271.
+## # … with 1,640 more rows</code></pre>
+<p>How do the proportions in <code>residence</code> vary from survey to survey? Now we must group by <code>residence</code> and <code>replicate</code>.`</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
+
+<span class="va">residence_props</span></code></pre></div>
+<pre><code>## # A tibble: 66 x 3
+## # Groups:   replicate [33]
+##    replicate residence  prop
+##        &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;
+##  1         1 rural      0.42
+##  2         1 urban      0.58
+##  3         2 rural      0.36
+##  4         2 urban      0.64
+##  5         3 rural      0.4 
+##  6         3 urban      0.6 
+##  7         4 rural      0.38
+##  8         4 urban      0.62
+##  9         5 rural      0.4 
+## 10         5 urban      0.6 
+## # … with 56 more rows</code></pre>
+<p>The numbers vary from replicate to replicate because in every survey replicate different students were drawn at random. Let’s look at the distribution of the proportions in a histogram.</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-92-1.png" width="90%">
+The most frequent proportions for rural are around 40% and for urban around 60%. Because we have chosen <code>binwidth = 0.05</code>, i.e. 5%, we can be more precise. Among the surveyed students, 35–40% live in the countryside and 55–60% in town.</p>
 </div>
-<div id="practice-on-your-own-5" class="section level2" number="6.2">
+<div id="number-of-replications-and-variability" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">6.2</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Number of replications and variability<a class="anchor" aria-label="anchor" href="#number-of-replications-and-variability"><i class="fas fa-link"></i></a>
 </h2>
-<ol class="exercises"><ol style="list-style-type: decimal">
-<li>blup</li>
-</ol></ol>
+<p>Our histograms show that proportions of residence vary from survey to survey. 33 is a large number for real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable for the number of repetitions.</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
+
+<span class="va">reps_num</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
+
+<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
+
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-93-1.png" width="90%"></div>
+<p>The histograms show now a nice symmetrical pattern around 40–42% for <code>rural</code> and 58–60% for <code>urban</code> residences. The parameter <code>scales = 'free_x'</code> allows to scale each histogram’s x axis separately. Such a distribution is called a <strong>sampling distribution</strong>. It shows the distribution of possible values of a statistics (proportions in our case) that one obtains by resampling from a population.</p>
+<p>The statistics proportion is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occurre if we randomly survey our students.</p>
+<p>To summarize a sampling distribution, we can calculate its mean value and standard deviation. The latter has a special name, <strong>standard error</strong>.</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   residence prop_sd
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 rural      0.0701
+## 2 urban      0.0701</code></pre>
+<p>The standard errors for <code>rural</code> and <code>urban</code> are identical, because they are dependent: <code>rural</code> = 1 - <code>urban</code>.</p>
 </div>
-<div id="reading-assignment-4" class="section level2" number="6.3">
+<div id="sample-size" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">6.3</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Sample size<a class="anchor" aria-label="anchor" href="#sample-size"><i class="fas fa-link"></i></a>
 </h2>
-<p>Read chapter 3 (to 3.5) in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
-<!-- ## Turning in your work -->
-<!-- - Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file. -->
-<!-- - Upload your R Notebook to ILIAS. You will find an upload option in today's session. -->
-<!-- - You should receive a solution file after the submission. -->
-<!-- ```{block, type='rmdalert'} -->
-<!-- Be sure to upload before the deadline! -->
-<!-- ``` -->
+<p>The standard error depends on the sample size. Let’s repeat our survey for 25, 50 and 100 students, respectively and observe how the standard error vary.</p>
+<p>For repetitive tasks like this, it is better to define a function that does the job instead of copy-pasting the code to vary the sample size. I will difine such a function without much comments. We will talk about functions later, if time allows.</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">calculate_props</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">population</span> <span class="op">=</span> <span class="va">getsmarter_pop</span>, <span class="va">survey_size</span>, <span class="va">reps_num</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">population</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
+
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
+
+<span class="va">residence_props</span>
+<span class="op">}</span></code></pre></div>
+<p>Let’s survey.</p>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+
+<span class="co"># Sample size 25</span>
+<span class="va">residence_props_25</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">25</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
+  
+<span class="co"># Sample size 50</span>
+<span class="va">residence_props_50</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">50</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
+
+<span class="co"># Sample size 100</span>
+<span class="va">residence_props_100</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">100</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
+<p>We plot the resulting samping distributions.</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_25</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 25'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-1.png" width="90%"></div>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_50</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 50'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-2.png" width="90%"></div>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_100</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 100'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-3.png" width="90%"></div>
+<p>We compare the standard errors of the three sampling distributions.</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props_25</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   residence prop_sd
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 rural       0.102
+## 2 urban       0.102</code></pre>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props_50</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   residence prop_sd
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 rural      0.0679
+## 2 urban      0.0679</code></pre>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props_100</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   residence prop_sd
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 rural      0.0458
+## 2 urban      0.0458</code></pre>
+<p>You see that the standard error decreases with increasing sample size. This makes sense because the larger the sample size the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.</p>
+<p>This time, I have some pre-formulated take-home messages, because sampling and variability are really important topics 😎.</p>
+<div class="rmdalert">
+<ul>
+<li>
+A <strong>random sample</strong><span class="math inline"><span class="math inline">\(^*\)</span></span> can be used to obtain information about a larger group, a population.
+</li>
+<li>
+A statistics calculated from a random sample is sometimes called a sampling statistics.
+</li>
+<li>
+The distribution of a statistics calculated from random samples is called <strong>sampling distribution</strong>.
+</li>
+<li>
+A sampling distribution is obtained by <strong>repeated random sampling</strong>.
+</li>
+<li>
+The more random samples are drawn, the better one can characterize the sampling distribution (i.e. its shape).
+</li>
+<li>
+The <strong>standard error</strong> is the standard deviation of a sampling statistics.
+</li>
+<li>
+The standard error decreases with increasing <strong>sample size</strong>.
+</li>
+</ul>
 </div>
-<div id="additional-reading-and-videos-1" class="section level2" number="6.4">
+<p><span class="math inline">\(^*\)</span> Sometimes, random sampling is not appropriate and stratified sampling or more complex sampling designs should be used. This is the case, when subgroups with different properties relevant for the sampling statistics exist in the population. However, this topic is beyond the scope of this course.</p>
+</div>
+<div id="practice-on-your-own-5" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">6.4</span> Additional reading and videos<a class="anchor" aria-label="anchor" href="#additional-reading-and-videos-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-5"><i class="fas fa-link"></i></a>
+</h2>
+<ol class="exercises">
+<ol style="list-style-type: decimal">
+<li><p>How large are the proportions of <code>rural</code> and <code>urban</code> in the population of students from getsmarter. How large are the mean values from the sampling distributions with sample sizes 25, 50 and 100. Compare these figures to the population parameters and compare.</p></li>
+<li><p>The student representatives would like to see more students using a bike or a bus instead of a car. As a first step, they need to know how many students actually use a car.</p></li>
+</ol>
+<p>Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion?</p>
+</ol>
+</div>
+<div id="reading-assignment-4" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Chapter 7 in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
+</div>
+<div id="turning-in-your-work-4" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-4"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li><p>More information on statistical graphical summaries and geoms: R4DS <span class="citation"><a href="literature-1.html#ref-r4ds" role="doc-biblioref">Wickham and Grolemund</a> (<a href="literature-1.html#ref-r4ds" role="doc-biblioref">2021</a>)</span>: Chapter 5 “Data transformation”</p></li>
-<li><p>A live exploratory data analysis by the main author of <code>tidyverse</code>, Hadley Wickham. Really informative, but Dr. Wickham types too fast 😄.</p></li>
+<li>Save your R Notebook and download the .Rmd file to your computer. You don’t need to download the .nb.html file.</li>
+<li>Upload your R Notebook to ILIAS. You will find an upload option in today’s session.</li>
+<li>You should receive a solution file after the submission.</li>
 </ul>
-<iframe width="639" height="302" src="https://www.youtube.com/embed/go5Au01Jrvs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
+<div class="rmdalert">
+<p>
+Be sure to upload before the deadline!
+</p>
+</div>
+</div>
+<div id="additional-reading-and-videos-1" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> Additional reading and videos<a class="anchor" aria-label="anchor" href="#additional-reading-and-videos-1"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
@@ -202,11 +428,14 @@ Calculate sampling distributions
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sampling"><span class="header-section-number">6</span> Sampling and uncertainty</a></li>
-<li><a class="nav-link" href="#simulating-data"><span class="header-section-number">6.1</span> Simulating data</a></li>
-<li><a class="nav-link" href="#practice-on-your-own-5"><span class="header-section-number">6.2</span> Practice on your own!</a></li>
-<li><a class="nav-link" href="#reading-assignment-4"><span class="header-section-number">6.3</span> Reading assignment</a></li>
-<li><a class="nav-link" href="#additional-reading-and-videos-1"><span class="header-section-number">6.4</span> Additional reading and videos</a></li>
+<li><a class="nav-link" href="#sampling"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="nav-link" href="#random-sampling-of-data"><span class="header-section-number">6.1</span> Random sampling of data</a></li>
+<li><a class="nav-link" href="#number-of-replications-and-variability"><span class="header-section-number">6.2</span> Number of replications and variability</a></li>
+<li><a class="nav-link" href="#sample-size"><span class="header-section-number">6.3</span> Sample size</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-5"><span class="header-section-number">6.4</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#reading-assignment-4"><span class="header-section-number">6.5</span> Reading assignment</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-4"><span class="header-section-number">6.6</span> Turning in your work</a></li>
+<li><a class="nav-link" href="#additional-reading-and-videos-1"><span class="header-section-number">6.7</span> Additional reading and videos</a></li>
 </ul>
 
       <div class="book-extra">
@@ -224,7 +453,7 @@ Calculate sampling distributions
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-12.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -232,6 +461,18 @@ Calculate sampling distributions
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 </html>
