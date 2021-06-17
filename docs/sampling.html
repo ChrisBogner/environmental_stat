@@ -117,7 +117,7 @@ Calculate the standard error
 <span class="va">transport</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="st">'foot'</span>
   <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">15</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'foot'</span>, <span class="st">'bike'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">45</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'bike'</span>, <span class="st">'auto'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">45</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'bike'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
   <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 
@@ -132,11 +132,11 @@ Calculate the standard error
 ##  1          1 f      urban     bus             15.1      294.
 ##  2          2 f      rural     bike            32.6      254.
 ##  3          3 f      urban     bike            19.3      231.
-##  4          4 m      rural     auto            35.9      245.
+##  4          4 m      rural     car             35.9      245.
 ##  5          5 m      rural     bus             37.9      234.
 ##  6          6 f      urban     foot             6.59     303.
 ##  7          7 f      urban     bus             23.5      284.
-##  8          8 m      rural     auto            36.2      274.
+##  8          8 m      rural     car             36.2      274.
 ##  9          9 m      urban     bike            24.3      299.
 ## 10         10 f      urban     bus             21.0      282.
 ## # … with 11,990 more rows</code></pre>
@@ -200,11 +200,11 @@ Calculate the standard error
 ## # Groups:   replicate [33]
 ##    replicate student_id gender residence transport travel_time time_lib
 ##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
-##  1         1       2079 m      rural     auto             38.8     262.
+##  1         1       2079 m      rural     car              38.8     262.
 ##  2         1       1314 m      urban     bike             13.3     301.
-##  3         1       1710 m      urban     auto             26.5     272.
+##  3         1       1710 m      urban     car              26.5     272.
 ##  4         1       4386 f      urban     bus              23.9     269.
-##  5         1       9490 m      rural     auto             34.2     262.
+##  5         1       9490 m      rural     car              34.2     262.
 ##  6         1      11757 f      rural     bus             102.      227.
 ##  7         1      11649 f      rural     bus             111.      202.
 ##  8         1       2244 m      rural     bus              38.9     256.

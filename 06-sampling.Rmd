@@ -54,7 +54,7 @@ residence <- sapply(travel_time, function(x) {
 transport <- sapply(travel_time, function(x) {
   if(x <= 10) 'foot'
   else if(x > 10 & x <= 15) sample(c('foot', 'bike'), size = 1)
-  else if(x > 15 & x <= 45) sample(c('bus', 'bike', 'auto'), size = 1)
+  else if(x > 15 & x <= 45) sample(c('bus', 'bike', 'car'), size = 1)
   else sample(c('bus', 'car'), size = 1)
 })
 
