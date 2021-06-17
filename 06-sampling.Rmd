@@ -7,9 +7,9 @@
 - Calculate the standard error
 ```
 
-With this chapter we start our journey into inferential statistics. Inferential statistics or simply **inference** wants to go beyond analysing single data sets. It wants to know whether what we have observed in a single data set can be generalized to a larger context. Often, this context is called **population**. And such generalization techniques are nothing else than **estimation** of **population parameters**. For example, if you want to know the mean income of a large group of people, you either can ask every person (if you have time and money to do so) or you ask just a cleverly chosen group, a **sample**, and try to estimate from their mean income, the mean income of the whole group.
+With this chapter we start our journey into inferential statistics. Inferential statistics or simply **inference** wants to go beyond the analysis of single data sets. It wants to know whether patterns that we have observed in a single data set can be generalized to a larger context. Often, this context is called **population**. And such generalization techniques are nothing else than **estimation population parameters**. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a **sample**, and try to estimate from their mean income, the mean income of the whole group.
 
-Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (**control group**) and some at increased temperature (**treatment group**). You measure their growth and want to know whether the **difference observed is due to chance** or whether this is a real difference, an **effect** of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.
+Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (**control group**) and some at increased temperature (**treatment group**). You measure their growth and want to know **whether the difference observed is due to chance** or whether this is a real difference, an **effect** of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.
 
 We will do inference based on data science and a computer. Nowadays, computational power is usually no longer a problem and cool statistical inference can be done based on computer simulations and so called **resampling** techniques.
 
@@ -22,14 +22,14 @@ library(tidyverse)
 library(infer)
 ```
 
-We will simulate our own data set, our own population and invent the *getsmarter university* with 12000 students. The code below draws random numbers and simulates the following variables:
+We will simulate our own data set, our own population, and invent the *getsmarter university* with 12000 students. The code below draws random numbers and simulates the following variables:
 
 - `student_id`: 1 to 12000
 - `gender`: *m*ale or *f*emale
-- `travel_time`: time students travel to the university
+- `travel_time`: time students travel to the university in minutes
 - `residence`: type of place of residents, either town = urban or countryside = rural
 - `transport`: how students travel/come to the university
-- `time_lib`: time students spend in the university library
+- `time_lib`: time students spend in the university library in minutes
 
 We organise all these variables in a `tibble` that we call `getsmarter_pop`.
 
@@ -94,7 +94,7 @@ survey %>%
   summarise(prop = n()/survey_size)
 ```
 
-42% of survey participants live in the  countryside and 58% in town.
+42% of survey students live in the  countryside and 58% in town.
 
 But which proportions would we obtain if we repeated the survey? Let's repeat the survey 33 times and observe the variability in `residence`. This is an unrealistic scenario for real life, however, for a computer experiment no problem. We set `reps = 33.`
 
@@ -109,7 +109,7 @@ Now `survey_reps` shows 33 replicates and the variable `replicate` ranges from 1
 survey_reps
 ```
 
-How do the proportions in `residence` vary from survey to survey? Now we must group by `residence` and `replicate`.`
+How do the proportions in `residence` vary from survey to survey? Now we must group by `residence` and `replicate`.
 
 ```{r, message = F}
 residence_props <- survey_reps %>% 
@@ -125,10 +125,11 @@ ggplot(data = residence_props, aes(x = prop)) +
   facet_wrap(~ residence) +
   labs(x = 'Proportion of residence', title = 'Distribution of residences', y = 'Frequency')
 ```
-The most frequent proportions for rural are around 40% and for urban around 60%. Because we have chosen `binwidth = 0.05`, i.e. 5%, we can be more precise. Among the surveyed students, 35--40% live in the countryside and 55--60% in town.
+
+The most frequent proportions for `rural` are around 40% and for `urban` around 60%. Because we have chosen `binwidth = 0.05`, i.e. the width of the columns is 5%, we can be more precise. Among the surveyed students, 35--40% live in the countryside and 55--60% in town.
 
 ## Number of replications and variability
-Our histograms show that proportions of residence vary from survey to survey. 33 is a large number for real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable for the number of repetitions.
+Our histograms show that proportions of residence vary from survey to survey. 33 is a large number for real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable `reps_num` to define the number of repetitions.
 
 ```{r, out.width = '90%', message = F}
 set.seed(345)
@@ -147,9 +148,9 @@ ggplot(data = residence_props, aes(x = prop)) +
   labs(x = 'Proportion of residence', title = 'Distribution of residences', y = 'Frequency')
 ```
 
-The histograms show now a nice symmetrical pattern around 40--42% for `rural` and 58--60% for `urban` residences. The parameter `scales = 'free_x'` allows to scale each histogram's x axis separately. Such a distribution is called a **sampling distribution**. It shows the distribution of possible values of a statistics (proportions in our case) that one obtains by resampling from a population.
+The histograms show now a nice symmetrical pattern around 40--42% for `rural` and 58--60% for `urban` residences. The parameter `scales = 'free_x'` allows to scale each histogram's $x$ axis separately. Such a distribution is called a **sampling distribution**. It shows the distribution of possible values of a statistics ("proportions of residence" in our case) that one obtains by a repeated sampling from a population.
 
-The statistics proportion is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occurre if we randomly survey our students.
+The statistics "proportion of residence" is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occur if we survey our students randomly.
 
 To summarize a sampling distribution, we can calculate its mean value and standard deviation. The latter has a special name, **standard error**.
 
@@ -223,7 +224,7 @@ residence_props_100 %>%
   group_by(residence) %>% 
   summarise(prop_sd = sd(prop))
 ```
-You see that the standard error decreases with increasing sample size. This makes sense because the larger the sample size the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.
+You see that the **standard error decreases with increasing sample size**. This makes sense because the larger the sample size the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.
 
 This time, I have some pre-formulated take-home messages, because sampling and variability are really important topics `r emo::ji('sunglasses')`.
 
@@ -237,15 +238,15 @@ This time, I have some pre-formulated take-home messages, because sampling and v
 - The standard error decreases with increasing **sample size**.
 ```
 
-$^*$ Sometimes, random sampling is not appropriate and stratified sampling or more complex sampling designs should be used. This is the case, when subgroups with different properties relevant for the sampling statistics exist in the population. However, this topic is beyond the scope of this course.
+$^*$ Sometimes, random sampling is not appropriate and stratified sampling or more complex sampling designs should be used. This is the case, when subgroups with different properties relevant for the sampling, statistics exist in the population. However, this topic is beyond the scope of this course.
 
 ## Practice on your own!
 <ol class ="exercises">
-1. How large are the proportions of `rural` and `urban` in the population of students from getsmarter. How large are the mean values from the sampling distributions with sample sizes 25, 50 and 100. Compare these figures to the population parameters and compare.
+1. How large are the proportions of `rural` and `urban` in the population of students from getsmarter. How large are the mean values from the sampling distributions with sample sizes 25, 50 and 100. Compare these figures to the population parameters and comment.
 
 1. The student representatives would like to see more students using a bike or a bus instead of a car. As a first step, they need to know how many students actually use a car.
 <br>
-Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion? Compare to the proportion in the population. Hint: Before you calculate the mean of all proportions estimated in the 10000 replicates, use `ungroup()` to delete the grouping by replicates.
+Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion? Compare to the proportion in the population. Hint: Before you calculate the mean of all proportions estimated in the 1000 replicates, use `ungroup()` to delete the grouping by replicates.
 
 </ol>
 
@@ -261,5 +262,3 @@ Chapter 7 in @ModernDive
 ```{block, type='rmdalert'}
 Be sure to upload before the deadline!
 ```
-
-## Additional reading and videos

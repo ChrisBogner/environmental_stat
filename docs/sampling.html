@@ -70,8 +70,8 @@ Calculate the standard error
 </li>
 </ul>
 </div>
-<p>With this chapter we start our journey into inferential statistics. Inferential statistics or simply <strong>inference</strong> wants to go beyond analysing single data sets. It wants to know whether what we have observed in a single data set can be generalized to a larger context. Often, this context is called <strong>population</strong>. And such generalization techniques are nothing else than <strong>estimation</strong> of <strong>population parameters</strong>. For example, if you want to know the mean income of a large group of people, you either can ask every person (if you have time and money to do so) or you ask just a cleverly chosen group, a <strong>sample</strong>, and try to estimate from their mean income, the mean income of the whole group.</p>
-<p>Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (<strong>control group</strong>) and some at increased temperature (<strong>treatment group</strong>). You measure their growth and want to know whether the <strong>difference observed is due to chance</strong> or whether this is a real difference, an <strong>effect</strong> of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.</p>
+<p>With this chapter we start our journey into inferential statistics. Inferential statistics or simply <strong>inference</strong> wants to go beyond the analysis of single data sets. It wants to know whether patterns that we have observed in a single data set can be generalized to a larger context. Often, this context is called <strong>population</strong>. And such generalization techniques are nothing else than <strong>estimation population parameters</strong>. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a <strong>sample</strong>, and try to estimate from their mean income, the mean income of the whole group.</p>
+<p>Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (<strong>control group</strong>) and some at increased temperature (<strong>treatment group</strong>). You measure their growth and want to know <strong>whether the difference observed is due to chance</strong> or whether this is a real difference, an <strong>effect</strong> of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.</p>
 <p>We will do inference based on data science and a computer. Nowadays, computational power is usually no longer a problem and cool statistical inference can be done based on computer simulations and so called <strong>resampling</strong> techniques.</p>
 <p>In this chapter you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness or chance and variability.</p>
 <div id="random-sampling-of-data" class="section level2" number="6.1">
@@ -82,20 +82,20 @@ Calculate the standard error
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></code></pre></div>
-<p>We will simulate our own data set, our own population and invent the <em>getsmarter university</em> with 12000 students. The code below draws random numbers and simulates the following variables:</p>
+<p>We will simulate our own data set, our own population, and invent the <em>getsmarter university</em> with 12000 students. The code below draws random numbers and simulates the following variables:</p>
 <ul>
 <li>
 <code>student_id</code>: 1 to 12000</li>
 <li>
 <code>gender</code>: <em>m</em>ale or <em>f</em>emale</li>
 <li>
-<code>travel_time</code>: time students travel to the university</li>
+<code>travel_time</code>: time students travel to the university in minutes</li>
 <li>
 <code>residence</code>: type of place of residents, either town = urban or countryside = rural</li>
 <li>
 <code>transport</code>: how students travel/come to the university</li>
 <li>
-<code>time_lib</code>: time students spend in the university library</li>
+<code>time_lib</code>: time students spend in the university library in minutes</li>
 </ul>
 <p>We organise all these variables in a <code>tibble</code> that we call <code>getsmarter_pop</code>.</p>
 <p>Because we draw random numbers using R, every time we rerun the code, new numbers will be generated. To have a reproducible population, we use the function <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>. It accepts as a parameter an integer. Which integer we use does not really matter as long as we use the same every time we rerun the code. By <em>setting the seed</em>, we set the random number generate in R to a certain reproducible state. The numbers are still random, but reproducible 😄.</p>
@@ -187,7 +187,7 @@ Calculate the standard error
 ##   &lt;chr&gt;     &lt;dbl&gt;
 ## 1 rural      0.42
 ## 2 urban      0.58</code></pre>
-<p>42% of survey participants live in the countryside and 58% in town.</p>
+<p>42% of survey students live in the countryside and 58% in town.</p>
 <p>But which proportions would we obtain if we repeated the survey? Let’s repeat the survey 33 times and observe the variability in <code>residence</code>. This is an unrealistic scenario for real life, however, for a computer experiment no problem. We set <code>reps = 33.</code></p>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
@@ -211,7 +211,7 @@ Calculate the standard error
 ##  9         1       3652 f      urban     bike             10.3     254.
 ## 10         1       3127 m      urban     bike             29.6     271.
 ## # … with 1,640 more rows</code></pre>
-<p>How do the proportions in <code>residence</code> vary from survey to survey? Now we must group by <code>residence</code> and <code>replicate</code>.`</p>
+<p>How do the proportions in <code>residence</code> vary from survey to survey? Now we must group by <code>residence</code> and <code>replicate</code>.</p>
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -239,14 +239,14 @@ Calculate the standard error
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-92-1.png" width="90%">
-The most frequent proportions for rural are around 40% and for urban around 60%. Because we have chosen <code>binwidth = 0.05</code>, i.e. 5%, we can be more precise. Among the surveyed students, 35–40% live in the countryside and 55–60% in town.</p>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-92-1.png" width="90%"></div>
+<p>The most frequent proportions for <code>rural</code> are around 40% and for <code>urban</code> around 60%. Because we have chosen <code>binwidth = 0.05</code>, i.e. the width of the columns is 5%, we can be more precise. Among the surveyed students, 35–40% live in the countryside and 55–60% in town.</p>
 </div>
 <div id="number-of-replications-and-variability" class="section level2" number="6.2">
 <h2>
 <span class="header-section-number">6.2</span> Number of replications and variability<a class="anchor" aria-label="anchor" href="#number-of-replications-and-variability"><i class="fas fa-link"></i></a>
 </h2>
-<p>Our histograms show that proportions of residence vary from survey to survey. 33 is a large number for real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable for the number of repetitions.</p>
+<p>Our histograms show that proportions of residence vary from survey to survey. 33 is a large number for real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable <code>reps_num</code> to define the number of repetitions.</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
@@ -263,8 +263,8 @@ The most frequent proportions for rural are around 40% and for urban around 60%.
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-93-1.png" width="90%"></div>
-<p>The histograms show now a nice symmetrical pattern around 40–42% for <code>rural</code> and 58–60% for <code>urban</code> residences. The parameter <code>scales = 'free_x'</code> allows to scale each histogram’s x axis separately. Such a distribution is called a <strong>sampling distribution</strong>. It shows the distribution of possible values of a statistics (proportions in our case) that one obtains by resampling from a population.</p>
-<p>The statistics proportion is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occurre if we randomly survey our students.</p>
+<p>The histograms show now a nice symmetrical pattern around 40–42% for <code>rural</code> and 58–60% for <code>urban</code> residences. The parameter <code>scales = 'free_x'</code> allows to scale each histogram’s <span class="math inline">\(x\)</span> axis separately. Such a distribution is called a <strong>sampling distribution</strong>. It shows the distribution of possible values of a statistics (“proportions of residence” in our case) that one obtains by a repeated sampling from a population.</p>
+<p>The statistics “proportion of residence” is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occur if we survey our students randomly.</p>
 <p>To summarize a sampling distribution, we can calculate its mean value and standard deviation. The latter has a special name, <strong>standard error</strong>.</p>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">residence_props</span> <span class="op">%&gt;%</span> 
@@ -353,7 +353,7 @@ The most frequent proportions for rural are around 40% and for urban around 60%.
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural      0.0458
 ## 2 urban      0.0458</code></pre>
-<p>You see that the standard error decreases with increasing sample size. This makes sense because the larger the sample size the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.</p>
+<p>You see that the <strong>standard error decreases with increasing sample size</strong>. This makes sense because the larger the sample size the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.</p>
 <p>This time, I have some pre-formulated take-home messages, because sampling and variability are really important topics 😎.</p>
 <div class="rmdalert">
 <ul>
@@ -380,17 +380,17 @@ The standard error decreases with increasing <strong>sample size</strong>.
 </li>
 </ul>
 </div>
-<p><span class="math inline">\(^*\)</span> Sometimes, random sampling is not appropriate and stratified sampling or more complex sampling designs should be used. This is the case, when subgroups with different properties relevant for the sampling statistics exist in the population. However, this topic is beyond the scope of this course.</p>
+<p><span class="math inline">\(^*\)</span> Sometimes, random sampling is not appropriate and stratified sampling or more complex sampling designs should be used. This is the case, when subgroups with different properties relevant for the sampling, statistics exist in the population. However, this topic is beyond the scope of this course.</p>
 </div>
 <div id="practice-on-your-own-5" class="section level2" number="6.4">
 <h2>
 <span class="header-section-number">6.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-5"><i class="fas fa-link"></i></a>
 </h2>
 <ol class="exercises"><ol style="list-style-type: decimal">
-<li><p>How large are the proportions of <code>rural</code> and <code>urban</code> in the population of students from getsmarter. How large are the mean values from the sampling distributions with sample sizes 25, 50 and 100. Compare these figures to the population parameters and compare.</p></li>
+<li><p>How large are the proportions of <code>rural</code> and <code>urban</code> in the population of students from getsmarter. How large are the mean values from the sampling distributions with sample sizes 25, 50 and 100. Compare these figures to the population parameters and comment.</p></li>
 <li><p>The student representatives would like to see more students using a bike or a bus instead of a car. As a first step, they need to know how many students actually use a car.
 <br>
-Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion? Compare to the proportion in the population. Hint: Before you calculate the mean of all proportions estimated in the 10000 replicates, use <code>ungroup()</code> to delete the grouping by replicates.</p></li>
+Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion? Compare to the proportion in the population. Hint: Before you calculate the mean of all proportions estimated in the 1000 replicates, use <code>ungroup()</code> to delete the grouping by replicates.</p></li>
 </ol></ol>
 </div>
 <div id="reading-assignment-4" class="section level2" number="6.5">
@@ -413,11 +413,6 @@ Conduct a repeated survey (1000 repetitions) of 50 students and estimate the pro
 Be sure to upload before the deadline!
 </p>
 </div>
-</div>
-<div id="additional-reading-and-videos-1" class="section level2" number="6.7">
-<h2>
-<span class="header-section-number">6.7</span> Additional reading and videos<a class="anchor" aria-label="anchor" href="#additional-reading-and-videos-1"><i class="fas fa-link"></i></a>
-</h2>
 
 </div>
 </div>
@@ -434,7 +429,6 @@ Be sure to upload before the deadline!
 <li><a class="nav-link" href="#practice-on-your-own-5"><span class="header-section-number">6.4</span> Practice on your own!</a></li>
 <li><a class="nav-link" href="#reading-assignment-4"><span class="header-section-number">6.5</span> Reading assignment</a></li>
 <li><a class="nav-link" href="#turning-in-your-work-4"><span class="header-section-number">6.6</span> Turning in your work</a></li>
-<li><a class="nav-link" href="#additional-reading-and-videos-1"><span class="header-section-number">6.7</span> Additional reading and videos</a></li>
 </ul>
 
       <div class="book-extra">
@@ -452,7 +446,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-13.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

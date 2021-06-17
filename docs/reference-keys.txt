@@ -68,7 +68,6 @@ sample-size
 practice-on-your-own-5
 reading-assignment-4
 turning-in-your-work-4
-additional-reading-and-videos-1
 additional-exercises
 introduction-to-r-and-rstudio-server-pro
 rob1
