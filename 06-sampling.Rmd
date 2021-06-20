@@ -17,7 +17,7 @@ In this chapter you will learn how to use a computer experiment to draw samples 
 
 ## Random sampling of data
 We will use the following libraries. The library `infer` is a dedicated package for *tidy* inference.
-```{r setup}
+```{r, message = F, error = F}
 library(tidyverse)
 library(infer)
 ```

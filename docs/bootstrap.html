@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>7 Bootstrap and confidence intervals | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.8/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Summer term 2021">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2021</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="introduction-to-r-and-rstudio-server.html"><span class="header-section-number">1</span> Introduction to R and RStudio Server</a></li>
+<li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="active" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">8</span> Additional exercises</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="bootstrap" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Bootstrap and confidence intervals<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
+</h1>
+<div class="rmdoutcomes">
+<ul>
+<li>
+Explain the idea behind the bootstrap
+</li>
+<li>
+Calculate bootstrap confidence intervals for the mean
+</li>
+</ul>
+</div>
+<p>In chapter <a href="sampling.html#sampling">6</a> we studied the variability of <strong>repeated random sampling from a population</strong>. We did computer experiments and sampled form a simulated population repeatedly without replacement (i.e. the data could appear in the sample only once) and calculated a statistics, the proportion of rural and urban residents. Such a statistics is a <strong>random variable</strong> and it is characterized by the <strong>sampling distribution</strong>. It shows which values you can expect by randomly sampling from a population.</p>
+<p>We learned that the shape of the sampling distribution and the size of its standard error depended on the sample size. In this chapter we will learn how to quantify the standard error or to calculate plausible values (confidence intervals) for real-life applications, when you have one sample only.</p>
+<div id="the-formulas" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> The formulas<a class="anchor" aria-label="anchor" href="#the-formulas"><i class="fas fa-link"></i></a>
+</h2>
+<p>You will never have the opportunity to sample/survey repeatedly to estimate the information (i.e. a statistics or parameter) about the population of interest. In real-life applications you will have one (hopefully cleverly obtained) random sample. So how can we have access to the shape of the sampling distribution? For several standard statistics, there are formulas that describe the standard error. You have probably learned that the standard error for the estimated mean equalled <span class="math inline">\(\sigma/\sqrt(n)\)</span>, <span class="math inline">\(\sigma\)</span> being the variance of the population and <span class="math inline">\(n\)</span> the sample size. If you don’t know the variance of the population, then you have to estimate it from the sample itself. But where does this formula come from? The very important <strong>Central Limit Theorem</strong> tells us that the random variable <strong>mean</strong> that we can estimate from our random sample is normally distributed with a mean equalled to the true mean of the population and the standard deviation of, you guessed it, <span class="math inline">\(\sigma/\sqrt(n)\)</span>. Based on the normal distribution we can calculate plausible values, a so-called <strong>confidence interval</strong>. Informally, we could define the confidence interval as follows:</p>
+<blockquote>
+<p>Is there a plausible range of values that we could obtain if we randomly sample from a population? Plausible means that if we repeated the sampling very often, this range would contain the true mean in let’s say 95% of the time. Such a plausible range is called a <strong>95% confidence interval</strong>.</p>
+</blockquote>
+<p>Because we know the theoretical distribution of the mean we can calculate the 95% confidence interval as <span class="math inline">\(\hat\mu \pm 1.96 \cdot SE\)</span>, with <span class="math inline">\(\hat\mu\)</span> being the estimated mean, <span class="math inline">\(SE\)</span> the standard error <span class="math inline">\(\sigma/\sqrt(n)\)</span> and the magic factor of 1.96 comes from the fact that in a normal distribution, 95% of all values fall into the interval <span class="math inline">\(\mu \pm 1.96 \cdot sd\)</span>, <span class="math inline">\(sd\)</span> being the standard deviation.</p>
+</div>
+<div id="bootstrapuse-your-computer" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Bootstrap–use your computer<a class="anchor" aria-label="anchor" href="#bootstrapuse-your-computer"><i class="fas fa-link"></i></a>
+</h2>
+<p>Formulas date from the early time of statistics where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using <strong>re-sampling</strong>, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sound like self-deception à la Baron Munchausen at first glance (Figure <a href="bootstrap.html#fig:meunch">7.1</a>). However, it has a solid mathematical foundation <span class="citation">(<a href="literature-1.html#ref-Efron1979" role="doc-biblioref">Efron 1979</a>)</span>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:meunch"></span>
+<img src="figures/M%C3%BCnchhausen-Sumpf-Hosemann.png" alt="Baron Munchausen pulls himself out of a mire by his own hair (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons)" width="80%"><p class="caption">
+Figure 7.1: Baron Munchausen pulls himself out of a mire by his own hair (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons)
+</p>
+</div>
+<p>Figure <a href="bootstrap.html#fig:sampling-world">7.2</a> shows the setup that we practiced in chapter <a href="sampling.html#sampling">6</a>. We wanted to estimate a parameter (proportion of rural and urban residents) called <span class="math inline">\(\mu\)</span> in the figure and we sampled randomly several times from the population. From all those random samples we calculated our statistics and obtained the sampling distribution.</p>
+<div class="figure">
+<span style="display:block;" id="fig:sampling-world"></span>
+<img src="figures/sampling_world.png" alt="Calculation of a sampling distribution by repeated random sampling from a population. Figure by [@Hesterberg2015], there Figure 4. The publication is open-access and can be used for non-commercial purposes." width="80%"><p class="caption">
+Figure 7.2: Calculation of a sampling distribution by repeated random sampling from a population. Figure by <span class="citation">(<a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">Hesterberg 2015</a>)</span>, there Figure 4. The publication is open-access and can be used for non-commercial purposes.
+</p>
+</div>
+<p>Figure <a href="bootstrap.html#fig:sampling-bootstrap">7.3</a> looks basically the same, except one important difference. Now, we don’t have access to several random samples from the population. We have one random sample only. And now we remember that we invested time and energy in thinking about how to best obtain this sample and we believe that it is representative for our population. Thus, we can think about this sample as our <em>mini</em> population. We replace the population by its miniature and sample from it as if it were the true population. However, because the sample is limited in size we have to sample <strong>with replacement</strong>. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For every of those bootstrap samples we calculate the statistics and obtain its bootstrap distribution. The confidence interval are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equalls the 95% bootstrap confidence interval.</p>
+<div class="figure">
+<span style="display:block;" id="fig:sampling-bootstrap"></span>
+<img src="figures/sampling_bootstrap.png" alt="Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by [@Hesterberg2015], there Figure 5. The publication is open-access and can be used for non-commercial purposes." width="80%"><p class="caption">
+Figure 7.3: Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by <span class="citation">(<a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">Hesterberg 2015</a>)</span>, there Figure 5. The publication is open-access and can be used for non-commercial purposes.
+</p>
+</div>
+</div>
+<div id="cofidence-intervals-for-the-mean-travel-time" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Cofidence intervals for the mean travel time<a class="anchor" aria-label="anchor" href="#cofidence-intervals-for-the-mean-travel-time"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s come back to our simulated getsmarter university population and estimate the mean travel time with its bootstrap confidence intervals.</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+
+<span class="va">student_id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12000</span>
+  
+<span class="va">travel_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.8</span>, min <span class="op">=</span> <span class="fl">5</span>, max <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,
+             <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.2</span>, min <span class="op">=</span> <span class="fl">60</span>, max <span class="op">=</span> <span class="fl">120</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'m'</span>, <span class="st">'f'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">12000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="va">residence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span> <span class="st">'urban'</span>
+  <span class="kw">else</span> <span class="st">'rural'</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="va">transport</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="st">'foot'</span>
+  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">15</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'foot'</span>, <span class="st">'bike'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">45</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'bike'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="va">time_lib</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">-</span> <span class="fl">0.7</span> <span class="op">*</span> <span class="va">travel_time</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>
+
+<span class="va">getsmarter_pop</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span><span class="va">student_id</span>, <span class="va">gender</span>, <span class="va">residence</span>, <span class="va">transport</span>, <span class="va">travel_time</span>, <span class="va">time_lib</span><span class="op">)</span>
+
+<span class="va">getsmarter_pop</span></code></pre></div>
+<pre><code>## # A tibble: 12,000 x 6
+##    student_id gender residence transport travel_time time_lib
+##         &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+##  1          1 f      urban     bus             15.1      294.
+##  2          2 f      rural     bike            32.6      254.
+##  3          3 f      urban     bike            19.3      231.
+##  4          4 m      rural     car             35.9      245.
+##  5          5 m      rural     bus             37.9      234.
+##  6          6 f      urban     foot             6.59     303.
+##  7          7 f      urban     bus             23.5      284.
+##  8          8 m      rural     car             36.2      274.
+##  9          9 m      urban     bike            24.3      299.
+## 10         10 f      urban     bus             21.0      282.
+## # … with 11,990 more rows</code></pre>
+<p>We survey 200 students.</p>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
+
+<span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">200</span>
+
+<span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p>The true mean travel time to the university and the mean from the survey equal</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mean_pop</span> <span class="op">&lt;-</span> <span class="va">getsmarter_pop</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">mean_pop</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##    mean
+##   &lt;dbl&gt;
+## 1  36.0</code></pre>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mean_survey</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">mean_survey</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   replicate  mean
+##       &lt;int&gt; &lt;dbl&gt;
+## 1         1  34.1</code></pre>
+<p>To calculate the bootsrap distribution, we sample from the data set <code>survey</code> with replacement. The size of the bootstrap samples always equal the size of the original sample. We use the same function <code>rep_sample_n</code> as in chapter <a href="sampling.html#sampling">6</a>, but change <code>replace = TRUE</code>.</p>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
+
+<span class="va">reps_num</span> <span class="op">&lt;-</span> <span class="fl">10000</span>
+
+<span class="va">survey_reps_bootstrap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">survey</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
+
+<span class="va">survey_reps_bootstrap</span></code></pre></div>
+<pre><code>## # A tibble: 2,000,000 x 7
+## # Groups:   replicate [10,000]
+##    replicate student_id gender residence transport travel_time time_lib
+##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+##  1         1       7038 m      urban     bus             29.4      243.
+##  2         1        493 m      urban     bus             21.1      303.
+##  3         1       3442 m      rural     car             30.3      311.
+##  4         1       4920 f      urban     bus             21.1      290.
+##  5         1       3178 f      urban     foot             8.07     325.
+##  6         1       7694 f      rural     car             31.3      295.
+##  7         1       9479 m      rural     bus             39.5      302.
+##  8         1       3367 m      rural     car             36.4      272.
+##  9         1       5985 f      urban     bike            15.9      303.
+## 10         1        843 m      urban     bike            26.4      300.
+## # … with 1,999,990 more rows</code></pre>
+<p>Because we sample with replacement, students can now appear several times in one and the same bootstrap sample. Let’s check this for the first 50 bootstrap samples. Student 4787 was sampled 8 times in the replicate 43, for example.</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey_reps_bootstrap</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">replicate</span> <span class="op">%in%</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span>, <span class="va">student_id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">tally</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2,657 x 3
+## # Groups:   replicate [50]
+##    replicate student_id     n
+##        &lt;int&gt;      &lt;int&gt; &lt;int&gt;
+##  1        43       4787     8
+##  2        20       5985     6
+##  3        34       7749     6
+##  4        38       5641     6
+##  5        41       8456     6
+##  6         3       7083     5
+##  7         3      10943     5
+##  8         5       8994     5
+##  9         6      10118     5
+## 10         8      11425     5
+## # … with 2,647 more rows</code></pre>
+<p>Now we can calculate the mean travel times from the bootstrap samples.</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">res_means_bootstrap</span> <span class="op">&lt;-</span> <span class="va">survey_reps_bootstrap</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>mean_tt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">res_means_bootstrap</span></code></pre></div>
+<pre><code>## # A tibble: 10,000 x 2
+##    replicate mean_tt
+##        &lt;int&gt;   &lt;dbl&gt;
+##  1         1    32.6
+##  2         2    31.9
+##  3         3    38.9
+##  4         4    33.5
+##  5         5    35.4
+##  6         6    37.2
+##  7         7    34.4
+##  8         8    33.4
+##  9         9    35.5
+## 10        10    31.0
+## # … with 9,990 more rows</code></pre>
+<p>The standard error and the 95% confidence interval based on the bootstrap are calculated as follows:</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">stat_bootstrap</span> <span class="op">&lt;-</span> <span class="va">res_means_bootstrap</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarize</span><span class="op">(</span>mean_bootstrap <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mean_tt</span><span class="op">)</span>, se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mean_tt</span><span class="op">)</span>, ci_2.5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">mean_tt</span>, probs <span class="op">=</span> <span class="fl">0.025</span><span class="op">)</span>, ci_97.5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">mean_tt</span>, probs <span class="op">=</span> <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">stat_bootstrap</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 4
+##   mean_bootstrap    se ci_2.5 ci_97.5
+##            &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1           34.1  2.06   30.1    38.3</code></pre>
+</div>
+<div id="bootstrap-with-the-library-infer" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Bootstrap with the library <code>infer</code><a class="anchor" aria-label="anchor" href="#bootstrap-with-the-library-infer"><i class="fas fa-link"></i></a>
+</h2>
+<p>The library <code>infer</code> offers a logical framework for calcualteing the bootstrap confidence intervals and to do hypothesis tests. We will talk about them in a later session. <code>infer</code> is a dedicated package for <em>tidy</em> inference and is organised around 5 verbs:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code><a href="https://infer.tidymodels.org/reference/specify.html">specify()</a></code> variables or relationships between them</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/hypothesize.html">hypothesize()</a></code> define the null hypothesis (for hypothesis tests only)</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/generate.html">generate()</a></code> generate data either for the confidence intervals or under the null hypothesis</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/calculate.html">calculate()</a></code> the sampling distribution</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/visualize.html">visualize()</a></code> visualize the sampling distribution</li>
+</ol>
+<p>How does our expample of calculating the bootstrap confidence intervals for the mean trave time look like in the <code>infer</code> workflow?</p>
+<p>We first calculate the bootstrap distribution.</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
+
+<span class="va">bootstrap_distribution</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>response <span class="op">=</span> <span class="va">travel_time</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/generate.html">generate</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fl">10000</span>, type <span class="op">=</span> <span class="st">'bootstrap'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">'mean'</span><span class="op">)</span></code></pre></div>
+<p>Then, we calculate the confidence intervals based on the percentile method.</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">percentile_ci</span> <span class="op">&lt;-</span> <span class="va">bootstrap_distribution</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/get_confidence_interval.html">get_confidence_interval</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">0.95</span>, type <span class="op">=</span> <span class="st">"percentile"</span><span class="op">)</span>
+<span class="va">percentile_ci</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   lower_ci upper_ci
+##      &lt;dbl&gt;    &lt;dbl&gt;
+## 1     30.1     38.3</code></pre>
+<p>And then visualize all results. Because the function <code>visualize</code> is based on ggplot, we can add custom axis labels.</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="va">bootstrap_distribution</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_confidence_interval.html">shade_confidence_interval</a></span><span class="op">(</span>endpoints <span class="op">=</span> <span class="va">percentile_ci</span>, color <span class="op">=</span> <span class="st">"orange"</span>, fill <span class="op">=</span> <span class="st">"khaki"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mean_pop</span><span class="op">$</span><span class="va">mean</span>, linetype <span class="op">=</span> <span class="st">'dashed'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Mean trave time (min)'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-114-1.png" width="672"></div>
+</div>
+<div id="interpreting-the-confidence-intervals" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Interpreting the confidence intervals<a class="anchor" aria-label="anchor" href="#interpreting-the-confidence-intervals"><i class="fas fa-link"></i></a>
+</h2>
+<p>The upper and lower limit of the confidence interval depend on the sample, i.e. they are themselves random variables. Definitely, random variables are everywhere 😄. It means that the confidence interval could fail to include the true population parameter. We are now ready for a more formal definition of a confidence interval:</p>
+<blockquote>
+<p>If we repeat the sampling very often and recalcualte the 95% confidence intervals, we expecte them to containt the true population parameters in about 95% of the time.</p>
+</blockquote>
+<p>It means that some of the confidence intervals won’t contain the true population parameter.</p>
+<p>The confidence interval is our best guess of plausible values for the population parameter. In case of a theoretical distribution of the statistics, the bootstrap and the theoretical confidence intervals coincide. Often, the interpretation is short-handed as: We are 95% confident that the confidence interval captures the true parameter. This is incorrect. It is better to state that in 95% of the time, the confidence interval captures the true population parameter. And you now know what is meant by “95% of the time” 😄.</p>
+</div>
+<div id="practice-on-your-own-6" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-6"><i class="fas fa-link"></i></a>
+</h2>
+<ol class="exercises"><ol style="list-style-type: decimal">
+<li><p>Repeat the analysis we did for the mean travel time now for the proportion of urban residents. Use the workflow in <code>infer</code>. Hint: <code><a href="https://infer.tidymodels.org/reference/specify.html">specify(response = residence, success = 'urban')</a></code>.</p></li>
+<li><p>How does the width of the confidence interval depend on the sample size? Repeat the analysis for the mean travel time for a survey of 30 students. Hint: <code><a href="https://infer.tidymodels.org/reference/specify.html">specify(response = wohnort, success = 'stadt')</a></code>.</p></li>
+</ol></ol>
+</div>
+<div id="reading-assignment-5" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Chapter 8 in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
+</div>
+<div id="turning-in-your-work-5" class="section level2" number="7.8">
+<h2>
+<span class="header-section-number">7.8</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-5"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Save your R Notebook and download the .Rmd file to your computer. You don’t need to download the .nb.html file.</li>
+<li>Upload your R Notebook to ILIAS. You will find an upload option in today’s session.</li>
+<li>You should receive a solution file after the submission.</li>
+</ul>
+<div class="rmdalert">
+<p>
+Be sure to upload before the deadline!
+</p>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></div>
+<div class="next"><a href="additional-exercises.html"><span class="header-section-number">8</span> Additional exercises</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bootstrap"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="nav-link" href="#the-formulas"><span class="header-section-number">7.1</span> The formulas</a></li>
+<li><a class="nav-link" href="#bootstrapuse-your-computer"><span class="header-section-number">7.2</span> Bootstrap–use your computer</a></li>
+<li><a class="nav-link" href="#cofidence-intervals-for-the-mean-travel-time"><span class="header-section-number">7.3</span> Cofidence intervals for the mean travel time</a></li>
+<li><a class="nav-link" href="#bootstrap-with-the-library-infer"><span class="header-section-number">7.4</span> Bootstrap with the library infer</a></li>
+<li><a class="nav-link" href="#interpreting-the-confidence-intervals"><span class="header-section-number">7.5</span> Interpreting the confidence intervals</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-6"><span class="header-section-number">7.6</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#reading-assignment-5"><span class="header-section-number">7.7</span> Reading assignment</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-5"><span class="header-section-number">7.8</span> Turning in your work</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/07-bootstrap.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/07-bootstrap.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-20.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+</html>
