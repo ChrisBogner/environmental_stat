@@ -19,7 +19,7 @@ Because we know the theoretical distribution of the mean we can calculate the 95
 
 
 ## Bootstrap--use your computer
-Formulas date from the early time of statistics where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using **re-sampling**, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sound like self-deception à la Baron Munchausen at first glance (Figure \@ref(fig:meunch)). However, it has a solid mathematical foundation [@Efron1979].
+Formulas date from the early time of statistics where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using **re-sampling**, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure \@ref(fig:meunch)). However, it has a solid mathematical foundation [@Efron1979].
 
 ```{r meunch, echo = F, fig.cap = 'Baron Munchausen pulls himself out of a mire by his own hair (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons)', fig.width = 6, out.width = "80%"}
 knitr::include_graphics('figures/Münchhausen-Sumpf-Hosemann.png')
@@ -27,20 +27,20 @@ knitr::include_graphics('figures/Münchhausen-Sumpf-Hosemann.png')
 
 Figure \@ref(fig:sampling-world) shows the setup that we practiced in chapter \@ref(sampling). We wanted to estimate a parameter (proportion of rural and urban residents) called $\mu$ in the figure and we sampled randomly several times from the population. From all those random samples we calculated our statistics and obtained the sampling distribution.
 
-```{r sampling-world, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling from a population. Figure by [@Hesterberg2015], there Figure 4. The publication is open-access and can be used for non-commercial purposes.', fig.width = 6, out.width = "80%"}
+```{r sampling-world, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling from a population. Figure by [@Hesterberg2015], their Figure 4. The publication is open-access and can be used for non-commercial purposes.', fig.width = 6, out.width = "80%"}
 knitr::include_graphics('figures/sampling_world.png')
 ```
 
-Figure \@ref(fig:sampling-bootstrap) looks basically the same, except one important difference. Now, we don't have access to several random samples from the population. We have one random sample only. And now we remember that we invested time and energy in thinking about how to best obtain this sample and we believe that it is representative for our population. Thus, we can think about this sample as our *mini* population. We replace the population by its miniature and sample from it as if it were the true population. However, because the sample is limited in size we have to sample **with replacement**. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For every of those bootstrap samples we calculate the statistics and obtain its bootstrap distribution. The confidence interval are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equalls the 95% bootstrap confidence interval.
+Figure \@ref(fig:sampling-bootstrap) looks basically the same, except one important difference. We don't have access to several random samples from the population, but have one random sample only. And now we remember that we invested time and energy in thinking about the best way obtain this sample and we believe that it is representative for our population. Thus, we can think about this sample as our *mini* population. We replace the population by its miniature, i.e. our sample, and sample from this sample as if it were the true population. However, because the sample is limited in size we have to sample **with replacement**. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For each of those bootstrap samples we calculate the statistics and obtain its bootstrap sampling distribution. The confidence interval are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equals the 95% bootstrap confidence interval.
 
 
-```{r sampling-bootstrap, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by [@Hesterberg2015], there Figure 5. The publication is open-access and can be used for non-commercial purposes.', fig.width = 6, out.width = "80%"}
+```{r sampling-bootstrap, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by [@Hesterberg2015], their Figure 5. The publication is open-access and can be used for non-commercial purposes.', fig.width = 6, out.width = "80%"}
 knitr::include_graphics('figures/sampling_bootstrap.png')
 ```
 
 
 ## Cofidence intervals for the mean travel time
-Let's come back to our simulated getsmarter university population and estimate the mean travel time with its bootstrap confidence intervals.
+Let's come back to our simulated getsmarter university population and estimate the mean travel time with its bootstrap confidence interval.
 
 ```{r, message = F, error = F}
 library(tidyverse)
@@ -98,7 +98,7 @@ mean_survey <- survey %>%
 mean_survey
 ```
 
-To calculate the bootsrap distribution, we sample from the data set `survey` with replacement. The size of the bootstrap samples always equal the size of the original sample. We use the same function `rep_sample_n` as in chapter \@ref(sampling), but change `replace = TRUE`.
+To calculate the bootstrap distribution, we sample from the data set `survey` with replacement. The size of the bootstrap samples always equal the size of the original sample. We use the same function `rep_sample_n` as in chapter \@ref(sampling), but change `replace = TRUE`.
 
 ```{r}
 set.seed(345)
@@ -139,7 +139,7 @@ stat_bootstrap
 ```
 
 ## Bootstrap with the library `infer`
-The library `infer` offers a logical framework for calcualteing the bootstrap confidence intervals and to do hypothesis tests. We will talk about them in a later session. `infer` is a dedicated package for *tidy* inference and is organised around 5 verbs:
+The library `infer` offers a convenient framework for calculating the bootstrap confidence intervals and to do hypothesis tests. We will talk about the latter in a later session. `infer` is a dedicated package for *tidy* inference and is organised around 5 verbs:
 
 1. `specify()` variables or relationships between them
 1. `hypothesize()` define the null hypothesis (for hypothesis tests only)
@@ -147,7 +147,7 @@ The library `infer` offers a logical framework for calcualteing the bootstrap co
 1. `calculate()` the sampling distribution
 1. `visualize()` visualize the sampling distribution
 
-How does our expample of calculating the bootstrap confidence intervals for the mean trave time look like in the `infer` workflow?
+How does our example of calculating the bootstrap confidence intervals for the mean travel time look like in the `infer` workflow?
 
 We first calculate the bootstrap distribution.
 ```{r}
@@ -181,7 +181,7 @@ The upper and lower limit of the confidence interval depend on the sample, i.e. 
 
 It means that some of the confidence intervals won't contain the true population parameter.
 
-The confidence interval is our best guess of plausible values for the population parameter. In case of a theoretical distribution of the statistics, the bootstrap and the theoretical confidence intervals coincide. Often, the interpretation is short-handed as: We are 95% confident that the confidence interval captures the true parameter. This is incorrect. It is better to state that in 95% of the time, the confidence interval captures the true population parameter. And you now know what is meant by "95% of the time" `r emo::ji('smile')`.
+The confidence interval is our best guess of plausible values for the population parameter. In case of a theoretical distribution of the statistics, the bootstrap and the theoretical confidence intervals coincide. Often, the interpretation is short-handed as: We are 95% confident that the confidence interval captures the true parameter. This is incorrect. It is better to state that in 95% of the time, the confidence interval captures the true population parameter. And now you know what is meant by "95% of the time" `r emo::ji('smile')`.
 
 ## Practice on your own!
 <ol class ="exercises">
