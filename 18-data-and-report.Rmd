@@ -1,0 +1,82 @@
+# Data sources and final report {#daten-und-bericht}
+
+```{block, type = 'rmdoutcomes'}
+- Know different data sources
+- Use libraries for direct access to databases
+```
+
+## Data sources
+
+In this chapter, I will introduce some interesting data sources (databases) that you can use for your final report. I offer technical assistance for the package `eurostat`. You can discover other packages on your own (this could be a possible challenge for the final report, see below `r emo::ji('smile')`).
+
+
+### Federal Statistical Office
+The [Federal Statistical Office](https://www.destatis.de/EN/Home/_node.html) offers data about Germany in different areas through their database 
+ [GENESIS](https://www-genesis.destatis.de/genesis/online?operation=previous&levelindex=&step=&titel=&levelid=&acceptscookies=false). You can navigate to the data sets and download them. Pay attention to select the format **flat** when downloading to get a *tidy* data set.
+
+### eurostat
+[eurostat](https://ec.europa.eu/eurostat) is the statistical office of the European Union. You will find many different data sets about Europe there. However, you don't need to download them by hand, but can use the dedicated library [eurostat](http://ropengov.github.io/eurostat/index.html). This library has an informative web site with many tutorials. You can also use the eurostat data to visualize maps (possible report challenge). 
+
+
+### gapminder
+You already worked with an excerpt of data by [gapminder](https://www.gapminder.org). The complete data set contains much more. You can download more data [here](https://www.gapminder.org/data/). gapminder organises their data in a so-called DDF Format (data description format) as *tidy* .csv files. A possible report challenge could be to understand this format. A complete data set is availagle via GitHub [here](https://github.com/open-numbers/ddf--gapminder--systema_globalis).
+
+
+### National Oceanic and Atmospheric Administration (NOAA)
+[NOAA](https://www.noaa.gov/) offers data on oceans, climate and weather. You can download the data sets via the library  [rnoaa](https://docs.ropensci.org/rnoaa/).
+
+
+### More data sources
+- [World Bank Open Data](https://data.worldbank.org/)
+- [World Happiness Report](https://worldhappiness.report/ed/2021/)
+- Global Carbon Budget 2020
+  - [Publication and data set](https://essd.copernicus.org/articles/12/3269/2020/)
+  - [Global Carbon Project](https://www.globalcarbonproject.org/index.htm)
+- Soil organic carbon contents from sites under perennial cultivation
+  - [Publication](https://www.nature.com/articles/s41597-019-0062-1)
+  - [Data set](https://figshare.com/articles/dataset/A_global_empirical_harmonised_dataset_of_Soil_Organic_Carbon_under_Perennial_Crops/7637210)
+- [PANGAEA](https://www.pangaea.de/): eine der größten Datenbanken für Umweltdaten
+- Overview of data and libraries on [ROpenScie](https://ropensci.org/):
+  [Data](https://github.com/ropensci-archive/opendata)
+  [Libraries](https://ropensci.org/packages/data-access/)
+
+## Research proposal
+Before you write your final report, you need to submit a research proposal on ILIAS. **Be sure to upload before the deadline!**. You will receive feedback on it. This should avoid any misunderstanding about your final report. Please use the template provided on ILIAS for the research proposal.
+
+
+## Structure of the final report
+### Sturcture of the working directory
+Create a new **R project** for your final report. You can find more about using projects [here](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects). A project helps you to structure your work properly.
+
+Inside your project folder, create a folder for data, figures and (help) scripts (if appropriate). Save your notebooks in the root directory of your project.
+
+
+### Download and save data
+If you want to use libraries to download data, then create a notebook for this task. Don't download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis. 
+
+### Structure of the report
+Please structure your report as follows:
+
+  - Introduction (with research question at the end)
+  - Material and Methods: Data description (with the date of download), description of the method with references, description of the research area if appropriate 
+  - Results: Explorative data analysis, further analysis to respond to the research question
+  - Discussion: use peer-reviewed literature to frame your results
+  - Conclusions
+  - Bibliography
+  
+You can combine results and discussion to one section.
+
+Each report should contain a **challenge**. This can be an extensive data tidying and wrangling or use of a new and interesting library (e.g. to represent spatial data in eurostat) etc.
+
+You can write your report in groups of two, I even recommend to do so. In this case, please add your names to the respective parts that you are responsible for. Every part will be graded separately. Every group member need to do some analysis and some writing. 
+
+I don't impose any particular length for your report. However, be *concise*.
+
+Knit the final report to an html-document. Think about whether you need to show all chunks, avoid redundancy. **Compress the whole project and submit everything!** Your report and your analysis must run on my computer so abserve the paths!
+
+
+
+```{block, type='rmdalert'}
+Submit the compressed project to ILIAS before the deadline.
+```
+
