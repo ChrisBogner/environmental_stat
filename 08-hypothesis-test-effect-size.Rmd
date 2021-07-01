@@ -1,0 +1,167 @@
+# Hypothesis tests versus effect size estimation {#hypothesis}
+
+```{block, type='rmdoutcomes'}
+- Explain the idea behind simulation-based hypothesis tests
+- Calculate hypothesis tests with `infer`
+- Explain the difference between a test and an effect size estimation
+```
+
+In chapter \@ref(bootstrap) we learned how to calculate confidence intervals, a range of plausible values. Or more formally, an interval that expect to contain the true population parameters in about 95% of the time, if we repeat the sampling very often. In this chapter we will learn what hypothesis tests are and why it is often better to estimate effect sizes.
+
+
+## Hypothesis tests with `infer`
+
+```{r, message = F, warning = F}
+library(tidyverse)
+library(infer)
+library(knitr)
+```
+
+Let's start with an old study that was done in the 1970. @Rosen1974 analysed whether "sex role stereotypes [had] an influence on personnel decisions". In our modern language, they wanted to know whether women are discriminated against in promotion decisions. They asked 95 bank supervisors to decide based on a personal file only whether a person should be promoted or not. All files were identical except the gender and the files were distributed randomly to the participants. Because of this random assignement of files, the procedure is an **experiment** and we can draw conclusions about the research question. Here, we look at one part of the data, namely promotion decision for a simple job (c.f. the original publication for more details.)
+
+
+```{r}
+study <- tibble('gender' = c(rep('male', 24),
+                             rep('female', 24)),
+                'decision' = c(rep('promoted', 21),
+                               rep('not_promoted', 3),
+                               rep('promoted', 14),
+                               rep('not_promoted', 10)))
+
+study %>% 
+  table() %>% 
+  addmargins() %>% 
+  kable()
+```
+Let's plot the data before we analyse it.
+```{r, out.width = '90%'}
+ggplot(study, aes(x = gender, fill = decision)) +
+  geom_bar() +
+  labs(x = 'Gender on personal file', y = 'Abs. frequency',
+       title = 'Decisions of bank supervisors from study by Rosen & Jerdee (1974)')
+```
+
+
+How large is the difference of proportions in promotions between men and women? Is this difference due to chance or are women discriminated against?
+
+A hypothesis test helps to decide whether an observed effect, in our case the difference in proportions of promotions, can be attributed to chance. In a hypothesis test, two different statements are contrasted, a **null hypothesis** and an **alternative hypothesis**:
+
+- Statement 1: There is no real difference, the observed difference is due to chance.
+
+H$_0$: **Null hypothesis**. The variables `gender` and `decision` are independent; the observed difference in promotions is random.
+
+- Statement 2: Women are discriminated against.
+
+H$_A$: **Alternative hypothesis**. The variables `gender` and `decision` are dependent. Women are discriminated against in decisions about promotion.
+
+We will use a general framework in the package `infer` for hypothesis tests. It offers a state-of-the-art simulation-based approach and is based on the following steps (Figure \@ref(fig:ht)):
+
+1. `specify()` variables or relationships between them
+1. `hypothesize()` define the null hypothesis
+1. `generate()` generate data under the null hypothesis
+1. `calculate()` the sampling distribution under the null hypothesis
+1. `visualize()` visualize the sampling distribution under the null hypothesis
+
+Two additional functions, `shade_p_value` and `get_p_value` visualize and calculate the $p$ value (see below for definition), respectively.
+
+
+```{r ht, echo = F, fig.cap = 'General framework in `infer`. (Source: https://infer.netlify.app/).', fig.width = 6, out.width = "80%"}
+knitr::include_graphics('figures/ht-diagram.png')
+```
+
+Let's proceed step by step. First, we calculate the observed difference from our data using `infer`. The parameter `order = c("male", "female")` tells us that we calculate the difference as male - female.
+```{r}
+prop_hat <- study %>% 
+  specify(formula = decision ~ gender, success = "promoted") %>%
+  calculate(stat = "diff in props", order = c("male", "female"))
+
+prop_hat
+```
+We observe `r round(prop_hat, 3)*100`% less women promoted than men.
+
+Let's see whether this difference can be attributed to chance. We generate data under the null hypothesis, i.e. a world where `gender` and `decision` to promote are completely independent. Then we compare the data we obtain in this world with the observed `r round(prop_hat, 3)*100`% difference between men and women.
+
+We generate the data under the null hypotheses by permutation. It means that if `gender` and `decision` are unrelated then we could have observed other combinations of them. Therefore, any permuted combination would be in agreement with the null hypothesis of independence of these variables. We generate 10000 permuted samples.
+```{r}
+set.seed(123)
+
+null_distn <- study %>%
+  specify(formula = decision ~ gender, success = "promoted") %>%
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10000) %>% 
+  calculate(stat = "diff in props", order = c("male", "female"))
+
+null_distn
+```
+
+The object `null_distn` contains 10000 differences in proportions of promotion from the permuted data. We can visualize their distribution and highlight the observed difference to compare. The parameter `direction = "greater"` defines the alternative hypothesis that women are discriminated against, i.e. the difference is larger than zero. The function `shade_p_value` shades values that are larger than the observed statistics. The red bar shows the observed statistic itself.
+```{r, out.width = '90%'}
+visualize(null_distn, bins = 12) +
+  shade_p_value(obs_stat = prop_hat, direction = "greater")
+```
+
+> The **$p$ value** is the probability to obtain data as extreme or more extreme than what has been observed, if the null hypothesis is true.
+
+The $p$ value in our example equals
+```{r}
+null_distn %>% 
+  get_p_value(obs_stat = prop_hat, direction = 'greater')
+```
+This $p$ value is really small. It is rare to observe a difference as larger as `r round(prop_hat, 3)*100`%, if we assume that women and men are promoted equally often. We reject the null hypothesis of independence and conclude that women are discriminated against in promotion. A cautionary note: In this experiment, we assumed that the participating bank supervisors were representative for their profession in the 1970s. Thus, it is more cautious to conclude that women were discriminated against in the 1970 (provided the white male bank supervisors are representative for the then-population of decision-makers).
+
+## There is only one test!
+When you read through literature, you will find a lot of different tests. It is difficult to keep all those names and remember when to use what. The good news is that it is unnecessary complicated and can be simplified with a test procedure based on computer simulations as we did in `infer`. The general logic behind simulation-based tests is shown in Figure \@ref(fig:one-test).
+
+```{r one-test, echo = F, fig.cap = 'General logic behind any simulation-based hypothesis test. (Source: http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html).', fig.width = 6, out.width = "80%"}
+knitr::include_graphics('figures/one_test.png')
+```
+
+The test procedure is based on the same steps, regardless which test you want to apply.
+
+**Step 1: calculate the test statistic in your data**
+Summarize your data with a test statistic. It can be a mean or a difference in proportions. In Figure \@ref(fig:one-test) this statistic is called $\sigma*$.
+
+**Step 2: formulate the null hypothesis**
+Think about your research question. What do you want to know? Derive a model of a world where this effect is absent. This is your null hypothesis $H_0$. This model can be a permutation of variables or a theoretical model or a complicated model `r emo::ji('smile')`.
+
+**Step 3: generate the data under the null hypothesis**
+Generate the data, i.e. many data samples, using your model of $H_0$ and calculate the same statistic as you did for your observed data for each of those samples.
+
+**Step 4: calculate the sampling distribution**
+These statistics under the null give you a sampling distribution that you can visualize. Additionally, visualize the observed statistic $\sigma*$ and compare. Does such a value appear often in your sampling distribution or is it rare? The $p$ value gives your the frequency of how often the sampling distribution has values that are at least as large as your $\sigma*$.
+
+**Step 5: Decide!**
+Is the $p$ values small? Use you domain knowledge to frame the result. No need to refer to statistical significance here! Formulate a conclusion in plain language. Think about how you obtained the data. There is always uncertainty, so be modest and do not overstate your finding!
+
+There is so much more to say about the misuse of $p$ values and the term "statistical significance". A good starting point is the paper by @Wasserstein2019.
+
+## Hypothesis test versus effect size estimation
+Compared to a statistical test, the estimation of a so called **effect size** can be much more interesting. Effect size can be the difference in means or proportions or more elaborated (standardized) effects. While a statistical test gives you a "feeling" of whether the observed effect could be attributed to chance, estimation of the effect size and its confidence intervals gives you a range of plausible values. It is much more interesting and relevant to discuss those and what they could mean for real life than just to state that something is (not) due chance. Prefer effect size and confidence intervals where possible to hypothesis tests.
+
+## Practice on your own!
+<ol class ="exercises">
+1. Does the travel time and the time spent in the library correlate in our getsmarter population? Do a statistical test based on a survey of 200 students. Formulate the null and alternative hypothesis before doing the test. Hint: `specify(travel_time ~ time_lib)` and `calculate(stat = "correlation")`. Consult the web site of the library `infer` (c.f. below).
+
+1. Does the travel time and the time spent in the library correlate in our getsmarter population? This time, esimate the correlation and calculate its confidence interval. Compare with the hypothesis test.
+
+</ol>
+
+## Reading assignment
+Chapter 9 in @ModernDive
+
+## Additional resources
+Webpage of `infer`: https://infer.netlify.app/
+
+Great talk by the author of `infer`.
+
+<p><a href="https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2"><img src="https://embed-fastly.wistia.com/deliveries/8934494267e19f3cfbc24dcc1cb1c43067a2f722.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a></p><p><a href="https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2">infer: a package for tidy statistical inference - RStudio</a></p>
+
+
+## Turning in your work
+- Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.
+- Upload your R Notebook to ILIAS. You will find an upload option in today's session.
+- You should receive a solution file after the submission.
+
+```{block, type='rmdalert'}
+Be sure to upload before the deadline!
+```

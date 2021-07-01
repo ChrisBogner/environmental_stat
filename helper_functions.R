@@ -2,6 +2,7 @@
 library(fontawesome)
 library(kableExtra)
 library(tidyverse)
+library(DT)
 
 knitr::knit_hooks$set(document = function(x) {
   sub('\\usepackage{graphicx, color}',

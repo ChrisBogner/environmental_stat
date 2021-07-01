@@ -177,7 +177,7 @@ visualize(bootstrap_distribution) +
 ## Interpreting the confidence intervals
 The upper and lower limit of the confidence interval depend on the sample, i.e. they are themselves random variables. Definitely, random variables are everywhere `r emo::ji('smile')`. It means that the confidence interval could fail to include the true population parameter. We are now ready for a more formal definition of a confidence interval:
 
-> If we repeat the sampling very often and recalcualte the 95% confidence intervals, we expecte them to containt the true population parameters in about 95% of the time.
+> If we repeat the sampling very often and recalculate the 95% confidence intervals, we expect them to contain the true population parameters in about 95% of the time.
 
 It means that some of the confidence intervals won't contain the true population parameter.
 

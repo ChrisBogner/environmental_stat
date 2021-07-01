@@ -6,6 +6,7 @@ rmd_files: ["index.Rmd", "01-intro.Rmd",
 "05-tidyverse.Rmd",
 "06-sampling.Rmd",
 "07-bootstrap.Rmd",
+"08-hypothesis-test-effect-size.Rmd",
 "18-data-and-report.Rmd",
 "19-tasks.Rmd", "20-biblio.Rmd"]
 before_chapter_script: ["helper_functions.R"]

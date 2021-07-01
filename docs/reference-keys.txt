@@ -11,8 +11,8 @@ fig:penguins
 fig:meunch
 fig:sampling-world
 fig:sampling-bootstrap
-tab:unnamed-chunk-120
-tab:unnamed-chunk-121
+tab:unnamed-chunk-125
+tab:unnamed-chunk-126
 introduction-to-r-and-rstudio-server
 opening-rstudio-server-pro
 the-rstudio-interface
@@ -80,6 +80,11 @@ interpreting-the-confidence-intervals
 practice-on-your-own-6
 reading-assignment-5
 turning-in-your-work-5
+hypothesis
+hypothesis-tests
+practice-on-your-own-7
+reading-assignment-6
+turning-in-your-work-6
 daten-und-bericht
 data-sources
 federal-statistical-office
@@ -101,3 +106,10 @@ the-big-practical-importing-wrangling-summerizing-and-plotting
 temperature-along-the-dutch-coast
 temperature-along-the-dutch-coast-revisited
 excel-data-turns-tidy
+hypothesis-tests-with-infer
+there-is-only-one-test
+hypothesis-test-versus-effet-size-estimation
+fig:ht
+fig:one-test
+additional-resources
+hypothesis-test-versus-effect-size-estimation
