@@ -42,7 +42,7 @@
 <li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
 <li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
 <li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
-<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypotothesis tests versus effect size estimation</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
 <li><a class="" href="daten-und-bericht.html"><span class="header-section-number">9</span> Data sources and final report</a></li>
 <li><a class="active" href="additional-exercises.html"><span class="header-section-number">10</span> Additional exercises</a></li>
 <li><a class="" href="literature-1.html">Literature</a></li>
@@ -69,7 +69,7 @@
 <p><br></p>
 <div class="inline-table"><table class="table table-striped" style="width: auto !important; ">
 <caption>
-<span id="tab:unnamed-chunk-125">Table 10.1: </span>Rob’s account book
+<span id="tab:unnamed-chunk-130">Table 10.1: </span>Rob’s account book
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -140,7 +140,7 @@ Friday
 <p>R codes missing values as <code>NA</code>. Rob ate in the Mensa last Monday, but forgot to write down the amount.</p>
 <div class="inline-table"><table class="table table-striped" style="width: auto !important; ">
 <caption>
-<span id="tab:unnamed-chunk-126">Table 10.2: </span>Rob’s account book, cont.
+<span id="tab:unnamed-chunk-131">Table 10.2: </span>Rob’s account book, cont.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -213,7 +213,7 @@ NA
 </h3>
 <p>In particular in the beginning of learning R you should not forget why you are doing it. Because R is really beautiful and you want to analyse and learn from real data.</p>
 <p>Even if you don’t fully understand the following code, just copy and paste it into your .R file and let it run!</p>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jennybc/gapminder">gapminder</a></span><span class="op">)</span>
 
@@ -275,14 +275,14 @@ NA
 <li>Read the excel file into R. Call it <code>wdi</code>.</li>
 <li>This data set is not tidy. In particular, the year is coded as column name. Those column names contain the year twice, once as a number and once as [YR NUMBER]. We rename the columns first.</li>
 </ul>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wdi</span> <span class="op">&lt;-</span> <span class="va">wdi</span> <span class="op">%&gt;%</span> 
   <span class="fu">rename_with</span><span class="op">(</span>.fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">str_sub</span><span class="op">(</span><span class="va">x</span>, start <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>, .cols <span class="op">=</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">'20'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>What does this code mean? Read the help pages for functions <code>rename_with()</code>, <code>str_sub()</code> and <code>starts_with()</code>.</p>
 <ul>
 <li>Pivot the data set to a tidy format: variables in columns and measurements in rows. Use <code>pivot_longer</code>.</li>
 </ul>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wdi</span> <span class="op">&lt;-</span> <span class="va">wdi</span> <span class="op">%&gt;%</span>
   <span class="fu">pivot_longer</span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">'year'</span>, values_to <span class="op">=</span> <span class="st">'indicator_value'</span>, cols <span class="op">=</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">'20'</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span>
@@ -334,7 +334,7 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-06-30.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
