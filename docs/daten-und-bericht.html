@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>9 Data sources and final report | Environmental Statistics</title>
+<title>B Data sources and final report | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -35,16 +35,21 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
 <li><a class="" href="introduction-to-r-and-rstudio-server.html"><span class="header-section-number">1</span> Introduction to R and RStudio Server</a></li>
 <li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
 <li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
 <li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
 <li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
 <li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
 <li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
 <li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
-<li><a class="active" href="daten-und-bericht.html"><span class="header-section-number">9</span> Data sources and final report</a></li>
-<li><a class="" href="additional-exercises.html"><span class="header-section-number">10</span> Additional exercises</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="active" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
 <li><a class="" href="literature-1.html">Literature</a></li>
 </ul>
 
@@ -53,9 +58,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="daten-und-bericht" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="daten-und-bericht" class="section level1" number="10">
 <h1>
-<span class="header-section-number">9</span> Data sources and final report<a class="anchor" aria-label="anchor" href="#daten-und-bericht"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B</span> Data sources and final report<a class="anchor" aria-label="anchor" href="#daten-und-bericht"><i class="fas fa-link"></i></a>
 </h1>
 <div class="rmdoutcomes">
 <ul>
@@ -67,39 +72,39 @@ Use libraries for direct access to databases
 </li>
 </ul>
 </div>
-<div id="data-sources" class="section level2" number="9.1">
+<div id="data-sources" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">9.1</span> Data sources<a class="anchor" aria-label="anchor" href="#data-sources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.1</span> Data sources<a class="anchor" aria-label="anchor" href="#data-sources"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this chapter, I will introduce some interesting data sources (databases) that you can use for your final report. I offer technical assistance for the package <code>eurostat</code>. You can discover other packages on your own (this could be a possible challenge for the final report, see below 😄).</p>
-<div id="federal-statistical-office" class="section level3" number="9.1.1">
+<div id="federal-statistical-office" class="section level3" number="10.1.1">
 <h3>
-<span class="header-section-number">9.1.1</span> Federal Statistical Office<a class="anchor" aria-label="anchor" href="#federal-statistical-office"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.1.1</span> Federal Statistical Office<a class="anchor" aria-label="anchor" href="#federal-statistical-office"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <a href="https://www.destatis.de/EN/Home/_node.html">Federal Statistical Office</a> offers data about Germany in different areas through their database
 <a href="https://www-genesis.destatis.de/genesis/online?operation=previous&amp;levelindex=&amp;step=&amp;titel=&amp;levelid=&amp;acceptscookies=false">GENESIS</a>. You can navigate to the data sets and download them. Pay attention to select the format <strong>flat</strong> when downloading to get a <em>tidy</em> data set.</p>
 </div>
-<div id="eurostat" class="section level3" number="9.1.2">
+<div id="eurostat" class="section level3" number="10.1.2">
 <h3>
-<span class="header-section-number">9.1.2</span> eurostat<a class="anchor" aria-label="anchor" href="#eurostat"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.1.2</span> eurostat<a class="anchor" aria-label="anchor" href="#eurostat"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://ec.europa.eu/eurostat">eurostat</a> is the statistical office of the European Union. You will find many different data sets about Europe there. However, you don’t need to download them by hand, but can use the dedicated library <a href="http://ropengov.github.io/eurostat/index.html">eurostat</a>. This library has an informative web site with many tutorials. You can also use the eurostat data to visualize maps (possible report challenge).</p>
 </div>
-<div id="gapminder" class="section level3" number="9.1.3">
+<div id="gapminder" class="section level3" number="10.1.3">
 <h3>
-<span class="header-section-number">9.1.3</span> gapminder<a class="anchor" aria-label="anchor" href="#gapminder"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.1.3</span> gapminder<a class="anchor" aria-label="anchor" href="#gapminder"><i class="fas fa-link"></i></a>
 </h3>
 <p>You already worked with an excerpt of data by <a href="https://www.gapminder.org">gapminder</a>. The complete data set contains much more. You can download more data <a href="https://www.gapminder.org/data/">here</a>. gapminder organises their data in a so-called DDF Format (data description format) as <em>tidy</em> .csv files. A possible report challenge could be to understand this format. A complete data set is availagle via GitHub <a href="https://github.com/open-numbers/ddf--gapminder--systema_globalis">here</a>.</p>
 </div>
-<div id="national-oceanic-and-atmospheric-administration-noaa" class="section level3" number="9.1.4">
+<div id="national-oceanic-and-atmospheric-administration-noaa" class="section level3" number="10.1.4">
 <h3>
-<span class="header-section-number">9.1.4</span> National Oceanic and Atmospheric Administration (NOAA)<a class="anchor" aria-label="anchor" href="#national-oceanic-and-atmospheric-administration-noaa"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.1.4</span> National Oceanic and Atmospheric Administration (NOAA)<a class="anchor" aria-label="anchor" href="#national-oceanic-and-atmospheric-administration-noaa"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://www.noaa.gov/">NOAA</a> offers data on oceans, climate and weather. You can download the data sets via the library <a href="https://docs.ropensci.org/rnoaa/">rnoaa</a>.</p>
 </div>
-<div id="more-data-sources" class="section level3" number="9.1.5">
+<div id="more-data-sources" class="section level3" number="10.1.5">
 <h3>
-<span class="header-section-number">9.1.5</span> More data sources<a class="anchor" aria-label="anchor" href="#more-data-sources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.1.5</span> More data sources<a class="anchor" aria-label="anchor" href="#more-data-sources"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li><a href="https://data.worldbank.org/">World Bank Open Data</a></li>
@@ -125,32 +130,32 @@ Use libraries for direct access to databases
 </ul>
 </div>
 </div>
-<div id="research-proposal" class="section level2" number="9.2">
+<div id="research-proposal" class="section level2" number="10.2">
 <h2>
-<span class="header-section-number">9.2</span> Research proposal<a class="anchor" aria-label="anchor" href="#research-proposal"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.2</span> Research proposal<a class="anchor" aria-label="anchor" href="#research-proposal"><i class="fas fa-link"></i></a>
 </h2>
 <p>Before you write your final report, you need to submit a research proposal on ILIAS. <strong>Be sure to upload before the deadline!</strong>. You will receive feedback on it. This should avoid any misunderstanding about your final report. Please use the template provided on ILIAS for the research proposal.</p>
 </div>
-<div id="structure-of-the-final-report" class="section level2" number="9.3">
+<div id="structure-of-the-final-report" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">9.3</span> Structure of the final report<a class="anchor" aria-label="anchor" href="#structure-of-the-final-report"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.3</span> Structure of the final report<a class="anchor" aria-label="anchor" href="#structure-of-the-final-report"><i class="fas fa-link"></i></a>
 </h2>
-<div id="sturcture-of-the-working-directory" class="section level3" number="9.3.1">
+<div id="sturcture-of-the-working-directory" class="section level3" number="10.3.1">
 <h3>
-<span class="header-section-number">9.3.1</span> Sturcture of the working directory<a class="anchor" aria-label="anchor" href="#sturcture-of-the-working-directory"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.3.1</span> Sturcture of the working directory<a class="anchor" aria-label="anchor" href="#sturcture-of-the-working-directory"><i class="fas fa-link"></i></a>
 </h3>
 <p>Create a new <strong>R project</strong> for your final report. You can find more about using projects <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">here</a>. A project helps you to structure your work properly.</p>
 <p>Inside your project folder, create a folder for data, figures and (help) scripts (if appropriate). Save your notebooks in the root directory of your project.</p>
 </div>
-<div id="download-and-save-data" class="section level3" number="9.3.2">
+<div id="download-and-save-data" class="section level3" number="10.3.2">
 <h3>
-<span class="header-section-number">9.3.2</span> Download and save data<a class="anchor" aria-label="anchor" href="#download-and-save-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.3.2</span> Download and save data<a class="anchor" aria-label="anchor" href="#download-and-save-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you want to use libraries to download data, then create a notebook for this task. Don’t download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis.</p>
 </div>
-<div id="structure-of-the-report" class="section level3" number="9.3.3">
+<div id="structure-of-the-report" class="section level3" number="10.3.3">
 <h3>
-<span class="header-section-number">9.3.3</span> Structure of the report<a class="anchor" aria-label="anchor" href="#structure-of-the-report"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B.3.3</span> Structure of the report<a class="anchor" aria-label="anchor" href="#structure-of-the-report"><i class="fas fa-link"></i></a>
 </h3>
 <p>Please structure your report as follows:</p>
 <ul>
@@ -176,27 +181,27 @@ Submit the compressed project to ILIAS before the deadline.
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></div>
-<div class="next"><a href="additional-exercises.html"><span class="header-section-number">10</span> Additional exercises</a></div>
+<div class="prev"><a href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></div>
+<div class="next"><a href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#daten-und-bericht"><span class="header-section-number">9</span> Data sources and final report</a></li>
+<li><a class="nav-link" href="#daten-und-bericht"><span class="header-section-number">B</span> Data sources and final report</a></li>
 <li>
-<a class="nav-link" href="#data-sources"><span class="header-section-number">9.1</span> Data sources</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#federal-statistical-office"><span class="header-section-number">9.1.1</span> Federal Statistical Office</a></li>
-<li><a class="nav-link" href="#eurostat"><span class="header-section-number">9.1.2</span> eurostat</a></li>
-<li><a class="nav-link" href="#gapminder"><span class="header-section-number">9.1.3</span> gapminder</a></li>
-<li><a class="nav-link" href="#national-oceanic-and-atmospheric-administration-noaa"><span class="header-section-number">9.1.4</span> National Oceanic and Atmospheric Administration (NOAA)</a></li>
-<li><a class="nav-link" href="#more-data-sources"><span class="header-section-number">9.1.5</span> More data sources</a></li>
+<a class="nav-link" href="#data-sources"><span class="header-section-number">B.1</span> Data sources</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#federal-statistical-office"><span class="header-section-number">B.1.1</span> Federal Statistical Office</a></li>
+<li><a class="nav-link" href="#eurostat"><span class="header-section-number">B.1.2</span> eurostat</a></li>
+<li><a class="nav-link" href="#gapminder"><span class="header-section-number">B.1.3</span> gapminder</a></li>
+<li><a class="nav-link" href="#national-oceanic-and-atmospheric-administration-noaa"><span class="header-section-number">B.1.4</span> National Oceanic and Atmospheric Administration (NOAA)</a></li>
+<li><a class="nav-link" href="#more-data-sources"><span class="header-section-number">B.1.5</span> More data sources</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#research-proposal"><span class="header-section-number">9.2</span> Research proposal</a></li>
+<li><a class="nav-link" href="#research-proposal"><span class="header-section-number">B.2</span> Research proposal</a></li>
 <li>
-<a class="nav-link" href="#structure-of-the-final-report"><span class="header-section-number">9.3</span> Structure of the final report</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sturcture-of-the-working-directory"><span class="header-section-number">9.3.1</span> Sturcture of the working directory</a></li>
-<li><a class="nav-link" href="#download-and-save-data"><span class="header-section-number">9.3.2</span> Download and save data</a></li>
-<li><a class="nav-link" href="#structure-of-the-report"><span class="header-section-number">9.3.3</span> Structure of the report</a></li>
+<a class="nav-link" href="#structure-of-the-final-report"><span class="header-section-number">B.3</span> Structure of the final report</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sturcture-of-the-working-directory"><span class="header-section-number">B.3.1</span> Sturcture of the working directory</a></li>
+<li><a class="nav-link" href="#download-and-save-data"><span class="header-section-number">B.3.2</span> Download and save data</a></li>
+<li><a class="nav-link" href="#structure-of-the-report"><span class="header-section-number">B.3.3</span> Structure of the report</a></li>
 </ul>
 </li>
 </ul>
@@ -216,7 +221,7 @@ Submit the compressed project to ILIAS before the deadline.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-01.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

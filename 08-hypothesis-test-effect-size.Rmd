@@ -142,7 +142,7 @@ Compared to a statistical test, the estimation of a so called **effect size** ca
 <ol class ="exercises">
 1. Does the travel time and the time spent in the library correlate in our getsmarter population? Do a statistical test based on a survey of 200 students. Formulate the null and alternative hypothesis before doing the test. Hint: `specify(travel_time ~ time_lib)` and `calculate(stat = "correlation")`. Consult the web site of the library `infer` (c.f. below).
 
-1. Does the travel time and the time spent in the library correlate in our getsmarter population? This time, esimate the correlation and calculate its confidence interval. Compare with the hypothesis test.
+1. Does the travel time and the time spent in the library correlate in our getsmarter population? This time, estimate the correlation and calculate its confidence interval. Compare with the hypothesis test.
 
 </ol>
 

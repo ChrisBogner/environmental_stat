@@ -20,14 +20,14 @@ knitr::kable(tab,
 ```
 
 
-- Generate a vector of Rob's expenses and assign it to the variable `expenses`. Use the function `c()` and use the numeric expenses only, not the days of the week.
-- How much did Rob spend during this week? Use the function `sum()`.
-- Rob seems to have spent the smallest amount on Tuesday. How much would he have spent if he paid that much every day of the week? Use the array notation with the square brackets.
+1. Generate a vector of Rob's expenses and assign it to the variable `expenses`. Use the function `c()` and use the numeric expenses only, not the days of the week.
+1. How much did Rob spend during this week? Use the function `sum()`.
+1. Rob seems to have spent the smallest amount on Tuesday. How much would he have spent if he paid that much every day of the week? Use the array notation with the square brackets.
 
 Unfortunately, Rob misspelled the amount on Tuesday. Actually, he invited his girl friend for lunch and paid 7.95 € instead of 2.90 €.
 
-- Correct Rob's typo.
-- How does the result change?
+4. Correct Rob's typo.
+5. How does the result change?
 
 ### Missing values {#rob2}
 
@@ -44,9 +44,9 @@ knitr::kable(tab,
                 position = "left")
 ```
 
-- How does NA change the calculated sum?
-- Read what happens when the data contains NAs by calling help on `sum`, i.e. type `?sum` in R console.
-- Correct your call to `sum()` accordingly.
+1. How does NA change the calculated sum?
+1. Read what happens when the data contains NAs by calling help on `sum`, i.e. type `?sum` in R console.
+1. Correct your call to `sum()` accordingly.
 
 ### Your very first plot {#firstplot}
 In particular in the beginning of learning R you should not forget why you are doing it. Because R is really beautiful and you want to analyse and learn from real data. 
@@ -68,29 +68,29 @@ ggplot(gapminder2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = 
   labs(title = 'Gapminder data for the year 2007')
 ```
 
-- What is the data set about. Use help like this `?gapminder`.
-- What do the colours represent?
-- What does the size of the circles represent?
-- How would you describe the relationship between the GDP per capita and Life expectancy?
+1. What is the data set about. Use help like this `?gapminder`.
+1. What do the colours represent?
+1. What does the size of the circles represent?
+1. How would you describe the relationship between the GDP per capita and Life expectancy?
 
 ## The big practical: importing, wrangling, summerizing and plotting 
 
 ### Temperature along the Dutch coast
 The file `r file.name("Temperatur.csv")` from the book by @Zuur2009a contains measurements of temperature, salinity and content of chlorophyll a at 31 locations along the Dutch coast. You can download the data set [here](https://highstat.com/index.php/a-beginner-s-guide-to-r). The data is provided by the Dutch institute RIKZ (monitoring program MWTL: Monitoring Waterstaatkundige Toestand des Lands), was measured between 1990 and 2005 between 0 and 4 times per month depending on the season. 
 
-- Read the file `r file.name("Temperatur.csv")` into R.
-- Convert the column `Date` to a proper date format. Use the library `lubridate`.
-- Calculate the number of measurements, mean and standard deviations of temperature per monitoring station. Hint: use `n()` inside `summarize()` to get the number of measurements.
-- Calculate the number of measurements, mean and standard deviations of temperature per month.
-- Plot the mean monthly temperature as a line and add the standard deviation as a band around it.
-- Label the axis appropriately.
-- Save you graph as a pdf file.
+1. Read the file `r file.name("Temperatur.csv")` into R.
+1. Convert the column `Date` to a proper date format. Use the library `lubridate`.
+1. Calculate the number of measurements, mean and standard deviations of temperature per monitoring station. Hint: use `n()` inside `summarize()` to get the number of measurements.
+1. Calculate the number of measurements, mean and standard deviations of temperature per month.
+1. Plot the mean monthly temperature as a line and add the standard deviation as a band around it.
+1. Label the axis appropriately.
+1. Save you graph as a pdf file.
 
 
 ### Temperature along the Dutch coast, revisited
-- Calculate the monthly means and standard deviations per monitoring station. Hint `group_by(Station, Month)`.
-- Plot the means with an error band in different plots. Hint: use `facet_wrap())`.
-- Save you graph as a pdf file.
+1. Calculate the monthly means and standard deviations per monitoring station. Hint `group_by(Station, Month)`.
+1. Plot the means with an error band in different plots. Hint: use `facet_wrap())`.
+1. Save you graph as a pdf file.
 
 
 ### Excel data turns tidy
@@ -98,10 +98,10 @@ We will import and tidy World Development Indicators data downloaded from the [W
 
 This exercise will show you how to load excel data directly without converting it to .csv file. The format of the data is a typical non-tidy one and you will wrangle it to a tidy `tibble`. The file is called `r file.name('Data_Extract_From_World_Development_Indicators.xlsx')`.
 
-- First, read the help pages of the function `read_xlsx()` in the library `readxl`. Pay attention to how you can specify the name of the excel sheet you want to read into R.
-- Open the excel sheet and look through the data carefully. How are NAs coded? Which data sheet do you need to read?
-- Read the excel file into R. Call it `wdi`.
-- This data set is not tidy. In particular, the year is coded as column name. Those column names contain the year twice, once as a number and once as [YR NUMBER]. We rename the columns first.
+1. The goal of this exercise is to learn how to read data from an excel file using `tidyverse` functions. We will use the library `readxl` and the function `read_xlsx()` for reading such files. Read the help pages of `read_xlsx()`, find and set the parameter for reading a particular table sheet correctly.
+1. Open the excel sheet and look through the data carefully. How are NAs coded? Which data sheet do you need to read?
+1. Read the excel file into R. Call it `wdi`.
+1. This data set is not tidy. In particular, the year is coded as column name. Those column names contain the year twice, once as a number and once as [YR NUMBER]. We rename the columns first.
 ```{r, eval = F}
 wdi <- wdi %>% 
   rename_with(.fn = function(x) str_sub(x, start = 1, end = 4), .cols = starts_with('20'))
@@ -109,7 +109,7 @@ wdi <- wdi %>%
 
 What does this code mean? Read the help pages for functions `rename_with()`, `str_sub()` and `starts_with()`.
 
-- Pivot the data set to a tidy format: variables in columns and measurements in rows. Use `pivot_longer`.
+5. Pivot the data set to a tidy format: variables in columns and measurements in rows. Use `pivot_longer`.
 ```{r, eval = F}
 wdi <- wdi %>%
   pivot_longer(names_to = 'year', values_to = 'indicator_value', cols = starts_with('20')) %>% 
@@ -121,4 +121,35 @@ wdi
   What does this code mean? Read the help pages for functions `pivot_longer()` and `as.numeric()`.
   Why is it necessary to convert `year` with `as.numeric()`?
 
-- Filter for the indicator `GDP (current US$)` and plot the data as time series. Hint: You can also filter for the indicator's code; look it up in the excel file. Label the axis appropriately.
+6. Filter for the indicator `GDP (current US$)` and plot the data as time series. Hint: You can also filter for the indicator's code; look it up in the excel file. Label the axis appropriately.
+
+## The big practical: statistical inference
+### Species richness in grasslands
+You will work with grassland species monitoring data from the Yellowstone National Park provided by @Zuur2009a and @Sikkink2007. You can download the data set [here](https://highstat.com/index.php/a-beginner-s-guide-to-r). The researchers monitored the changes in the grassland communities over time and related them to environmental factors. Biodiversity is expressed as the number of different species per site (variable `R`). Approximately 90 species were identified in 8 transects in monitoring campaigns repeated every 4 to 10 years, resulting in 58 observations. The data is saved in the file `r file.name("Vegetation2.xls")`.   
+
+1. Read the data and explore its structure. Describe the type of variables. Does the type correspond to your expectation for the respective variable? Remember to set the name of the table sheet you want to read in `read_xls()`
+
+1. Short explorative data analysis: calculate the number of measurements, the mean and the standard deviations of species number `R` per transect.
+
+1. Plot the species number versus the variable `BARESOIL` (proportion of bare soil). Colour the dots by transect. Hint: convert the transect `as_factor()`.
+
+1. Add a smoothing line without a confidence band (`geom_smooth(se = FALSE)`) through all points independently of the transect. You might want to consult [Section 4.2]((https://ggplot2-book.org/collective-geoms.html)) in the book ggplot2 [@Wickham2020]. Hint: set the colour aes in `geom_point()` instead of in `ggplot()`. 
+
+1. Add labels to your graph and assign it to an object.
+
+1. Plot the species number as a time series by transect. Add both, points and lines. The size of the points should reflect the proportion of bare soil. You might want to consult [Section 12.1]((https://ggplot2-book.org/scale-other.html?q=size#size)) in the book ggplot2 [@Wickham2020]. Think about where to set the aesthetic `size` in order to scale the points only.
+
+1. Add labels to your graph and assign it to an object.
+
+1. Put both graphs side-by-side and save the as a pdf (`ggsavce()`).
+
+1. Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in `infer`.
+
+1. If you calculate the 90% confidence interval instead of the 95% confidence interval, does the confidence interval increase or decrease? Why?
+
+### Soil comaction {#soil-compaction}
+Heavy agricultural machines could compact the soil. In a randomized field trial, plots (variable `plots`) on a homogeneous agricultural field were assigned randomly either to the control (`control`) or to treatment where a heavy agricultural machine was used (`compacted`). Bulk density in [g/cm³] (mass of dry soil divided by soil volume) was measured on every plot. It is a parameter for soil structure and can help to spot soil compaction. The data is stored in`r file.name("bd_compaction.csv")`.
+
+1. Read the data and do a short explorative data analysis.
+1. Did the bulk density increase due to heavy machinery or could the difference be due to chance? Use the framework in `infer`.
+1. Calculate the effect size (difference in means) and its 95% confidence interval.

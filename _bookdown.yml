@@ -7,8 +7,11 @@ rmd_files: ["index.Rmd", "01-intro.Rmd",
 "06-sampling.Rmd",
 "07-bootstrap.Rmd",
 "08-hypothesis-test-effect-size.Rmd",
+"17-statistical-background.Rmd",
 "18-data-and-report.Rmd",
-"19-tasks.Rmd", "20-biblio.Rmd"]
+"19-tasks.Rmd",
+"20-faq.Rmd",
+"21-biblio.Rmd"]
 before_chapter_script: ["helper_functions.R"]
 delete_merged_file: true
 output_dir: "docs"

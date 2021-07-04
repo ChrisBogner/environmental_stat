@@ -1,0 +1,109 @@
+# (APPENDIX) Appendix {-}
+# Statistics refresher {#stat-background}
+
+```{block, type='rmdoutcomes'}
+- Refresh basic statistics
+```
+
+This chapter is a short refresher on the basic statistics and does not replace a statistics book. I will use the penguins data set to calculate the examples.
+
+```{r, echo = F, fig.cap = 'Artwork by `@allison_horst`', fig.width = 6, out.width = "100%"}
+knitr::include_graphics('figures/lter_penguins.png')
+```
+
+```{r, warning = F, message = F}
+library(palmerpenguins)
+library(tidyverse)
+```
+
+
+## Descriptive statistics
+### Mean
+The mean is one of the common summary statistics you can calculate for your data. To calculate the mean you sum all the values in your data set and divide the sum by the number of values.
+
+$$\bar{x} = \sum_{i = 1}^{i = n} \frac{x_i}{n}$$
+where:
+
+- $\bar{x}$: mean value of data set $x$
+- $i$: index running from 1 to $n$, the number of your data (sample size)
+- $x_i$: single data points in the data sets $x$
+
+A simple example first, before we turn to the penguins. Let's calculate the mean of the data set `a` containing the values 2, 4.3, 5 and 10 by hand and compare it to the values obtained with the function `mean()`.
+```{r}
+a <- c(2, 4.3, 5, 10)
+
+hand_mean = (2 + 4.3 + 5 + 10)/4
+r_mean <- mean(a)
+
+hand_mean
+r_mean
+```
+As expected, the values are identical. Let's now calculate the mean bill length of the penguins.
+
+```{r}
+mean(x = penguins$bill_length_mm)
+```
+The function `mean()` returns NA if there are missing data in the data set. Remember to exclude NAs to get a meaningful result.
+```{r}
+mean(x = penguins$bill_length_mm, na.rm = TRUE)
+```
+
+
+### Standard deviation
+The standard deviation is a measure of variability in your data. It shows how far on average do the data deviation from its mean value. Deviation is here the squared difference between a data point and the mean of the data. The standard deviation is the square root of the variance and is defined as:
+
+$$s = \sqrt{\frac{1}{n-1} \sum_{i = 1}^{i = n} (x_i - \bar{x})^2}$$
+where:
+
+- $\bar{x}$: mean value of data set $x$
+- $i$: index running from 1 to $n$, the number of your data (sample size)
+- $x_i$: single data points in the data sets $x$
+
+
+How large is the standard deviation in the data set `a`? Again, we compare the results of by-hand calculation and the output of the function `sd()`.
+```{r}
+sd_hand <- sqrt(((2 - r_mean)^2 + (4.3 - r_mean)^2 + (5 - r_mean)^2 + (10 - r_mean)^2)/(4 - 1))
+
+r_sd <- sd(a)
+
+sd_hand
+r_sd
+```
+Again, identical `r emo::ji('smile')`. How large is the standard deviation of penguins' bill lengths? Don't forget to exclude the missing values!
+```{r}
+mean(x = penguins$bill_length_mm, na.rm = TRUE)
+```
+
+
+## Measures of association
+### Linear correlation coefficent
+Aka Pearson correlation coefficient and Pearson product-moment correlation coefficient measures the linear association between two numeric variables:
+
+$$ r = \frac{\sum_{i = 1}^{i = n} (x_i - \bar{x})(y_i - \bar{y})}{ \sqrt{\sum_{i = 1}^{i = n} (x_i - \bar{x})^2} \sqrt{\sum_{i = 1}^{i = n} (y_i - \bar{y})^2}}$$
+where:
+
+- $\bar{x}$ and $\bar{x}$: mean values of data set $x$ and $y$, respectively
+- $i$: index running from 1 to $n$, the number of your data (sample size)
+- $x_i$ and $y_i$: single data points in the data sets $x$ and $y$, respectively
+
+The Pearson correlation coefficients varies between -1 (perfect negative correlation) and 1 (perfect positive correlation). A value around zero shows no **linear** correlation. However, a different kind of assiciation might exist in the data. Remember to always plot your data!
+
+How large is the correlation coefficient between the bill length and the bill depth for the species Adélie?
+```{r, echo = F, fig.cap = 'Artwork by `@allison_horst`', fig.width = 6, out.width = "100%"}
+knitr::include_graphics('figures/culmen_depth.png')
+```
+
+```{r}
+adelie <- penguins %>% 
+  filter(species == 'Adelie')
+
+cor(adelie$bill_length_mm, adelie$bill_depth_mm, method = 'pearson', use = 'pairwise.complete.obs')
+```
+
+We need to distinguish between species here because the correlations differ between them.
+```{r, out.width = '90%', warning = F, message = F}
+ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, col = species)) +
+  geom_point() +
+  geom_smooth(se = FALSE, method = lm)
+```
+

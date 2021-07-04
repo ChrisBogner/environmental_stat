@@ -1,3 +1,4 @@
+# (PART) Part II: Statistical inference {-}
 # Sampling and variability {#sampling}
 
 ```{block, type='rmdoutcomes'}
@@ -7,7 +8,7 @@
 - Calculate the standard error
 ```
 
-With this chapter we start our journey into inferential statistics. Inferential statistics or simply **inference** wants to go beyond the analysis of single data sets. It wants to know whether patterns that we have observed in a single data set can be generalized to a larger context. Often, this context is called **population**. And such generalization techniques are nothing else than **estimation population parameters**. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a **sample**, and try to estimate from their mean income, the mean income of the whole group.
+With this chapter we start our journey into statistical inference. Statistical inference or simply **inference** wants to go beyond the analysis of single data sets. It wants to know whether patterns that we have observed in a single data set can be generalized to a larger context. Often, this context is called **population**. And such generalization techniques are nothing else than **estimation population parameters**. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a **sample**, and try to estimate from their mean income, the mean income of the whole group.
 
 Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (**control group**) and some at increased temperature (**treatment group**). You measure their growth and want to know **whether the difference observed is due to chance** or whether this is a real difference, an **effect** of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.
 

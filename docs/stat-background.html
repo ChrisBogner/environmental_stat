@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>A Statistics refresher | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Summer term 2021">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2021</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="" href="introduction-to-r-and-rstudio-server.html"><span class="header-section-number">1</span> Introduction to R and RStudio Server</a></li>
+<li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="active" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="stat-background" class="section level1" number="9">
+<h1>
+<span class="header-section-number">A</span> Statistics refresher<a class="anchor" aria-label="anchor" href="#stat-background"><i class="fas fa-link"></i></a>
+</h1>
+<div class="rmdoutcomes">
+<ul>
+<li>
+Refresh basic statistics
+</li>
+</ul>
+</div>
+<p>This chapter is a short refresher on the basic statistics and does not replace a statistics book. I will use the penguins data set to calculate the examples.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-128"></span>
+<img src="figures/lter_penguins.png" alt="Artwork by `@allison_horst`" width="100%"><p class="caption">
+Figure A.1: Artwork by <code>@allison_horst</code>
+</p>
+</div>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<div id="descriptive-statistics" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">A.1</span> Descriptive statistics<a class="anchor" aria-label="anchor" href="#descriptive-statistics"><i class="fas fa-link"></i></a>
+</h2>
+<div id="mean" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">A.1.1</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
+</h3>
+<p>The mean is one of the common summary statistics you can calculate for your data. To calculate the mean you sum all the values in your data set and divide the sum by the number of values.</p>
+<p><span class="math display">\[\bar{x} = \sum_{i = 1}^{i = n} \frac{x_i}{n}\]</span>
+where:</p>
+<ul>
+<li>
+<span class="math inline">\(\bar{x}\)</span>: mean value of data set <span class="math inline">\(x\)</span>
+</li>
+<li>
+<span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data (sample size)</li>
+<li>
+<span class="math inline">\(x_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span>
+</li>
+</ul>
+<p>A simple example first, before we turn to the penguins. Let’s calculate the mean of the data set <code>a</code> containing the values 2, 4.3, 5 and 10 by hand and compare it to the values obtained with the function <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>.</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4.3</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>
+
+<span class="va">hand_mean</span> <span class="op">=</span> <span class="op">(</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">4.3</span> <span class="op">+</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">10</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span>
+<span class="va">r_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>
+
+<span class="va">hand_mean</span></code></pre></div>
+<pre><code>## [1] 5.325</code></pre>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">r_mean</span></code></pre></div>
+<pre><code>## [1] 5.325</code></pre>
+<p>As expected, the values are identical. Let’s now calculate the mean bill length of the penguins.</p>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>The function <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> returns NA if there are missing data in the data set. Remember to exclude NAs to get a meaningful result.</p>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 43.92193</code></pre>
+</div>
+<div id="standard-deviation" class="section level3" number="9.1.2">
+<h3>
+<span class="header-section-number">A.1.2</span> Standard deviation<a class="anchor" aria-label="anchor" href="#standard-deviation"><i class="fas fa-link"></i></a>
+</h3>
+<p>The standard deviation is a measure of variability in your data. It shows how far on average do the data deviation from its mean value. Deviation is here the squared difference between a data point and the mean of the data. The standard deviation is the square root of the variance and is defined as:</p>
+<p><span class="math display">\[s = \sqrt{\frac{1}{n-1} \sum_{i = 1}^{i = n} (x_i - \bar{x})^2}\]</span>
+where:</p>
+<ul>
+<li>
+<span class="math inline">\(\bar{x}\)</span>: mean value of data set <span class="math inline">\(x\)</span>
+</li>
+<li>
+<span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data (sample size)</li>
+<li>
+<span class="math inline">\(x_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span>
+</li>
+</ul>
+<p>How large is the standard deviation in the data set <code>a</code>? Again, we compare the results of by-hand calculation and the output of the function <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>.</p>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sd_hand</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">4.3</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">5</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">10</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">4</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">r_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>
+
+<span class="va">sd_hand</span></code></pre></div>
+<pre><code>## [1] 3.369842</code></pre>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">r_sd</span></code></pre></div>
+<pre><code>## [1] 3.369842</code></pre>
+<p>Again, identical 😄. How large is the standard deviation of penguins’ bill lengths? Don’t forget to exclude the missing values!</p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 43.92193</code></pre>
+</div>
+</div>
+<div id="measures-of-association" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">A.2</span> Measures of association<a class="anchor" aria-label="anchor" href="#measures-of-association"><i class="fas fa-link"></i></a>
+</h2>
+<div id="linear-correlation-coefficent" class="section level3" number="9.2.1">
+<h3>
+<span class="header-section-number">A.2.1</span> Linear correlation coefficent<a class="anchor" aria-label="anchor" href="#linear-correlation-coefficent"><i class="fas fa-link"></i></a>
+</h3>
+<p>Aka Pearson correlation coefficient and Pearson product-moment correlation coefficient measures the linear association between two numeric variables:</p>
+<p><span class="math display">\[ r = \frac{\sum_{i = 1}^{i = n} (x_i - \bar{x})(y_i - \bar{y})}{ \sqrt{\sum_{i = 1}^{i = n} (x_i - \bar{x})^2} \sqrt{\sum_{i = 1}^{i = n} (y_i - \bar{y})^2}}\]</span>
+where:</p>
+<ul>
+<li>
+<span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{x}\)</span>: mean values of data set <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, respectively</li>
+<li>
+<span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data (sample size)</li>
+<li>
+<span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, respectively</li>
+</ul>
+<p>The Pearson correlation coefficients varies between -1 (perfect negative correlation) and 1 (perfect positive correlation). A value around zero shows no <strong>linear</strong> correlation. However, a different kind of assiciation might exist in the data. Remember to always plot your data!</p>
+How large is the correlation coefficient between the bill length and the bill depth for the species Adélie?
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-135"></span>
+<img src="figures/culmen_depth.png" alt="Artwork by `@allison_horst`" width="100%"><p class="caption">
+Figure A.2: Artwork by <code>@allison_horst</code>
+</p>
+</div>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">adelie</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">'Adelie'</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">adelie</span><span class="op">$</span><span class="va">bill_length_mm</span>, <span class="va">adelie</span><span class="op">$</span><span class="va">bill_depth_mm</span>, method <span class="op">=</span> <span class="st">'pearson'</span>, use <span class="op">=</span> <span class="st">'pairwise.complete.obs'</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.3914917</code></pre>
+<p>We need to distinguish between species here because the correlations differ between them.</p>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">bill_depth_mm</span>, col <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="va">lm</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-137-1.png" width="90%"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></div>
+<div class="next"><a href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#stat-background"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li>
+<a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">A.1</span> Descriptive statistics</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mean"><span class="header-section-number">A.1.1</span> Mean</a></li>
+<li><a class="nav-link" href="#standard-deviation"><span class="header-section-number">A.1.2</span> Standard deviation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#measures-of-association"><span class="header-section-number">A.2</span> Measures of association</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#linear-correlation-coefficent"><span class="header-section-number">A.2.1</span> Linear correlation coefficent</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/17-statistical-background.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/17-statistical-background.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-04.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+</html>

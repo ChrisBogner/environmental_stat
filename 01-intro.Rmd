@@ -1,3 +1,4 @@
+# (PART) Part I: Explore data {-}
 # Introduction to R and RStudio Server
 
 ```{block, type='rmdoutcomes'}

@@ -13,8 +13,10 @@ fig:sampling-world
 fig:sampling-bootstrap
 fig:ht
 fig:one-test
-tab:unnamed-chunk-130
-tab:unnamed-chunk-131
+fig:unnamed-chunk-128
+fig:unnamed-chunk-135
+tab:unnamed-chunk-142
+tab:unnamed-chunk-143
 introduction-to-r-and-rstudio-server
 opening-rstudio-server-pro
 the-rstudio-interface
@@ -90,6 +92,12 @@ practice-on-your-own-7
 reading-assignment-6
 additional-resources
 turning-in-your-work-6
+stat-background
+descriptive-statistics
+mean
+standard-deviation
+measures-of-association
+linear-correlation-coefficent
 daten-und-bericht
 data-sources
 federal-statistical-office
@@ -111,3 +119,7 @@ the-big-practical-importing-wrangling-summerizing-and-plotting
 temperature-along-the-dutch-coast
 temperature-along-the-dutch-coast-revisited
 excel-data-turns-tidy
+the-big-practical-statistical-inference
+species-richness-in-grasslands
+soil-compaction
+faq
