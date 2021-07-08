@@ -141,13 +141,13 @@ You will work with grassland species monitoring data from the Yellowstone Nation
 
 1. Add labels to your graph and assign it to an object.
 
-1. Put both graphs side-by-side and save the as a pdf (`ggsavce()`).
+1. Put both graphs side-by-side and save the as a pdf (`ggsave()`).
 
 1. Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in `infer`.
 
 1. If you calculate the 90% confidence interval instead of the 95% confidence interval, does the confidence interval increase or decrease? Why?
 
-### Soil comaction {#soil-compaction}
+### Soil compaction {#soil-compaction}
 Heavy agricultural machines could compact the soil. In a randomized field trial, plots (variable `plots`) on a homogeneous agricultural field were assigned randomly either to the control (`control`) or to treatment where a heavy agricultural machine was used (`compacted`). Bulk density in [g/cm³] (mass of dry soil divided by soil volume) was measured on every plot. It is a parameter for soil structure and can help to spot soil compaction. The data is stored in`r file.name("bd_compaction.csv")`.
 
 1. Read the data and do a short explorative data analysis.

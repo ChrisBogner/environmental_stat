@@ -317,14 +317,14 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <li><p>Add labels to your graph and assign it to an object.</p></li>
 <li><p>Plot the species number as a time series by transect. Add both, points and lines. The size of the points should reflect the proportion of bare soil. You might want to consult <a href="(https://ggplot2-book.org/scale-other.html?q=size#size)">Section 12.1</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020" role="doc-biblioref">Wickham 2020</a>)</span>. Think about where to set the aesthetic <code>size</code> in order to scale the points only.</p></li>
 <li><p>Add labels to your graph and assign it to an object.</p></li>
-<li><p>Put both graphs side-by-side and save the as a pdf (<code>ggsavce()</code>).</p></li>
+<li><p>Put both graphs side-by-side and save the as a pdf (<code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>).</p></li>
 <li><p>Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in <code>infer</code>.</p></li>
 <li><p>If you calculate the 90% confidence interval instead of the 95% confidence interval, does the confidence interval increase or decrease? Why?</p></li>
 </ol>
 </div>
 <div id="soil-compaction" class="section level3" number="11.3.2">
 <h3>
-<span class="header-section-number">C.3.2</span> Soil comaction<a class="anchor" aria-label="anchor" href="#soil-compaction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.3.2</span> Soil compaction<a class="anchor" aria-label="anchor" href="#soil-compaction"><i class="fas fa-link"></i></a>
 </h3>
 <p>Heavy agricultural machines could compact the soil. In a randomized field trial, plots (variable <code>plots</code>) on a homogeneous agricultural field were assigned randomly either to the control (<code>control</code>) or to treatment where a heavy agricultural machine was used (<code>compacted</code>). Bulk density in [g/cm³] (mass of dry soil divided by soil volume) was measured on every plot. It is a parameter for soil structure and can help to spot soil compaction. The data is stored in<span style="font-family: sans-serif; font-size: 12pt">bd_compaction.csv</span>.</p>
 <ol style="list-style-type: decimal">
@@ -359,7 +359,7 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <li>
 <a class="nav-link" href="#the-big-practical-statistical-inference"><span class="header-section-number">C.3</span> The big practical: statistical inference</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#species-richness-in-grasslands"><span class="header-section-number">C.3.1</span> Species richness in grasslands</a></li>
-<li><a class="nav-link" href="#soil-compaction"><span class="header-section-number">C.3.2</span> Soil comaction</a></li>
+<li><a class="nav-link" href="#soil-compaction"><span class="header-section-number">C.3.2</span> Soil compaction</a></li>
 </ul>
 </li>
 </ul>
