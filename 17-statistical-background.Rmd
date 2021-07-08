@@ -82,7 +82,7 @@ Aka Pearson correlation coefficient and Pearson product-moment correlation coeff
 $$ r = \frac{\sum_{i = 1}^{i = n} (x_i - \bar{x})(y_i - \bar{y})}{ \sqrt{\sum_{i = 1}^{i = n} (x_i - \bar{x})^2} \sqrt{\sum_{i = 1}^{i = n} (y_i - \bar{y})^2}}$$
 where:
 
-- $\bar{x}$ and $\bar{x}$: mean values of data set $x$ and $y$, respectively
+- $\bar{x}$ and $\bar{y}$: mean values of data set $x$ and $y$, respectively
 - $i$: index running from 1 to $n$, the number of your data (sample size)
 - $x_i$ and $y_i$: single data points in the data sets $x$ and $y$, respectively
 
