@@ -141,7 +141,7 @@ You will work with grassland species monitoring data from the Yellowstone Nation
 
 1. Add labels to your graph and assign it to an object.
 
-1. Put both graphs side-by-side and save the as a pdf (`ggsave()`).
+1. Put both graphs side-by-side and save them as a pdf (`ggsave()`).
 
 1. Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in `infer`.
 
