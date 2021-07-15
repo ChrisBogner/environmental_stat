@@ -147,6 +147,25 @@ pre code {
     transform: translate(0, -50%);
     font-size: 45px;
  }
+ 
+.rmddef {
+  padding: 1em 1em 0.5em 5em;
+  background: #ffe1b4;
+  position:relative;
+  border-radius: 10px;
+  margin-bottom: 24px;
+}
+
+.rmddef:before {
+    content: "\f13d";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+ }
 
 
 .exercises {

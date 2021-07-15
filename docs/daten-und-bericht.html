@@ -45,6 +45,8 @@
 <li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
 <li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
 <li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
 <li><a class="active" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
@@ -58,7 +60,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="daten-und-bericht" class="section level1" number="10">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="daten-und-bericht" class="section level1" number="11">
 <h1>
 <span class="header-section-number">B</span> Data sources and final report<a class="anchor" aria-label="anchor" href="#daten-und-bericht"><i class="fas fa-link"></i></a>
 </h1>
@@ -72,37 +74,37 @@ Use libraries for direct access to databases
 </li>
 </ul>
 </div>
-<div id="data-sources" class="section level2" number="10.1">
+<div id="data-sources" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">B.1</span> Data sources<a class="anchor" aria-label="anchor" href="#data-sources"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this chapter, I will introduce some interesting data sources (databases) that you can use for your final report. I offer technical assistance for the package <code>eurostat</code>. You can discover other packages on your own (this could be a possible challenge for the final report, see below 😄).</p>
-<div id="federal-statistical-office" class="section level3" number="10.1.1">
+<div id="federal-statistical-office" class="section level3" number="11.1.1">
 <h3>
 <span class="header-section-number">B.1.1</span> Federal Statistical Office<a class="anchor" aria-label="anchor" href="#federal-statistical-office"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <a href="https://www.destatis.de/EN/Home/_node.html">Federal Statistical Office</a> offers data about Germany in different areas through their database
 <a href="https://www-genesis.destatis.de/genesis/online?operation=previous&amp;levelindex=&amp;step=&amp;titel=&amp;levelid=&amp;acceptscookies=false">GENESIS</a>. You can navigate to the data sets and download them. Pay attention to select the format <strong>flat</strong> when downloading to get a <em>tidy</em> data set.</p>
 </div>
-<div id="eurostat" class="section level3" number="10.1.2">
+<div id="eurostat" class="section level3" number="11.1.2">
 <h3>
 <span class="header-section-number">B.1.2</span> eurostat<a class="anchor" aria-label="anchor" href="#eurostat"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://ec.europa.eu/eurostat">eurostat</a> is the statistical office of the European Union. You will find many different data sets about Europe there. However, you don’t need to download them by hand, but can use the dedicated library <a href="http://ropengov.github.io/eurostat/index.html">eurostat</a>. This library has an informative web site with many tutorials. You can also use the eurostat data to visualize maps (possible report challenge).</p>
 </div>
-<div id="gapminder" class="section level3" number="10.1.3">
+<div id="gapminder" class="section level3" number="11.1.3">
 <h3>
 <span class="header-section-number">B.1.3</span> gapminder<a class="anchor" aria-label="anchor" href="#gapminder"><i class="fas fa-link"></i></a>
 </h3>
 <p>You already worked with an excerpt of data by <a href="https://www.gapminder.org">gapminder</a>. The complete data set contains much more. You can download more data <a href="https://www.gapminder.org/data/">here</a>. gapminder organises their data in a so-called DDF Format (data description format) as <em>tidy</em> .csv files. A possible report challenge could be to understand this format. A complete data set is availagle via GitHub <a href="https://github.com/open-numbers/ddf--gapminder--systema_globalis">here</a>.</p>
 </div>
-<div id="national-oceanic-and-atmospheric-administration-noaa" class="section level3" number="10.1.4">
+<div id="national-oceanic-and-atmospheric-administration-noaa" class="section level3" number="11.1.4">
 <h3>
 <span class="header-section-number">B.1.4</span> National Oceanic and Atmospheric Administration (NOAA)<a class="anchor" aria-label="anchor" href="#national-oceanic-and-atmospheric-administration-noaa"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://www.noaa.gov/">NOAA</a> offers data on oceans, climate and weather. You can download the data sets via the library <a href="https://docs.ropensci.org/rnoaa/">rnoaa</a>.</p>
 </div>
-<div id="more-data-sources" class="section level3" number="10.1.5">
+<div id="more-data-sources" class="section level3" number="11.1.5">
 <h3>
 <span class="header-section-number">B.1.5</span> More data sources<a class="anchor" aria-label="anchor" href="#more-data-sources"><i class="fas fa-link"></i></a>
 </h3>
@@ -130,30 +132,30 @@ Use libraries for direct access to databases
 </ul>
 </div>
 </div>
-<div id="research-proposal" class="section level2" number="10.2">
+<div id="research-proposal" class="section level2" number="11.2">
 <h2>
 <span class="header-section-number">B.2</span> Research proposal<a class="anchor" aria-label="anchor" href="#research-proposal"><i class="fas fa-link"></i></a>
 </h2>
 <p>Before you write your final report, you need to submit a research proposal on ILIAS. <strong>Be sure to upload before the deadline!</strong>. You will receive feedback on it. This should avoid any misunderstanding about your final report. Please use the template provided on ILIAS for the research proposal.</p>
 </div>
-<div id="structure-of-the-final-report" class="section level2" number="10.3">
+<div id="structure-of-the-final-report" class="section level2" number="11.3">
 <h2>
 <span class="header-section-number">B.3</span> Structure of the final report<a class="anchor" aria-label="anchor" href="#structure-of-the-final-report"><i class="fas fa-link"></i></a>
 </h2>
-<div id="sturcture-of-the-working-directory" class="section level3" number="10.3.1">
+<div id="sturcture-of-the-working-directory" class="section level3" number="11.3.1">
 <h3>
 <span class="header-section-number">B.3.1</span> Sturcture of the working directory<a class="anchor" aria-label="anchor" href="#sturcture-of-the-working-directory"><i class="fas fa-link"></i></a>
 </h3>
 <p>Create a new <strong>R project</strong> for your final report. You can find more about using projects <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">here</a>. A project helps you to structure your work properly.</p>
 <p>Inside your project folder, create a folder for data, figures and (help) scripts (if appropriate). Save your notebooks in the root directory of your project.</p>
 </div>
-<div id="download-and-save-data" class="section level3" number="10.3.2">
+<div id="download-and-save-data" class="section level3" number="11.3.2">
 <h3>
 <span class="header-section-number">B.3.2</span> Download and save data<a class="anchor" aria-label="anchor" href="#download-and-save-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you want to use libraries to download data, then create a notebook for this task. Don’t download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis.</p>
 </div>
-<div id="structure-of-the-report" class="section level3" number="10.3.3">
+<div id="structure-of-the-report" class="section level3" number="11.3.3">
 <h3>
 <span class="header-section-number">B.3.3</span> Structure of the report<a class="anchor" aria-label="anchor" href="#structure-of-the-report"><i class="fas fa-link"></i></a>
 </h3>
@@ -221,7 +223,7 @@ Submit the compressed project to ILIAS before the deadline.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-08.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

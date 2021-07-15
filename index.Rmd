@@ -75,6 +75,11 @@ This is important
 ```
 
 
+```{block, type='rmddef'}
+This is a definition
+```
+
+
 ```{block, type='exercises'}
 1. This is an exercise inside a chapter.
 ```
