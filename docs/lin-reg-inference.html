@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>10 Inference in linear regression | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Summer term 2021">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2021</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="" href="introduction-to-r-and-rstudio-server.html"><span class="header-section-number">1</span> Introduction to R and RStudio Server</a></li>
+<li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="active" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="lin-reg-inference" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> Inference in linear regression<a class="anchor" aria-label="anchor" href="#lin-reg-inference"><i class="fas fa-link"></i></a>
+</h1>
+<div class="rmdoutcomes">
+<ul>
+<li>
+Calculate confidence intervals for model parameters
+</li>
+<li>
+Interpret the summary of a linear regression model
+</li>
+<li>
+Use bootstrap for confidence intervals
+</li>
+</ul>
+</div>
+<p>In the last chapter, we learned how to fit a simple linear model. Remember the assumptions of the model:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>L</strong>inear relationship between variables</li>
+<li>
+<strong>I</strong>ndependence of residuals</li>
+<li>
+<strong>N</strong>ormal residuals</li>
+<li>
+<strong>E</strong>quality of variance (called homoscedasticity) and a mean of zero in residuals</li>
+</ol>
+<p>In this chapter, we will see how to judge the quality of our model. And we will learn what to do in case the normality and homoscedasticity assumptions are violated.</p>
+<div id="how-good-is-the-model" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> How good is the model?<a class="anchor" aria-label="anchor" href="#how-good-is-the-model"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/moderndive/moderndive/issues">moderndive</a></span><span class="op">)</span></code></pre></div>
+<p>The data that we model have a certain variability that we quantify by e.g. its standard deviation. To judge how good a model captures the relationship between the dependent variable and the predictors, we could quantify how much variability of the dependent variable can be explained by the model. Thus, we split the variability of the dependent variable as:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathit{SQT} &amp;= \mathit{SQE} + \mathit{SQR}\\
+\sum^{n}_{i = 1} (y_i-\bar{y})^2 &amp;= \sum^{n}_{i=1} (\hat{y}_i - \bar{y})^2 + \sum^{n}_{i=1} (y_i - \hat{y}_i)^2\\
+\end{align*}
+\]</span></p>
+<p>where <span class="math inline">\(y_i\)</span>: observed data, <span class="math inline">\(\bar{y}\)</span>: mean, <span class="math inline">\(\hat{y}_i\)</span>: fitted values</p>
+<ul>
+<li>
+<span class="math inline">\(\mathit{SQT}\)</span> Sum of squares total: variability or variance of the data</li>
+<li>
+<span class="math inline">\(\mathit{SQE}\)</span> Sum of squares explained: variability explained by the model</li>
+<li>
+<span class="math inline">\(\mathit{SQR}\)</span> Sum of squares residual: variability not explained by the model</li>
+</ul>
+<p>The <span class="math inline">\(\mathit{SQE}\)</span> quantifies the variability of the fitted values around the mean of the data and <span class="math inline">\(\mathit{SQR}\)</span> shows how much variability the model fails to capture. The smaller this residual variability <span class="math inline">\(\mathit{SQR}\)</span> the better the model! The so-called <strong>coefficient of determination</strong> calculates the proportion of explained variability. The larger it is the better the model 😄:</p>
+<p><span class="math display">\[R^2 = \frac{\mathit{SQE}}{\mathit{SQT}} = 1 - \frac{SQR}{SQT} = 1- \frac{\sum^{n}_{i=1} (y_i - \hat{y}_i)^2}{\sum^{n}_{i = 1} (y_i - \bar{y}_i)^2}\]</span></p>
+<p>Let’s go back to our example and look at the coefficient of determination.</p>
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lin_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">time_lib</span> <span class="op">~</span> <span class="va">travel_time</span>, data <span class="op">=</span> <span class="va">survey</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/moderndive/man/get_regression_summaries.html">get_regression_summaries</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+r_squared
+</th>
+<th style="text-align:right;">
+adj_r_squared
+</th>
+<th style="text-align:right;">
+mse
+</th>
+<th style="text-align:right;">
+rmse
+</th>
+<th style="text-align:right;">
+sigma
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p_value
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+nobs
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+0.532
+</td>
+<td style="text-align:right;">
+0.529
+</td>
+<td style="text-align:right;">
+430.4021
+</td>
+<td style="text-align:right;">
+20.74614
+</td>
+<td style="text-align:right;">
+20.851
+</td>
+<td style="text-align:right;">
+224.697
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+200
+</td>
+</tr></tbody>
+</table></div>
+<p>There is a lot of information coming with the summary. In details, we find:</p>
+<ul>
+<li>
+<code>r_squared</code>: Coefficient of determination <span class="math inline">\(R^2\)</span>
+</li>
+<li>
+<code>adj_r_squared</code>:
+<span class="math inline">\(R^2_\text{ajd} = 1 - (1 - R^2) \frac{n-1}{n - p - 1}\)</span>, <span class="math inline">\(n\)</span>: number of data points, <span class="math inline">\(p\)</span>: number of predictors (without the intercept); more robust than <span class="math inline">\(R^2\)</span> for multiple linear regression</li>
+<li>
+<code>mse</code>: mean standard error <code><a href="https://rdrr.io/r/base/mean.html">mean(residuals(lin_mod)^2)</a></code>
+</li>
+<li>
+<code>rmse</code>: square root of <code>mse</code>
+</li>
+<li>
+<code>simga</code>: standard error of the error term <span class="math inline">\(\varepsilon\)</span>
+</li>
+<li>
+<code>statistic</code>: value of the <span class="math inline">\(F\)</span> statistics for the hypothesis test, where <span class="math inline">\(H_0\)</span>: all model parameters equal zero</li>
+<li>
+<code>p-value</code>: <span class="math inline">\(p\)</span> value of the hypothesis test</li>
+<li>
+<code>df</code>: degrees of freedom, here number of predictors</li>
+<li>
+<code>nobst</code>: number of data points</li>
+</ul>
+<p>Thus, we conclude hat our model explained 53% of the variance in the data.</p>
+</div>
+<div id="bootstrap-with-infer-confidence-interval-for-the-slope" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Bootstrap with <code>infer</code>: Confidence interval for the slope<a class="anchor" aria-label="anchor" href="#bootstrap-with-infer-confidence-interval-for-the-slope"><i class="fas fa-link"></i></a>
+</h2>
+<p>In case, the residuals are non-normally distributed and/or heteroscedastic, the confidence intervals for the model parameters could be wrong. In particular for small data sets, the violation of those assumptions is problematic. To avoid interpreting (possibly) wrong confidence intervals, we can use the bootstrap to construct confidence intervals that do not require the normality and homoscedasticity of residuals. However, they still require independent data (this is always the case for the ordinary bootstrap).</p>
+<p>In a simple linear regression, the most interesting parameter is the slope. We can use our usual framework in <code>infer</code> to determine its confidence interval.</p>
+<p><strong>Step 1: Bootstrap the data and calculate the statistic slope</strong></p>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bootstrap_distn_slope</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">time_lib</span> <span class="op">~</span> <span class="va">travel_time</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/generate.html">generate</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fl">10000</span>, type <span class="op">=</span> <span class="st">"bootstrap"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"slope"</span><span class="op">)</span></code></pre></div>
+<p><strong>Step 2: Calculate the confidence interval</strong></p>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">percentile_ci</span> <span class="op">&lt;-</span> <span class="va">bootstrap_distn_slope</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/get_confidence_interval.html">get_confidence_interval</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"percentile"</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span>
+
+<span class="va">percentile_ci</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   lower_ci upper_ci
+##      &lt;dbl&gt;    &lt;dbl&gt;
+## 1   -0.848   -0.687</code></pre>
+<p><strong>Step 3: Visualise the result</strong></p>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="va">bootstrap_distn_slope</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_confidence_interval.html">shade_confidence_interval</a></span><span class="op">(</span>endpoints <span class="op">=</span> <span class="va">percentile_ci</span><span class="op">)</span> </code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-150-1.png" width="90%"></div>
+<p>Compared to the standard confidence interval based on the normality and homoscedasticity assumptions, the bootstrap confidence interval is similar.</p>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/moderndive/man/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">==</span> <span class="st">'travel_time'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std_error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p_value
+</th>
+<th style="text-align:right;">
+lower_ci
+</th>
+<th style="text-align:right;">
+upper_ci
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;">
+travel_time
+</td>
+<td style="text-align:right;">
+-0.766
+</td>
+<td style="text-align:right;">
+0.051
+</td>
+<td style="text-align:right;">
+-14.99
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-0.867
+</td>
+<td style="text-align:right;">
+-0.665
+</td>
+</tr></tbody>
+</table></div>
+<p>This is because in our model, the assumptions were valid. In such a case, the confidence intervals are similar and you can safely use the standard confidence interval. Otherwise prefer the bootstrap.</p>
+</div>
+<div id="practice-on-your-own-9" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-9"><i class="fas fa-link"></i></a>
+</h2>
+<ol class="exercises"><ol style="list-style-type: decimal">
+<li>You will analyse the relationship between the number of plant species and the number of endemic species on the Galapagos islands. The data set is called <code>gala</code> and is part of the library <code>faraway</code>.
+<br><ul>
+<li>Load the data set and read the help pages to understand the meaning of the variables.</li>
+<li>We want to know how the number of endemic species depends on the number of plant species on the islands. Fit a linear regression model that takes the number of species as predictor and the number of endemic species as dependent variable.</li>
+<li>Check the model assumptions.</li>
+<li>Use the workflow in <code>infer</code> to calculate a confidence interval for the slope in the model.</li>
+<li>Compare the confidence interval based on normality assumption and the bootstrap confidence intervals</li>
+</ul>
+</li>
+</ol></ol>
+</div>
+<div id="reading-assignment-8" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-8"><i class="fas fa-link"></i></a>
+</h2>
+<p>Chapter 10 in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
+</div>
+<div id="turning-in-your-work-7" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-7"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Save your R Notebook and download the .Rmd file to your computer. You don’t need to download the .nb.html file.</li>
+<li>Upload your R Notebook to ILIAS. You will find an upload option in today’s session.</li>
+<li>You should receive a solution file after the submission.</li>
+</ul>
+<div class="rmdalert">
+<p>
+Be sure to upload before the deadline!
+</p>
+</div>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></div>
+<div class="next"><a href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#lin-reg-inference"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li><a class="nav-link" href="#how-good-is-the-model"><span class="header-section-number">10.1</span> How good is the model?</a></li>
+<li><a class="nav-link" href="#bootstrap-with-infer-confidence-interval-for-the-slope"><span class="header-section-number">10.2</span> Bootstrap with infer: Confidence interval for the slope</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-9"><span class="header-section-number">10.3</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#reading-assignment-8"><span class="header-section-number">10.4</span> Reading assignment</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-7"><span class="header-section-number">10.5</span> Turning in your work</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/10-linear-regression-inference.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/10-linear-regression-inference.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-21.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+</html>

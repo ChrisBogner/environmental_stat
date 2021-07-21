@@ -1,0 +1,164 @@
+# Inference in linear regression {#lin-reg-inference}
+
+```{block, type='rmdoutcomes'}
+- Calculate confidence intervals for model parameters
+- Interpret the summary of a linear regression model
+- Use bootstrap for confidence intervals
+```
+
+In the last chapter, we learned how to fit a simple linear model. Remember the assumptions of the model:
+
+
+1. **L**inear relationship between variables
+1. **I**ndependence of residuals
+1. **N**ormal residuals
+1. **E**quality of variance (called homoscedasticity) and a mean of zero in residuals
+
+In this chapter, we will see how to judge the quality of our model. And we will learn what to do in case the normality and homoscedasticity assumptions are violated.
+
+## How good is the model?
+```{r, message = F, warning = F}
+library(tidyverse)
+library(infer)
+library(knitr)
+library(moderndive)
+```
+
+```{r, echo = F}
+set.seed(123)
+
+student_id <- 1:12000
+  
+travel_time <- c(runif(n = 12000 * 0.8, min = 5, max = 40),
+             runif(n = 12000 * 0.2, min = 60, max = 120))
+
+gender <- sample(c('m', 'f'), size = 12000, replace = TRUE)
+
+residence <- sapply(travel_time, function(x) {
+  if(x < 30) 'urban'
+  else 'rural'
+})
+
+transport <- sapply(travel_time, function(x) {
+  if(x <= 10) 'foot'
+  else if(x > 10 & x <= 15) sample(c('foot', 'bike'), size = 1)
+  else if(x > 15 & x <= 45) sample(c('bus', 'bike', 'car'), size = 1)
+  else sample(c('bus', 'car'), size = 1)
+})
+
+time_lib <- 5 * 60 - 0.7 * travel_time + rnorm(length(travel_time), 0, 20)
+
+getsmarter_pop <- tibble(student_id, gender, residence, transport, travel_time, time_lib)
+```
+
+```{r, echo = F}
+set.seed(345)
+
+survey_size <- 200
+
+survey <- rep_sample_n(getsmarter_pop, size = survey_size, replace = FALSE, reps = 1)
+```
+
+The data that we model have a certain variability that we quantify by e.g. its standard deviation. To judge how good a model captures the relationship between the dependent variable and the predictors, we could quantify how much variability of the dependent variable can be explained by the model. Thus, we split the variability of the dependent variable as:
+
+$$
+\begin{align*}
+\mathit{SQT} &= \mathit{SQE} + \mathit{SQR}\\
+\sum^{n}_{i = 1} (y_i-\bar{y})^2 &= \sum^{n}_{i=1} (\hat{y}_i - \bar{y})^2 + \sum^{n}_{i=1} (y_i - \hat{y}_i)^2\\
+\end{align*}
+$$
+
+where $y_i$: observed data, $\bar{y}$: mean, $\hat{y}_i$: fitted values
+
+- $\mathit{SQT}$ Sum of squares total: variability or variance of the data
+- $\mathit{SQE}$ Sum of squares explained: variability explained by the model
+- $\mathit{SQR}$ Sum of squares residual: variability not explained by the model
+
+The $\mathit{SQE}$ quantifies the variability of the fitted values around the mean of the data and $\mathit{SQR}$ shows how much variability the model fails to capture. The smaller this residual variability $\mathit{SQR}$ the better the model! The so-called **coefficient of determination** calculates the proportion of explained variability. The larger it is the better the model `r emo::ji('smile')`:
+
+$$R^2 = \frac{\mathit{SQE}}{\mathit{SQT}} = 1 - \frac{SQR}{SQT} = 1- \frac{\sum^{n}_{i=1} (y_i - \hat{y}_i)^2}{\sum^{n}_{i = 1} (y_i - \bar{y}_i)^2}$$
+
+
+Let's go back to our example and look at the coefficient of determination.
+```{r}
+lin_mod <- lm(formula = time_lib ~ travel_time, data = survey)
+
+get_regression_summaries(lin_mod) %>% kable()
+```
+
+There is a lot of information coming with the summary. In details, we find:
+
+- `r_squared`: Coefficient of determination $R^2$
+- `adj_r_squared`: 
+$R^2_\text{ajd} = 1 - (1 - R^2) \frac{n-1}{n - p - 1}$, $n$: number of data points, $p$: number of predictors (without the intercept); more robust than $R^2$ for multiple linear regression
+- `mse`: mean standard error `mean(residuals(lin_mod)^2)`
+- `rmse`: square root of `mse`
+- `simga`: standard error of the error term $\varepsilon$
+- `statistic`: value of the $F$ statistics for the hypothesis test, where $H_0$: all model parameters equal zero
+- `p-value`: $p$ value of the hypothesis test
+- `df`: degrees of freedom, here number of predictors
+- `nobst`: number of data points
+
+Thus, we conclude hat our model explained 53% of the variance in the data.
+
+## Bootstrap with `infer`: Confidence interval for the slope
+In case, the residuals are non-normally distributed and/or heteroscedastic, the confidence intervals for the model parameters could be wrong. In particular for small data sets, the violation of those assumptions is problematic. To avoid interpreting (possibly) wrong confidence intervals, we can use the bootstrap to construct confidence intervals that do not require the normality and homoscedasticity of residuals. However, they still require independent data (this is always the case for the ordinary bootstrap).
+
+In a simple linear regression, the most interesting parameter is the slope. We can use our usual framework in `infer` to determine its confidence interval.
+
+**Step 1: Bootstrap the data and calculate the statistic slope**
+```{r}
+bootstrap_distn_slope <- survey %>% 
+  specify(formula = time_lib ~ travel_time) %>%
+  generate(reps = 10000, type = "bootstrap") %>% 
+  calculate(stat = "slope")
+```
+
+**Step 2: Calculate the confidence interval**
+```{r}
+percentile_ci <- bootstrap_distn_slope %>% 
+  get_confidence_interval(type = "percentile", level = 0.95)
+
+percentile_ci
+```
+
+**Step 3: Visualise the result**
+```{r, out.width = '90%'}
+visualize(bootstrap_distn_slope) +
+    shade_confidence_interval(endpoints = percentile_ci) 
+```
+
+
+Compared to the standard confidence interval based on the normality and homoscedasticity assumptions, the bootstrap confidence interval is similar. 
+```{r}
+get_regression_table(lin_mod) %>% 
+filter(term == 'travel_time') %>%
+  kable()
+```
+
+This is because in our model, the assumptions were valid. In such a case, the confidence intervals are similar and you can safely use the standard confidence interval. Otherwise prefer the bootstrap.
+
+
+## Practice on your own!
+<ol class ="exercises">
+1. You will analyse the relationship between the number of plant species and the number of endemic species on the Galapagos islands. The data set is called `gala` and is part of the library `faraway`. 
+<br>
+    - Load the data set and read the help pages to understand the meaning of the variables.
+    - We want to know how the number of endemic species depends on the number of plant species on the islands. Fit a linear regression model that takes the number of species as predictor and the number of endemic species as dependent variable.
+    - Check the model assumptions.
+    - Use the workflow in `infer` to calculate a confidence interval for the slope in the model.
+    - Compare the confidence interval based on normality assumption and the bootstrap confidence intervals
+</ol>
+
+## Reading assignment
+Chapter 10 in @ModernDive
+
+
+## Turning in your work
+- Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.
+- Upload your R Notebook to ILIAS. You will find an upload option in today's session.
+- You should receive a solution file after the submission.
+
+```{block, type='rmdalert'}
+Be sure to upload before the deadline!
+```

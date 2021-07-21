@@ -13,10 +13,10 @@ fig:sampling-world
 fig:sampling-bootstrap
 fig:ht
 fig:one-test
-fig:unnamed-chunk-144
-fig:unnamed-chunk-151
-tab:unnamed-chunk-158
-tab:unnamed-chunk-159
+fig:unnamed-chunk-155
+fig:unnamed-chunk-162
+tab:unnamed-chunk-169
+tab:unnamed-chunk-170
 introduction-to-r-and-rstudio-server
 opening-rstudio-server-pro
 the-rstudio-interface
@@ -101,6 +101,12 @@ model-assumptions
 interprete-your-model
 practice-on-your-own-8
 reading-assignment-7
+lin-reg-inference
+how-good-is-the-model
+bootstrap-with-infer-confidence-interval-for-the-slope
+practice-on-your-own-9
+reading-assignment-8
+turning-in-your-work-7
 stat-background
 descriptive-statistics
 mean

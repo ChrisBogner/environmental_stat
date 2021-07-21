@@ -47,6 +47,7 @@
 <li><a class="active" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
 <li class="book-part">Part III: Statistical modelling</li>
 <li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
 <li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
@@ -259,8 +260,8 @@ Figure 8.1: General framework in <code>infer</code>. (Source: <a href="https://i
 <p>When you read through literature, you will find a lot of different tests. It is difficult to keep all those names and remember when to use what. The good news is that it is unnecessary complicated and can be simplified with a test procedure based on computer simulations as we did in <code>infer</code>. The general logic behind simulation-based tests is shown in Figure <a href="hypothesis.html#fig:one-test">8.2</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:one-test"></span>
-<img src="figures/one_test.png" alt="General logic behind any simulation-based hypothesis test. (Source: http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html)." width="80%"><p class="caption">
-Figure 8.2: General logic behind any simulation-based hypothesis test. (Source: <a href="http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html" class="uri">http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html</a>).
+<img src="figures/one_test.png" alt="General logic behind any simulation-based hypothesis test. (Source: http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html. Used with permission by the author Prof. Allen Downey)." width="80%"><p class="caption">
+Figure 8.2: General logic behind any simulation-based hypothesis test. (Source: <a href="http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html" class="uri">http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html</a>. Used with permission by the author Prof. Allen Downey).
 </p>
 </div>
 <p>The test procedure is based on the same steps, regardless which test you want to apply.</p>
@@ -271,7 +272,7 @@ Think about your research question. What do you want to know? Derive a model of 
 <p><strong>Step 3: generate the data under the null hypothesis</strong>
 Generate the data, i.e. many data samples, using your model of <span class="math inline">\(H_0\)</span> and calculate the same statistic as you did for your observed data for each of those samples.</p>
 <p><strong>Step 4: calculate the sampling distribution</strong>
-These statistics under the null give you a sampling distribution that you can visualize. Additionally, visualize the observed statistic <span class="math inline">\(\sigma*\)</span> and compare. Does such a value appear often in your sampling distribution or is it rare? The <span class="math inline">\(p\)</span> value gives your the frequency of how often the sampling distribution has values that are at least as large as your <span class="math inline">\(\sigma*\)</span>.</p>
+These statistics under the null give you a sampling distribution that you can visualize. Additionally, visualize the observed statistic <span class="math inline">\(\sigma*\)</span> and compare. Does such a value appear often in your sampling distribution or is it rare? The <span class="math inline">\(p\)</span> value gives you the frequency of how often the sampling distribution has values that are at least as large as your <span class="math inline">\(\sigma*\)</span>.</p>
 <p><strong>Step 5: Decide!</strong>
 Is the <span class="math inline">\(p\)</span> values small? Use you domain knowledge to frame the result. No need to refer to statistical significance here! Formulate a conclusion in plain language. Think about how you obtained the data. There is always uncertainty, so be modest and do not overstate your finding!</p>
 <p>There is so much more to say about the misuse of <span class="math inline">\(p\)</span> values and the term “statistical significance.” A good starting point is the paper by <span class="citation"><a href="literature-1.html#ref-Wasserstein2019" role="doc-biblioref">Wasserstein, Schirm, and Lazar</a> (<a href="literature-1.html#ref-Wasserstein2019" role="doc-biblioref">2019</a>)</span>.</p>
@@ -302,13 +303,7 @@ Is the <span class="math inline">\(p\)</span> values small? Use you domain knowl
 <span class="header-section-number">8.6</span> Additional resources<a class="anchor" aria-label="anchor" href="#additional-resources"><i class="fas fa-link"></i></a>
 </h2>
 <p>Webpage of <code>infer</code>: <a href="https://infer.netlify.app/" class="uri">https://infer.netlify.app/</a></p>
-<p>Great talk by the author of <code>infer</code>.</p>
-<p>
-<a href="https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2"><img src="https://embed-fastly.wistia.com/deliveries/8934494267e19f3cfbc24dcc1cb1c43067a2f722.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
-</p>
-<p>
-<a href="https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2">infer: a package for tidy statistical inference - RStudio</a>
-</p>
+<p>Great <a href="https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2">talk</a> by the author of <code>infer</code>.</p>
 </div>
 <div id="turning-in-your-work-6" class="section level2" number="8.7">
 <h2>
@@ -361,7 +356,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-15.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

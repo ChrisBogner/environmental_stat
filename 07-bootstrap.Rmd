@@ -21,20 +21,20 @@ Because we know the theoretical distribution of the mean we can calculate the 95
 ## Bootstrap--use your computer
 Formulas date from the early time of statistics where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using **re-sampling**, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure \@ref(fig:meunch)). However, it has a solid mathematical foundation [@Efron1979].
 
-```{r meunch, echo = F, fig.cap = 'Baron Munchausen pulls himself out of a mire by his own hair (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons)', fig.width = 6, out.width = "80%"}
+```{r meunch, echo = F, fig.cap = 'Münchhausen removes himself from the swamp using his own braids (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons) [Link to figure](https://upload.wikimedia.org/wikipedia/commons/a/ad/M%C3%BCnchhausen-Sumpf-Hosemann.png)', fig.width = 6, out.width = "80%"}
 knitr::include_graphics('figures/Münchhausen-Sumpf-Hosemann.png')
 ```
 
 Figure \@ref(fig:sampling-world) shows the setup that we practiced in chapter \@ref(sampling). We wanted to estimate a parameter (proportion of rural and urban residents) called $\mu$ in the figure and we sampled randomly several times from the population. From all those random samples we calculated our statistics and obtained the sampling distribution.
 
-```{r sampling-world, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling from a population. Figure by [@Hesterberg2015], their Figure 4. The publication is open-access and can be used for non-commercial purposes.', fig.width = 6, out.width = "80%"}
+```{r sampling-world, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling from a population. Figure by @Hesterberg2015, their Figure 4. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&doi=10.1080%2F00031305.2015.1089789)', fig.width = 6, out.width = "80%"}
 knitr::include_graphics('figures/sampling_world.png')
 ```
 
 Figure \@ref(fig:sampling-bootstrap) looks basically the same, except one important difference. We don't have access to several random samples from the population, but have one random sample only. And now we remember that we invested time and energy in thinking about the best way obtain this sample and we believe that it is representative for our population. Thus, we can think about this sample as our *mini* population. We replace the population by its miniature, i.e. our sample, and sample from this sample as if it were the true population. However, because the sample is limited in size we have to sample **with replacement**. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For each of those bootstrap samples we calculate the statistics and obtain its bootstrap sampling distribution. The confidence interval are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equals the 95% bootstrap confidence interval.
 
 
-```{r sampling-bootstrap, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by [@Hesterberg2015], their Figure 5. The publication is open-access and can be used for non-commercial purposes.', fig.width = 6, out.width = "80%"}
+```{r sampling-bootstrap, echo = F, fig.cap = 'Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by @Hesterberg2015, their Figure 5. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&doi=10.1080%2F00031305.2015.1089789)', fig.width = 6, out.width = "80%"}
 knitr::include_graphics('figures/sampling_bootstrap.png')
 ```
 

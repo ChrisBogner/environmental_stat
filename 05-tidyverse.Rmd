@@ -281,6 +281,4 @@ Read chapter 3 (to 3.5) in @ModernDive
 
 - More information on statistical graphical summaries and geoms: R4DS @r4ds: Chapter 5 "Data transformation"
 
-- A live exploratory data analysis by the main author of `tidyverse`, Hadley Wickham. Really informative, but Dr. Wickham types too fast `r emo::ji('smile')`.
-
-<iframe width="639" height="302" src="https://www.youtube.com/embed/go5Au01Jrvs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+- A [live exploratory data analysis](https://www.youtube.com/watch?v=go5Au01Jrvs) by the main author of `tidyverse`, Hadley Wickham. Really informative, but Dr. Wickham types too fast `r emo::ji('smile')`.

@@ -112,7 +112,7 @@ This $p$ value is really small. It is rare to observe a difference as larger as 
 ## There is only one test!
 When you read through literature, you will find a lot of different tests. It is difficult to keep all those names and remember when to use what. The good news is that it is unnecessary complicated and can be simplified with a test procedure based on computer simulations as we did in `infer`. The general logic behind simulation-based tests is shown in Figure \@ref(fig:one-test).
 
-```{r one-test, echo = F, fig.cap = 'General logic behind any simulation-based hypothesis test. (Source: http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html).', fig.width = 6, out.width = "80%"}
+```{r one-test, echo = F, fig.cap = 'General logic behind any simulation-based hypothesis test. (Source: http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html. Used with permission by the author Prof. Allen Downey).', fig.width = 6, out.width = "80%"}
 knitr::include_graphics('figures/one_test.png')
 ```
 
@@ -128,7 +128,7 @@ Think about your research question. What do you want to know? Derive a model of 
 Generate the data, i.e. many data samples, using your model of $H_0$ and calculate the same statistic as you did for your observed data for each of those samples.
 
 **Step 4: calculate the sampling distribution**
-These statistics under the null give you a sampling distribution that you can visualize. Additionally, visualize the observed statistic $\sigma*$ and compare. Does such a value appear often in your sampling distribution or is it rare? The $p$ value gives your the frequency of how often the sampling distribution has values that are at least as large as your $\sigma*$.
+These statistics under the null give you a sampling distribution that you can visualize. Additionally, visualize the observed statistic $\sigma*$ and compare. Does such a value appear often in your sampling distribution or is it rare? The $p$ value gives you the frequency of how often the sampling distribution has values that are at least as large as your $\sigma*$.
 
 **Step 5: Decide!**
 Is the $p$ values small? Use you domain knowledge to frame the result. No need to refer to statistical significance here! Formulate a conclusion in plain language. Think about how you obtained the data. There is always uncertainty, so be modest and do not overstate your finding!
@@ -152,9 +152,7 @@ Chapter 9 in @ModernDive
 ## Additional resources
 Webpage of `infer`: https://infer.netlify.app/
 
-Great talk by the author of `infer`.
-
-<p><a href="https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2"><img src="https://embed-fastly.wistia.com/deliveries/8934494267e19f3cfbc24dcc1cb1c43067a2f722.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a></p><p><a href="https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2">infer: a package for tidy statistical inference - RStudio</a></p>
+Great [talk](https://www.rstudio.com/resources/rstudioconf-2018/infer-a-package-for-tidy-statistical-inference/?wvideo=lkx9sw1ed2) by the author of `infer`.
 
 
 ## Turning in your work
