@@ -59,7 +59,7 @@ survey_size <- 200
 survey <- rep_sample_n(getsmarter_pop, size = survey_size, replace = FALSE, reps = 1)
 ```
 
-The data that we model have a certain variability that we quantify by e.g. its standard deviation. To judge how good a model captures the relationship between the dependent variable and the predictors, we could quantify how much variability of the dependent variable can be explained by the model. Thus, we split the variability of the dependent variable as:
+The data that we model have a certain variability that we quantify by e.g. its variance. To judge how good a model captures the relationship between the dependent variable and the predictors, we could quantify how much variability of the dependent variable can be explained by the model. Thus, we split the variability of the dependent variable (i.e. our observed data) as:
 
 $$
 \begin{align*}
