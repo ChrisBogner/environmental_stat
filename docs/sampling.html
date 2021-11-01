@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>6 Sampling and variability | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="font-awesome.min.css">
@@ -137,7 +137,7 @@ Calculate the standard error
 <span class="va">getsmarter_pop</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span><span class="va">student_id</span>, <span class="va">gender</span>, <span class="va">residence</span>, <span class="va">transport</span>, <span class="va">travel_time</span>, <span class="va">time_lib</span><span class="op">)</span>
 
 <span class="va">getsmarter_pop</span></code></pre></div>
-<pre><code>## # A tibble: 12,000 x 6
+<pre><code>## # A tibble: 12,000 × 6
 ##    student_id gender residence transport travel_time time_lib
 ##         &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
 ##  1          1 f      urban     bus             15.1      294.
@@ -151,18 +151,18 @@ Calculate the standard error
 ##  9          9 m      urban     bike            24.3      299.
 ## 10         10 f      urban     bus             21.0      282.
 ## # … with 11,990 more rows</code></pre>
-<p>We conduct a survey among the students of getsmarter and record the values of the variables listed above. We select the students randomly. Therefore, the data set that we generate through our survey will be a <strong>random sample</strong>. To simulate such a survey, we use the function <code><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n()</a></code>. It <em>sample</em>s <em>rep</em>eatedly <em>n</em> data points (students in our case) from a given data set (our population <code>getsmarter_pop</code>).</p>
-<p>Because we sample randomly (and use the random number generator in R to do so), we need to set the seed again for reproducibility. We will simulate a survey of 50 students and define the survey size by <code>survey_size &lt;- 50</code>. The survey will be done once, parameter <code>reps = 1</code>, and students can be interviewed only once, parameter <code>replace = FALSE</code>, in the function <code><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n()</a></code>.</p>
+<p>We conduct a survey among the students of getsmarter and record the values of the variables listed above. We select the students randomly. Therefore, the data set that we generate through our survey will be a <strong>random sample</strong>. To simulate such a survey, we use the function <code><a href="https://rdrr.io/pkg/infer/man/rep_sample_n.html">rep_sample_n()</a></code>. It <em>sample</em>s <em>rep</em>eatedly <em>n</em> data points (students in our case) from a given data set (our population <code>getsmarter_pop</code>).</p>
+<p>Because we sample randomly (and use the random number generator in R to do so), we need to set the seed again for reproducibility. We will simulate a survey of 50 students and define the survey size by <code>survey_size &lt;- 50</code>. The survey will be done once, parameter <code>reps = 1</code>, and students can be interviewed only once, parameter <code>replace = FALSE</code>, in the function <code><a href="https://rdrr.io/pkg/infer/man/rep_sample_n.html">rep_sample_n()</a></code>.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
 <span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">50</span>
 
-<span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/infer/man/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>The function <code>rep_sample_n</code> returns a grouped <code>tibble</code>. The variable <code>replicate</code> contained only the number 1 because <code>rep = 1</code>. It is an indicator variable of the replication.</p>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">survey</span></code></pre></div>
-<pre><code>## # A tibble: 50 x 7
+<pre><code>## # A tibble: 50 × 7
 ## # Groups:   replicate [1]
 ##    replicate student_id gender residence transport travel_time time_lib
 ##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
@@ -182,7 +182,7 @@ Calculate the standard error
 <code class="sourceCode R"><span class="va">survey</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">count</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ## # Groups:   residence [2]
 ##   residence     n
 ##   &lt;chr&gt;     &lt;int&gt;
@@ -193,7 +193,7 @@ Calculate the standard error
 <code class="sourceCode R"><span class="va">survey</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   residence  prop
 ##   &lt;chr&gt;     &lt;dbl&gt;
 ## 1 rural      0.42
@@ -203,11 +203,11 @@ Calculate the standard error
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
 
-<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></code></pre></div>
+<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/infer/man/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></code></pre></div>
 <p>Now <code>survey_reps</code> shows 33 replicates and the variable <code>replicate</code> ranges from 1 to 33. The data set has 1650 = 33 <span class="math inline">\(\times\)</span> <code>survey_size</code> rows.</p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">survey_reps</span></code></pre></div>
-<pre><code>## # A tibble: 1,650 x 7
+<pre><code>## # A tibble: 1,650 × 7
 ## # Groups:   replicate [33]
 ##    replicate student_id gender residence transport travel_time time_lib
 ##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
@@ -229,7 +229,7 @@ Calculate the standard error
   <span class="fu">summarise</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
 <span class="va">residence_props</span></code></pre></div>
-<pre><code>## # A tibble: 66 x 3
+<pre><code>## # A tibble: 66 × 3
 ## # Groups:   replicate [33]
 ##    replicate residence  prop
 ##        &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;
@@ -246,10 +246,10 @@ Calculate the standard error
 ## # … with 56 more rows</code></pre>
 <p>The numbers vary from replicate to replicate because in every survey replicate different students were drawn at random. Let’s look at the distribution of the proportions in a histogram.</p>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-94-1.png" width="90%"></div>
 <p>The most frequent proportions for <code>rural</code> are around 40% and for <code>urban</code> around 60%. Because we have chosen <code>binwidth = 0.05</code>, i.e. the width of the columns is 5%, we can be more precise. Among the surveyed students, 35–40% live in the countryside and 55–60% in town.</p>
 </div>
@@ -263,16 +263,16 @@ Calculate the standard error
 
 <span class="va">reps_num</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
 
-<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
+<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/infer/man/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
 
 <span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-95-1.png" width="90%"></div>
 <p>The histograms show now a nice symmetrical pattern around 40–42% for <code>rural</code> and 58–60% for <code>urban</code> residences. The parameter <code>scales = 'free_x'</code> allows to scale each histogram’s <span class="math inline">\(x\)</span> axis separately. Such a distribution is called a <strong>sampling distribution</strong>. It shows the distribution of possible values of a statistics (“proportions of residence” in our case) that one obtains by a repeated sampling from a population.</p>
 <p>The statistics “proportion of residence” is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occur if we survey our students randomly.</p>
@@ -281,7 +281,7 @@ Calculate the standard error
 <code class="sourceCode R"><span class="va">residence_props</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural      0.0701
@@ -297,7 +297,7 @@ Calculate the standard error
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">calculate_props</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">population</span> <span class="op">=</span> <span class="va">getsmarter_pop</span>, <span class="va">survey_size</span>, <span class="va">reps_num</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span>
   
-  <span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">population</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
+  <span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/infer/man/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">population</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
 
 <span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -319,29 +319,29 @@ Calculate the standard error
 <span class="va">residence_props_100</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">100</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
 <p>We plot the resulting samping distributions.</p>
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_25</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 25'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_25</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 25'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-99-1.png" width="90%"></div>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_50</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 50'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_50</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 50'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-99-2.png" width="90%"></div>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_100</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 100'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_100</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 100'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-99-3.png" width="90%"></div>
 <p>We compare the standard errors of the three sampling distributions.</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">residence_props_25</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural       0.102
@@ -350,7 +350,7 @@ Calculate the standard error
 <code class="sourceCode R"><span class="va">residence_props_50</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural      0.0679
@@ -359,7 +359,7 @@ Calculate the standard error
 <code class="sourceCode R"><span class="va">residence_props_100</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural      0.0458
@@ -457,7 +457,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-21.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-10-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

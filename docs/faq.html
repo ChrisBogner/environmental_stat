@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>D Frequently and not-so-frequently asked questions | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="font-awesome.min.css">
@@ -71,7 +71,7 @@
 <div id="what-is-the-difference-between-double-and-single-quotes" class="section level3 unnumbered">
 <h3>What is the difference between double <code>""</code> and single <code>''</code> quotes?<a class="anchor" aria-label="anchor" href="#what-is-the-difference-between-double-and-single-quotes"><i class="fas fa-link"></i></a>
 </h3>
-<p>There is no difference. Both are valid to quote text/strings. Pay attention when you use quotes in quotes like “My solutions to exercise ‘Find the mean’.” Then quotes inside quotes must be different (either "" outside and ’’ inside or the other way round). However, they may be rendered differently between plain R and R Markdown in e.g. the title.</p>
+<p>There is no difference. Both are valid to quote text/strings. Pay attention when you use quotes in quotes like “My solutions to exercise ‘Find the mean’.” Then quotes inside quotes must be different (either “” outside and ’’ inside or the other way round). However, they may be rendered differently between plain R and R Markdown in e.g. the title.</p>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">'I am a text.'</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "I am a text."</code></pre>
@@ -88,12 +88,12 @@
 <div id="when-do-we-use-the-pipe-operator-and-when-the-plus-sign-to-connect-lines-of-code" class="section level3 unnumbered">
 <h3>When do we use the pipe operator <code>%&gt;%</code> and when the plus sign <code>+</code> to connect lines of code?<a class="anchor" aria-label="anchor" href="#when-do-we-use-the-pipe-operator-and-when-the-plus-sign-to-connect-lines-of-code"><i class="fas fa-link"></i></a>
 </h3>
-<p>The pipe operator <code><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></code> is used to compose functions. Instead of saving the result of every function and then passing this result explicitly to the next function, we can omit the intermediate saving and “pipe” the results through:</p>
+<p>The pipe operator <code><a href="https://rdrr.io/pkg/infer/man/pipe.html">%&gt;%</a></code> is used to compose functions. Instead of saving the result of every function and then passing this result explicitly to the next function, we can omit the intermediate saving and “pipe” the results through:</p>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">'Adelie'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##    mean
 ##   &lt;dbl&gt;
 ## 1  38.8</code></pre>
@@ -105,9 +105,9 @@
 <p>More details on pipes <a href="https://r4ds.had.co.nz/pipes.html">here</a>.</p>
 <p>The plus sign <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> is used as operator in <code>ggplot2</code> only, to construct a graph.</p>
 <div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">bill_depth_mm</span>, col <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="va">lm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">bill_depth_mm</span>, col <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="va">lm</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-178-1.png" width="90%"></div>
 
 </div>
@@ -139,7 +139,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-21.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-10-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

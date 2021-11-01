@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>C Additional exercises | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="font-awesome.min.css">
@@ -228,12 +228,12 @@ NA
 <span class="va">gapminder2007</span> <span class="op">&lt;-</span> <span class="va">gapminder</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder2007</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span>, size <span class="op">=</span> <span class="va">pop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">'GDP per capita'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">'Life expectancy'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Gapminder data for the year 2007'</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder2007</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span>, size <span class="op">=</span> <span class="va">pop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">xlab</a></span><span class="op">(</span><span class="st">'GDP per capita'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">ylab</a></span><span class="op">(</span><span class="st">'Life expectancy'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Gapminder data for the year 2007'</span><span class="op">)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>What is the data set about. Use help like this <code><a href="https://rdrr.io/pkg/gapminder/man/gapminder.html">?gapminder</a></code>.</li>
 <li>What do the colours represent?</li>
@@ -316,11 +316,11 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <li><p>Read the data and explore its structure. Describe the type of variables. Does the type correspond to your expectation for the respective variable? Remember to set the name of the table sheet you want to read in <code>read_xls()</code>.</p></li>
 <li><p>Short explorative data analysis: calculate the number of measurements, the mean and the standard deviations of species number <code>R</code> per transect.</p></li>
 <li><p>Plot the species number versus the variable <code>BARESOIL</code> (proportion of bare soil). Colour the dots by transect. Hint: convert the transect <code>as_factor()</code>.</p></li>
-<li><p>Add a smoothing line without a confidence band (<code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth(se = FALSE)</a></code>) through all points independently of the transect. You might want to consult <a href="(https://ggplot2-book.org/collective-geoms.html)">Section 4.2</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020" role="doc-biblioref">Wickham 2020</a>)</span>. Hint: set the colour aes in <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> instead of in <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>.</p></li>
+<li><p>Add a smoothing line without a confidence band (<code><a href="https://rdrr.io/pkg/ggplot2/man/geom_smooth.html">geom_smooth(se = FALSE)</a></code>) through all points independently of the transect. You might want to consult <a href="(https://ggplot2-book.org/collective-geoms.html)">Section 4.2</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020" role="doc-biblioref">Wickham 2020</a>)</span>. Hint: set the colour aes in <code><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point()</a></code> instead of in <code><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot()</a></code>.</p></li>
 <li><p>Add labels to your graph and assign it to an object.</p></li>
 <li><p>Plot the species number as a time series by transect. Add both, points and lines. The size of the points should reflect the proportion of bare soil. You might want to consult <a href="(https://ggplot2-book.org/scale-other.html?q=size#size)">Section 12.1</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020" role="doc-biblioref">Wickham 2020</a>)</span>. Think about where to set the aesthetic <code>size</code> in order to scale the points only.</p></li>
 <li><p>Add labels to your graph and assign it to an object.</p></li>
-<li><p>Put both graphs side-by-side and save them as a pdf (<code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>).</p></li>
+<li><p>Put both graphs side-by-side and save them as a pdf (<code><a href="https://rdrr.io/pkg/ggplot2/man/ggsave.html">ggsave()</a></code>).</p></li>
 <li><p>Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in <code>infer</code>.</p></li>
 <li><p>If you calculate the 90% confidence interval instead of the 95% confidence interval, does the confidence interval increase or decrease? Why?</p></li>
 </ol>
@@ -382,7 +382,7 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-07-21.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-10-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

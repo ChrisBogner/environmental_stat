@@ -2,7 +2,7 @@
 # Introduction to R and RStudio Server
 
 ```{block, type='rmdoutcomes'}
-- Login into the RStudio Server Pro
+- Log in into the RStudio Server Pro
 - Upload and download files from the server
 - Use R as a calculator
 - Create first objects in R
@@ -15,11 +15,11 @@ Today we begin with the fundamental building blocks of R and RStudio: the interf
 
 
 ## Opening RStudio Server Pro
-We will work in the RStudio Server Pro, an online R System. Thus, you don't need to install R or RStudio on your computer (yet). You will receive a login and a password for the server. **Do not share your credentials.** In case of difficulties I might need to login into your RStudio Server account. To allow me to do so, you need to sign an agreement and to email it me.
+We will work in the RStudio Server Pro, an online R System. Thus, you don't need to install R or RStudio on your computer (yet). You will receive a login and a password for the server. **Do not share your credentials.** In case of difficulties I might need to log in into your RStudio Server account. To allow me to do so, you need to sign an agreement and to email it me.
 
-Before you can login into the server, you need to activate the VPN client. If you are not familiar with the VPN client, please visit [this website](https://rrzk.uni-koeln.de/en/internet-access-web/network-access/vpn).
+Before you can log in into the server, you need to activate the VPN client. If you are not familiar with the VPN client, please visit [this website](https://rrzk.uni-koeln.de/en/internet-access-web/network-access/vpn).
 
-To login into the RStudio Server,  [click hier](https://cheops-rstudio-edu.rrz.uni-koeln.de:8787/auth-sign-in). Or copy the address into your browser:  https://cheops-rstudio-edu.rrz.uni-koeln.de:8787/auth-sign-in.htm. After logging in, you will see the home interface  (Figure \@ref(fig:rserver)).
+To log in into the RStudio Server,  [click hier](https://cheops-rstudio-edu.rrz.uni-koeln.de:8787/auth-sign-in). Or copy the address into your browser:  https://cheops-rstudio-edu.rrz.uni-koeln.de:8787/auth-sign-in.htm. After logging in, you will see the home interface  (Figure \@ref(fig:rserver)).
 
 ```{r rserver, echo = F, fig.cap = 'RStudio Server Pro Home', fig.width = 6, out.width = "100%"}
 knitr::include_graphics('figures/RServer_Oberflaeche.png')
@@ -77,17 +77,17 @@ knitr::include_graphics('figures/files_download.png')
 
 ## Practice on your own!
 
-To complete this problem set you will next run through some Exercises, and submit your R script (i.e. .R file) with answers to all the Exercises. If you need to type text, don't forget to use the comment sign `#` before typing your text so that R will not misinterpret your text as commands.
+To complete this problem set you will next run through some Exercises, and submit your R script (i.e. *.R file) with answers to all the Exercises. If you need to type text, don't forget to use the comment sign `#` before typing your text so that R will not misinterpret your text as commands.
 
 ```{block, type='rmdalert'}
-Remember to save your work as you go along! Click the save button in the upper left hand corner of the window.
+Remember to save your work as you go along! Click the save button in the upper left-hand corner of the window.
 ```
 
 We will start the exercises \@ref(rob1) and \@ref(rob2) in class. Finish the exercises on your own and produce your first plot in exercise \@ref(firstplot) `r emo::ji('smile')`.
 
 ## Turning in your work
-- Save your R script and download the .R file to your computer.
-- Upload your .R file to ILIAS. You will find an upload option in today's session.
+- Save your R script and download the *.R file to your computer.
+- Upload your *.R file to ILIAS. You will find an upload option in today's session.
 - You should receive a solution file after the deadline.
 
 ```{block, type='rmdalert'}
@@ -106,4 +106,4 @@ There are other classes and students using the server. To keep it as fast as pos
 - You are signed out! 
 
 ## Reading assignment
-Chapters 1.1. and 1.2 in @ModernDive
+Chapters 1.1 and 1.2 in @ModernDive
