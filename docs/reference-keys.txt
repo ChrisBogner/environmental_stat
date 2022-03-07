@@ -15,8 +15,8 @@ fig:ht
 fig:one-test
 fig:unnamed-chunk-155
 fig:unnamed-chunk-162
-tab:unnamed-chunk-169
 tab:unnamed-chunk-170
+tab:unnamed-chunk-171
 introduction-to-r-and-rstudio-server
 opening-rstudio-server-pro
 the-rstudio-interface
@@ -110,7 +110,7 @@ turning-in-your-work-7
 stat-background
 descriptive-statistics
 mean
-standard-deviation
+variance-and-standard-deviation
 measures-of-association
 linear-correlation-coefficent
 daten-und-bericht
@@ -125,6 +125,7 @@ structure-of-the-final-report
 sturcture-of-the-working-directory
 download-and-save-data
 structure-of-the-report
+evaluation-critera
 additional-exercises
 introduction-to-r-and-rstudio-server-pro
 rob1

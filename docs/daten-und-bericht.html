@@ -6,11 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>B Data sources and final report | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Know different data sources  Use libraries for direct access to databases   B.1 Data sources In this chapter, I will introduce some interesting data sources (databases) that you can use for your...">
+<meta name="generator" content="bookdown 0.24.3 with bs4_book()">
+<meta property="og:title" content="B Data sources and final report | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Know different data sources  Use libraries for direct access to databases   B.1 Data sources In this chapter, I will introduce some interesting data sources (databases) that you can use for your...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="B Data sources and final report | Environmental Statistics">
+<meta name="twitter:description" content="Know different data sources  Use libraries for direct access to databases   B.1 Data sources In this chapter, I will introduce some interesting data sources (databases) that you can use for your...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="font-awesome.min.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -91,7 +99,7 @@ Use libraries for direct access to databases
 <h3>
 <span class="header-section-number">B.1.2</span> eurostat<a class="anchor" aria-label="anchor" href="#eurostat"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://ec.europa.eu/eurostat">eurostat</a> is the statistical office of the European Union. You will find many different data sets about Europe there. However, you don’t need to download them by hand, but can use the dedicated library <a href="http://ropengov.github.io/eurostat/index.html">eurostat</a>. This library has an informative web site with many tutorials. You can also use the eurostat data to visualize maps (possible report challenge).</p>
+<p><a href="https://ec.europa.eu/eurostat">eurostat</a> is the statistical office of the European Union. You will find many different data sets about Europe there. However, I strongly recommend using the dedicated R library <a href="http://ropengov.github.io/eurostat/index.html">eurostat</a> to download the data. My experience shows that students underestimate how error-prone manual download from a large database can be! The R library eurostat has an informative web site with many tutorials. Some of the show how to use the eurostat data to visualize maps (possible report challenge).</p>
 </div>
 <div id="gapminder" class="section level3" number="12.1.3">
 <h3>
@@ -125,7 +133,7 @@ Use libraries for direct access to databases
 </ul>
 </li>
 <li>
-<a href="https://www.pangaea.de/">PANGAEA</a>: eine der größten Datenbanken für Umweltdaten</li>
+<a href="https://www.pangaea.de/">PANGAEA</a>: one of the largest databases for environmental datasets</li>
 <li>Overview of data and libraries on <a href="https://ropensci.org/">ROpenScie</a>:
 <a href="https://github.com/ropensci-archive/opendata">Data</a>
 <a href="https://ropensci.org/packages/data-access/">Libraries</a>
@@ -154,7 +162,7 @@ Use libraries for direct access to databases
 <h3>
 <span class="header-section-number">B.3.2</span> Download and save data<a class="anchor" aria-label="anchor" href="#download-and-save-data"><i class="fas fa-link"></i></a>
 </h3>
-<p>If you want to use libraries to download data, then create a notebook for this task. Don’t download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis.</p>
+<p>If you want to use libraries to download data, then create a notebook for this task. Don’t download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis. This will ensure that your report is <strong>fully reproducible</strong>.</p>
 </div>
 <div id="structure-of-the-report" class="section level3" number="12.3.3">
 <h3>
@@ -163,24 +171,55 @@ Use libraries for direct access to databases
 <p>Please structure your report as follows:</p>
 <ul>
 <li>Introduction (with research question at the end)</li>
-<li>Material and Methods: Data description (with the date of download), description of the method with references, description of the research area if appropriate</li>
-<li>Results: Explorative data analysis, further analysis to respond to the research question</li>
-<li>Discussion: use peer-reviewed literature to frame your results</li>
+<li>Material and Methods:
+<ul>
+<li>Data description:
+date of download, <strong>reproducibility</strong> is crucial), description of variables and their units</li>
+<li>Description of the method with references, description of the research area if appropriate</li>
+</ul>
+</li>
+<li>Results:
+<ul>
+<li>Explorative data analysis (mandatory!)</li>
+<li>Further analysis to respond to your research question(s)</li>
+</ul>
+</li>
+<li>Discussion: use peer-reviewed literature to discuss your results</li>
 <li>Conclusions</li>
 <li>Bibliography</li>
 </ul>
 <p>You can combine results and discussion to one section.</p>
-<p>Each report should contain a <strong>challenge</strong>. This can be an extensive data tidying and wrangling or use of a new and interesting library (e.g. to represent spatial data in eurostat) etc.</p>
-<p>You can write your report in groups of two, I even recommend to do so. In this case, please add your names to the respective parts that you are responsible for. Every part will be graded separately. Every group member need to do some analysis and some writing.</p>
-<p>I don’t impose any particular length for your report. However, be <em>concise</em>.</p>
-<p>Knit the final report to an html-document. Think about whether you need to show all chunks, avoid redundancy. <strong>Compress the whole project and submit everything!</strong> Your report and your analysis must run on my computer so abserve the paths!</p>
+<p>Each report should contain a <strong>challenge</strong>. This can be an extensive data tidying and wrangling or use of a new and interesting library (e.g. to plot spatial data in eurostat) etc.</p>
+<p>You can write your report in groups of two, I even recommend to do so. In this case, please add your names to the respective parts that you are responsible to receive individual grades. Every part will be graded separately. Every group member need to do some analysis and some writing. Alternatively, give your consent to receive the same grade if you analysed the data and wrote the report together.</p>
+<p>I don’t impose any particular length for your report. However, please be <em>concise</em>.</p>
+<p>Knit the final report to an html-document. Think about whether you need to show all chunks, avoid redundancy. <strong>Compress the whole project and submit everything!</strong> Your report and your analysis must run on my computer so observe the paths!</p>
 <div class="rmdalert">
 <p>
 Submit the compressed project to ILIAS before the deadline.
 </p>
 </div>
-
 </div>
+</div>
+<div id="evaluation-critera" class="section level2" number="12.4">
+<h2>
+<span class="header-section-number">B.4</span> Evaluation critera<a class="anchor" aria-label="anchor" href="#evaluation-critera"><i class="fas fa-link"></i></a>
+</h2>
+<p>I will evaluate your report along the following criteria:</p>
+<ol style="list-style-type: decimal">
+<li>Does the notebook run without errors?</li>
+<li>Is the the notebook structured as prescribed above?</li>
+<li>Are the research questions stated clearly?</li>
+<li>Are the methods described and necessary literature cited.</li>
+<li>Were the data downloaded and saved outside the main report in an extra notebook for full reproducibility? In case the data is downloaded by hand, this must be explained in the main report.</li>
+<li>Is the research area described?</li>
+<li>Quality of data preparation and exploratory analysis.</li>
+<li>Quality of the main analysis, which you do to respond to research questions.</li>
+<li>Quality of figures.</li>
+<li>Are the results discussed and additional literature cited? This literature should help evaluating and understanding your results.</li>
+<li>Are the conclusions sound and supported by the data and results?</li>
+</ol>
+<p>You will receive a corrected report as feedback.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -207,12 +246,13 @@ Submit the compressed project to ILIAS before the deadline.
 <li><a class="nav-link" href="#structure-of-the-report"><span class="header-section-number">B.3.3</span> Structure of the report</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#evaluation-critera"><span class="header-section-number">B.4</span> Evaluation critera</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/18-data-and-report.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/18-data-and-report.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/18-data-and-report.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/18-data-and-report.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -224,7 +264,7 @@ Submit the compressed project to ILIAS before the deadline.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-10-18.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2022-03-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -244,6 +284,22 @@ Submit the compressed project to ILIAS before the deadline.
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
 </html>

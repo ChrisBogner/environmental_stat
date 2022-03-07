@@ -187,7 +187,7 @@ The confidence interval is our best guess of plausible values for the population
 <ol class ="exercises">
 1. Repeat the analysis we did for the mean travel time now for the proportion of urban residents. Use the workflow in `infer`. Hint: `specify(response = residence, success = 'urban')`.
 
-1. How does the width of the confidence interval depend on the sample size? Repeat the analysis for the mean travel time for a survey of 30 students. Hint: `specify(response = wohnort, success = 'stadt')`.
+1. How does the width of the confidence interval depend on the sample size? Repeat the analysis for the mean travel time for a survey of 30 students.
 
 </ol>
 

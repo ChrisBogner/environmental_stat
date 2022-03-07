@@ -6,11 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>8 Hypothesis tests versus effect size estimation | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Explain the idea behind simulation-based hypothesis tests  Calculate hypothesis tests with infer  Explain the difference between a test and an effect size estimation  In chapter 7 we learned how...">
+<meta name="generator" content="bookdown 0.24.3 with bs4_book()">
+<meta property="og:title" content="8 Hypothesis tests versus effect size estimation | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Explain the idea behind simulation-based hypothesis tests  Calculate hypothesis tests with infer  Explain the difference between a test and an effect size estimation  In chapter 7 we learned how...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8 Hypothesis tests versus effect size estimation | Environmental Statistics">
+<meta name="twitter:description" content="Explain the idea behind simulation-based hypothesis tests  Calculate hypothesis tests with infer  Explain the difference between a test and an effect size estimation  In chapter 7 we learned how...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="font-awesome.min.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -89,16 +97,16 @@ Explain the difference between a test and an effect size estimation
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></code></pre></div>
 <p>Let’s start with an old study that was done in the 1970. <span class="citation"><a href="literature-1.html#ref-Rosen1974" role="doc-biblioref">Rosen and Jerdee</a> (<a href="literature-1.html#ref-Rosen1974" role="doc-biblioref">1974</a>)</span> analysed whether “sex role stereotypes [had] an influence on personnel decisions.” In our modern language, they wanted to know whether women are discriminated against in promotion decisions. They asked 95 bank supervisors to decide based on a personal file only whether a person should be promoted or not. All files were identical except the gender and the files were distributed randomly to the participants. Because of this random assignement of files, the procedure is an <strong>experiment</strong> and we can draw conclusions about the research question. Here, we look at one part of the data, namely promotion decision for a simple job (c.f. the original publication for more details.)</p>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">study</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span><span class="st">'gender'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'male'</span>, <span class="fl">24</span><span class="op">)</span>,
+<code class="sourceCode R"><span class="va">study</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="st">'gender'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'male'</span>, <span class="fl">24</span><span class="op">)</span>,
                              <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'female'</span>, <span class="fl">24</span><span class="op">)</span><span class="op">)</span>,
                 <span class="st">'decision'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'promoted'</span>, <span class="fl">21</span><span class="op">)</span>,
                                <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'not_promoted'</span>, <span class="fl">3</span><span class="op">)</span>,
                                <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'promoted'</span>, <span class="fl">14</span><span class="op">)</span>,
                                <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'not_promoted'</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">study</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">study</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
@@ -161,9 +169,9 @@ Sum
 </table></div>
 <p>Let’s plot the data before we analyse it.</p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">study</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gender</span>, fill <span class="op">=</span> <span class="va">decision</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Gender on personal file'</span>, y <span class="op">=</span> <span class="st">'Abs. frequency'</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">study</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gender</span>, fill <span class="op">=</span> <span class="va">decision</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Gender on personal file'</span>, y <span class="op">=</span> <span class="st">'Abs. frequency'</span>,
        title <span class="op">=</span> <span class="st">'Decisions of bank supervisors from study by Rosen &amp; Jerdee (1974)'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-121-1.png" width="90%"></div>
 <p>How large is the difference of proportions in promotions between men and women? Is this difference due to chance or are women discriminated against?</p>
@@ -179,15 +187,15 @@ Sum
 <p>We will use a general framework in the package <code>infer</code> for hypothesis tests. It offers a state-of-the-art simulation-based approach and is based on the following steps (Figure <a href="hypothesis.html#fig:ht">8.1</a>):</p>
 <ol style="list-style-type: decimal">
 <li>
-<code><a href="https://rdrr.io/pkg/infer/man/specify.html">specify()</a></code> variables or relationships between them</li>
+<code><a href="https://infer.tidymodels.org/reference/specify.html">specify()</a></code> variables or relationships between them</li>
 <li>
-<code><a href="https://rdrr.io/pkg/infer/man/hypothesize.html">hypothesize()</a></code> define the null hypothesis</li>
+<code><a href="https://infer.tidymodels.org/reference/hypothesize.html">hypothesize()</a></code> define the null hypothesis</li>
 <li>
-<code><a href="https://rdrr.io/pkg/infer/man/generate.html">generate()</a></code> generate data under the null hypothesis</li>
+<code><a href="https://infer.tidymodels.org/reference/generate.html">generate()</a></code> generate data under the null hypothesis</li>
 <li>
-<code><a href="https://rdrr.io/pkg/infer/man/calculate.html">calculate()</a></code> the sampling distribution under the null hypothesis</li>
+<code><a href="https://infer.tidymodels.org/reference/calculate.html">calculate()</a></code> the sampling distribution under the null hypothesis</li>
 <li>
-<code><a href="https://rdrr.io/pkg/infer/man/visualize.html">visualize()</a></code> visualize the sampling distribution under the null hypothesis</li>
+<code><a href="https://infer.tidymodels.org/reference/visualize.html">visualize()</a></code> visualize the sampling distribution under the null hypothesis</li>
 </ol>
 <p>Two additional functions, <code>shade_p_value</code> and <code>get_p_value</code> visualize and calculate the <span class="math inline">\(p\)</span> value (see below for definition), respectively.</p>
 <div class="figure">
@@ -198,12 +206,14 @@ Figure 8.1: General framework in <code>infer</code>. (Source: <a href="https://i
 </div>
 <p>Let’s proceed step by step. First, we calculate the observed difference from our data using <code>infer</code>. The parameter <code>order = c("male", "female")</code> tells us that we calculate the difference as male - female.</p>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">prop_hat</span> <span class="op">&lt;-</span> <span class="va">study</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/specify.html">specify</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">decision</span> <span class="op">~</span> <span class="va">gender</span>, success <span class="op">=</span> <span class="st">"promoted"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"diff in props"</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">prop_hat</span> <span class="op">&lt;-</span> <span class="va">study</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">decision</span> <span class="op">~</span> <span class="va">gender</span>, success <span class="op">=</span> <span class="st">"promoted"</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"diff in props"</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">prop_hat</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
+<pre><code>## Response: decision (factor)
+## Explanatory: gender (factor)
+## # A tibble: 1 × 1
 ##    stat
 ##   &lt;dbl&gt;
 ## 1 0.292</code></pre>
@@ -213,15 +223,18 @@ Figure 8.1: General framework in <code>infer</code>. (Source: <a href="https://i
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 
-<span class="va">null_distn</span> <span class="op">&lt;-</span> <span class="va">study</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/specify.html">specify</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">decision</span> <span class="op">~</span> <span class="va">gender</span>, success <span class="op">=</span> <span class="st">"promoted"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/hypothesize.html">hypothesize</a></span><span class="op">(</span>null <span class="op">=</span> <span class="st">"independence"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/generate.html">generate</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"diff in props"</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">null_distn</span> <span class="op">&lt;-</span> <span class="va">study</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">decision</span> <span class="op">~</span> <span class="va">gender</span>, success <span class="op">=</span> <span class="st">"promoted"</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/hypothesize.html">hypothesize</a></span><span class="op">(</span>null <span class="op">=</span> <span class="st">"independence"</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/generate.html">generate</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"diff in props"</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Setting `type = "permute"` in `generate()`.</code></pre>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">null_distn</span></code></pre></div>
-<pre><code>## # A tibble: 10,000 × 2
+<pre><code>## Response: decision (factor)
+## Explanatory: gender (factor)
+## Null Hypothesis: independence
+## # A tibble: 10,000 × 2
 ##    replicate    stat
 ##        &lt;int&gt;   &lt;dbl&gt;
 ##  1         1  0.125 
@@ -237,16 +250,16 @@ Figure 8.1: General framework in <code>infer</code>. (Source: <a href="https://i
 ## # … with 9,990 more rows</code></pre>
 <p>The object <code>null_distn</code> contains 10000 differences in proportions of promotion from the permuted data. We can visualize their distribution and highlight the observed difference to compare. The parameter <code>direction = "greater"</code> defines the alternative hypothesis that women are discriminated against, i.e. the difference is larger than zero. The function <code>shade_p_value</code> shades values that are larger than the observed statistics. The red bar shows the observed statistic itself.</p>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/infer/man/visualize.html">visualize</a></span><span class="op">(</span><span class="va">null_distn</span>, bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/shade_p_value.html">shade_p_value</a></span><span class="op">(</span>obs_stat <span class="op">=</span> <span class="va">prop_hat</span>, direction <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="va">null_distn</span>, bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_p_value.html">shade_p_value</a></span><span class="op">(</span>obs_stat <span class="op">=</span> <span class="va">prop_hat</span>, direction <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-124-1.png" width="90%"></div>
 <blockquote>
 <p>The <strong><span class="math inline">\(p\)</span> value</strong> is the probability to obtain data as extreme or more extreme than what has been observed, if the null hypothesis is true.</p>
 </blockquote>
 <p>The <span class="math inline">\(p\)</span> value in our example equals</p>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">null_distn</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/infer/man/get_p_value.html">get_p_value</a></span><span class="op">(</span>obs_stat <span class="op">=</span> <span class="va">prop_hat</span>, direction <span class="op">=</span> <span class="st">'greater'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">null_distn</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://infer.tidymodels.org/reference/get_p_value.html">get_p_value</a></span><span class="op">(</span>obs_stat <span class="op">=</span> <span class="va">prop_hat</span>, direction <span class="op">=</span> <span class="st">'greater'</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##   p_value
 ##     &lt;dbl&gt;
@@ -288,7 +301,7 @@ Is the <span class="math inline">\(p\)</span> values small? Use you domain knowl
 <span class="header-section-number">8.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-7"><i class="fas fa-link"></i></a>
 </h2>
 <ol class="exercises"><ol style="list-style-type: decimal">
-<li><p>Does the travel time and the time spent in the library correlate in our getsmarter population? Do a statistical test based on a survey of 200 students. Formulate the null and alternative hypothesis before doing the test. Hint: <code><a href="https://rdrr.io/pkg/infer/man/specify.html">specify(travel_time ~ time_lib)</a></code> and <code><a href="https://rdrr.io/pkg/infer/man/calculate.html">calculate(stat = "correlation")</a></code>. Consult the web site of the library <code>infer</code> (c.f. below).</p></li>
+<li><p>Does the travel time and the time spent in the library correlate in our getsmarter population? Do a statistical test based on a survey of 200 students. Formulate the null and alternative hypothesis before doing the test. Hint: <code>specify(travel_time ~ time_lib)</code> and <code>calculate(stat = "correlation")</code>. Consult the web site of the library <code>infer</code> (c.f. below).</p></li>
 <li><p>Does the travel time and the time spent in the library correlate in our getsmarter population? This time, estimate the correlation and calculate its confidence interval. Compare with the hypothesis test.</p></li>
 </ol></ol>
 </div>
@@ -343,8 +356,8 @@ Be sure to upload before the deadline!
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/08-hypothesis-test-effect-size.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/08-hypothesis-test-effect-size.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/08-hypothesis-test-effect-size.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/08-hypothesis-test-effect-size.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -356,7 +369,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2021-10-18.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2021" was written by Christina Bogner. It was last built on 2022-03-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -376,6 +389,22 @@ Be sure to upload before the deadline!
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
 </html>

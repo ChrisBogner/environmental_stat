@@ -15,7 +15,7 @@ The [Federal Statistical Office](https://www.destatis.de/EN/Home/_node.html) off
  [GENESIS](https://www-genesis.destatis.de/genesis/online?operation=previous&levelindex=&step=&titel=&levelid=&acceptscookies=false). You can navigate to the data sets and download them. Pay attention to select the format **flat** when downloading to get a *tidy* data set.
 
 ### eurostat
-[eurostat](https://ec.europa.eu/eurostat) is the statistical office of the European Union. You will find many different data sets about Europe there. However, you don't need to download them by hand, but can use the dedicated library [eurostat](http://ropengov.github.io/eurostat/index.html). This library has an informative web site with many tutorials. You can also use the eurostat data to visualize maps (possible report challenge). 
+[eurostat](https://ec.europa.eu/eurostat) is the statistical office of the European Union. You will find many different data sets about Europe there. However, I strongly recommend using the dedicated R library [eurostat](http://ropengov.github.io/eurostat/index.html) to download the data. My experience shows that students underestimate how error-prone manual download from a large database can be! The R library eurostat has an informative web site with many tutorials. Some of the show how to use the eurostat data to visualize maps (possible report challenge). 
 
 
 ### gapminder
@@ -35,7 +35,7 @@ You already worked with an excerpt of data by [gapminder](https://www.gapminder.
 - Soil organic carbon contents from sites under perennial cultivation
   - [Publication](https://www.nature.com/articles/s41597-019-0062-1)
   - [Data set](https://figshare.com/articles/dataset/A_global_empirical_harmonised_dataset_of_Soil_Organic_Carbon_under_Perennial_Crops/7637210)
-- [PANGAEA](https://www.pangaea.de/): eine der größten Datenbanken für Umweltdaten
+- [PANGAEA](https://www.pangaea.de/): one of the largest databases for environmental datasets
 - Overview of data and libraries on [ROpenScie](https://ropensci.org/):
   [Data](https://github.com/ropensci-archive/opendata)
   [Libraries](https://ropensci.org/packages/data-access/)
@@ -52,27 +52,32 @@ Inside your project folder, create a folder for data, figures and (help) scripts
 
 
 ### Download and save data
-If you want to use libraries to download data, then create a notebook for this task. Don't download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis. 
+If you want to use libraries to download data, then create a notebook for this task. Don't download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis. This will ensure that your report is **fully reproducible**.
 
 ### Structure of the report
 Please structure your report as follows:
 
   - Introduction (with research question at the end)
-  - Material and Methods: Data description (with the date of download), description of the method with references, description of the research area if appropriate 
-  - Results: Explorative data analysis, further analysis to respond to the research question
-  - Discussion: use peer-reviewed literature to frame your results
+  - Material and Methods: 
+      - Data description:
+      date of download, **reproducibility** is crucial), description of variables and their units
+      - Description of the method with references, description of the research area if appropriate 
+  - Results: 
+      - Explorative data analysis (mandatory!)
+      - Further analysis to respond to your research question(s)
+  - Discussion: use peer-reviewed literature to discuss your results
   - Conclusions
   - Bibliography
   
 You can combine results and discussion to one section.
 
-Each report should contain a **challenge**. This can be an extensive data tidying and wrangling or use of a new and interesting library (e.g. to represent spatial data in eurostat) etc.
+Each report should contain a **challenge**. This can be an extensive data tidying and wrangling or use of a new and interesting library (e.g. to plot spatial data in eurostat) etc.
 
-You can write your report in groups of two, I even recommend to do so. In this case, please add your names to the respective parts that you are responsible for. Every part will be graded separately. Every group member need to do some analysis and some writing. 
+You can write your report in groups of two, I even recommend to do so. In this case, please add your names to the respective parts that you are responsible to receive individual grades. Every part will be graded separately. Every group member need to do some analysis and some writing. Alternatively, give your consent to receive the same grade if you analysed the data and wrote the report together.
 
-I don't impose any particular length for your report. However, be *concise*.
+I don't impose any particular length for your report. However, please be *concise*.
 
-Knit the final report to an html-document. Think about whether you need to show all chunks, avoid redundancy. **Compress the whole project and submit everything!** Your report and your analysis must run on my computer so abserve the paths!
+Knit the final report to an html-document. Think about whether you need to show all chunks, avoid redundancy. **Compress the whole project and submit everything!** Your report and your analysis must run on my computer so observe the paths!
 
 
 
@@ -80,3 +85,20 @@ Knit the final report to an html-document. Think about whether you need to show 
 Submit the compressed project to ILIAS before the deadline.
 ```
 
+## Evaluation critera
+I will evaluate your report along the following criteria:
+
+1. Does the notebook run without errors?
+1. Is the the notebook structured as prescribed above?
+1. Are the research questions stated clearly?
+1. Are the methods described and necessary literature cited.
+1. Were the data downloaded and saved outside the main report in an extra notebook for full reproducibility? In case the data is downloaded by hand, this must be explained in the main report.
+1. Is the research area described?
+1. Quality of data preparation and exploratory analysis.
+1. Quality of the main analysis, which you do to respond to research questions.
+1. Quality of figures.
+1. Are the results discussed and additional literature cited? This literature should help evaluating and understanding your results.
+1. Are the conclusions sound and supported by the data and results?
+
+
+You will receive a corrected report as feedback.

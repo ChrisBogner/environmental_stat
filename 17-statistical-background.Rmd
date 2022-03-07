@@ -32,7 +32,7 @@ A simple example first, before we turn to the penguins. Let's calculate the mean
 ```{r}
 a <- c(2, 4.3, 5, 10)
 
-hand_mean = (2 + 4.3 + 5 + 10)/4
+hand_mean <- (2 + 4.3 + 5 + 10)/4
 r_mean <- mean(a)
 
 hand_mean
@@ -43,20 +43,24 @@ As expected, the values are identical. Let's now calculate the mean bill length 
 ```{r}
 mean(x = penguins$bill_length_mm)
 ```
-The function `mean()` returns NA if there are missing data in the data set. Remember to exclude NAs to get a meaningful result.
+The function `mean()` returns NA if there are missing values in the data set. Remember to exclude NAs with `na.rm = TRUE` to get a meaningful result.
 ```{r}
 mean(x = penguins$bill_length_mm, na.rm = TRUE)
 ```
 
 
-### Standard deviation
-The standard deviation is a measure of variability in your data. It shows how far on average do the data deviation from its mean value. Deviation is here the squared difference between a data point and the mean of the data. The standard deviation is the square root of the variance and is defined as:
+### Variance and standard deviation
+Variance and standard deviation are both measures of variability in your data. They show how far the data *deviates* from its mean value on the average. This *deviation* is defined as the squared difference between a data point and the mean of the data. The variance is defined as:
+
+$$v = \frac{1}{n-1} \sum_{i = 1}^{i = n} (x_i - \bar{x})^2$$
+
+The standard deviation is the square root of the variance and is defined as:
 
 $$s = \sqrt{\frac{1}{n-1} \sum_{i = 1}^{i = n} (x_i - \bar{x})^2}$$
 where:
 
 - $\bar{x}$: mean value of data set $x$
-- $i$: index running from 1 to $n$, the number of your data (sample size)
+- $i$: index running from 1 to $n$, the number of your data points (sample size)
 - $x_i$: single data points in the data sets $x$
 
 
@@ -71,7 +75,7 @@ r_sd
 ```
 Again, identical `r emo::ji('smile')`. How large is the standard deviation of penguins' bill lengths? Don't forget to exclude the missing values!
 ```{r}
-mean(x = penguins$bill_length_mm, na.rm = TRUE)
+sd(x = penguins$bill_length_mm, na.rm = TRUE)
 ```
 
 
@@ -83,7 +87,7 @@ $$ r = \frac{\sum_{i = 1}^{i = n} (x_i - \bar{x})(y_i - \bar{y})}{ \sqrt{\sum_{i
 where:
 
 - $\bar{x}$ and $\bar{y}$: mean values of data set $x$ and $y$, respectively
-- $i$: index running from 1 to $n$, the number of your data (sample size)
+- $i$: index running from 1 to $n$, the number of your data points (sample size)
 - $x_i$ and $y_i$: single data points in the data sets $x$ and $y$, respectively
 
 The Pearson correlation coefficients varies between -1 (perfect negative correlation) and 1 (perfect positive correlation). A value around zero shows no **linear** correlation. However, a different kind of assiciation might exist in the data. Remember to always plot your data!
@@ -100,7 +104,14 @@ adelie <- penguins %>%
 cor(adelie$bill_length_mm, adelie$bill_depth_mm, method = 'pearson', use = 'pairwise.complete.obs')
 ```
 
-We need to distinguish between species here because the correlations differ between them.
+We need to distinguish between species because the correlations differ between them.
+
+```{r}
+penguins %>%
+  group_by(species) %>% 
+  summarise(cor = cor(bill_length_mm, bill_depth_mm, method = 'pearson', use = 'pairwise.complete.obs'))
+```
+
 ```{r, out.width = '90%', warning = F, message = F}
 ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, col = species)) +
   geom_point() +
