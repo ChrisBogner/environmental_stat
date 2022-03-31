@@ -1,7 +1,7 @@
 ---
 knit: "bookdown::render_book"
 title: "Environmental Statistics"
-subtitle: "Summer term 2021"
+subtitle: "Summer term 2022"
 author: "Christina Bogner"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 site: bookdown::bookdown_site
@@ -18,10 +18,10 @@ description: "Lecture notes for the course Environmental Statistics in IMES (UoC
 > The most exciting phrase to hear in science, the one that heralds new discoveries, is not 'Eureka!' but 'That's funny...' 
 `r tufte::quote_footer('--- Isaac Asimov')`
 
-## Online teaching {-}
+## Back to in-person teaching {-}
 
 ```{block, type='rmdinfo'}
-The corona virus pandemic impacts our lives and changes the way we teach and learn. This course will be held online. Please be patient if not all activities turn out to be successful and not all technical tools function as desired. We all will do our best to support you in your curriculum.
+The corona virus pandemic still impacts our lives and changes the way we teach and learn. This course will be held in person, I hope we are back to nearly normal. We learnt a lot during the online-teaching phase and some of the tools proved useful. Thus, I will try to move some of them into the in-person phase.
 ```
 
 In this course, we will use the following tools:
@@ -33,19 +33,14 @@ In this course, we will use the following tools:
 **Campuswire**: a chat platform to decrease the number of emails and allow for a more natural exchange between participants and lecturer. You should have received an invitation email, if not, send me an email, please.
 
 
-**Zoom**: will be used for live presentations. Please check the registration requirements on ILIAS.
-
-
-**RStudio Server Pro**: a server with a running R and RStudio installation. We will be working there.
-
 ## Intended learning outcomes (ILOs) {-}
 At the end of this course you should be able to
 
 ```{block, type='rmdoutcomes'}
-- Write simple R scripts for data analysis.
+- Write R notebooks for data analysis.
 - Explain statistical methods learnt in this course.
 - Apply statistical methods learnt in this course.
-- Apply selected methods to a new data set and write a report.
+- Apply selected methods to a new data set and write a reproducible report.
 ```
 
 

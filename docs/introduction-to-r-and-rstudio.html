@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>1 Introduction to R and RStudio | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<meta name="description" content="Create and save files in RStudio  Use R as a calculator  Create first objects in R  Call first functions in R  Do you very first plot  This chapter introduces you to R and RStudio which you’ll be...">
+<meta name="generator" content="bookdown 0.24.3 with bs4_book()">
+<meta property="og:title" content="1 Introduction to R and RStudio | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Create and save files in RStudio  Use R as a calculator  Create first objects in R  Call first functions in R  Do you very first plot  This chapter introduces you to R and RStudio which you’ll be...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1 Introduction to R and RStudio | Environmental Statistics">
+<meta name="twitter:description" content="Create and save files in RStudio  Use R as a calculator  Create first objects in R  Call first functions in R  Do you very first plot  This chapter introduces you to R and RStudio which you’ll be...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Summer term 2022">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2022</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="active" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introduction-to-r-and-rstudio" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Introduction to R and RStudio<a class="anchor" aria-label="anchor" href="#introduction-to-r-and-rstudio"><i class="fas fa-link"></i></a>
+</h1>
+<div class="rmdoutcomes">
+<ul>
+<li>
+Create and save files in RStudio
+</li>
+<li>
+Use R as a calculator
+</li>
+<li>
+Create first objects in R
+</li>
+<li>
+Call first functions in R
+</li>
+<li>
+Do you very first plot
+</li>
+</ul>
+</div>
+<p>This chapter introduces you to R and RStudio which you’ll be using throughout the course both to learn statistical concepts and to analyse real data. Often, R and RStudio are confused. However, they are not the same: R is the name of the programming language itself and RStudio is a so-called <em>integrated development interface</em> (IDE), a development environment that will make your life easier.</p>
+<div id="what-is" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> What is <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>?<a class="anchor" aria-label="anchor" href="#what-is"><i class="fas fa-link"></i></a>
+</h2>
+<p>R is a programming language for data analysis and statistical modelling. It is free (<em>open-source software</em>) and belongs together with Python to the most used programming languages for data analysis. R has been introduced by Ross Ihaka and Robert Gentleman in 1996 <span class="citation">(<a href="literature-1.html#ref-Ihaka1996" role="doc-biblioref">Ihaka and Gentleman 1996</a>)</span>. It has many additional <em>packages</em>, which extend its functionality.</p>
+<p>You can and should install R on your computer through the official <a href="https://www.r-project.org/">R webpage</a>. A short installation HowTo can be found on ILIAS and in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span>, Chapter 1. You will also find additional packages on R’s official webpage under CRAN (<em>The Comprehensive R Archive Network</em>). Not all packages are released through CRAN; however, in the beginning it is a good idea to use CRAN to find and install packages.</p>
+<p>Packages can be organized in topics, which you can explore via the <a href="http://cran.r-project.org/web/views/">CRAN Task Views</a>. For environmental statistics, the following topics are relevant:</p>
+<ul>
+<li>Environmetrics: analysis of environmental data</li>
+<li>Multivariate: multivariate statistics</li>
+<li>Spatial: analysis of spatial data</li>
+<li>TimeSeries: time series analysis.</li>
+</ul>
+</div>
+<div id="what-is-rstudio" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> What is RStudio?<a class="anchor" aria-label="anchor" href="#what-is-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>RStudio Desktop is an IDE for R (and some other languages). You can download and install the <em>open-source</em> version for your computer <a href="https://rstudio.com/products/rstudio/#rstudio-desktop">here</a>. The RStudio interface is split in four main areas (Figure <a href="introduction-to-r-and-rstudio.html#fig:rstudio">1.1</a>).</p>
+<p>On the top left, you will type your commands and your text. The focus of this course is on reproducible research, and we will start using RMarkdown in the next session.</p>
+<p>The panel on the bottom left is the <em>console</em> where R executes your commands. This is the proper R system. When you start RStudio, the standard R text will be displayed there to inform you about the R being open source, its version and some other useful things.</p>
+<p>The panel in the upper right contains your <em>workspace</em>, i.e. the objects that you generated during your working session in R. Additionally, you will find the history of your commands there.</p>
+<p>The panel in the bottom right will show your plots (in case you are working with simple scripts and not with RMarkdown files). The tab “Files” helps you to browse your files.</p>
+<div class="figure">
+<span style="display:block;" id="fig:rstudio"></span>
+<img src="figures/RStudio_engl.png" alt="RStudio interface" width="100%"><p class="caption">
+Figure 1.1: RStudio interface
+</p>
+</div>
+</div>
+<div id="organize-your-work" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Organize your work<a class="anchor" aria-label="anchor" href="#organize-your-work"><i class="fas fa-link"></i></a>
+</h2>
+<p>To better organize your files, create a folder for <strong>data</strong>, <strong>scripts</strong> and <strong>notebooks</strong>.</p>
+</div>
+<div id="practice-on-your-own" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will start the exercises <a href="additional-exercises.html#rob1">C.1.1</a> and <a href="additional-exercises.html#rob2">C.1.2</a> in class. Finish the exercises on your own and produce your first plot in exercise <a href="additional-exercises.html#firstplot">C.1.3</a> 😄. If you need to type comments or answer with text, don’t forget to use the comment sign <code>#</code> at the beginning of the line. Otherwise, R will misinterpret your text as commands and will try to execute it.</p>
+<div class="rmdalert">
+<p>
+Remember to save your R script regularly! Click the save button in the upper left-hand corner of the window or hit Stg+s.
+</p>
+</div>
+</div>
+<div id="turning-in-your-work" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Save your R script as *.R file.</li>
+<li>Upload your *.R file to ILIAS. You will find an upload option in today’s session.</li>
+<li>You should receive a solution file after the upload.</li>
+</ul>
+<div class="rmdalert">
+<p>
+Be sure to upload before the deadline!
+</p>
+</div>
+</div>
+<div id="reading-assignment" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment"><i class="fas fa-link"></i></a>
+</h2>
+<p>Chapters 1.1 and 1.2 in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Preface</a></div>
+<div class="next"><a href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introduction-to-r-and-rstudio"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="nav-link" href="#what-is"><span class="header-section-number">1.1</span> What is ?</a></li>
+<li><a class="nav-link" href="#what-is-rstudio"><span class="header-section-number">1.2</span> What is RStudio?</a></li>
+<li><a class="nav-link" href="#organize-your-work"><span class="header-section-number">1.3</span> Organize your work</a></li>
+<li><a class="nav-link" href="#practice-on-your-own"><span class="header-section-number">1.4</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#turning-in-your-work"><span class="header-section-number">1.5</span> Turning in your work</a></li>
+<li><a class="nav-link" href="#reading-assignment"><span class="header-section-number">1.6</span> Reading assignment</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/01-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/01-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-03-31.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
