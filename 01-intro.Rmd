@@ -12,11 +12,11 @@
 This chapter introduces you to R and RStudio which you'll be using throughout the course both to learn statistical concepts and to analyse real data. Often, R and RStudio are confused. However, they are not the same: R is the name of the programming language itself and RStudio is a so-called *integrated development interface* (IDE), a development environment that will make your life easier.
 
 ## What is `r fa("r-project", fill = "steelblue")`?
-R is a programming language for data analysis and statistical modelling. It is free (*open-source software*) and belongs together with Python to the most used programming languages for data analysis. R has been introduced by Ross Ihaka and Robert Gentleman in 1996 [@Ihaka1996]. It has many additional *packages*, which extend its functionality.
+R is a programming language for data analysis and statistical modelling. It is free (*open-source software*) and belongs, together with Python, to the most popular programming languages for data analysis. R has been introduced by Ross Ihaka and Robert Gentleman in 1996 [@Ihaka1996]. It has many additional *packages*, which extend its functionality.
 
-You can and should install R on your computer through the official [R webpage](https://www.r-project.org/). A short installation HowTo can be found on ILIAS and in @ModernDive, Chapter 1. You will also find additional packages on R's official webpage under CRAN (*The Comprehensive R Archive Network*). Not all packages are released through CRAN; however, in the beginning it is a good idea to use CRAN to find and install packages. 
+You can and should install R on your computer through the official [R webpage](https://www.r-project.org/). A short installation instruction with a list of packages for this course can be found on ILIAS. Additionally, you can refer to @ModernDive, Chapter 1. You will find packages on R's official webpage under CRAN (*The Comprehensive R Archive Network*). Not all packages are released through CRAN. However, in the beginning it is a good idea to use CRAN to find and install packages. 
 
-Packages can be organized in topics, which you can explore via the [CRAN Task Views](http://cran.r-project.org/web/views/). For environmental statistics, the following topics are relevant:
+Packages are sometimes organized in topics, which you can explore via the [CRAN Task Views](http://cran.r-project.org/web/views/). For environmental statistics, the following topics are relevant:
 
 - Environmetrics: analysis of environmental data
 - Multivariate: multivariate statistics
@@ -27,7 +27,7 @@ Packages can be organized in topics, which you can explore via the [CRAN Task Vi
 ## What is RStudio?
 RStudio Desktop is an IDE for R (and some other languages). You can download and install the *open-source* version for your computer [here](https://rstudio.com/products/rstudio/#rstudio-desktop). The RStudio interface is split in four main areas (Figure \@ref(fig:rstudio)).
 
-On the top left, you will type your commands and your text. The focus of this course is on reproducible research, and we will start using RMarkdown in the next session.
+On the top left, you will type your commands and your text. The focus of this course is on reproducible research, and we will start using R Markdown in the next session.
 
 The panel on the bottom left is the *console* where R executes your commands. This is the proper R system. When you start RStudio, the standard R text will be displayed there to inform you about the R being open source, its version and some other useful things.
 
@@ -41,12 +41,12 @@ knitr::include_graphics('figures/RStudio_engl.png')
 
 
 ## Organize your work
-To better organize your files, create a folder for **data**, **scripts** and **notebooks**.
+To better organize your files, create a subfolders for **data**, **scripts** and **notebooks** in your main folder.
 
 
 ## Practice on your own!
 
-We will start the exercises \@ref(rob1) and \@ref(rob2) in class. Finish the exercises on your own and produce your first plot in exercise \@ref(firstplot) `r emo::ji('smile')`. If you need to type comments or answer with text, don't forget to use the comment sign `#` at the beginning of the line. Otherwise, R will misinterpret your text as commands and will try to execute it.
+We will start the exercises \@ref(rob1) and \@ref(rob2) in class. Finish the exercises on your own and produce your first plot in exercise \@ref(firstplot) `r emo::ji('smile')`. If you need to type comments or answer with text, don't forget to use the comment sign `#` at the beginning of each text line. Otherwise, R will misinterpret your text as commands and will try to execute them.
 
 ```{block, type='rmdalert'}
 Remember to save your R script regularly! Click the save button in the upper left-hand corner of the window or hit Stg+s.

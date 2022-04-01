@@ -45,7 +45,7 @@
 <li><a class="" href="index.html">Preface</a></li>
 <li class="book-part">Part I: Explore data</li>
 <li><a class="active" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
+<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
 <li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
 <li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
 <li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
@@ -97,9 +97,9 @@ Do you very first plot
 <h2>
 <span class="header-section-number">1.1</span> What is <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>?<a class="anchor" aria-label="anchor" href="#what-is"><i class="fas fa-link"></i></a>
 </h2>
-<p>R is a programming language for data analysis and statistical modelling. It is free (<em>open-source software</em>) and belongs together with Python to the most used programming languages for data analysis. R has been introduced by Ross Ihaka and Robert Gentleman in 1996 <span class="citation">(<a href="literature-1.html#ref-Ihaka1996" role="doc-biblioref">Ihaka and Gentleman 1996</a>)</span>. It has many additional <em>packages</em>, which extend its functionality.</p>
-<p>You can and should install R on your computer through the official <a href="https://www.r-project.org/">R webpage</a>. A short installation HowTo can be found on ILIAS and in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span>, Chapter 1. You will also find additional packages on R’s official webpage under CRAN (<em>The Comprehensive R Archive Network</em>). Not all packages are released through CRAN; however, in the beginning it is a good idea to use CRAN to find and install packages.</p>
-<p>Packages can be organized in topics, which you can explore via the <a href="http://cran.r-project.org/web/views/">CRAN Task Views</a>. For environmental statistics, the following topics are relevant:</p>
+<p>R is a programming language for data analysis and statistical modelling. It is free (<em>open-source software</em>) and belongs, together with Python, to the most popular programming languages for data analysis. R has been introduced by Ross Ihaka and Robert Gentleman in 1996 <span class="citation">(<a href="literature-1.html#ref-Ihaka1996" role="doc-biblioref">Ihaka and Gentleman 1996</a>)</span>. It has many additional <em>packages</em>, which extend its functionality.</p>
+<p>You can and should install R on your computer through the official <a href="https://www.r-project.org/">R webpage</a>. A short installation instruction with a list of packages for this course can be found on ILIAS. Additionally, you can refer to <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span>, Chapter 1. You will find packages on R’s official webpage under CRAN (<em>The Comprehensive R Archive Network</em>). Not all packages are released through CRAN. However, in the beginning it is a good idea to use CRAN to find and install packages.</p>
+<p>Packages are sometimes organized in topics, which you can explore via the <a href="http://cran.r-project.org/web/views/">CRAN Task Views</a>. For environmental statistics, the following topics are relevant:</p>
 <ul>
 <li>Environmetrics: analysis of environmental data</li>
 <li>Multivariate: multivariate statistics</li>
@@ -112,7 +112,7 @@ Do you very first plot
 <span class="header-section-number">1.2</span> What is RStudio?<a class="anchor" aria-label="anchor" href="#what-is-rstudio"><i class="fas fa-link"></i></a>
 </h2>
 <p>RStudio Desktop is an IDE for R (and some other languages). You can download and install the <em>open-source</em> version for your computer <a href="https://rstudio.com/products/rstudio/#rstudio-desktop">here</a>. The RStudio interface is split in four main areas (Figure <a href="introduction-to-r-and-rstudio.html#fig:rstudio">1.1</a>).</p>
-<p>On the top left, you will type your commands and your text. The focus of this course is on reproducible research, and we will start using RMarkdown in the next session.</p>
+<p>On the top left, you will type your commands and your text. The focus of this course is on reproducible research, and we will start using R Markdown in the next session.</p>
 <p>The panel on the bottom left is the <em>console</em> where R executes your commands. This is the proper R system. When you start RStudio, the standard R text will be displayed there to inform you about the R being open source, its version and some other useful things.</p>
 <p>The panel in the upper right contains your <em>workspace</em>, i.e. the objects that you generated during your working session in R. Additionally, you will find the history of your commands there.</p>
 <p>The panel in the bottom right will show your plots (in case you are working with simple scripts and not with RMarkdown files). The tab “Files” helps you to browse your files.</p>
@@ -127,13 +127,13 @@ Figure 1.1: RStudio interface
 <h2>
 <span class="header-section-number">1.3</span> Organize your work<a class="anchor" aria-label="anchor" href="#organize-your-work"><i class="fas fa-link"></i></a>
 </h2>
-<p>To better organize your files, create a folder for <strong>data</strong>, <strong>scripts</strong> and <strong>notebooks</strong>.</p>
+<p>To better organize your files, create a subfolders for <strong>data</strong>, <strong>scripts</strong> and <strong>notebooks</strong> in your main folder.</p>
 </div>
 <div id="practice-on-your-own" class="section level2" number="1.4">
 <h2>
 <span class="header-section-number">1.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own"><i class="fas fa-link"></i></a>
 </h2>
-<p>We will start the exercises <a href="additional-exercises.html#rob1">C.1.1</a> and <a href="additional-exercises.html#rob2">C.1.2</a> in class. Finish the exercises on your own and produce your first plot in exercise <a href="additional-exercises.html#firstplot">C.1.3</a> 😄. If you need to type comments or answer with text, don’t forget to use the comment sign <code>#</code> at the beginning of the line. Otherwise, R will misinterpret your text as commands and will try to execute it.</p>
+<p>We will start the exercises <a href="additional-exercises.html#rob1">C.1.1</a> and <a href="additional-exercises.html#rob2">C.1.2</a> in class. Finish the exercises on your own and produce your first plot in exercise <a href="additional-exercises.html#firstplot">C.1.3</a> 😄. If you need to type comments or answer with text, don’t forget to use the comment sign <code>#</code> at the beginning of each text line. Otherwise, R will misinterpret your text as commands and will try to execute them.</p>
 <div class="rmdalert">
 <p>
 Remember to save your R script regularly! Click the save button in the upper left-hand corner of the window or hit Stg+s.
@@ -165,7 +165,7 @@ Be sure to upload before the deadline!
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Preface</a></div>
-<div class="next"><a href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></div>
+<div class="next"><a href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -193,7 +193,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-03-31.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-04-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

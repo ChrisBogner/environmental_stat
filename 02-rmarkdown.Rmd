@@ -1,4 +1,4 @@
-# Using R Markdown
+# Using R Markdown for reproducible research
 
 
 ```{block, type='rmdoutcomes'}
@@ -6,7 +6,11 @@
 - Basic layout in R Markdown
 ```
 
-## Opening a new R Notebook
+
+## Reproducibility in research
+to come
+
+## Create a new R Notebook
 
 When you want to write a paper, you have to open a Word document to type your ideas into, and save your work in. In R we use a document type called an R Markdown document. R Markdown documents are useful for both running code, and annotating the code with comments. The document can be saved, so you can refer back to your code later, and can be used to create other document types (html, word, pdf, or slides) for presenting the results of your analyses. R Markdown provides a way to generate clear and reproducible statistical analyses. 
 
@@ -186,11 +190,6 @@ A superscript: R^2^
 
 
 ## Turning in your work
-- Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.
-- Upload your R Notebook to ILIAS. You will find an upload option in today's session.
-- You should receive a solution file after the deadline.
-
-```{block, type='rmdalert'}
-Be sure to upload before the deadline!
-```
-
+- Save your R Notebook as an *.Rmd file. 
+- Upload your R Notebook to ILIAS. You don't need to upload the .nb.html file. You will find an upload option in today's session.
+- You should receive a solution file after your upload. **Be sure to upload before the deadline!**

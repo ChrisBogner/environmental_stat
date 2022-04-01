@@ -45,7 +45,7 @@
 <li><a class="" href="index.html">Preface</a></li>
 <li class="book-part">Part I: Explore data</li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="using-r-markdown.html"><span class="header-section-number">2</span> Using R Markdown</a></li>
+<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
 <li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
 <li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
 <li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
@@ -173,7 +173,7 @@ Sum
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Gender on personal file'</span>, y <span class="op">=</span> <span class="st">'Abs. frequency'</span>,
        title <span class="op">=</span> <span class="st">'Decisions of bank supervisors from study by Rosen &amp; Jerdee (1974)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-121-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-116-1.png" width="90%"></div>
 <p>How large is the difference of proportions in promotions between men and women? Is this difference due to chance or are women discriminated against?</p>
 <p>A hypothesis test helps to decide whether an observed effect, in our case the difference in proportions of promotions, can be attributed to chance. In a hypothesis test, two different statements are contrasted, a <strong>null hypothesis</strong> and an <strong>alternative hypothesis</strong>:</p>
 <ul>
@@ -252,7 +252,7 @@ Figure 8.1: General framework in <code>infer</code>. (Source: <a href="https://i
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="va">null_distn</span>, bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_p_value.html">shade_p_value</a></span><span class="op">(</span>obs_stat <span class="op">=</span> <span class="va">prop_hat</span>, direction <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-124-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-119-1.png" width="90%"></div>
 <blockquote>
 <p>The <strong><span class="math inline">\(p\)</span> value</strong> is the probability to obtain data as extreme or more extreme than what has been observed, if the null hypothesis is true.</p>
 </blockquote>
@@ -323,16 +323,11 @@ Is the <span class="math inline">\(p\)</span> values small? Use you domain knowl
 <span class="header-section-number">8.7</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-6"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li>Save your R Notebook and download the .Rmd file to your computer. You don’t need to download the .nb.html file.</li>
-<li>Upload your R Notebook to ILIAS. You will find an upload option in today’s session.</li>
-<li>You should receive a solution file after the submission.</li>
+<li>Save your R Notebook as an *.Rmd file.</li>
+<li>Upload your R Notebook to ILIAS. You don’t need to upload the .nb.html file. You will find an upload option in today’s session.</li>
+<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong>
+</li>
 </ul>
-<div class="rmdalert">
-<p>
-Be sure to upload before the deadline!
-</p>
-</div>
-
 </div>
 </div>
 
@@ -369,7 +364,7 @@ Be sure to upload before the deadline!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-03-31.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-04-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

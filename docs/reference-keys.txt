@@ -8,10 +8,10 @@ fig:sampling-world
 fig:sampling-bootstrap
 fig:ht
 fig:one-test
+fig:unnamed-chunk-148
 fig:unnamed-chunk-155
-fig:unnamed-chunk-162
-tab:unnamed-chunk-170
-tab:unnamed-chunk-171
+tab:unnamed-chunk-163
+tab:unnamed-chunk-164
 introduction-to-r-and-rstudio
 what-is
 what-is-rstudio
@@ -19,8 +19,9 @@ organize-your-work
 practice-on-your-own
 turning-in-your-work
 reading-assignment
-using-r-markdown
-opening-a-new-r-notebook
+using-r-markdown-for-reproducible-research
+reproducibility-in-research
+create-a-new-r-notebook
 make-changes-to-a-file
 saving-a-file
 preview

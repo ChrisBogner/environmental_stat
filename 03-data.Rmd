@@ -99,14 +99,9 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, co
 Chapter 1.3 in @ModernDive.
 
 ## Turning in your work
-
--   Save your R Notebook and download the .Rmd file to your computer. You don't need to download the .nb.html file.
--   Upload your R Notebook to ILIAS. You will find an upload option in today's session.
--   You should receive a solution file after the deadline.
-
-```{block, type='rmdalert'}
-Be sure to upload before the deadline!
-```
+- Save your R Notebook as an *.Rmd file. 
+- Upload your R Notebook to ILIAS. You don't need to upload the .nb.html file. You will find an upload option in today's session.
+- You should receive a solution file after your upload. **Be sure to upload before the deadline!**
 
 ## Additional reading
 

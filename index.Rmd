@@ -30,7 +30,7 @@ In this course, we will use the following tools:
 **ILIAS**: the moodle platform at the UoC. You should all be registered there already.
 
 
-**Campuswire**: a chat platform to decrease the number of emails and allow for a more natural exchange between participants and lecturer. You should have received an invitation email, if not, send me an email, please.
+**Campuswire**: a chat platform to decrease the number of emails and allow for a more natural exchange between participants and lecturer. You should have received an invitation email, if not, email me, please.
 
 
 ## Intended learning outcomes (ILOs) {-}
@@ -89,7 +89,7 @@ This is a definition
 
 ## Acknowledgements {-}
 
-This document is based on the free material provided by 
+This document draws on the free material provided by 
 
 - ModernDive: @ModernDive and their free Problem Sets authored by Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay (https://moderndive.github.io/moderndive_labs/index.html)
 
