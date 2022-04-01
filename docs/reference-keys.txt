@@ -122,7 +122,7 @@ download-and-save-data
 structure-of-the-report
 evaluation-critera
 additional-exercises
-introduction-to-r-and-rstudio-server-pro
+introduction-to-r-and-rstudio-1
 rob1
 rob2
 firstplot

@@ -1,6 +1,6 @@
 # Additional exercises
 
-## Introduction to R and RStudio Server Pro
+## Introduction to R and RStudio
 
 ### Rob's account book {#rob1}
 
