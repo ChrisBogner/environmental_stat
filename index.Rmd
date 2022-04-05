@@ -37,10 +37,12 @@ In this course, we will use the following tools:
 At the end of this course you should be able to
 
 ```{block, type='rmdoutcomes'}
-- Write R notebooks for data analysis.
-- Explain statistical methods learnt in this course.
-- Apply statistical methods learnt in this course.
-- Apply selected methods to a new data set and write a reproducible report.
+- Import/read data into R.
+- Prepare data for analysis.
+- Visualize data.
+- Explain and apply statistical methods learnt in this course.
+- Combine code and report in a reproducible way.
+- Apply selected methods learnt in this course to a new data set and write a reproducible report.
 ```
 
 
