@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>2 Using R Markdown for reproducible research | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
-<meta name="description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research to come  2.2 Create a new R Notebook When you want to write a paper, you have to open a Word document...">
+<meta name="description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research Usually, analysing data and generating the report are two separate tasks. First, you analyse your...">
 <meta name="generator" content="bookdown 0.24.3 with bs4_book()">
 <meta property="og:title" content="2 Using R Markdown for reproducible research | Environmental Statistics">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research to come  2.2 Create a new R Notebook When you want to write a paper, you have to open a Word document...">
+<meta property="og:description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research Usually, analysing data and generating the report are two separate tasks. First, you analyse your...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2 Using R Markdown for reproducible research | Environmental Statistics">
-<meta name="twitter:description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research to come  2.2 Create a new R Notebook When you want to write a paper, you have to open a Word document...">
+<meta name="twitter:description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research Usually, analysing data and generating the report are two separate tasks. First, you analyse your...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -46,21 +46,8 @@
 <li class="book-part">Part I: Explore data</li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
 <li><a class="active" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
-<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
-<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
-<li class="book-part">Part II: Statistical inference</li>
-<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
-<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
-<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
-<li class="book-part">Part III: Statistical modelling</li>
-<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
-<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
-<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
-<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">3</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">4</span> Frequently and not-so-frequently asked questions</a></li>
 <li><a class="" href="literature-1.html">Literature</a></li>
 </ul>
 
@@ -87,36 +74,44 @@ Basic layout in R Markdown
 <h2>
 <span class="header-section-number">2.1</span> Reproducibility in research<a class="anchor" aria-label="anchor" href="#reproducibility-in-research"><i class="fas fa-link"></i></a>
 </h2>
-<p>to come</p>
+<p>Usually, analysing data and generating the report are two separate tasks. First, you analyse your data (hopefully in R 😄), and then you describe your methods, results and conclusions in a text document. However, this procedure is error-prone and not reproducible. You have to copy-paste results from R into tables or include figures in your word processor. The connection between the analysis code, the results and the report is lost.</p>
+<p>Donald Knuth, the creator of TEX, suggested the idea of <em>literate programming</em>, where analysis code and the report are combined in one document <span class="citation">(<a href="literature-1.html#ref-Knuth1984" role="doc-biblioref">Knuth 1984</a>)</span>. This kind of document is human-centred and allows to better understand the analysis. It helps to generate completely reproducible data analyses.</p>
 </div>
-<div id="create-a-new-r-notebook" class="section level2" number="2.2">
+<div id="combining-code-and-report-in-one-document" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> Create a new R Notebook<a class="anchor" aria-label="anchor" href="#create-a-new-r-notebook"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Combining code and report in one document<a class="anchor" aria-label="anchor" href="#combining-code-and-report-in-one-document"><i class="fas fa-link"></i></a>
 </h2>
-<p>When you want to write a paper, you have to open a Word document to type your ideas into, and save your work in. In R we use a document type called an R Markdown document. R Markdown documents are useful for both running code, and annotating the code with comments. The document can be saved, so you can refer back to your code later, and can be used to create other document types (html, word, pdf, or slides) for presenting the results of your analyses. R Markdown provides a way to generate clear and reproducible statistical analyses.</p>
-<p>There are different types of R Markdown documents. We will usually use the R Notebook.</p>
-<p>To open a new R Notebook, click on the little green plus on the upper left hand and select R Notebook as in the image below. You can leave it untitled.</p>
+<p>We will use <strong>R Markdown</strong> to combine analysis code and report in one reproducible document. In general, R Markdown can produce different output documents (html, word, pdf, or slides). However, in this course we will concentrate on html output and use so-called R Notebooks (mostly).</p>
+<div id="create-a-new-r-notebook" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Create a new R Notebook<a class="anchor" aria-label="anchor" href="#create-a-new-r-notebook"><i class="fas fa-link"></i></a>
+</h3>
+<p>To create a new R Notebook, click on the little green plus or click on <code>File</code> on the upper left hand and select R Notebook as in the image below. Save your notebook in the subfolder <strong>notebooks</strong>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:r-notebook"></span>
 <img src="figures/r-notebook.png" alt="How to create a new R Notebook" width="40%"><p class="caption">
 Figure 2.1: How to create a new R Notebook
 </p>
 </div>
-<p>When you open a new R Notebook, there is some example code in it that you can get rid of. We will take care of this next.</p>
+<p>In contrast to a new R script, a new notebook has some template text and example R code in grey boxes called <strong>chunks</strong>. Have a look at this template text. It provides basic example of layout and R code chunks.</p>
 </div>
-<div id="make-changes-to-a-file" class="section level2" number="2.3">
-<h2>
-<span class="header-section-number">2.3</span> Make changes to a file<a class="anchor" aria-label="anchor" href="#make-changes-to-a-file"><i class="fas fa-link"></i></a>
-</h2>
-<p>Let’s make some changes to the R Markdown file you just opened. Using the image below as a guide</p>
+<div id="customize-the-header" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Customize the header<a class="anchor" aria-label="anchor" href="#customize-the-header"><i class="fas fa-link"></i></a>
+</h3>
+<p>Every R Markdown document starts with a header. It is enclosed between two lines of <code>---</code> signs. Inside the header, you find some (blue) keywords like <code>title:</code> and <code>output:</code>. Let’s customize the header for our needs:</p>
 <ul>
-<li>First, change the title at the top to “Getting to know R Notebooks.” Be sure to keep the quotation marks.</li>
-<li>Second, add an author line, following the example below. You need quotation marks!</li>
-<li>Third, delete everything in the document from line 6 downwards.</li>
-<li>Fourth, add headers and text, <strong>exactly</strong> following the example below.</li>
-<li>Finally, insert what is called a “code chunk.” To do this you click on the <strong>insert</strong> button near the top centre of the screen, then choose R. The greyed out box that shows up is where you type code.</li>
+<li><p>Change the title at the top to “Getting to know R Notebooks.” Be sure to keep the quotation marks.</p></li>
+<li><p>Add an author line and put your name there in quotation marks.</p></li>
 </ul>
-<p>Your final result should look like this:</p>
+<p>Additionally, you might want to add the date. The syntax is <code>date: "some date here"</code>.</p>
+</div>
+<div id="structure-your-notebook" class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> Structure your notebook<a class="anchor" aria-label="anchor" href="#structure-your-notebook"><i class="fas fa-link"></i></a>
+</h3>
+<p>Structure with headers and subheaders helps to orginze content and ideas. To add a header, put <code>#</code> followed by the header title. Be sure to include a space between # and the text! A subheader is produced with <code>##</code> and a subsubheader with <code>###</code>. Be sure to include a space before the header text!</p>
+<p>Delete the template text and structure your notebook. Your final result should look something like this:</p>
 <div class="figure">
 <span style="display:block;" id="fig:rmarkdown-file"></span>
 <img src="figures/new_chunk.png" alt="An R Notebook" width="100%"><p class="caption">
@@ -124,62 +119,44 @@ Figure 2.2: An R Notebook
 </p>
 </div>
 </div>
-<div id="saving-a-file" class="section level2" number="2.4">
-<h2>
-<span class="header-section-number">2.4</span> Saving a file<a class="anchor" aria-label="anchor" href="#saving-a-file"><i class="fas fa-link"></i></a>
-</h2>
-<p>I suggest to create a new folder <code>Notebooks</code> to save all your R Notebooks.</p>
-<p>You will complete your lab work in an R Notebook file like this each week, so it is important to learn how to save these files.</p>
-<ul>
-<li>Click File &gt; Save As…</li>
-<li>Browse to the <code>Notebooks</code> course folder you just created</li>
-<li>Name the file: <code>Session2_lastname_firstname</code> (fill in your firstname and lastname)</li>
-<li>Click save</li>
-</ul>
-<p>This is now saved in the <code>Notebooks</code> folder <strong>on the server</strong>.</p>
-</div>
-<div id="preview" class="section level2" number="2.5">
-<h2>
-<span class="header-section-number">2.5</span> Preview<a class="anchor" aria-label="anchor" href="#preview"><i class="fas fa-link"></i></a>
-</h2>
+<div id="preview" class="section level3" number="2.2.4">
+<h3>
+<span class="header-section-number">2.2.4</span> Preview<a class="anchor" aria-label="anchor" href="#preview"><i class="fas fa-link"></i></a>
+</h3>
 <p>Notebooks have the great advantage to offer the preview of your work. Just click the <code>Preview</code> button. The preview is refreshed every time you save your notebook.</p>
+<p>Inspect the preview of your notebook to see how your formatting with headers and subheaders affects the output. There more layout elements, and you will experiment with them in the exercises.</p>
 </div>
-<div id="other-output-options" class="section level2" number="2.6">
-<h2>
-<span class="header-section-number">2.6</span> Other output options<a class="anchor" aria-label="anchor" href="#other-output-options"><i class="fas fa-link"></i></a>
-</h2>
+<div id="other-output-options" class="section level3" number="2.2.5">
+<h3>
+<span class="header-section-number">2.2.5</span> Other output options<a class="anchor" aria-label="anchor" href="#other-output-options"><i class="fas fa-link"></i></a>
+</h3>
 <p>You can also produce different outputs from your R Notebook because it is a normal R Markdown file and supports different output formats. However, if you produce an .html output, the <code>Preview</code> button will disappear! To bring it back, you need to edit the header of your R Notebook file to <code>output: html_notebook</code>.</p>
 <div class="rmdinfo">
 <p>
 Note that there is now an R Notebook file (<code>.Rmd</code>) and an html file (<code>nb.html</code>) in the <code>Notebooks</code> folder.
 </p>
 </div>
-<p>Inspect the preview of your notebook to see how what you typed was formatted. There are lots of tricks for controlling the formatting of the knitted html file. For instance:</p>
-<ul>
-<li>putting <code>##</code> and a space in front of text makes it into a large header. For example, see how <code>## This is a header</code> in your R Markdown <code>.Rmd</code> file translates in the resulting <code>.html</code> output.</li>
-<li>putting <code>###</code> and a space in front of text makes it a smaller header!</li>
-</ul>
 </div>
-<div id="entering-and-running-commands" class="section level2" number="2.7">
+</div>
+<div id="entering-and-running-commands" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">2.7</span> Entering and running commands<a class="anchor" aria-label="anchor" href="#entering-and-running-commands"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Entering and running commands<a class="anchor" aria-label="anchor" href="#entering-and-running-commands"><i class="fas fa-link"></i></a>
 </h2>
-<p>The code chunks are where you put R code in an R Markdown file. So far, your preview doesn’t show anything, because we did not put any content in the code chunks yet!</p>
-<p>Using your first code chunk, type the following command to create a new variable called <code>x</code> with the value of 6.</p>
+<p>In contrast to text, headings etc. R code is typed in special boxes called <strong>chunks</strong>. To create an empty chunk to type code, click the little green C on top or type <code>Str + Alt + i</code>. On an international keyboard, <code>Str</code> equals <code>Control</code> and on a Mac the <code>Command</code> key.</p>
+<p>Using your first code chunk, type the following command to create a new variable called <code>x</code> with the value of 42.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">6</span></code></pre></div>
-<p>The arrow <code>&lt;-</code> is called an <strong>ASSIGNMENT OPERATOR</strong>, and tells R to save an object called <code>x</code> that has the value of 6. This is similar to saving a value in a graphing calculator.</p>
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">42</span></code></pre></div>
+<p>Remember that the arrow <code>&lt;-</code> is the <strong>assignment operator</strong>. It generates (or overwrites, if it already exists) the object <code>x</code> and assigns it the value of 42.</p>
 <div class="rmdinfo">
 <p>
-Note that whatever you want to save must always be to the left of the assignment operator!!
+Note the direction of the arrow! It points from the value to the object name.
 </p>
 </div>
-<p>To actually <strong>RUN</strong> this command in your console, you have a few options:</p>
+<p>To <strong>Run</strong> this command in your console, you can either:</p>
 <ul>
-<li>click on the green triangle in the code chunk</li>
-<li>highlight the code and hit <code>Control-Enter</code> on a PC or <code>Command-Return</code> on a Mac</li>
+<li>click on the green triangle in the code chunk on the right or</li>
+<li>highlight the code in the chunk and hit <code>Str + Enter</code> (as in an R script).</li>
 </ul>
-<p>Think of “running” code in your console as telling R “do this.”</p>
 <div class="rmdinfo">
 <p>
 Note that you now have a new object in your workspace, called x!
@@ -192,27 +169,30 @@ Figure 2.3: Global environment contains the variable x now
 </p>
 </div>
 </div>
-<div id="a-brief-recap-of-data-types" class="section level2" number="2.8">
+<div id="a-brief-recap-of-data-types" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">2.8</span> A brief recap of data types<a class="anchor" aria-label="anchor" href="#a-brief-recap-of-data-types"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> A brief recap of data types<a class="anchor" aria-label="anchor" href="#a-brief-recap-of-data-types"><i class="fas fa-link"></i></a>
 </h2>
-<p>So far you have made a numeric variable <code>x</code>. There many other types of data objects you can make in R.</p>
-<p>First, copy, paste and run the following command in a new code chunk to make a <strong>character</strong> called <code>favorite_movie</code>. Think of characters as text as opposed to numerical values. Note that I told R that this was a <strong>character</strong> by putting quotation marks around <code>Star_Wars</code>.</p>
+<p>You have created a numeric variable <code>x</code>. However, you are not restricted to numbers. R can also handle other types of objects, like characters, for example. To tell R that you want to generate a variable containing characters in contrast to numbers, you need to enclose the assigned content in quotes.</p>
+<p>Create the following chunk in your notebook and let it run.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">favorite_movie</span> <span class="op">&lt;-</span> <span class="st">"Star_Wars"</span></code></pre></div>
-<p>Next, copy, paste and run the following command into a new code chunk.</p>
+<code class="sourceCode R"><span class="va">day_of_week</span> <span class="op">&lt;-</span> <span class="st">"Sunday"</span></code></pre></div>
+<p>To generate a more complicated object, namely a numeric <strong>vector</strong>, we use the command <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> to <em>concatenate</em> several numbers.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span></code></pre></div>
-<p>This makes what is called a <strong>vector</strong>, which we have named <code>v</code>. It is a data object that has multiple elements of the same type. This vector contains three numbers, 2, 4, and 6. The <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function says to r to <code>concatenate</code> the values 2, 4, 6, into a single <strong>vector</strong>. Note in the Environment pane that your vector <code>v</code> contains numbers (listed as <code>num</code>).</p>
-<p>You can do math on a vector that contains numbers! For instance, copy, paste and run the following command into a new code chunk. This tells R to multiply each element of the vector <code>v</code> by 3.</p>
+<code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.5</span>, <span class="fl">6.234</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<p>Note in the Environment pane that your vector <code>v</code> contains numbers (listed as <code>num</code>). The information [1:3] shows you that your vector has three elements, indexed from 1 to 3. Indices indicate the place of an element in the vector. To access and change a particular element, we use its index like</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v</span> <span class="op">*</span> <span class="fl">3</span></code></pre></div>
+<code class="sourceCode R"><span class="va">v</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4.5</span></code></pre></div>
+<p>Now the second element of your vector equals 4.5. Remember that R will not warn you when changing your objects!</p>
+<p>You can calculate with objects as you can with numbers. Let’s divide evely single element of v by 2.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">v</span> <span class="op">/</span> <span class="fl">2</span></code></pre></div>
 </div>
-<div id="practice-on-your-own-1" class="section level2" number="2.9">
+<div id="practice-on-your-own-1" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.9</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>To complete this problem set you will next run through some Exercises, and submit your R Notebook file with answers to all the Exercises. Please make a <strong>header</strong> for each of these Exercises. If you need to answer an Exercise with text, type the text <strong>below</strong> the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk <strong>below</strong> the header, and put the code in the greyed out box.</p>
+<p>When you work on your exercises, please structure your R Notebook with e.g. headers and subheaders for each exercise. Some of the exercises require code and explanation!</p>
 <div class="rmdalert">
 <p>
 Remember to save your work as you go along! Click the save button in the upper left hand corner of the R Markdown window.
@@ -222,49 +202,46 @@ Remember to save your work as you go along! Click the save button in the upper l
 <li>
 <p>Answer the following with code in a code chunk (no text necessary). Remember that the code is just <strong>instructions</strong> for R. You need to run the code chunk to make R execute those instructions!</p>
 <ul>
-<li>Create a variable called <code>y</code> with the value of 7</li>
+<li>Create a variable called <code>y</code> with the value of 13.</li>
 <li>Multiply <code>x</code> by <code>y</code>, and store the answer in a variable named <code>z</code> like so: <code>z &lt;- x * y</code>
 </li>
-<li>You should now see <code>favorite_movie</code>, <code>x</code>, <code>v</code>, <code>y</code>, and <code>z</code> all in your Environment pane</li>
+<li>You should now see <code>day_of_week</code>, <code>x</code>, <code>v</code>, <code>y</code>, and <code>z</code> all in your Environment pane.</li>
 </ul>
 </li>
 <li><ul>
-<li>Run the following mathematical operation in a code chunk: <code>6 + 3</code>
-</li>
-<li>Where does the answer appear? (please answer with <strong>text</strong>)</li>
+<li>Run the following mathematical operation in a code chunk: <code>6 + 3</code>.</li>
+<li>Where does the answer appear?</li>
 </ul></li>
 <li><ul>
 <li>Now add a code chunk, and save the results of <code>6 + 3</code> as a variable called a.</li>
-<li>Does the answer appear? (please answer with <strong>text</strong>)</li>
-<li>Where does the object <code>a</code> show up? (please answer with <strong>text</strong>)</li>
-<li>Next type <code>a</code> into the code chunk and re-run the code chunk. What happens? (please answer with <strong>text</strong>)</li>
+<li>Does the answer appear?</li>
+<li>Where does the object <code>a</code> show up?</li>
+<li>Next type <code>a</code> into the code chunk and re-run the code chunk. What happens?</li>
 </ul></li>
 <li><ul>
 <li>Run following command in a new code chunk. <code>a^2</code>.</li>
-<li>What does the <code>^</code> operator do? (please answer with <strong>text</strong>)</li>
+<li>What does the <code>^</code> operator do?</li>
 </ul></li>
 <li><ul>
 <li>Type the following command into a new code chunk. <code>sum(a, x, y)</code>
 </li>
 <li>
-<code>sum</code> is a function. Based on the output, what do you think the <code>sum</code> function does? (please answer with <strong>text</strong>)</li>
+<code>sum</code> is a function. Based on the output, what do you think the <code>sum</code> function does?</li>
 </ul></li>
 <li><ul>
 <li>Click the little broom icon in the upper right hand corner of the <strong>Environment</strong> pane. Click yes on the window that opens.</li>
-<li>What happened? (please answer with <strong>text</strong>, and don’t freak out)</li>
+<li>What happened?</li>
 </ul></li>
 <li><ul>
 <li>Go to the <strong>Run</strong> button at the top right of the R Markdown pane, and choose <strong>Run All</strong> (the last option)</li>
-<li>What happened? (please answer with <strong>text</strong>)</li>
+<li>What happened?</li>
 </ul></li>
 <li><p>Recall the vector <code>v</code> we created earlier. Copy, paste and run the following in a code chunk. What does this code accomplish?
 <br><code>v + 2</code>
-<br>
-Please answer with <strong>text</strong>.</p></li>
+<br></p></li>
 <li><p>Copy, paste, and run the following code to make a vector called <code>music</code>, that contains music genres. Recall a vector is a data object that has multiple elements of the same type. Here the data type is a <strong>character</strong>. Look in the environment pane. How does R tell us that this vector contains <strong>characters</strong>, not numbers?
 <br><code>music &lt;- c("bluegrass", "funk", "folk")</code>
-<br>
-Please answer with <strong>text</strong>.</p></li>
+<br></p></li>
 <li><p>Now let’s practice some basic formatting. Using <a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">this formatting tips page</a> figure out how to put the following into your lab report. These all can get typed into the white section, where text goes. <strong>Hint:</strong> To put <strong>each of these on its own line!</strong> hit a hard return between each line of text.
 <br><em>Italicize like this</em>
 <br><strong>Bold like this</strong>
@@ -272,9 +249,9 @@ Please answer with <strong>text</strong>.</p></li>
 A superscript: R<sup>2</sup></p></li>
 </ol></ol>
 </div>
-<div id="turning-in-your-work-1" class="section level2" number="2.10">
+<div id="turning-in-your-work-1" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">2.10</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Save your R Notebook as an *.Rmd file.</li>
@@ -286,21 +263,25 @@ A superscript: R<sup>2</sup></p></li>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></div>
-<div class="next"><a href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></div>
+<div class="next"><a href="additional-exercises.html"><span class="header-section-number">3</span> Additional exercises</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#using-r-markdown-for-reproducible-research"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
 <li><a class="nav-link" href="#reproducibility-in-research"><span class="header-section-number">2.1</span> Reproducibility in research</a></li>
-<li><a class="nav-link" href="#create-a-new-r-notebook"><span class="header-section-number">2.2</span> Create a new R Notebook</a></li>
-<li><a class="nav-link" href="#make-changes-to-a-file"><span class="header-section-number">2.3</span> Make changes to a file</a></li>
-<li><a class="nav-link" href="#saving-a-file"><span class="header-section-number">2.4</span> Saving a file</a></li>
-<li><a class="nav-link" href="#preview"><span class="header-section-number">2.5</span> Preview</a></li>
-<li><a class="nav-link" href="#other-output-options"><span class="header-section-number">2.6</span> Other output options</a></li>
-<li><a class="nav-link" href="#entering-and-running-commands"><span class="header-section-number">2.7</span> Entering and running commands</a></li>
-<li><a class="nav-link" href="#a-brief-recap-of-data-types"><span class="header-section-number">2.8</span> A brief recap of data types</a></li>
-<li><a class="nav-link" href="#practice-on-your-own-1"><span class="header-section-number">2.9</span> Practice on your own!</a></li>
-<li><a class="nav-link" href="#turning-in-your-work-1"><span class="header-section-number">2.10</span> Turning in your work</a></li>
+<li>
+<a class="nav-link" href="#combining-code-and-report-in-one-document"><span class="header-section-number">2.2</span> Combining code and report in one document</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create-a-new-r-notebook"><span class="header-section-number">2.2.1</span> Create a new R Notebook</a></li>
+<li><a class="nav-link" href="#customize-the-header"><span class="header-section-number">2.2.2</span> Customize the header</a></li>
+<li><a class="nav-link" href="#structure-your-notebook"><span class="header-section-number">2.2.3</span> Structure your notebook</a></li>
+<li><a class="nav-link" href="#preview"><span class="header-section-number">2.2.4</span> Preview</a></li>
+<li><a class="nav-link" href="#other-output-options"><span class="header-section-number">2.2.5</span> Other output options</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#entering-and-running-commands"><span class="header-section-number">2.3</span> Entering and running commands</a></li>
+<li><a class="nav-link" href="#a-brief-recap-of-data-types"><span class="header-section-number">2.4</span> A brief recap of data types</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-1"><span class="header-section-number">2.5</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-1"><span class="header-section-number">2.6</span> Turning in your work</a></li>
 </ul>
 
       <div class="book-extra">
@@ -318,7 +299,7 @@ A superscript: R<sup>2</sup></p></li>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-04-01.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-04-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -326,34 +307,6 @@ A superscript: R<sup>2</sup></p></li>
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>
