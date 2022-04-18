@@ -2,7 +2,7 @@ book_filename: "environmental_stat"
 rmd_files: ["index.Rmd",
 "01-intro.Rmd",
 "02-rmarkdown.Rmd",
-#"03-data.Rmd",
+"03-data.Rmd",
 #"04-import-explore-visualize.Rmd",
 #"05-tidyverse.Rmd",
 #"06-sampling.Rmd",

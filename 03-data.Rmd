@@ -6,7 +6,7 @@
 - Explore a data set and recognize the type of its variables
 ```
 
-Data can be anything `r emo::ji('smile')`. Usually we will store data in a rectangular form, i.e. variables in columns and observations in rows. There are two dedicated object formats to store data, namely `data.frame()` and `tibble()`. They have both similar characteristics, however, the tibble is considered the modern form of a data frame and offers some advantages (details later).
+Data can be anything `r emo::ji('smile')`. Usually, we will store data in a rectangular form, i.e. variables in columns and observations in rows. There are two dedicated object formats to store data, namely `data.frame()` and `tibble()`. They have both similar characteristics, however, the tibble is considered the modern form of a data frame and offers some advantages (details later).
 
 In this chapter, we will have a look at a data set called `palmerpenguins`. It is provided in a dedicated package, so let's install this package first.
 
@@ -66,9 +66,9 @@ You already know how to access a certain position inside a vector. A tibble is a
 penguins[1, 3]
 ```
 
-## Let's see them
+## Let's look at them
 
-We will talk much more about data visualisation later. For now, just use the code below to visualize the relationship between the flipper length and the body mass of the animals.
+We will talk much more about data visualization later. For now, just use the code below to visualize the relationship between the flipper length and the body mass of the animals.
 
 ```{r, out.width="90%", warning = F}
 library(ggplot2)
@@ -91,7 +91,7 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, co
 
 1. Find the levels of the variable `island`.
 
-1. This is a challenge `r emo::ji('nerd_face')`. Take the code that produced the visualisation of flipper length and the body mass of the animals. Make an educated guess how to change the code such that it produces the visualisation of the bill depth vs. body mass. Can you also guess how to adjust the label on the x axis?
+1. This is a challenge `r emo::ji('nerd_face')`. Take the code that produced the visualization of flipper length and the body mass of the animals. Make an educated guess how to change the code such that it produces the visualization of the bill depth vs. body mass. Can you also guess how to adjust the label on the $x$-axis?
 </ol>
 
 ## Reading assignment

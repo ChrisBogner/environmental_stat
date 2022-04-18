@@ -2,8 +2,9 @@ fig:rstudio
 fig:r-notebook
 fig:rmarkdown-file
 fig:workspace
-tab:unnamed-chunk-28
-tab:unnamed-chunk-29
+fig:penguins
+tab:unnamed-chunk-38
+tab:unnamed-chunk-39
 introduction-to-r-and-rstudio
 what-is
 what-is-rstudio
@@ -23,6 +24,15 @@ entering-and-running-commands
 a-brief-recap-of-data-types
 practice-on-your-own-1
 turning-in-your-work-1
+what-is-data
+installing-r-packages
+welcome-the-penguins
+the-square-braces-revisited
+lets-look-at-them
+practice-on-your-own-2
+reading-assignment-1
+turning-in-your-work-2
+additional-reading
 additional-exercises
 introduction-to-r-and-rstudio-1
 rob1
