@@ -8,27 +8,27 @@
 
 ## Data import from text files
 
-To import a data set from a text file (e.g. .csv, .txt, .dat) into R, we will use the library `readr` which is part of the `tydiverse`. We first load the library.
+To import a data set from a text file (e.g. csv, .txt, .dat) into R, we will use the library `readr` which is part of the `tydiverse`. We first load the library.
 
 ```{r, message = F, warning = F}
 library(tidyverse)
 ```
 
-Let's assume that the data is stored in the folder `data`. If this is not your case, change the path accordingly. To load the data, we can chose among several different functions that all start with `read_`. The most generic one is `read_delim()` where we can specify how the columns are separated (delimited) in the data file.
+Let's assume that the data is stored in the folder `data`. If this is not your case, change the path accordingly. To load the data, we can choose among several functions that all start with `read_`. The most generic one is `read_delim()` where we can specify how the columns are separated (delimited) in the data file.
 
 ```{r}
 emissions <- read_delim(file = 'data/emissions.csv', delim = ';')
 ```
 
-Let's have a look at the data. This is a data set on greenhouse gas emissions by source sector in the EU that I downloaded from [eurostat](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=env_air_gge&lang=en) on 2021-04-30. It contains the greenhouse gas emissions in CO~2~ equivalent, in Mio tonnes, per vehicle type. The data base could be a great source for data in your reports `r emo::ji('smile')`.
+Let's have a look at the data. This is a data set on greenhouse gas emissions by source sector in the EU that I downloaded from [eurostat](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=env_air_gge&lang=en) on 2021-04-30. It contains the greenhouse gas emissions in CO~2~ equivalent, in Mio tonnes, per vehicle type. The database could be a great source for data in your reports `r emo::ji('smile')`.
 
 ```{r}
 emissions
 ```
 
-The result of reading the data with any function in the library `readr` is always a `tibble`. You can see that none of the variables is a `factor`. This is the default behaviour of `readr`. If you want a variable to be coded as a `factor` then you have to transform it by hand, preferably with functions from the package `forcats`.
+The result of reading the data with any function in the library `readr` is always a `tibble`. You can see that none of the variables is a `factor`. This is the default behaviour of `readr`. If you want a variable to be coded as a `factor` then you have to transform it manually, preferably with functions from the package `forcats`.
 
-Let's have a quick look at the data set.
+Let's have a brief look at the data set.
 
 ```{r}
 summary(emissions)
@@ -48,15 +48,15 @@ unique(emissions$vehicle)
 
 ## Visualization with the library `ggplot2`
 
-The library `ggplot2` is a powerful package for data visualisation. The name comes from **the grammar of graphics** and hints at a systematic approach to visualisation. In a nutshell, `ggplot2` defines a statistical graphic as follows:
+The library `ggplot2` is a powerful package for data visualization. The name comes from **the grammar of graphics** and hints at a systematic approach to visualization. In a nutshell, `ggplot2` defines a statistical graphic as follows:
 
 > A statistical graphic is a `mapping` of variables in a `data` set to `aes`thetic attributes of `geom`etric objects.
 
-In `ggplot2`, a graphic is build up step by step, starting with a call to the core function `ggplot()`. We have to specify the following elements:
+In `ggplot2`, a graphic is built up step by step, starting with a call to the core function `ggplot()`. We have to specify the following elements:
 
--   `data`: the data set containing the variables to be visualised.
+-   `data`: the data set containing the variables to be visualized.
 
--   `aes`: (aesthetic) attributes for the geometric object to be visualised. This can be the x and y variables, colour, shape, grouping variable etc.
+-   `aes`: (aesthetic) attributes for the geometric object to be visualized. This can be the x and y variables, colour, shape, grouping variable etc.
 
 -   `geom`: the geometric object we want to plot, i.e. lines, points, bars, boxes etc.
 
@@ -80,12 +80,12 @@ ggplot(data = emissions_france, mapping = aes(x = time, y = values)) +
   geom_line()
 ```
 
-This call can be verbalised like following:
+This call can be verbalized like following:
 
 -   Take the data set `emissions` and map the following attributes:
 
-    -   on the x-axsis the variable `time`
-    -   on the y-axsis the variable `values`
+    -   on the $x$-axis, the variable `time`
+    -   on the $y$-axis, the variable `values`
 
 -   Plot the data as a line (`geom_line()`)
 
@@ -99,7 +99,7 @@ ggplot(data = emissions_france, mapping = aes(x = time, y = values)) +
 
 ### Point plot
 
-We can add points to this plot with `geom_point()`. In principle, I wouldn't do it for this time series, but I wan't to show this geom `r emo::ji('smile')`.
+We can add points to this plot with `geom_point()`. Normally, I wouldn't do it for this time series, but I want to show this geom `r emo::ji('smile')`.
 
 ```{r, out.width = "90%"}
 ggplot(data = emissions_france, mapping = aes(x = time, y = values)) + 
@@ -115,7 +115,7 @@ emissions_france_italy <- emissions %>%
   filter(geo %in% c('France', 'Italy') & vehicle == 'Fuel combustion in cars')
 ```
 
-We plot the countries using different colours. Note that we do not (yet) select the colours by hand, but specify the variable that will be used to distinguish the time series. The colours are chosen one by country automatically.
+We plot the countries using different colours. Note that we do not (yet) select the colours manually, but specify the variable that will be used to distinguish the time series. The colours are chosen one by country automatically.
 
 ```{r, out.width = "90%"}
 ggplot(data = emissions_france_italy, mapping = aes(x = time, y = values, colour = geo)) + 
@@ -144,16 +144,16 @@ ggplot(data = emissions_2018, mapping = aes(x = values)) +
 
 ## Boxplot
 
-A boxplot calculates some prominent statistics of a data set and plots them in form of a box with 'whiskers' (thus also called box-and-whiskers plot). Basically, it is the same as calculating the `summary()` (five-numbers: min, max, 25%, 50% and 75% quantiles), but as a figure. If you are not familiar with this kind of statistical summaries, please have a look at the Appendix A in @ModernDive and read the part A.1.4 Five-number summary.
+A boxplot calculates some prominent statistics of a data set and plots them in the form of a box with 'whiskers' (thus also called box-and-whiskers plot). Basically, it is the same as calculating the `summary()` (five-numbers: min, max, 25%, 50% and 75% quantiles), but as a figure. If you are not familiar with this kind of statistical summaries, please have a look at the Appendix A in @ModernDive and read the part A.1.4 Five-number summary.
 
-Lets have a look at this kind of summary plot. How are the emissions distributed by year? We have to convert `time` to a factor variable in order to display the data correctly (try out what happens if you don't convert it).
+Let's have a look at this kind of summary plot. How are the emissions distributed by year? We have to convert `time` to a factor variable to display the data correctly (try out what happens if you don't convert it).
 
 ```{r, out.width = "90%"}
 ggplot(data = emissions, mapping = aes(x = factor(time), y = values)) +
   geom_boxplot()
 ```
 
-Hmmm, the labels on the x axis are really ugly. Let's tune them a little bit (we will do more tuning in later sessions).
+Hmmm, the labels on the $x$-axis are ugly. Let's tune them a little (we will do more tuning in later sessions).
 
 ```{r, out.width = "90%",}
 ggplot(data = emissions, mapping = aes(x = factor(time), y = values)) +
@@ -163,7 +163,7 @@ ggplot(data = emissions, mapping = aes(x = factor(time), y = values)) +
 
 ### Barplot
 
-The last geom we want to see is `geom_bar()`. We want to know how many data entries does `emissions` contain per vehicle.
+The last geom we want to see is `geom_bar()`. We would like to know how many data entries does `emissions` contain per vehicle.
 
 ```{r, out.width = "90%"}
 ggplot(data = emissions, mapping = aes(x = vehicle)) +
