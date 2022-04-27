@@ -181,7 +181,7 @@ Admittedly, a boring plot `r emo::ji('smile')`, the number of entries is identic
 <br>
 `france_germany <- gapminder %>% filter(country %in% c('France', 'Germany'))`
 
-3. Plot the life expectancy vs. GDP in 2007, use the data set `gapminder`. Pick the code for filtering the data in task [ref](firstplot). Use the aesthetics colour and size. Have an educated guess on how to change the title of the legends (or google for it `r emo::ji('smile')`).
+3. Plot the life expectancy vs. GDP in 2007, use the data set `gapminder`. Pick the code for filtering the data in task \@ref(firstplot). Use the aesthetics colour and size. Have an educated guess on how to change the title of the legends (or google for it `r emo::ji('smile')`).
 
 4. How is the GDP distributed in Africa and Europe in 2007? Use the data set `gapminder`. Filter the data like this:
 <br>
