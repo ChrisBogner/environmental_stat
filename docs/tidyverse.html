@@ -395,9 +395,9 @@ Use functions from <code>dplyr</code> for data wrangling
 ## 1        2261 13200
 ## 2        2667 13200</code></pre>
 </div>
-<div id="visualise" class="section level3" number="5.2.5">
+<div id="visualize" class="section level3" number="5.2.5">
 <h3>
-<span class="header-section-number">5.2.5</span> Visualise<a class="anchor" aria-label="anchor" href="#visualise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.5</span> Visualize<a class="anchor" aria-label="anchor" href="#visualize"><i class="fas fa-link"></i></a>
 </h3>
 <p>We plot the time series and use a trick to split them along three different plots with the function <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code>. It needs a variable to separate the data into plots and we chose <code>STATIONS_ID</code>. The splitting variable must be preceeded by <code>~</code>.</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
@@ -407,9 +407,9 @@ Use functions from <code>dplyr</code> for data wrangling
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-70-1.png" width="90%"></div>
 </div>
-<div id="new-variables-with-mutate" class="section level3" number="5.2.6">
+<div id="create-new-variables-with-mutate" class="section level3" number="5.2.6">
 <h3>
-<span class="header-section-number">5.2.6</span> New variables with <code>mutate()</code><a class="anchor" aria-label="anchor" href="#new-variables-with-mutate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.6</span> Create new variables with <code>mutate()</code><a class="anchor" aria-label="anchor" href="#create-new-variables-with-mutate"><i class="fas fa-link"></i></a>
 </h3>
 <p>We want to calculate the monthly means and standard deviations of the air temperature and humidity. First, we need to generate the temporal information, namely year and month that will be used to group the temperature values to calculate <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> and <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>. This can be achieved with the functions <code><a href="https://lubridate.tidyverse.org/reference/year.html">year()</a></code>and <code><a href="https://lubridate.tidyverse.org/reference/month.html">month()</a></code> from library <code>lubridate</code>. The function <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> can create new variables in a data object.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
@@ -588,8 +588,8 @@ Use functions from <code>dplyr</code> for data wrangling
 <li><a class="nav-link" href="#date-and-time-made-easy"><span class="header-section-number">5.2.2</span> Date and time made easy</a></li>
 <li><a class="nav-link" href="#summarize"><span class="header-section-number">5.2.3</span> Summarize</a></li>
 <li><a class="nav-link" href="#the-grammar-of-data-manipulation-dplyr"><span class="header-section-number">5.2.4</span> The grammar of data manipulation – dplyr</a></li>
-<li><a class="nav-link" href="#visualise"><span class="header-section-number">5.2.5</span> Visualise</a></li>
-<li><a class="nav-link" href="#new-variables-with-mutate"><span class="header-section-number">5.2.6</span> New variables with mutate()</a></li>
+<li><a class="nav-link" href="#visualize"><span class="header-section-number">5.2.5</span> Visualize</a></li>
+<li><a class="nav-link" href="#create-new-variables-with-mutate"><span class="header-section-number">5.2.6</span> Create new variables with mutate()</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#practice-on-your-own-4"><span class="header-section-number">5.3</span> Practice on your own!</a></li>
@@ -612,7 +612,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-03.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

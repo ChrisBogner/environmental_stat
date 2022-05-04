@@ -52,8 +52,8 @@ read-data-revisited
 date-and-time-made-easy
 summarize
 the-grammar-of-data-manipulation-dplyr
-visualise
-new-variables-with-mutate
+visualize
+create-new-variables-with-mutate
 practice-on-your-own-4
 reading-assignment-3
 additional-reading-and-videos

@@ -159,7 +159,7 @@ temp_humid %>%
   count()
 ```
 
-### Visualise
+### Visualize
 
 We plot the time series and use a trick to split them along three different plots with the function `facet_wrap()`. It needs a variable to separate the data into plots and we chose `STATIONS_ID`. The splitting variable must be preceeded by `~`.
 
@@ -170,7 +170,7 @@ ggplot(data = temp_humid, aes(x = MESS_DATUM, y = TT_TU)) +
   labs(x = 'Time', y = 'Temperature (°C)')
 ```
 
-### New variables with `mutate()`
+### Create new variables with `mutate()`
 We want to calculate the monthly means and standard deviations of the air temperature and humidity. First, we need to generate the temporal information, namely year and month that will be used to group the temperature values to calculate `mean()` and `sd()`. This can be achieved with the functions `year()`and `month()` from library `lubridate`. The function `mutate()` can create new variables in a data object. 
 
 ```{r}
