@@ -8,13 +8,13 @@
 - Calculate the standard error
 ```
 
-With this chapter we start our journey into statistical inference. Statistical inference or simply **inference** wants to go beyond the analysis of single data sets. It wants to know whether patterns that we have observed in a single data set can be generalized to a larger context. Often, this context is called **population**. And such generalization techniques are nothing else than **estimation population parameters**. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a **sample**, and try to estimate from their mean income, the mean income of the whole group.
+With this chapter, we start our journey into statistical inference. Statistical inference or simply **inference** goes beyond the analysis of single data sets and generalizes patterns which we observed in a single data set to a larger context. Often, this context is called **population**. And such generalization techniques are nothing else than **estimation of population parameters**. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a **sample**, and try to estimate from their mean income, the mean income of the whole group.
 
-Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (**control group**) and some at increased temperature (**treatment group**). You measure their growth and want to know **whether the difference observed is due to chance** or whether this is a real difference, an **effect** of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.
+Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (**control group**) and some at increased temperature (**treatment group**). You measure their growth and want to know **whether the difference observed is due to chance** or whether this is a real difference, an **effect** of the treatment. And if this is a real difference, how large it is and how precisely we can estimate this effect. All these questions can be answered using inference.
 
 We will do inference based on data science and a computer. Nowadays, computational power is usually no longer a problem and cool statistical inference can be done based on computer simulations and so called **resampling** techniques.
 
-In this chapter you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness or chance and variability.
+In this chapter, you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness or chance and variability.
 
 ## Random sampling of data
 We will use the following libraries. The library `infer` is a dedicated package for *tidy* inference.
@@ -32,7 +32,7 @@ We will simulate our own data set, our own population, and invent the *getsmarte
 - `transport`: how students travel/come to the university
 - `time_lib`: time students spend in the university library in minutes
 
-We organise all these variables in a `tibble` that we call `getsmarter_pop`.
+We organize all these variables in a `tibble` that we call `getsmarter_pop`.
 
 Because we draw random numbers using R, every time we rerun the code, new numbers will be generated. To have a reproducible population, we use the function `set.seed()`. It accepts as a parameter an integer. Which integer we use does not really matter as long as we use the same every time we rerun the code. By *setting the seed*, we set the random number generate in R to a certain reproducible state. The numbers are still random, but reproducible `r emo::ji('smile')`.
 
@@ -97,7 +97,7 @@ survey %>%
 
 42% of survey students live in the  countryside and 58% in town.
 
-But which proportions would we obtain if we repeated the survey? Let's repeat the survey 33 times and observe the variability in `residence`. This is an unrealistic scenario for real life, however, for a computer experiment no problem. We set `reps = 33.`
+But which proportions would we obtain if we repeated the survey? Let's repeat the survey 33 times and observe the variability in `residence`. This is an unrealistic scenario for real life, however, for a computer experiment, no problem. We set `reps = 33.`
 
 ```{r}
 set.seed(234)
@@ -130,7 +130,7 @@ ggplot(data = residence_props, aes(x = prop)) +
 The most frequent proportions for `rural` are around 40% and for `urban` around 60%. Because we have chosen `binwidth = 0.05`, i.e. the width of the columns is 5%, we can be more precise. Among the surveyed students, 35--40% live in the countryside and 55--60% in town.
 
 ## Number of replications and variability
-Our histograms show that proportions of residence vary from survey to survey. 33 is a large number for real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable `reps_num` to define the number of repetitions.
+Our histograms show that proportions of residence vary from survey to survey. 33 is a large number in real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable `reps_num` to define the number of repetitions.
 
 ```{r, out.width = '90%', message = F}
 set.seed(345)
@@ -149,7 +149,7 @@ ggplot(data = residence_props, aes(x = prop)) +
   labs(x = 'Proportion of residence', title = 'Distribution of residences', y = 'Frequency')
 ```
 
-The histograms show now a nice symmetrical pattern around 40--42% for `rural` and 58--60% for `urban` residences. The parameter `scales = 'free_x'` allows to scale each histogram's $x$ axis separately. Such a distribution is called a **sampling distribution**. It shows the distribution of possible values of a statistics ("proportions of residence" in our case) that one obtains by a repeated sampling from a population.
+The histograms show now a nice symmetrical pattern around 40--42% for `rural` and 58--60% for `urban` residences. The parameter `scales = 'free_x'` allows scaling each histogram's $x$ axis separately. Such a distribution is called a **sampling distribution**. It shows the distribution of possible values of a statistics ("proportions of residence" in our case) that one obtains by a repeated sampling from a population.
 
 The statistics "proportion of residence" is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occur if we survey our students randomly.
 
@@ -160,12 +160,12 @@ residence_props %>%
   group_by(residence) %>% 
   summarise(prop_sd = sd(prop))
 ```
-The standard errors for `rural` and `urban` are identical, because they are dependent: `rural` = 1 - `urban`.
+The standard errors for `rural` and `urban` are identical because they are dependent: `rural` = 1 - `urban`.
 
 ## Sample size
 The standard error depends on the sample size. Let's repeat our survey for 25, 50 and 100 students, respectively and observe how the standard error vary.
 
-For repetitive tasks like this, it is better to define a function that does the job instead of copy-pasting the code to vary the sample size. I will difine such a function without much comments. We will talk about functions later, if time allows.
+For repetitive tasks like this, it is better to define a function that does the job instead of copy-pasting the code to vary the sample size. I will define such a function without many comments. We will talk about functions later, if time allows.
 ```{r}
 calculate_props <- function(population = getsmarter_pop, survey_size, reps_num = 1000) {
   
@@ -193,7 +193,7 @@ residence_props_50 <- calculate_props(population = getsmarter_pop, survey_size =
 residence_props_100 <- calculate_props(population = getsmarter_pop, survey_size = 100, reps_num = 1000)
 ```
 
-We plot the resulting samping distributions.
+We plot the resulting sampling distributions.
 ```{r, out.width = '90%'}
 ggplot(data = residence_props_25, aes(x = prop)) + 
   geom_histogram(binwidth = 0.05, boundary = 0.4, col = 'white') +
@@ -225,9 +225,9 @@ residence_props_100 %>%
   group_by(residence) %>% 
   summarise(prop_sd = sd(prop))
 ```
-You see that the **standard error decreases with increasing sample size**. This makes sense because the larger the sample size the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.
+You see that the **standard error decreases with increasing sample size**. This makes sense because the larger the sample size, the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.
 
-This time, I have some pre-formulated take-home messages, because sampling and variability are really important topics `r emo::ji('sunglasses')`.
+This time, I have some pre-formulated take-home messages because sampling and variability are crucial topics `r emo::ji('sunglasses')`.
 
 ```{block, type='rmdalert'}
 - A **random sample**$^*$ can be used to obtain information about a larger group, a population.

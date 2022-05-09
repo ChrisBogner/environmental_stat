@@ -7,18 +7,44 @@
 <title>7 Bootstrap and confidence intervals | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
 <meta name="description" content="Explain the idea behind the bootstrap  Calculate bootstrap confidence intervals for the mean  In chapter 6 we studied the variability of repeated random sampling from a population. We did computer...">
-<meta name="generator" content="bookdown 0.24.3 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="7 Bootstrap and confidence intervals | Environmental Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Explain the idea behind the bootstrap  Calculate bootstrap confidence intervals for the mean  In chapter 6 we studied the variability of repeated random sampling from a population. We did computer...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7 Bootstrap and confidence intervals | Environmental Statistics">
 <meta name="twitter:description" content="Explain the idea behind the bootstrap  Calculate bootstrap confidence intervals for the mean  In chapter 6 we studied the variability of repeated random sampling from a population. We did computer...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="font-awesome.min.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -110,14 +136,14 @@ Figure 7.1: Münchhausen removes himself from the swamp using his own braids (Th
 <div class="figure">
 <span style="display:block;" id="fig:sampling-world"></span>
 <img src="figures/sampling_world.png" alt="Calculation of a sampling distribution by repeated random sampling from a population. Figure by @Hesterberg2015, their Figure 4. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%"><p class="caption">
-Figure 7.2: Calculation of a sampling distribution by repeated random sampling from a population. Figure by <span class="citation"><a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">Hesterberg</a> (<a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">2015</a>)</span>, their Figure 4. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
+Figure 7.2: Calculation of a sampling distribution by repeated random sampling from a population. Figure by <span class="citation">Hesterberg (<a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">2015</a>)</span>, their Figure 4. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
 </p>
 </div>
 <p>Figure <a href="bootstrap.html#fig:sampling-bootstrap">7.3</a> looks basically the same, except one important difference. We don’t have access to several random samples from the population, but have one random sample only. And now we remember that we invested time and energy in thinking about the best way obtain this sample and we believe that it is representative for our population. Thus, we can think about this sample as our <em>mini</em> population. We replace the population by its miniature, i.e. our sample, and sample from this sample as if it were the true population. However, because the sample is limited in size we have to sample <strong>with replacement</strong>. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For each of those bootstrap samples we calculate the statistics and obtain its bootstrap sampling distribution. The confidence interval are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equals the 95% bootstrap confidence interval.</p>
 <div class="figure">
 <span style="display:block;" id="fig:sampling-bootstrap"></span>
 <img src="figures/sampling_bootstrap.png" alt="Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by @Hesterberg2015, their Figure 5. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%"><p class="caption">
-Figure 7.3: Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by <span class="citation"><a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">Hesterberg</a> (<a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">2015</a>)</span>, their Figure 5. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
+Figure 7.3: Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by <span class="citation">Hesterberg (<a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">2015</a>)</span>, their Figure 5. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
 </p>
 </div>
 </div>
@@ -126,10 +152,10 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <span class="header-section-number">7.3</span> Cofidence intervals for the mean travel time<a class="anchor" aria-label="anchor" href="#cofidence-intervals-for-the-mean-travel-time"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s come back to our simulated getsmarter university population and estimate the mean travel time with its bootstrap confidence interval.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 
 <span class="va">student_id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12000</span>
@@ -171,14 +197,14 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10         10 f      urban     bus             21.0      282.
 ## # … with 11,990 more rows</code></pre>
 <p>We survey 200 students.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
 <span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">200</span>
 
 <span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>The true mean travel time to the university and the mean from the survey equal</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mean_pop</span> <span class="op">&lt;-</span> <span class="va">getsmarter_pop</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span>
 
@@ -187,7 +213,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ##    mean
 ##   &lt;dbl&gt;
 ## 1  36.0</code></pre>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mean_survey</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span>
 
@@ -197,7 +223,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ##       &lt;int&gt; &lt;dbl&gt;
 ## 1         1  34.1</code></pre>
 <p>To calculate the bootstrap distribution, we sample from the data set <code>survey</code> with replacement. The size of the bootstrap samples always equal the size of the original sample. We use the same function <code>rep_sample_n</code> as in chapter <a href="sampling.html#sampling">6</a>, but change <code>replace = TRUE</code>.</p>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
 <span class="va">reps_num</span> <span class="op">&lt;-</span> <span class="fl">10000</span>
@@ -221,7 +247,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10         1        843 m      urban     bike            26.4      300.
 ## # … with 1,999,990 more rows</code></pre>
 <p>Because we sample with replacement, students can now appear several times in one and the same bootstrap sample. Let’s check this for the first 50 bootstrap samples. Student 4787 was sampled 8 times in the replicate 43, for example.</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">survey_reps_bootstrap</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">replicate</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">student_id</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
@@ -244,7 +270,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10         8      11425     5
 ## # … with 2,647 more rows</code></pre>
 <p>Now we can calculate the mean travel times from the bootstrap samples.</p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_means_bootstrap</span> <span class="op">&lt;-</span> <span class="va">survey_reps_bootstrap</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_tt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span>
@@ -265,7 +291,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10        10    31.0
 ## # … with 9,990 more rows</code></pre>
 <p>The standard error and the 95% confidence interval based on the bootstrap are calculated as follows:</p>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stat_bootstrap</span> <span class="op">&lt;-</span> <span class="va">res_means_bootstrap</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean_bootstrap <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mean_tt</span><span class="op">)</span>, se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mean_tt</span><span class="op">)</span>, ci_2.5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">mean_tt</span>, probs <span class="op">=</span> <span class="fl">0.025</span><span class="op">)</span>, ci_97.5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">mean_tt</span>, probs <span class="op">=</span> <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span>
 
@@ -294,7 +320,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 </ol>
 <p>How does our example of calculating the bootstrap confidence intervals for the mean travel time look like in the <code>infer</code> workflow?</p>
 <p>We first calculate the bootstrap distribution.</p>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
 <span class="va">bootstrap_distribution</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span>
@@ -302,7 +328,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
   <span class="fu"><a href="https://infer.tidymodels.org/reference/generate.html">generate</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fl">10000</span>, type <span class="op">=</span> <span class="st">'bootstrap'</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">'mean'</span><span class="op">)</span></code></pre></div>
 <p>Then, we calculate the confidence intervals based on the percentile method.</p>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">percentile_ci</span> <span class="op">&lt;-</span> <span class="va">bootstrap_distribution</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://infer.tidymodels.org/reference/get_confidence_interval.html">get_confidence_interval</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">0.95</span>, type <span class="op">=</span> <span class="st">"percentile"</span><span class="op">)</span>
 <span class="va">percentile_ci</span></code></pre></div>
@@ -311,12 +337,12 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ##      &lt;dbl&gt;    &lt;dbl&gt;
 ## 1     30.1     38.3</code></pre>
 <p>And then visualize all results. Because the function <code>visualize</code> is based on ggplot, we can add custom axis labels.</p>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="va">bootstrap_distribution</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_confidence_interval.html">shade_confidence_interval</a></span><span class="op">(</span>endpoints <span class="op">=</span> <span class="va">percentile_ci</span>, color <span class="op">=</span> <span class="st">"orange"</span>, fill <span class="op">=</span> <span class="st">"khaki"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mean_pop</span><span class="op">$</span><span class="va">mean</span>, linetype <span class="op">=</span> <span class="st">'dashed'</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Mean trave time (min)'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-111-1.png" width="672"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-112-1.png" width="672"></div>
 </div>
 <div id="interpreting-the-confidence-intervals" class="section level2" number="7.5">
 <h2>
@@ -342,7 +368,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <h2>
 <span class="header-section-number">7.7</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-5"><i class="fas fa-link"></i></a>
 </h2>
-<p>Chapter 8 in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
+<p>Chapter 8 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
 </div>
 <div id="turning-in-your-work-5" class="section level2" number="7.8">
 <h2>
@@ -388,7 +414,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-04-01.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

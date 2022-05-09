@@ -7,18 +7,44 @@
 <title>9 Linear regression | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
 <meta name="description" content="Explain the general structure of a linear model.  Name the assumption of a linear model.  Calculate a simple linear regression in R.  With this chapter, we start our journey to statistical...">
-<meta name="generator" content="bookdown 0.24.3 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="9 Linear regression | Environmental Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Explain the general structure of a linear model.  Name the assumption of a linear model.  Calculate a simple linear regression in R.  With this chapter, we start our journey to statistical...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="9 Linear regression | Environmental Statistics">
 <meta name="twitter:description" content="Explain the general structure of a linear model.  Name the assumption of a linear model.  Calculate a simple linear regression in R.  With this chapter, we start our journey to statistical...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="font-awesome.min.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -112,10 +138,12 @@ A <strong>regression model</strong> has the form:
 <span class="math inline"><span class="math inline">\(y\)</span></span>: dependent variable
 </li>
 <li>
-<span class="math inline"><span class="math inline">\(f\)</span></span>: type of relationship (function)
+<span class="math inline"><span class="math inline">\(f\)</span></span>: type of relationship
+(function)
 </li>
 <li>
-<span class="math inline"><span class="math inline">\(X\)</span></span>: independent variables (predictors, explanatory variables)
+<span class="math inline"><span class="math inline">\(X\)</span></span>: independent variables
+(predictors, explanatory variables)
 </li>
 <li>
 <span class="math inline"><span class="math inline">\(\varepsilon\)</span></span>: error term
@@ -126,10 +154,14 @@ If:
 </p>
 <ul>
 <li>
-<span class="math inline"><span class="math inline">\(f\)</span></span> linear (effect of predictors is additive), the model is called <strong>linear regression model</strong>
+<span class="math inline"><span class="math inline">\(f\)</span></span> linear (effect of predictors
+is additive), the model is called <strong>linear regression
+model</strong>
 </li>
 <li>
-<span class="math inline"><span class="math inline">\(X\)</span></span> is a single predictor, the model is called <strong>simple linear regression model</strong>, otherwise <strong>multiple linear regression model</strong>
+<span class="math inline"><span class="math inline">\(X\)</span></span> is a single predictor, the
+model is called <strong>simple linear regression model</strong>,
+otherwise <strong>multiple linear regression model</strong>
 </li>
 </ul>
 <p>
@@ -137,10 +169,12 @@ Components of the model:
 </p>
 <ul>
 <li>
-<span class="math inline"><span class="math inline">\(f(X)\)</span></span>: systematic or deterministic component
+<span class="math inline"><span class="math inline">\(f(X)\)</span></span>: systematic or
+deterministic component
 </li>
 <li>
-<span class="math inline"><span class="math inline">\(\varepsilon\)</span></span>: stochastic component (error term, residuals)
+<span class="math inline"><span class="math inline">\(\varepsilon\)</span></span>: stochastic
+component (error term, residuals)
 </li>
 </ul>
 </div>
@@ -159,22 +193,29 @@ Given <strong>data</strong> pairs: <span class="math inline"><span class="math i
 <span class="math inline"><span class="math inline">\(y\)</span></span> and <span class="math inline"><span class="math inline">\(x\)</span></span> are numeric variables.
 </p>
 <p>
-We call the model <span class="math display"><span class="math display">\[y_i=\beta_0 + \beta_1x_i + \varepsilon_i, \qquad i=1,\dots,n.\]</span></span>
+We call the model <span class="math display"><span class="math display">\[y_i=\beta_0 +
+\beta_1x_i + \varepsilon_i, \qquad i=1,\dots,n.\]</span></span>
 </p>
 <p>
-a <strong>simple linear regression model</strong>, if the errors <span class="math inline"><span class="math inline">\(\varepsilon_1,\dots, \varepsilon_n\)</span></span> are independent and identically distributed (iid) and
+a <strong>simple linear regression model</strong>, if the errors
+<span class="math inline"><span class="math inline">\(\varepsilon_1,\dots, \varepsilon_n\)</span></span>
+are independent and identically distributed (iid) and
 </p>
 <p>
-<span class="math display"><span class="math display">\[\mathrm{E}(\varepsilon_i) = 0, \qquad \mathrm{Var}(\varepsilon_i)=\sigma^2.\]</span></span>
+<span class="math display"><span class="math display">\[\mathrm{E}(\varepsilon_i) = 0, \qquad
+\mathrm{Var}(\varepsilon_i)=\sigma^2.\]</span></span>
 </p>
 <p>
-If additionally <span class="math display"><span class="math display">\[\varepsilon_i \sim N(0,\sigma^2)\]</span></span>
+If additionally <span class="math display"><span class="math display">\[\varepsilon_i \sim
+N(0,\sigma^2)\]</span></span>
 </p>
 <p>
-i.e. the residuals are normally distributed, we call the model a <strong>normal linear regression model</strong>.
+i.e. the residuals are normally distributed, we call the model a
+<strong>normal linear regression model</strong>.
 </p>
 <p>
-<span class="math inline"><span class="math inline">\(\beta_0\)</span></span> is the intercept and <span class="math inline"><span class="math inline">\(\beta_1\)</span></span> the slope of the model.
+<span class="math inline"><span class="math inline">\(\beta_0\)</span></span> is the intercept and
+<span class="math inline"><span class="math inline">\(\beta_1\)</span></span> the slope of the model.
 </p>
 </div>
 <p>The assumptions of the normal linear regression model can be summarized as LINE:</p>
@@ -195,13 +236,13 @@ i.e. the residuals are normally distributed, we call the model a <strong>normal
 <span class="header-section-number">9.3</span> Example: Relationship between the time in the library and the travel time<a class="anchor" aria-label="anchor" href="#example-relationship-between-the-time-in-the-library-and-the-travel-time"><i class="fas fa-link"></i></a>
 </h2>
 <p>We come back to our lovely getsmarter university and want to study the relationship between the time a student needs to come to the university and the time she spends in the library.</p>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/moderndive/moderndive/issues">moderndive</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://moderndive.github.io/moderndive/">moderndive</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></code></pre></div>
 <p>Let’s generate the population.</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 
 <span class="va">student_id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12000</span>
@@ -243,7 +284,7 @@ i.e. the residuals are normally distributed, we call the model a <strong>normal
 ## 10         10 f      urban     bus             21.0      282.
 ## # … with 11,990 more rows</code></pre>
 <p>We survey 200 students.</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
 <span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">200</span>
@@ -254,19 +295,19 @@ i.e. the residuals are normally distributed, we call the model a <strong>normal
 <span class="header-section-number">9.3.1</span> Fit a simple normal regression model<a class="anchor" aria-label="anchor" href="#fit-a-simple-normal-regression-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>We first check that the linear model makes sense and the relationship between the two variables is (approximately) linear.</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">survey</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">travel_time</span>, y <span class="op">=</span> <span class="va">time_lib</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Travel time (min)'</span>, y <span class="op">=</span> <span class="st">'Time in the library (min)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-128-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-129-1.png" width="90%"></div>
 <p>This looks reasonably linear and we can proceed with the modelling.</p>
 <p>To fit a linear model in R, we use the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. The dependent and the independent varialbes are joined in a <code>formula</code> by a tilde sign <code>~</code>. You can also omit the word formula and just type <code>time_lib ~ travel_time</code>.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lin_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">time_lib</span> <span class="op">~</span> <span class="va">travel_time</span>, data <span class="op">=</span> <span class="va">survey</span><span class="op">)</span></code></pre></div>
 <p>That’s it 😄.</p>
 <p>Let’s have a look at the estimated intercept and the slope. The function <code>get_regression_table</code> provides a tidy form of the model results and the function <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable()</a></code> layouts them nicely.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/moderndive/man/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="moderndive.github.io/moderndive//reference/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:left;">
@@ -344,7 +385,7 @@ travel_time
 <p><span class="math display">\[\widehat{\text{time_lib}_i} = 302.094 - 0.766 \cdot \text{travel_time}_i + \varepsilon_i\]</span>
 The model estimates a <code>time_lib</code> value for every student <span class="math inline">\(i\)</span>, with <span class="math inline">\(i\)</span> being an arbitrary student index running from 1 to 200 because we have surveyed 200 students. The “hat” above <span class="math inline">\(\text{time_lib}_i\)</span> indicates that this is an estimate. The estimated time in the library is the systematic component of the model, namely <span class="math inline">\(302.094 - 0.766 \cdot \text{travel_time}_i\)</span>. The difference of the actual time in the library and this estimated value is the error term or the residuum <span class="math inline">\(\varepsilon_i\)</span>.</p>
 <p>To simplify our analysis, we put the original data, estimated values (also called fitted values) and the residuals in one tibble. The respective values can be extracted from the model object <code>lin_mod</code> with the functions <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code> and <code><a href="https://rdrr.io/r/stats/residuals.html">residuals()</a></code>.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model_res</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fitted <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span>, residuals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">)</span>
 
@@ -365,7 +406,7 @@ The model estimates a <code>time_lib</code> value for every student <span class=
 ## 10         1       8153 f      urban     foot             8.06     297.   296.
 ## # … with 190 more rows, and 1 more variable: residuals &lt;dbl&gt;</code></pre>
 <p>Let’s have a look at the residuals and the fitted values.</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">model_res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">travel_time</span>, y <span class="op">=</span> <span class="va">time_lib</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xend <span class="op">=</span> <span class="va">travel_time</span>, yend <span class="op">=</span> <span class="va">fitted</span>, lty <span class="op">=</span> <span class="st">'Residuals'</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>  <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, slope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, color <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span>
@@ -375,7 +416,7 @@ The model estimates a <code>time_lib</code> value for every student <span class=
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">''</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>observed <span class="op">=</span> <span class="st">'black'</span>, fitted <span class="op">=</span> <span class="st">'blue'</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'observed'</span>, <span class="st">'fitted'</span><span class="op">)</span>, label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Observed values'</span>, <span class="st">'Fitted values'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_linetype_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">''</span>, values <span class="op">=</span> <span class="op">(</span><span class="st">'Residuals'</span> <span class="op">=</span> <span class="st">'solid'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-132-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-133-1.png" width="90%"></div>
 </div>
 <div id="model-assumptions" class="section level3" number="9.3.2">
 <h3>
@@ -384,21 +425,21 @@ The model estimates a <code>time_lib</code> value for every student <span class=
 <p>Before we interpret the meaning of the model parameters <em>intercept</em> and <em>slope</em>, we have to check the model assumptions. We already saw that the relationship is reasonably linear. Let’s look at the rest of the assumptions.</p>
 <p><strong>Independent residuals</strong>. This is difficult to check and should come with the study design. If you have like in our example independently surveyed students, you can reasonably assume that the both, the data and the residuals are independent. Conversely it means that you cannot use a normal linear regression model for time depenend data (time series) or spatially dependent data. The line you fit will still be correct, but the confidence intervals won’t.</p>
 <p><strong>Normal residuals.</strong> To check for normality of residuals, we use a graphical tool, namely the so-called qq-plot. It compares random data from a normal distribution with our residuals. If the data fall on strait line (at least approximately) then we can conclude that our residuals are normally distributed.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">model_res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Quantiles of the normal distribution'</span>,
        y <span class="op">=</span> <span class="st">'Qauntiles of the residuals'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-133-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-134-1.png" width="90%"></div>
 <p>This looks good 😄. You will need some practice to judge the qq-plots. You need to worry if you see large deviations from the line for small and large values.</p>
 <p><strong>Equal variance and zero mean.</strong> For the last assumption, we plot the residuals versus fitted values. It is important that the residuals remain (approximately) equally large for small and large fitted values and fluctuate around zero.</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">model_res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">fitted</span>, y <span class="op">=</span> <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>, col <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Fitted values'</span>, y <span class="op">=</span> <span class="st">'Residuals'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-134-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-135-1.png" width="90%"></div>
 <p>We have slightly larger residuals for larger fitted values. However, we also have more larger than smaller fitted values (i.e. travel times). This distorts the picture a bit. Overall, there is no serious problem there.</p>
 </div>
 <div id="interprete-your-model" class="section level3" number="9.3.3">
@@ -406,8 +447,8 @@ The model estimates a <code>time_lib</code> value for every student <span class=
 <span class="header-section-number">9.3.3</span> Interprete your model<a class="anchor" aria-label="anchor" href="#interprete-your-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can conclude that our model meets all the assumptions. Therefore, we can interpret the estimated parameters and their confidence intervals now.</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/moderndive/man/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="moderndive.github.io/moderndive//reference/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:left;">
@@ -490,14 +531,14 @@ travel_time
 <span class="header-section-number">9.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-8"><i class="fas fa-link"></i></a>
 </h2>
 <ol class="exercises"><ol style="list-style-type: decimal">
-<li>Predictors do not need to be numeric. Work through Chapter 5.2 in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span> to see an example of a categorical predictor.</li>
+<li>Predictors do not need to be numeric. Work through Chapter 5.2 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span> to see an example of a categorical predictor.</li>
 </ol></ol>
 </div>
 <div id="reading-assignment-7" class="section level2" number="9.5">
 <h2>
 <span class="header-section-number">9.5</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-7"><i class="fas fa-link"></i></a>
 </h2>
-<p>Chapter 5 in <span class="citation"><a href="literature-1.html#ref-ModernDive" role="doc-biblioref">Ismay and Kim</a> (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
+<p>Chapter 5 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
 <!-- ## Turning in your work -->
 <!-- - Save your R Notebook as an *.Rmd file.  -->
 <!-- - Upload your R Notebook to ILIAS. You don't need to upload the .nb.html file. You will find an upload option in today's session. -->
@@ -540,7 +581,7 @@ travel_time
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-04-01.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
