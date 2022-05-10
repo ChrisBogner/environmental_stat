@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>6 Sampling and variability | Environmental Statistics</title>
 <meta name="author" content="Christina Bogner">
-<meta name="description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter we start our journey into...">
+<meta name="description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter, we start our journey into...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="6 Sampling and variability | Environmental Statistics">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter we start our journey into...">
+<meta property="og:description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter, we start our journey into...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="6 Sampling and variability | Environmental Statistics">
-<meta name="twitter:description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter we start our journey into...">
+<meta name="twitter:description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter, we start our journey into...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -115,10 +115,10 @@ Calculate the standard error
 </li>
 </ul>
 </div>
-<p>With this chapter we start our journey into statistical inference. Statistical inference or simply <strong>inference</strong> wants to go beyond the analysis of single data sets. It wants to know whether patterns that we have observed in a single data set can be generalized to a larger context. Often, this context is called <strong>population</strong>. And such generalization techniques are nothing else than <strong>estimation population parameters</strong>. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a <strong>sample</strong>, and try to estimate from their mean income, the mean income of the whole group.</p>
-<p>Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (<strong>control group</strong>) and some at increased temperature (<strong>treatment group</strong>). You measure their growth and want to know <strong>whether the difference observed is due to chance</strong> or whether this is a real difference, an <strong>effect</strong> of the treatment. And if this is a real difference, how large is it and how precisely can we estimate this effect. All these questions can be answered using inference.</p>
+<p>With this chapter, we start our journey into statistical inference. Statistical inference or simply <strong>inference</strong> goes beyond the analysis of single data sets and generalizes patterns which we observed in a single data set to a larger context. Often, this context is called <strong>population</strong>. And such generalization techniques are nothing else than <strong>estimation of population parameters</strong>. For example, if you want to know the mean income of a large group of people, you can either ask every person (if you have time and money to do so) or you ask a cleverly chosen group only, a <strong>sample</strong>, and try to estimate from their mean income, the mean income of the whole group.</p>
+<p>Another setting, where you will want to use inference, is when doing experiments, e.g. in the lab. Imagine you want to study the influence of increased temperature on the growth of a plant species. Then you would design an experiment where some plants of this species are grown at ambient temperature (<strong>control group</strong>) and some at increased temperature (<strong>treatment group</strong>). You measure their growth and want to know <strong>whether the difference observed is due to chance</strong> or whether this is a real difference, an <strong>effect</strong> of the treatment. And if this is a real difference, how large it is and how precisely we can estimate this effect. All these questions can be answered using inference.</p>
 <p>We will do inference based on data science and a computer. Nowadays, computational power is usually no longer a problem and cool statistical inference can be done based on computer simulations and so called <strong>resampling</strong> techniques.</p>
-<p>In this chapter you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness or chance and variability.</p>
+<p>In this chapter, you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness or chance and variability.</p>
 <div id="random-sampling-of-data" class="section level2" number="6.1">
 <h2>
 <span class="header-section-number">6.1</span> Random sampling of data<a class="anchor" aria-label="anchor" href="#random-sampling-of-data"><i class="fas fa-link"></i></a>
@@ -126,7 +126,7 @@ Calculate the standard error
 <p>We will use the following libraries. The library <code>infer</code> is a dedicated package for <em>tidy</em> inference.</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://moderndive.github.io/moderndive/">moderndive</a></span><span class="op">)</span></code></pre></div>
 <p>We will simulate our own data set, our own population, and invent the <em>getsmarter university</em> with 12000 students. The code below draws random numbers and simulates the following variables:</p>
 <ul>
 <li>
@@ -142,7 +142,7 @@ Calculate the standard error
 <li>
 <code>time_lib</code>: time students spend in the university library in minutes</li>
 </ul>
-<p>We organise all these variables in a <code>tibble</code> that we call <code>getsmarter_pop</code>.</p>
+<p>We organize all these variables in a <code>tibble</code> that we call <code>getsmarter_pop</code>.</p>
 <p>Because we draw random numbers using R, every time we rerun the code, new numbers will be generated. To have a reproducible population, we use the function <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>. It accepts as a parameter an integer. Which integer we use does not really matter as long as we use the same every time we rerun the code. By <em>setting the seed</em>, we set the random number generate in R to a certain reproducible state. The numbers are still random, but reproducible 😄.</p>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
@@ -213,8 +213,8 @@ Calculate the standard error
 ## # … with 40 more rows</code></pre>
 <p>How many students from the survey live in the town and how many in the countryside?</p>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ## # Groups:   residence [2]
@@ -224,8 +224,8 @@ Calculate the standard error
 ## 2 urban        29</code></pre>
 <p>Instead of actual numbers, we want to express <code>residence</code> as proportions.</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence  prop
@@ -233,7 +233,7 @@ Calculate the standard error
 ## 1 rural      0.42
 ## 2 urban      0.58</code></pre>
 <p>42% of survey students live in the countryside and 58% in town.</p>
-<p>But which proportions would we obtain if we repeated the survey? Let’s repeat the survey 33 times and observe the variability in <code>residence</code>. This is an unrealistic scenario for real life, however, for a computer experiment no problem. We set <code>reps = 33.</code></p>
+<p>But which proportions would we obtain if we repeated the survey? Let’s repeat the survey 33 times and observe the variability in <code>residence</code>. This is an unrealistic scenario for real life, however, for a computer experiment, no problem. We set <code>reps = 33.</code></p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
 
@@ -258,8 +258,8 @@ Calculate the standard error
 ## # … with 1,640 more rows</code></pre>
 <p>How do the proportions in <code>residence</code> vary from survey to survey? Now we must group by <code>residence</code> and <code>replicate</code>.</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
 <span class="va">residence_props</span></code></pre></div>
@@ -291,7 +291,7 @@ Calculate the standard error
 <h2>
 <span class="header-section-number">6.2</span> Number of replications and variability<a class="anchor" aria-label="anchor" href="#number-of-replications-and-variability"><i class="fas fa-link"></i></a>
 </h2>
-<p>Our histograms show that proportions of residence vary from survey to survey. 33 is a large number for real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable <code>reps_num</code> to define the number of repetitions.</p>
+<p>Our histograms show that proportions of residence vary from survey to survey. 33 is a large number in real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable <code>reps_num</code> to define the number of repetitions.</p>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
 
@@ -299,8 +299,8 @@ Calculate the standard error
 
 <span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
 
-<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -308,33 +308,33 @@ Calculate the standard error
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-93-1.png" width="90%"></div>
-<p>The histograms show now a nice symmetrical pattern around 40–42% for <code>rural</code> and 58–60% for <code>urban</code> residences. The parameter <code>scales = 'free_x'</code> allows to scale each histogram’s <span class="math inline">\(x\)</span> axis separately. Such a distribution is called a <strong>sampling distribution</strong>. It shows the distribution of possible values of a statistics (“proportions of residence” in our case) that one obtains by a repeated sampling from a population.</p>
+<p>The histograms show now a nice symmetrical pattern around 40–42% for <code>rural</code> and 58–60% for <code>urban</code> residences. The parameter <code>scales = 'free_x'</code> allows scaling each histogram’s <span class="math inline">\(x\)</span> axis separately. Such a distribution is called a <strong>sampling distribution</strong>. It shows the distribution of possible values of a statistics (“proportions of residence” in our case) that one obtains by a repeated sampling from a population.</p>
 <p>The statistics “proportion of residence” is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occur if we survey our students randomly.</p>
 <p>To summarize a sampling distribution, we can calculate its mean value and standard deviation. The latter has a special name, <strong>standard error</strong>.</p>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural      0.0701
 ## 2 urban      0.0701</code></pre>
-<p>The standard errors for <code>rural</code> and <code>urban</code> are identical, because they are dependent: <code>rural</code> = 1 - <code>urban</code>.</p>
+<p>The standard errors for <code>rural</code> and <code>urban</code> are identical because they are dependent: <code>rural</code> = 1 - <code>urban</code>.</p>
 </div>
 <div id="sample-size" class="section level2" number="6.3">
 <h2>
 <span class="header-section-number">6.3</span> Sample size<a class="anchor" aria-label="anchor" href="#sample-size"><i class="fas fa-link"></i></a>
 </h2>
 <p>The standard error depends on the sample size. Let’s repeat our survey for 25, 50 and 100 students, respectively and observe how the standard error vary.</p>
-<p>For repetitive tasks like this, it is better to define a function that does the job instead of copy-pasting the code to vary the sample size. I will difine such a function without much comments. We will talk about functions later, if time allows.</p>
+<p>For repetitive tasks like this, it is better to define a function that does the job instead of copy-pasting the code to vary the sample size. I will define such a function without many comments. We will talk about functions later, if time allows.</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">calculate_props</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">population</span> <span class="op">=</span> <span class="va">getsmarter_pop</span>, <span class="va">survey_size</span>, <span class="va">reps_num</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">population</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
 
-<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
 <span class="va">residence_props</span>
@@ -351,10 +351,10 @@ Calculate the standard error
 
 <span class="co"># Sample size 100</span>
 <span class="va">residence_props_100</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">100</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
-<p>We plot the resulting samping distributions.</p>
+<p>We plot the resulting sampling distributions.</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_25</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.04</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 25'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-1.png" width="90%"></div>
@@ -372,8 +372,8 @@ Calculate the standard error
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-3.png" width="90%"></div>
 <p>We compare the standard errors of the three sampling distributions.</p>
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props_25</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props_25</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
@@ -381,8 +381,8 @@ Calculate the standard error
 ## 1 rural       0.102
 ## 2 urban       0.102</code></pre>
 <div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props_50</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props_50</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
@@ -390,16 +390,16 @@ Calculate the standard error
 ## 1 rural      0.0679
 ## 2 urban      0.0679</code></pre>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props_100</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props_100</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural      0.0458
 ## 2 urban      0.0458</code></pre>
-<p>You see that the <strong>standard error decreases with increasing sample size</strong>. This makes sense because the larger the sample size the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.</p>
-<p>This time, I have some pre-formulated take-home messages, because sampling and variability are really important topics 😎.</p>
+<p>You see that the <strong>standard error decreases with increasing sample size</strong>. This makes sense because the larger the sample size, the more information it contains about the population, i.e. it is more representative. Accordingly, the variability of the information (measured by the standard error) decreases.</p>
+<p>This time, I have some pre-formulated take-home messages because sampling and variability are crucial topics 😎.</p>
 <div class="rmdalert">
 <ul>
 <li>
@@ -493,7 +493,7 @@ Conduct a repeated survey (1000 repetitions) of 50 students and estimate the pro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-09.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

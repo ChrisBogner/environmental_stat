@@ -22,7 +22,8 @@ Imports:
     lubridate,
     infer,
     dabestr,
-    emojifont
+    emojifont,
+    fontawesome
 Remotes:
     rstudio/bookdown,
     rstudio/bslib,

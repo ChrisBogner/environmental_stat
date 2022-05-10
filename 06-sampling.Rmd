@@ -20,7 +20,7 @@ In this chapter, you will learn how to use a computer experiment to draw samples
 We will use the following libraries. The library `infer` is a dedicated package for *tidy* inference.
 ```{r, message = F, error = F}
 library(tidyverse)
-library(infer)
+library(moderndive)
 ```
 
 We will simulate our own data set, our own population, and invent the *getsmarter university* with 12000 students. The code below draws random numbers and simulates the following variables:
@@ -196,7 +196,7 @@ residence_props_100 <- calculate_props(population = getsmarter_pop, survey_size 
 We plot the resulting sampling distributions.
 ```{r, out.width = '90%'}
 ggplot(data = residence_props_25, aes(x = prop)) + 
-  geom_histogram(binwidth = 0.05, boundary = 0.4, col = 'white') +
+  geom_histogram(binwidth = 0.04, boundary = 0.4, col = 'white') +
   facet_wrap(~ residence, scales = 'free_x') +
   labs(x = 'Proportion of residence', title = 'Distribution of residences, sample size = 25', y = 'Frequency')
 
