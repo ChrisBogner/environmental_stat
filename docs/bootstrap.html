@@ -121,9 +121,9 @@ Calculate bootstrap confidence intervals for the mean
 </blockquote>
 <p>Because we know the theoretical distribution of the mean we can calculate the 95% confidence interval as <span class="math inline">\(\hat\mu \pm 1.96 \cdot SE\)</span>, with <span class="math inline">\(\hat\mu\)</span> being the estimated mean, <span class="math inline">\(SE\)</span> the standard error <span class="math inline">\(\sigma/\sqrt(n)\)</span> and the magic factor of 1.96 comes from the fact that in a normal distribution, 95% of all values fall into the interval <span class="math inline">\(\mu \pm 1.96 \cdot sd\)</span>, <span class="math inline">\(sd\)</span> being the standard deviation.</p>
 </div>
-<div id="bootstrapuse-your-computer" class="section level2" number="7.2">
+<div id="bootstrap-use-your-computer" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">7.2</span> Bootstrap–use your computer<a class="anchor" aria-label="anchor" href="#bootstrapuse-your-computer"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Bootstrap – use your computer<a class="anchor" aria-label="anchor" href="#bootstrap-use-your-computer"><i class="fas fa-link"></i></a>
 </h2>
 <p>Formulas date from the early time of statistics, where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using <strong>re-sampling</strong>, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure <a href="bootstrap.html#fig:meunch">7.1</a>). However, it has a solid mathematical foundation <span class="citation">(<a href="literature-1.html#ref-Efron1979" role="doc-biblioref">Efron 1979</a>)</span>.</p>
 <div class="figure">
@@ -390,7 +390,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#bootstrap"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
 <li><a class="nav-link" href="#the-formulas"><span class="header-section-number">7.1</span> The formulas</a></li>
-<li><a class="nav-link" href="#bootstrapuse-your-computer"><span class="header-section-number">7.2</span> Bootstrap–use your computer</a></li>
+<li><a class="nav-link" href="#bootstrap-use-your-computer"><span class="header-section-number">7.2</span> Bootstrap – use your computer</a></li>
 <li><a class="nav-link" href="#confidence-intervals-for-the-mean-travel-time"><span class="header-section-number">7.3</span> Confidence intervals for the mean travel time</a></li>
 <li><a class="nav-link" href="#bootstrap-with-the-library-infer"><span class="header-section-number">7.4</span> Bootstrap with the library infer</a></li>
 <li><a class="nav-link" href="#interpreting-the-confidence-intervals"><span class="header-section-number">7.5</span> Interpreting the confidence intervals</a></li>

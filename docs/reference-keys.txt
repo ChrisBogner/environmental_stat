@@ -73,7 +73,7 @@ reading-assignment-4
 turning-in-your-work-4
 bootstrap
 the-formulas
-bootstrapuse-your-computer
+bootstrap-use-your-computer
 confidence-intervals-for-the-mean-travel-time
 bootstrap-with-the-library-infer
 interpreting-the-confidence-intervals

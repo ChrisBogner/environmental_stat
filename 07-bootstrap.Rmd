@@ -18,7 +18,7 @@ You will never have the opportunity to sample/survey repeatedly to estimate the 
 Because we know the theoretical distribution of the mean we can calculate the 95% confidence interval as $\hat\mu \pm 1.96 \cdot SE$, with $\hat\mu$ being the estimated mean, $SE$ the standard error $\sigma/\sqrt(n)$ and the magic factor of 1.96 comes from the fact that in a normal distribution, 95% of all values fall into the interval $\mu \pm 1.96 \cdot sd$, $sd$ being the standard deviation.
 
 
-## Bootstrap--use your computer
+## Bootstrap -- use your computer
 Formulas date from the early time of statistics, where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using **re-sampling**, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure \@ref(fig:meunch)). However, it has a solid mathematical foundation [@Efron1979].
 
 ```{r meunch, echo = F, fig.cap = 'Münchhausen removes himself from the swamp using his own braids (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons) [Link to figure](https://upload.wikimedia.org/wikipedia/commons/a/ad/M%C3%BCnchhausen-Sumpf-Hosemann.png)', fig.width = 6, out.width = "80%"}
