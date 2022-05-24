@@ -74,7 +74,7 @@ turning-in-your-work-4
 bootstrap
 the-formulas
 bootstrapuse-your-computer
-cofidence-intervals-for-the-mean-travel-time
+confidence-intervals-for-the-mean-travel-time
 bootstrap-with-the-library-infer
 interpreting-the-confidence-intervals
 practice-on-your-own-6

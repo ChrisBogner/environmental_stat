@@ -109,13 +109,13 @@ Calculate bootstrap confidence intervals for the mean
 </li>
 </ul>
 </div>
-<p>In chapter <a href="sampling.html#sampling">6</a> we studied the variability of <strong>repeated random sampling from a population</strong>. We did computer experiments and sampled form a simulated population repeatedly without replacement (i.e. the data could appear in the sample only once) and calculated a statistics, the proportion of rural and urban residents. Such a statistics is a <strong>random variable</strong> and it is characterized by the <strong>sampling distribution</strong>. It shows which values you can expect by randomly sampling from a population.</p>
-<p>We learned that the shape of the sampling distribution and the size of its standard error depended on the sample size. In this chapter we will learn how to quantify the standard error or to calculate plausible values (confidence intervals) for real-life applications, when you have one sample only.</p>
+<p>In chapter <a href="sampling.html#sampling">6</a> we studied the variability of <strong>repeated random sampling from a population</strong>. We did computer experiments and sampled from a simulated population repeatedly without replacement (i.e. the data could appear in the sample only once) and calculated a statistics, the proportion of rural and urban residents. Such a statistics is a <strong>random variable</strong>, and it is characterized by the <strong>sampling distribution</strong>. It shows which values you can expect by randomly sampling from a population.</p>
+<p>We learned that the shape of the sampling distribution and the size of its standard error depended on the sample size. In this chapter, we will learn how to quantify the standard error or to calculate plausible values (confidence intervals) for real-life applications, when you have one sample only.</p>
 <div id="the-formulas" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> The formulas<a class="anchor" aria-label="anchor" href="#the-formulas"><i class="fas fa-link"></i></a>
 </h2>
-<p>You will never have the opportunity to sample/survey repeatedly to estimate the information (i.e. a statistics or parameter) about the population of interest. In real-life applications you will have one (hopefully cleverly obtained) random sample. So how can we have access to the shape of the sampling distribution? For several standard statistics, there are formulas that describe the standard error. You have probably learned that the standard error for the estimated mean equalled <span class="math inline">\(\sigma/\sqrt(n)\)</span>, <span class="math inline">\(\sigma\)</span> being the variance of the population and <span class="math inline">\(n\)</span> the sample size. If you don’t know the variance of the population, then you have to estimate it from the sample itself. But where does this formula come from? The very important <strong>Central Limit Theorem</strong> tells us that the random variable <strong>mean</strong> that we can estimate from our random sample is normally distributed with a mean equalled to the true mean of the population and the standard deviation of, you guessed it, <span class="math inline">\(\sigma/\sqrt(n)\)</span>. Based on the normal distribution we can calculate plausible values, a so-called <strong>confidence interval</strong>. Informally, we could define the confidence interval as follows:</p>
+<p>You will never have the opportunity to sample/survey repeatedly to estimate the information (i.e. a statistics or parameter) about the population of interest. In real-life applications, you will have one (hopefully cleverly obtained) random sample. So, how can we have access to the shape of the sampling distribution? For several standard statistics, there are formulas that describe the standard error. You have probably learned that the standard error for the estimated mean equalled <span class="math inline">\(\sigma/\sqrt(n)\)</span>, <span class="math inline">\(\sigma\)</span> being the variance of the population and <span class="math inline">\(n\)</span> the sample size. If you don’t know the variance of the population, then you have to estimate it from the sample itself. But where does this formula come from? The crucial <strong>Central Limit Theorem</strong> tells us that the random variable <strong>mean</strong> that we can estimate from our random sample is normally distributed with a mean equalled to the true mean of the population and the standard deviation of, you guessed it, <span class="math inline">\(\sigma/\sqrt(n)\)</span>. Based on the normal distribution, we can calculate plausible values, a so-called <strong>confidence interval</strong>. Informally, we could define the confidence interval as follows:</p>
 <blockquote>
 <p>Is there a plausible range of values that we could obtain if we randomly sample from a population? Plausible means that if we repeated the sampling very often, this range would contain the true mean in let’s say 95% of the time. Such a plausible range is called a <strong>95% confidence interval</strong>.</p>
 </blockquote>
@@ -125,21 +125,21 @@ Calculate bootstrap confidence intervals for the mean
 <h2>
 <span class="header-section-number">7.2</span> Bootstrap–use your computer<a class="anchor" aria-label="anchor" href="#bootstrapuse-your-computer"><i class="fas fa-link"></i></a>
 </h2>
-<p>Formulas date from the early time of statistics where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using <strong>re-sampling</strong>, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure <a href="bootstrap.html#fig:meunch">7.1</a>). However, it has a solid mathematical foundation <span class="citation">(<a href="literature-1.html#ref-Efron1979" role="doc-biblioref">Efron 1979</a>)</span>.</p>
+<p>Formulas date from the early time of statistics, where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using <strong>re-sampling</strong>, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure <a href="bootstrap.html#fig:meunch">7.1</a>). However, it has a solid mathematical foundation <span class="citation">(<a href="literature-1.html#ref-Efron1979" role="doc-biblioref">Efron 1979</a>)</span>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:meunch"></span>
 <img src="figures/M%C3%BCnchhausen-Sumpf-Hosemann.png" alt="Münchhausen removes himself from the swamp using his own braids (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons) [Link to figure](https://upload.wikimedia.org/wikipedia/commons/a/ad/M%C3%BCnchhausen-Sumpf-Hosemann.png)" width="80%"><p class="caption">
 Figure 7.1: Münchhausen removes himself from the swamp using his own braids (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons) <a href="https://upload.wikimedia.org/wikipedia/commons/a/ad/M%C3%BCnchhausen-Sumpf-Hosemann.png">Link to figure</a>
 </p>
 </div>
-<p>Figure <a href="bootstrap.html#fig:sampling-world">7.2</a> shows the setup that we practiced in chapter <a href="sampling.html#sampling">6</a>. We wanted to estimate a parameter (proportion of rural and urban residents) called <span class="math inline">\(\mu\)</span> in the figure and we sampled randomly several times from the population. From all those random samples we calculated our statistics and obtained the sampling distribution.</p>
+<p>Figure <a href="bootstrap.html#fig:sampling-world">7.2</a> shows the setup that we practised in chapter <a href="sampling.html#sampling">6</a>. We wanted to estimate a parameter (proportion of rural and urban residents) called <span class="math inline">\(\mu\)</span> in the figure, and we sampled randomly several times from the population. From all those random samples, we calculated our statistics and obtained the sampling distribution.</p>
 <div class="figure">
 <span style="display:block;" id="fig:sampling-world"></span>
 <img src="figures/sampling_world.png" alt="Calculation of a sampling distribution by repeated random sampling from a population. Figure by @Hesterberg2015, their Figure 4. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%"><p class="caption">
 Figure 7.2: Calculation of a sampling distribution by repeated random sampling from a population. Figure by <span class="citation">Hesterberg (<a href="literature-1.html#ref-Hesterberg2015" role="doc-biblioref">2015</a>)</span>, their Figure 4. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
 </p>
 </div>
-<p>Figure <a href="bootstrap.html#fig:sampling-bootstrap">7.3</a> looks basically the same, except one important difference. We don’t have access to several random samples from the population, but have one random sample only. And now we remember that we invested time and energy in thinking about the best way obtain this sample and we believe that it is representative for our population. Thus, we can think about this sample as our <em>mini</em> population. We replace the population by its miniature, i.e. our sample, and sample from this sample as if it were the true population. However, because the sample is limited in size we have to sample <strong>with replacement</strong>. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For each of those bootstrap samples we calculate the statistics and obtain its bootstrap sampling distribution. The confidence interval are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equals the 95% bootstrap confidence interval.</p>
+<p>Figure <a href="bootstrap.html#fig:sampling-bootstrap">7.3</a> looks nearly the same, except one important difference. We don’t have access to several random samples from the population, but have one random sample only. And now we remember that we invested time and energy in thinking about the best way to obtain this sample, and we believe that it is representative of our population. Thus, we can think about this sample as our <em>mini</em> population. We replace the population by its miniature, i.e. our sample, and sample from this sample as if it were the true population. However, because the sample is limited in size, we have to sample <strong>with replacement</strong>. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For each of those bootstrap samples, we calculate the statistics and obtain its bootstrap sampling distribution. The confidence intervals are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equals the 95% bootstrap confidence interval.</p>
 <div class="figure">
 <span style="display:block;" id="fig:sampling-bootstrap"></span>
 <img src="figures/sampling_bootstrap.png" alt="Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by @Hesterberg2015, their Figure 5. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%"><p class="caption">
@@ -147,9 +147,9 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 </p>
 </div>
 </div>
-<div id="cofidence-intervals-for-the-mean-travel-time" class="section level2" number="7.3">
+<div id="confidence-intervals-for-the-mean-travel-time" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">7.3</span> Cofidence intervals for the mean travel time<a class="anchor" aria-label="anchor" href="#cofidence-intervals-for-the-mean-travel-time"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Confidence intervals for the mean travel time<a class="anchor" aria-label="anchor" href="#confidence-intervals-for-the-mean-travel-time"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s come back to our simulated getsmarter university population and estimate the mean travel time with its bootstrap confidence interval.</p>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
@@ -305,7 +305,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <h2>
 <span class="header-section-number">7.4</span> Bootstrap with the library <code>infer</code><a class="anchor" aria-label="anchor" href="#bootstrap-with-the-library-infer"><i class="fas fa-link"></i></a>
 </h2>
-<p>The library <code>infer</code> offers a convenient framework for calculating the bootstrap confidence intervals and to do hypothesis tests. We will talk about the latter in a later session. <code>infer</code> is a dedicated package for <em>tidy</em> inference and is organised around 5 verbs:</p>
+<p>The library <code>infer</code> offers a convenient framework for calculating the bootstrap confidence intervals and to do hypothesis tests. We will talk about the latter in a later session. <code>infer</code> is a dedicated package for <em>tidy</em> inference and is organized around 5 verbs:</p>
 <ol style="list-style-type: decimal">
 <li>
 <code><a href="https://infer.tidymodels.org/reference/specify.html">specify()</a></code> variables or relationships between them</li>
@@ -336,7 +336,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ##   lower_ci upper_ci
 ##      &lt;dbl&gt;    &lt;dbl&gt;
 ## 1     30.1     38.3</code></pre>
-<p>And then visualize all results. Because the function <code>visualize</code> is based on ggplot, we can add custom axis labels.</p>
+<p>And then visualize all results. Because the function <code>visualize</code> is based on <code>ggplot2</code>, we can add custom axis labels.</p>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="va">bootstrap_distribution</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_confidence_interval.html">shade_confidence_interval</a></span><span class="op">(</span>endpoints <span class="op">=</span> <span class="va">percentile_ci</span>, color <span class="op">=</span> <span class="st">"orange"</span>, fill <span class="op">=</span> <span class="st">"khaki"</span><span class="op">)</span> <span class="op">+</span>
@@ -352,7 +352,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <blockquote>
 <p>If we repeat the sampling very often and recalculate the 95% confidence intervals, we expect them to contain the true population parameters in about 95% of the time.</p>
 </blockquote>
-<p>It means that some of the confidence intervals won’t contain the true population parameter.</p>
+<p>It means that some confidence intervals won’t contain the true population parameter.</p>
 <p>The confidence interval is our best guess of plausible values for the population parameter. In case of a theoretical distribution of the statistics, the bootstrap and the theoretical confidence intervals coincide. Often, the interpretation is short-handed as: We are 95% confident that the confidence interval captures the true parameter. This is incorrect. It is better to state that in 95% of the time, the confidence interval captures the true population parameter. And now you know what is meant by “95% of the time” 😄.</p>
 </div>
 <div id="practice-on-your-own-6" class="section level2" number="7.6">
@@ -391,7 +391,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <li><a class="nav-link" href="#bootstrap"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
 <li><a class="nav-link" href="#the-formulas"><span class="header-section-number">7.1</span> The formulas</a></li>
 <li><a class="nav-link" href="#bootstrapuse-your-computer"><span class="header-section-number">7.2</span> Bootstrap–use your computer</a></li>
-<li><a class="nav-link" href="#cofidence-intervals-for-the-mean-travel-time"><span class="header-section-number">7.3</span> Cofidence intervals for the mean travel time</a></li>
+<li><a class="nav-link" href="#confidence-intervals-for-the-mean-travel-time"><span class="header-section-number">7.3</span> Confidence intervals for the mean travel time</a></li>
 <li><a class="nav-link" href="#bootstrap-with-the-library-infer"><span class="header-section-number">7.4</span> Bootstrap with the library infer</a></li>
 <li><a class="nav-link" href="#interpreting-the-confidence-intervals"><span class="header-section-number">7.5</span> Interpreting the confidence intervals</a></li>
 <li><a class="nav-link" href="#practice-on-your-own-6"><span class="header-section-number">7.6</span> Practice on your own!</a></li>
@@ -414,7 +414,7 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-10.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
