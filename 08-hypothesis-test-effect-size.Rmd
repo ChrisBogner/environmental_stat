@@ -37,7 +37,7 @@ Let's plot the data before we analyse it.
 ```{r, out.width = '90%'}
 ggplot(study, aes(x = gender, fill = decision)) +
   geom_bar() +
-  labs(x = 'Gender on personal file', y = 'Abs. frequency',
+  labs(x = 'Gender on personnel file', y = 'Abs. frequency',
        title = 'Decisions of bank supervisors from study by Rosen & Jerdee (1974)')
 ```
 
