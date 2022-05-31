@@ -113,7 +113,7 @@ estimation
 </li>
 </ul>
 </div>
-<p>In chapter <a href="bootstrap.html#bootstrap">7</a> we learned how to calculate confidence intervals, a range of plausible values. Or more formally, an interval that expect to contain the true population parameters in about 95% of the time, if we repeat the sampling very often. In this chapter we will learn what hypothesis tests are and why it is often better to estimate effect sizes.</p>
+<p>In chapter <a href="bootstrap.html#bootstrap">7</a> we learned how to calculate confidence intervals, a range of plausible values. Or more formally, an interval that expect to contain the true population parameters in about 95% of the time, if we repeat the sampling very often. In this chapter, we will learn what hypothesis tests are and why it is often better to estimate effect sizes.</p>
 <div id="hypothesis-tests-with-infer" class="section level2" number="8.1">
 <h2>
 <span class="header-section-number">8.1</span> Hypothesis tests with <code>infer</code><a class="anchor" aria-label="anchor" href="#hypothesis-tests-with-infer"><i class="fas fa-link"></i></a>
@@ -122,7 +122,7 @@ estimation
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></code></pre></div>
-<p>Let’s start with an old study that was done in the 1970. <span class="citation">Rosen and Jerdee (<a href="literature-1.html#ref-Rosen1974" role="doc-biblioref">1974</a>)</span> analysed whether “sex role stereotypes [had] an influence on personnel decisions”. In our modern language, they wanted to know whether women are discriminated against in promotion decisions. They asked 95 bank supervisors to decide based on a personal file only whether a person should be promoted or not. All files were identical except the gender and the files were distributed randomly to the participants. Because of this random assignement of files, the procedure is an <strong>experiment</strong> and we can draw conclusions about the research question. Here, we look at one part of the data, namely promotion decision for a simple job (c.f. the original publication for more details.)</p>
+<p>Let’s start with an old study that was done in the 1970. <span class="citation">Rosen and Jerdee (<a href="literature-1.html#ref-Rosen1974" role="doc-biblioref">1974</a>)</span> analysed whether “sex role stereotypes [had] an influence on personnel decisions”. In our modern language, they wanted to know whether women are discriminated against in promotion decisions. They asked 95 bank supervisors to decide based on a personnel file only whether a person should be promoted or not. All files were identical except the gender and the files were distributed randomly to the participants. Because of this random assignment of files, the procedure is an <strong>experiment</strong>, and we can draw conclusions about the research question. Here, we look at one part of the data, namely promotion decision for a simple job (c.f. the original publication for more details.)</p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">study</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="st">'gender'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'male'</span>, <span class="fl">24</span><span class="op">)</span>,
                              <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'female'</span>, <span class="fl">24</span><span class="op">)</span><span class="op">)</span>,
@@ -201,7 +201,7 @@ Sum
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Gender on personal file'</span>, y <span class="op">=</span> <span class="st">'Abs. frequency'</span>,
        title <span class="op">=</span> <span class="st">'Decisions of bank supervisors from study by Rosen &amp; Jerdee (1974)'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-117-1.png" width="90%"></div>
-<p>How large is the difference of proportions in promotions between men and women? Is this difference due to chance or are women discriminated against?</p>
+<p>How large is the difference of proportions in promotions between men and women? Is this difference due to chance, or are women discriminated against?</p>
 <p>A hypothesis test helps to decide whether an observed effect, in our case the difference in proportions of promotions, can be attributed to chance. In a hypothesis test, two different statements are contrasted, a <strong>null hypothesis</strong> and an <strong>alternative hypothesis</strong>:</p>
 <ul>
 <li>Statement 1: There is no real difference, the observed difference is due to chance.</li>
@@ -246,7 +246,7 @@ Figure 8.1: General framework in <code>infer</code>. (Source: <a href="https://i
 ## 1 0.292</code></pre>
 <p>We observe 29.2% less women promoted than men.</p>
 <p>Let’s see whether this difference can be attributed to chance. We generate data under the null hypothesis, i.e. a world where <code>gender</code> and <code>decision</code> to promote are completely independent. Then we compare the data we obtain in this world with the observed 29.2% difference between men and women.</p>
-<p>We generate the data under the null hypotheses by permutation. It means that if <code>gender</code> and <code>decision</code> are unrelated then we could have observed other combinations of them. Therefore, any permuted combination would be in agreement with the null hypothesis of independence of these variables. We generate 10000 permuted samples.</p>
+<p>We generate the data under the null hypotheses by permutation. It means that if <code>gender</code> and <code>decision</code> are unrelated, then we could have observed other combinations of them. Therefore, any permuted combination would be in agreement with the null hypothesis of independence of these variables. We generate 10000 permuted samples.</p>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 
@@ -291,13 +291,13 @@ Figure 8.1: General framework in <code>infer</code>. (Source: <a href="https://i
 ##   p_value
 ##     &lt;dbl&gt;
 ## 1  0.0268</code></pre>
-<p>This <span class="math inline">\(p\)</span> value is really small. It is rare to observe a difference as larger as 29.2%, if we assume that women and men are promoted equally often. We reject the null hypothesis of independence and conclude that women are discriminated against in promotion. A cautionary note: In this experiment, we assumed that the participating bank supervisors were representative for their profession in the 1970s. Thus, it is more cautious to conclude that women were discriminated against in the 1970 (provided the white male bank supervisors are representative for the then-population of decision-makers).</p>
+<p>This <span class="math inline">\(p\)</span> value is really small. It is rare to observe a difference as large as 29.2%, if we assume that women and men are promoted equally often. We reject the null hypothesis of independence and conclude that women are discriminated against in promotion. A cautionary note: In this experiment, we assumed that the participating bank supervisors were representative for their profession in the 1970s. Thus, it is more cautious to conclude that women were discriminated against in the 1970 (provided the white male bank supervisors are representative for the then-population of decision-makers).</p>
 </div>
 <div id="there-is-only-one-test" class="section level2" number="8.2">
 <h2>
 <span class="header-section-number">8.2</span> There is only one test!<a class="anchor" aria-label="anchor" href="#there-is-only-one-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>When you read through literature, you will find a lot of different tests. It is difficult to keep all those names and remember when to use what. The good news is that it is unnecessary complicated and can be simplified with a test procedure based on computer simulations as we did in <code>infer</code>. The general logic behind simulation-based tests is shown in Figure <a href="hypothesis.html#fig:one-test">8.2</a>.</p>
+<p>When you read through literature, you will find many tests. It is difficult to keep all those names and remember when to use what. The good news is that it is unnecessarily complicated and can be simplified with a test procedure based on computer simulations as we did in <code>infer</code>. The general logic behind simulation-based tests is shown in Figure <a href="hypothesis.html#fig:one-test">8.2</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:one-test"></span>
 <img src="figures/one_test.png" alt="General logic behind any simulation-based hypothesis test. (Source: http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html. Used with permission by the author Prof. Allen Downey)." width="80%"><p class="caption">
@@ -308,27 +308,27 @@ Figure 8.2: General logic behind any simulation-based hypothesis test. (Source: 
 <p><strong>Step 1: calculate the test statistic in your data</strong>
 Summarize your data with a test statistic. It can be a mean or a difference in proportions. In Figure <a href="hypothesis.html#fig:one-test">8.2</a> this statistic is called <span class="math inline">\(\sigma*\)</span>.</p>
 <p><strong>Step 2: formulate the null hypothesis</strong>
-Think about your research question. What do you want to know? Derive a model of a world where this effect is absent. This is your null hypothesis <span class="math inline">\(H_0\)</span>. This model can be a permutation of variables or a theoretical model or a complicated model 😄.</p>
+Think about your research question. What do you want to know? Derive a model of a world where this effect is absent. This is your null hypothesis, <span class="math inline">\(H_0\)</span>. This model can be a permutation of variables or a theoretical model or a complicated model 😄.</p>
 <p><strong>Step 3: generate the data under the null hypothesis</strong>
 Generate the data, i.e. many data samples, using your model of <span class="math inline">\(H_0\)</span> and calculate the same statistic as you did for your observed data for each of those samples.</p>
 <p><strong>Step 4: calculate the sampling distribution</strong>
-These statistics under the null give you a sampling distribution that you can visualize. Additionally, visualize the observed statistic <span class="math inline">\(\sigma*\)</span> and compare. Does such a value appear often in your sampling distribution or is it rare? The <span class="math inline">\(p\)</span> value gives you the frequency of how often the sampling distribution has values that are at least as large as your <span class="math inline">\(\sigma*\)</span>.</p>
+These statistics under the null give you a sampling distribution that you can visualize. Additionally, visualize the observed statistic <span class="math inline">\(\sigma*\)</span> and compare. Does such a value often appear in your sampling distribution or is it rare? The <span class="math inline">\(p\)</span> value gives you the frequency of how often the sampling distribution has values that are at least as large as your <span class="math inline">\(\sigma*\)</span>.</p>
 <p><strong>Step 5: Decide!</strong>
-Is the <span class="math inline">\(p\)</span> values small? Use you domain knowledge to frame the result. No need to refer to statistical significance here! Formulate a conclusion in plain language. Think about how you obtained the data. There is always uncertainty, so be modest and do not overstate your finding!</p>
+Is the <span class="math inline">\(p\)</span> values small? Use your domain knowledge to frame the result. No need to refer to statistical significance here! Formulate a conclusion in plain language. Think about how you obtained the data. There is always uncertainty, so be modest and do not overstate your finding!</p>
 <p>There is so much more to say about the misuse of <span class="math inline">\(p\)</span> values and the term “statistical significance”. A good starting point is the paper by <span class="citation">Wasserstein, Schirm, and Lazar (<a href="literature-1.html#ref-Wasserstein2019" role="doc-biblioref">2019</a>)</span>.</p>
 </div>
 <div id="hypothesis-test-versus-effect-size-estimation" class="section level2" number="8.3">
 <h2>
 <span class="header-section-number">8.3</span> Hypothesis test versus effect size estimation<a class="anchor" aria-label="anchor" href="#hypothesis-test-versus-effect-size-estimation"><i class="fas fa-link"></i></a>
 </h2>
-<p>Compared to a statistical test, the estimation of a so called <strong>effect size</strong> can be much more interesting. Effect size can be the difference in means or proportions or more elaborated (standardized) effects. While a statistical test gives you a “feeling” of whether the observed effect could be attributed to chance, estimation of the effect size and its confidence intervals gives you a range of plausible values. It is much more interesting and relevant to discuss those and what they could mean for real life than just to state that something is (not) due chance. Prefer effect size and confidence intervals where possible to hypothesis tests.</p>
+<p>Compared to a statistical test, the estimation of a so-called <strong>effect size</strong> can be much more interesting. Effect size can be the difference in means or proportions or more elaborated (standardized) effects. While a statistical test gives you a “feeling” of whether the observed effect could be attributed to chance, estimation of the effect size and its confidence intervals gives you a range of plausible values. It is much more interesting and relevant to discuss those and what they could mean for real life than just to state that something is (not) due chance. Prefer effect size and confidence intervals where possible to hypothesis tests.</p>
 </div>
 <div id="practice-on-your-own-7" class="section level2" number="8.4">
 <h2>
 <span class="header-section-number">8.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-7"><i class="fas fa-link"></i></a>
 </h2>
 <ol class="exercises"><ol style="list-style-type: decimal">
-<li><p>Does the travel time and the time spent in the library correlate in our getsmarter population? Do a statistical test based on a survey of 200 students. Formulate the null and alternative hypothesis before doing the test. Hint: <code>specify(travel_time ~ time_lib)</code> and <code>calculate(stat = "correlation")</code>. Consult the web site of the library <code>infer</code> (c.f. below).</p></li>
+<li><p>Does the travel time and the time spent in the library correlate in our getsmarter population? Do a statistical test based on a survey of 200 students. Formulate the null and alternative hypothesis before doing the test. Hint: <code>specify(travel_time ~ time_lib)</code> and <code>calculate(stat = "correlation")</code>. Consult the website of the library <code>infer</code> (c.f. below).</p></li>
 <li><p>Does the travel time and the time spent in the library correlate in our getsmarter population? This time, estimate the correlation and calculate its confidence interval. Compare with the hypothesis test.</p></li>
 </ol></ol>
 </div>
@@ -391,7 +391,7 @@ Is the <span class="math inline">\(p\)</span> values small? Use you domain knowl
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-24.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
