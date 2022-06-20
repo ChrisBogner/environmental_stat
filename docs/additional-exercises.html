@@ -1,28 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>C Additional exercises | Environmental Statistics</title>
-<meta name="author" content="Christina Bogner">
-<meta name="description" content="C.1 Introduction to R and RStudio  C.1.1 Rob’s account book The young master student Rob Stat thinks seriously about his mother’s advice to monitor his expenses. He begins by writing down what he...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="C Additional exercises | Environmental Statistics">
-<meta property="og:type" content="book">
-<meta property="og:description" content="C.1 Introduction to R and RStudio  C.1.1 Rob’s account book The young master student Rob Stat thinks seriously about his mother’s advice to monitor his expenses. He begins by writing down what he...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C Additional exercises | Environmental Statistics">
-<meta name="twitter:description" content="C.1 Introduction to R and RStudio  C.1.1 Rob’s account book The young master student Rob Stat thinks seriously about his mother’s advice to monitor his expenses. He begins by writing down what he...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>C Additional exercises | Environmental Statistics</title>
+
+    <meta name="author" content="Christina Bogner" />
+  
+   <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="C Additional exercises | Environmental Statistics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="C Additional exercises | Environmental Statistics" />
+  
+  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<style type="text/css">
+    <style type="text/css">
     /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
     div.csl-bib-body { }
     div.csl-entry {
@@ -44,14 +66,17 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="font-awesome.min.css">
+      <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="font-awesome.min.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -64,63 +89,42 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface</a></li>
-<li class="book-part">Part I: Explore data</li>
-<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
-<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
-<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
-<li class="book-part">Part II: Statistical inference</li>
-<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
-<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
-<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
-<li class="book-part">Part III: Statistical modelling</li>
-<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
-<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
-<li><a class="active" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
-<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
-<li><a class="" href="literature-1.html">Literature</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="additional-exercises" class="section level1" number="13">
-<h1>
-<span class="header-section-number">C</span> Additional exercises<a class="anchor" aria-label="anchor" href="#additional-exercises"><i class="fas fa-link"></i></a>
-</h1>
-<div id="introduction-to-r-and-rstudio-1" class="section level2" number="13.1">
-<h2>
-<span class="header-section-number">C.1</span> Introduction to R and RStudio<a class="anchor" aria-label="anchor" href="#introduction-to-r-and-rstudio-1"><i class="fas fa-link"></i></a>
-</h2>
-<div id="rob1" class="section level3" number="13.1.1">
-<h3>
-<span class="header-section-number">C.1.1</span> Rob’s account book<a class="anchor" aria-label="anchor" href="#rob1"><i class="fas fa-link"></i></a>
-</h3>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="additional-exercises" class="section level1" number="14">
+<h1><span class="header-section-number">C</span> Additional exercises</h1>
+<div id="introduction-to-r-and-rstudio-1" class="section level2" number="14.1">
+<h2><span class="header-section-number">C.1</span> Introduction to R and RStudio</h2>
+<div id="rob1" class="section level3" number="14.1.1">
+<h3><span class="header-section-number">C.1.1</span> Rob’s account book</h3>
 <p>The young master student Rob Stat thinks seriously about his mother’s advice to monitor his expenses. He begins by writing down what he spends during the week in the Mensa:</p>
 <p><br></p>
-<div class="inline-table"><table class="table table-striped" style="width: auto !important; ">
+<table class="table table-striped" style="width: auto !important; ">
 <caption>
-<span id="tab:unnamed-chunk-164">Table C.1: </span>Rob’s account book
+<span id="tab:unnamed-chunk-182">Table C.1: </span>Rob’s account book
 </caption>
-<thead><tr>
+<thead>
+<tr>
 <th style="text-align:left;">
 Day of week
 </th>
 <th style="text-align:right;">
 Amount spent (€)
 </th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
@@ -163,10 +167,10 @@ Friday
 </td>
 </tr>
 </tbody>
-</table></div>
+</table>
 <ol style="list-style-type: decimal">
-<li>Generate a vector of Rob’s expenses and assign it to the variable <code>expenses</code>. Use the function <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> and use the numeric expenses only, not the days of the week.</li>
-<li>How much did Rob spend during this week? Use the function <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>.</li>
+<li>Generate a vector of Rob’s expenses and assign it to the variable <code>expenses</code>. Use the function <code>c()</code> and use the numeric expenses only, not the days of the week.</li>
+<li>How much did Rob spend during this week? Use the function <code>sum()</code>.</li>
 <li>Rob seems to have spent the smallest amount on Tuesday. How much would he have spent if he paid that much every day of the week? Use the array notation with the square brackets.</li>
 </ol>
 <p>Unfortunately, Rob misspelled the amount on Tuesday. Actually, he invited his girl friend for lunch and paid 7.95 € instead of 2.90 €.</p>
@@ -175,23 +179,23 @@ Friday
 <li>How does the result change?</li>
 </ol>
 </div>
-<div id="rob2" class="section level3" number="13.1.2">
-<h3>
-<span class="header-section-number">C.1.2</span> Missing values<a class="anchor" aria-label="anchor" href="#rob2"><i class="fas fa-link"></i></a>
-</h3>
+<div id="rob2" class="section level3" number="14.1.2">
+<h3><span class="header-section-number">C.1.2</span> Missing values</h3>
 <p>R codes missing values as <code>NA</code>. Rob ate in the Mensa last Monday, but forgot to write down the amount.</p>
-<div class="inline-table"><table class="table table-striped" style="width: auto !important; ">
+<table class="table table-striped" style="width: auto !important; ">
 <caption>
-<span id="tab:unnamed-chunk-165">Table C.2: </span>Rob’s account book, cont.
+<span id="tab:unnamed-chunk-183">Table C.2: </span>Rob’s account book, cont.
 </caption>
-<thead><tr>
+<thead>
+<tr>
 <th style="text-align:left;">
 Day of week
 </th>
 <th style="text-align:right;">
 Amount spent (€)
 </th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
@@ -242,73 +246,62 @@ NA
 </td>
 </tr>
 </tbody>
-</table></div>
+</table>
 <ol style="list-style-type: decimal">
 <li>How does NA change the calculated sum?</li>
-<li>Read what happens when the data contains NAs by calling help on <code>sum</code>, i.e. type <code><a href="https://rdrr.io/r/base/sum.html">?sum</a></code> in R console.</li>
-<li>Correct your call to <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> accordingly.</li>
+<li>Read what happens when the data contains NAs by calling help on <code>sum</code>, i.e. type <code>?sum</code> in R console.</li>
+<li>Correct your call to <code>sum()</code> accordingly.</li>
 </ol>
 </div>
-<div id="firstplot" class="section level3" number="13.1.3">
-<h3>
-<span class="header-section-number">C.1.3</span> Your very first plot<a class="anchor" aria-label="anchor" href="#firstplot"><i class="fas fa-link"></i></a>
-</h3>
+<div id="firstplot" class="section level3" number="14.1.3">
+<h3><span class="header-section-number">C.1.3</span> Your very first plot</h3>
 <p>In particular in the beginning of learning R you should not forget why you are doing it. Because R is really beautiful and you want to analyse and learn from real data.</p>
 <p>Even if you don’t fully understand the following code, just copy and paste it into your .R file and let it run!</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jennybc/gapminder">gapminder</a></span><span class="op">)</span>
-
-<span class="va">gapminder2007</span> <span class="op">&lt;-</span> <span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder2007</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span>, size <span class="op">=</span> <span class="va">pop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">'GDP per capita'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">'Life expectancy'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Gapminder data for the year 2007'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="additional-exercises.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb213-2"><a href="additional-exercises.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb213-3"><a href="additional-exercises.html#cb213-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-4"><a href="additional-exercises.html#cb213-4" aria-hidden="true" tabindex="-1"></a>gapminder2007 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb213-5"><a href="additional-exercises.html#cb213-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>)</span>
+<span id="cb213-6"><a href="additional-exercises.html#cb213-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-7"><a href="additional-exercises.html#cb213-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder2007, <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp, <span class="at">color =</span> continent, <span class="at">size =</span> pop)) <span class="sc">+</span></span>
+<span id="cb213-8"><a href="additional-exercises.html#cb213-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb213-9"><a href="additional-exercises.html#cb213-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb213-10"><a href="additional-exercises.html#cb213-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;GDP per capita&#39;</span>) <span class="sc">+</span></span>
+<span id="cb213-11"><a href="additional-exercises.html#cb213-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&#39;Life expectancy&#39;</span>) <span class="sc">+</span></span>
+<span id="cb213-12"><a href="additional-exercises.html#cb213-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&#39;Gapminder data for the year 2007&#39;</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>What is the data set about. Use help like this <code><a href="https://rdrr.io/pkg/gapminder/man/gapminder.html">?gapminder</a></code>.</li>
+<li>What is the data set about. Use help like this <code>?gapminder</code>.</li>
 <li>What do the colours represent?</li>
 <li>What does the size of the circles represent?</li>
 <li>How would you describe the relationship between the GDP per capita and Life expectancy?</li>
 </ol>
 </div>
 </div>
-<div id="the-big-practical-importing-wrangling-summerizing-and-plotting" class="section level2" number="13.2">
-<h2>
-<span class="header-section-number">C.2</span> The big practical: importing, wrangling, summerizing and plotting<a class="anchor" aria-label="anchor" href="#the-big-practical-importing-wrangling-summerizing-and-plotting"><i class="fas fa-link"></i></a>
-</h2>
-<div id="temperature-along-the-dutch-coast" class="section level3" number="13.2.1">
-<h3>
-<span class="header-section-number">C.2.1</span> Temperature along the Dutch coast<a class="anchor" aria-label="anchor" href="#temperature-along-the-dutch-coast"><i class="fas fa-link"></i></a>
-</h3>
+<div id="the-big-practical-importing-wrangling-summerizing-and-plotting" class="section level2" number="14.2">
+<h2><span class="header-section-number">C.2</span> The big practical: importing, wrangling, summerizing and plotting</h2>
+<div id="temperature-along-the-dutch-coast" class="section level3" number="14.2.1">
+<h3><span class="header-section-number">C.2.1</span> Temperature along the Dutch coast</h3>
 <p>The file <span style="font-family: sans-serif; font-size: 12pt">Temperatur.csv</span> from the book by <span class="citation">Zuur, Ieno, and Meesters (<a href="literature-1.html#ref-Zuur2009a" role="doc-biblioref">2009</a>)</span> contains measurements of temperature, salinity and content of chlorophyll a at 31 locations along the Dutch coast. You can download the data set <a href="https://highstat.com/index.php/a-beginner-s-guide-to-r">here</a>. The data is provided by the Dutch institute RIKZ (monitoring program MWTL: Monitoring Waterstaatkundige Toestand des Lands), was measured between 1990 and 2005 between 0 and 4 times per month depending on the season.</p>
 <ol style="list-style-type: decimal">
 <li>Read the file <span style="font-family: sans-serif; font-size: 12pt">Temperatur.csv</span> into R.</li>
 <li>Convert the column <code>Date</code> to a proper date format. Use the library <code>lubridate</code>.</li>
-<li>Calculate the number of measurements, mean and standard deviations of temperature per monitoring station. Hint: use <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code> inside <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> to get the number of measurements.</li>
+<li>Calculate the number of measurements, mean and standard deviations of temperature per monitoring station. Hint: use <code>n()</code> inside <code>summarize()</code> to get the number of measurements.</li>
 <li>Calculate the number of measurements, mean and standard deviations of temperature per month.</li>
 <li>Plot the mean monthly temperature as a line and add the standard deviation as a band around it.</li>
 <li>Label the axis appropriately.</li>
 <li>Save you graph as a pdf file.</li>
 </ol>
 </div>
-<div id="temperature-along-the-dutch-coast-revisited" class="section level3" number="13.2.2">
-<h3>
-<span class="header-section-number">C.2.2</span> Temperature along the Dutch coast, revisited<a class="anchor" aria-label="anchor" href="#temperature-along-the-dutch-coast-revisited"><i class="fas fa-link"></i></a>
-</h3>
+<div id="temperature-along-the-dutch-coast-revisited" class="section level3" number="14.2.2">
+<h3><span class="header-section-number">C.2.2</span> Temperature along the Dutch coast, revisited</h3>
 <ol style="list-style-type: decimal">
 <li>Calculate the monthly means and standard deviations per monitoring station. Hint <code>group_by(Station, Month)</code>.</li>
 <li>Plot the means with an error band in different plots. Hint: use <code>facet_wrap())</code>.</li>
 <li>Save you graph as a pdf file.</li>
 </ol>
 </div>
-<div id="excel-data-turns-tidy" class="section level3" number="13.2.3">
-<h3>
-<span class="header-section-number">C.2.3</span> Excel data turns tidy<a class="anchor" aria-label="anchor" href="#excel-data-turns-tidy"><i class="fas fa-link"></i></a>
-</h3>
+<div id="excel-data-turns-tidy" class="section level3" number="14.2.3">
+<h3><span class="header-section-number">C.2.3</span> Excel data turns tidy</h3>
 <p>We will import and tidy World Development Indicators data downloaded from the <a href="https://databank.worldbank.org/source/world-development-indicators/preview/on#">World Bank</a> on 2021-06-09 for 20 countries. This is an extract only and more data is available.</p>
 <p>This exercise will show you how to load excel data directly without converting it to .csv file. The format of the data is a typical non-tidy one and you will wrangle it to a tidy <code>tibble</code>. The file is called <span style="font-family: sans-serif; font-size: 12pt">Data_Extract_From_World_Development_Indicators.xlsx</span>.</p>
 <ol style="list-style-type: decimal">
@@ -317,106 +310,78 @@ NA
 <li>Read the excel file into R. Call it <code>wdi</code>.</li>
 <li>This data set is not tidy. In particular, the year is coded as column name. Those column names contain the year twice, once as a number and once as [YR NUMBER]. We rename the columns first.</li>
 </ol>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wdi</span> <span class="op">&lt;-</span> <span class="va">wdi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>.fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">x</span>, start <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>, .cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'20'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>What does this code mean? Read the help pages for functions <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub()</a></code> and <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="additional-exercises.html#cb214-1" aria-hidden="true" tabindex="-1"></a>wdi <span class="ot">&lt;-</span> wdi <span class="sc">%&gt;%</span> </span>
+<span id="cb214-2"><a href="additional-exercises.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> <span class="cf">function</span>(x) <span class="fu">str_sub</span>(x, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">4</span>), <span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&#39;20&#39;</span>))</span></code></pre></div>
+<p>What does this code mean? Read the help pages for functions <code>rename_with()</code>, <code>str_sub()</code> and <code>starts_with()</code>.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Pivot the data set to a tidy format: variables in columns and measurements in rows. Use <code>pivot_longer</code>.</li>
 </ol>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wdi</span> <span class="op">&lt;-</span> <span class="va">wdi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">'year'</span>, values_to <span class="op">=</span> <span class="st">'indicator_value'</span>, cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'20'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">wdi</span></code></pre></div>
-<p>What does this code mean? Read the help pages for functions <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code> and <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>.
-Why is it necessary to convert <code>year</code> with <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>?</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="additional-exercises.html#cb215-1" aria-hidden="true" tabindex="-1"></a>wdi <span class="ot">&lt;-</span> wdi <span class="sc">%&gt;%</span></span>
+<span id="cb215-2"><a href="additional-exercises.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&#39;year&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;indicator_value&#39;</span>, <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&#39;20&#39;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb215-3"><a href="additional-exercises.html#cb215-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span>
+<span id="cb215-4"><a href="additional-exercises.html#cb215-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb215-5"><a href="additional-exercises.html#cb215-5" aria-hidden="true" tabindex="-1"></a>wdi</span></code></pre></div>
+<p>What does this code mean? Read the help pages for functions <code>pivot_longer()</code> and <code>as.numeric()</code>.
+Why is it necessary to convert <code>year</code> with <code>as.numeric()</code>?</p>
 <ol start="6" style="list-style-type: decimal">
 <li>Filter for the indicator <code>GDP (current US$)</code> and plot the data as time series. Hint: You can also filter for the indicator’s code; look it up in the excel file. Label the axis appropriately.</li>
 </ol>
 </div>
 </div>
-<div id="the-big-practical-statistical-inference" class="section level2" number="13.3">
-<h2>
-<span class="header-section-number">C.3</span> The big practical: statistical inference<a class="anchor" aria-label="anchor" href="#the-big-practical-statistical-inference"><i class="fas fa-link"></i></a>
-</h2>
-<div id="species-richness-in-grasslands" class="section level3" number="13.3.1">
-<h3>
-<span class="header-section-number">C.3.1</span> Species richness in grasslands<a class="anchor" aria-label="anchor" href="#species-richness-in-grasslands"><i class="fas fa-link"></i></a>
-</h3>
+<div id="the-big-practical-statistical-inference" class="section level2" number="14.3">
+<h2><span class="header-section-number">C.3</span> The big practical: statistical inference</h2>
+<div id="species-richness-in-grasslands" class="section level3" number="14.3.1">
+<h3><span class="header-section-number">C.3.1</span> Species richness in grasslands</h3>
 <p>You will work with grassland species monitoring data from the Yellowstone National Park provided by <span class="citation">Zuur, Ieno, and Meesters (<a href="literature-1.html#ref-Zuur2009a" role="doc-biblioref">2009</a>)</span> and <span class="citation">Sikkink et al. (<a href="literature-1.html#ref-Sikkink2007" role="doc-biblioref">2007</a>)</span>. You can download the data set <a href="https://highstat.com/index.php/a-beginner-s-guide-to-r">here</a>. The researchers monitored the changes in the grassland communities over time and related them to environmental factors. Biodiversity is expressed as the number of different species per site (variable <code>R</code>). Approximately 90 species were identified in 8 transects in monitoring campaigns repeated every 4 to 10 years, resulting in 58 observations. The data is saved in the file <span style="font-family: sans-serif; font-size: 12pt">Vegetation2.xls</span>.</p>
 <ol style="list-style-type: decimal">
 <li><p>Read the data and explore its structure. Describe the type of variables. Does the type correspond to your expectation for the respective variable? Remember to set the name of the table sheet you want to read in <code>read_xls()</code>.</p></li>
 <li><p>Short explorative data analysis: calculate the number of measurements, the mean and the standard deviations of species number <code>R</code> per transect.</p></li>
-<li><p>Plot the species number versus the variable <code>BARESOIL</code> (proportion of bare soil). Colour the dots by transect. Hint: convert the transect <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor()</a></code>.</p></li>
-<li><p>Add a smoothing line without a confidence band (<code>geom_smooth(se = FALSE)</code>) through all points independently of the transect. You might want to consult <a href="(https://ggplot2-book.org/collective-geoms.html)">Section 4.2</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020" role="doc-biblioref">Wickham 2020</a>)</span>. Hint: set the colour aes in <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> instead of in <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>.</p></li>
+<li><p>Plot the species number versus the variable <code>BARESOIL</code> (proportion of bare soil). Colour the dots by transect. Hint: convert the transect <code>as_factor()</code>.</p></li>
+<li><p>Add a smoothing line without a confidence band (<code>geom_smooth(se = FALSE)</code>) through all points independently of the transect. You might want to consult <a href="(https://ggplot2-book.org/collective-geoms.html)">Section 4.2</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020" role="doc-biblioref">Wickham 2020</a>)</span>. Hint: set the colour aes in <code>geom_point()</code> instead of in <code>ggplot()</code>.</p></li>
 <li><p>Add labels to your graph and assign it to an object.</p></li>
 <li><p>Plot the species number as a time series by transect. Add both, points and lines. The size of the points should reflect the proportion of bare soil. You might want to consult <a href="(https://ggplot2-book.org/scale-other.html?q=size#size)">Section 12.1</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020" role="doc-biblioref">Wickham 2020</a>)</span>. Think about where to set the aesthetic <code>size</code> in order to scale the points only.</p></li>
 <li><p>Add labels to your graph and assign it to an object.</p></li>
-<li><p>Put both graphs side-by-side and save them as a pdf (<code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>).</p></li>
+<li><p>Put both graphs side-by-side and save them as a pdf (<code>ggsave()</code>).</p></li>
 <li><p>Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in <code>infer</code>.</p></li>
 <li><p>If you calculate the 90% confidence interval instead of the 95% confidence interval, does the confidence interval increase or decrease? Why?</p></li>
 </ol>
 </div>
-<div id="soil-compaction" class="section level3" number="13.3.2">
-<h3>
-<span class="header-section-number">C.3.2</span> Soil compaction<a class="anchor" aria-label="anchor" href="#soil-compaction"><i class="fas fa-link"></i></a>
-</h3>
+<div id="soil-compaction" class="section level3" number="14.3.2">
+<h3><span class="header-section-number">C.3.2</span> Soil compaction</h3>
 <p>Heavy agricultural machines could compact the soil. In a randomized field trial, plots (variable <code>plots</code>) on a homogeneous agricultural field were assigned randomly either to the control (<code>control</code>) or to treatment where a heavy agricultural machine was used (<code>compacted</code>). Bulk density in [g/cm³] (mass of dry soil divided by soil volume) was measured on every plot. It is a parameter for soil structure and can help to spot soil compaction. The data is stored in<span style="font-family: sans-serif; font-size: 12pt">bd_compaction.csv</span>.</p>
 <ol style="list-style-type: decimal">
 <li>Read the data and do a short explorative data analysis.</li>
 <li>Did the bulk density increase due to heavy machinery or could the difference be due to chance? Use the framework in <code>infer</code>.</li>
 <li>Calculate the effect size (difference in means) and its 95% confidence interval.</li>
 </ol>
+
 </div>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></div>
-<div class="next"><a href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#additional-exercises"><span class="header-section-number">C</span> Additional exercises</a></li>
-<li>
-<a class="nav-link" href="#introduction-to-r-and-rstudio-1"><span class="header-section-number">C.1</span> Introduction to R and RStudio</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#rob1"><span class="header-section-number">C.1.1</span> Rob’s account book</a></li>
-<li><a class="nav-link" href="#rob2"><span class="header-section-number">C.1.2</span> Missing values</a></li>
-<li><a class="nav-link" href="#firstplot"><span class="header-section-number">C.1.3</span> Your very first plot</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#the-big-practical-importing-wrangling-summerizing-and-plotting"><span class="header-section-number">C.2</span> The big practical: importing, wrangling, summerizing and plotting</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#temperature-along-the-dutch-coast"><span class="header-section-number">C.2.1</span> Temperature along the Dutch coast</a></li>
-<li><a class="nav-link" href="#temperature-along-the-dutch-coast-revisited"><span class="header-section-number">C.2.2</span> Temperature along the Dutch coast, revisited</a></li>
-<li><a class="nav-link" href="#excel-data-turns-tidy"><span class="header-section-number">C.2.3</span> Excel data turns tidy</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#the-big-practical-statistical-inference"><span class="header-section-number">C.3</span> The big practical: statistical inference</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#species-richness-in-grasslands"><span class="header-section-number">C.3.1</span> Species richness in grasslands</a></li>
-<li><a class="nav-link" href="#soil-compaction"><span class="header-section-number">C.3.2</span> Soil compaction</a></li>
-</ul>
-</li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/19-tasks.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/19-tasks.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-31.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -424,7 +389,11 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -436,7 +405,8 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
 for (let popover of popovers) {
   const div = document.createElement('div');
   div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
@@ -454,4 +424,5 @@ for (let popover of popovers) {
 }
 </script>
 </body>
+
 </html>

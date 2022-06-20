@@ -1,0 +1,11 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+2667;Köln-Bonn;7.12;50.86;68;12.5;19571001;19700320;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+2667;Köln-Bonn;7.14;50.87;73;1.7;19700321;19891114;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+2667;Köln-Bonn;7.14;50.87;73;19;19881001;19891114;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+2667;Köln-Bonn;7.16;50.86;92;1.7;19891115;19891115;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+2667;Köln-Bonn;7.16;50.86;92;19;19891115;19891115;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+2667;Köln-Bonn;7.16;50.86;92;1.8;19940202;20040423;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+2667;Köln-Bonn;7.16;50.86;92;1.8;20040424;20050321;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+2667;Köln-Bonn;7.16;50.86;92;6;20050322;20081127;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+2667;Köln-Bonn;7.16;50.86;92;6;20081128;20220322;SCAPP;Sonnenscheind/Strahlungsmessung, elektr.;eor;
+generiert: 30.03.2022 --  Deutscher Wetterdienst  --

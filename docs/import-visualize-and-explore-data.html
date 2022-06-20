@@ -1,28 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>4 Import, visualize and explore data | Environmental Statistics</title>
-<meta name="author" content="Christina Bogner">
-<meta name="description" content="Import data into R  Explain the general call to the function ggplot()  Plot 5 frequently used types of graphics   4.1 Data import from text files To import a data set from a text file (e.g. csv,...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="4 Import, visualize and explore data | Environmental Statistics">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Import data into R  Explain the general call to the function ggplot()  Plot 5 frequently used types of graphics   4.1 Data import from text files To import a data set from a text file (e.g. csv,...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4 Import, visualize and explore data | Environmental Statistics">
-<meta name="twitter:description" content="Import data into R  Explain the general call to the function ggplot()  Plot 5 frequently used types of graphics   4.1 Data import from text files To import a data set from a text file (e.g. csv,...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>4 Import, visualize and explore data | Environmental Statistics</title>
+
+    <meta name="author" content="Christina Bogner" />
+  
+   <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="4 Import, visualize and explore data | Environmental Statistics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Import, visualize and explore data | Environmental Statistics" />
+  
+  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<style type="text/css">
+    <style type="text/css">
     /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
     div.csl-bib-body { }
     div.csl-entry {
@@ -44,14 +66,17 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="font-awesome.min.css">
+      <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="font-awesome.min.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -64,48 +89,29 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface</a></li>
-<li class="book-part">Part I: Explore data</li>
-<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
-<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
-<li><a class="active" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
-<li class="book-part">Part II: Statistical inference</li>
-<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
-<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
-<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
-<li class="book-part">Part III: Statistical modelling</li>
-<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
-<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
-<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
-<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
-<li><a class="" href="literature-1.html">Literature</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="import-visualize-and-explore-data" class="section level1" number="4">
-<h1>
-<span class="header-section-number">4</span> Import, visualize and explore data<a class="anchor" aria-label="anchor" href="#import-visualize-and-explore-data"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="import-visualize-and-explore-data" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Import, visualize and explore data</h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
 Import data into R
 </li>
 <li>
-Explain the general call to the function <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>
+Explain the general call to the function <code>ggplot()</code>
 </li>
 <li>
 Plot 5 frequently used types of graphics
@@ -113,18 +119,14 @@ Plot 5 frequently used types of graphics
 </ul>
 </div>
 <div id="data-import-from-text-files" class="section level2" number="4.1">
-<h2>
-<span class="header-section-number">4.1</span> Data import from text files<a class="anchor" aria-label="anchor" href="#data-import-from-text-files"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.1</span> Data import from text files</h2>
 <p>To import a data set from a text file (e.g. csv, .txt, .dat) into R, we will use the library <code>readr</code> which is part of the <code>tydiverse</code>. We first load the library.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<p>Let’s assume that the data is stored in the folder <code>data</code>. If this is not your case, change the path accordingly. To load the data, we can choose among several functions that all start with <code>read_</code>. The most generic one is <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> where we can specify how the columns are separated (delimited) in the data file.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'data/emissions.csv'</span>, delim <span class="op">=</span> <span class="st">';'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="import-visualize-and-explore-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Let’s assume that the data is stored in the folder <code>data</code>. If this is not your case, change the path accordingly. To load the data, we can choose among several functions that all start with <code>read_</code>. The most generic one is <code>read_delim()</code> where we can specify how the columns are separated (delimited) in the data file.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="import-visualize-and-explore-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a>emissions <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">&#39;data/emissions.csv&#39;</span>, <span class="at">delim =</span> <span class="st">&#39;;&#39;</span>)</span></code></pre></div>
 <pre><code>## Rows: 2871 Columns: 6
 ## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: ";"
+## Delimiter: &quot;;&quot;
 ## chr  (4): unit, airpol, vehicle, geo
 ## dbl  (1): values
 ## date (1): time
@@ -132,8 +134,7 @@ Plot 5 frequently used types of graphics
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Let’s have a look at the data. This is a data set on greenhouse gas emissions by source sector in the EU that I downloaded from <a href="https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=env_air_gge&amp;lang=en">eurostat</a> on 2021-04-30. It contains the greenhouse gas emissions in CO<sub>2</sub> equivalent, in Mio tonnes, per vehicle type. The database could be a great source for data in your reports 😄.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">emissions</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="import-visualize-and-explore-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a>emissions</span></code></pre></div>
 <pre><code>## # A tibble: 2,871 × 6
 ##    unit           airpol                         vehicle geo   time       values
 ##    &lt;chr&gt;          &lt;chr&gt;                          &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;      &lt;dbl&gt;
@@ -150,8 +151,7 @@ Plot 5 frequently used types of graphics
 ## # … with 2,861 more rows</code></pre>
 <p>The result of reading the data with any function in the library <code>readr</code> is always a <code>tibble</code>. You can see that none of the variables is a <code>factor</code>. This is the default behaviour of <code>readr</code>. If you want a variable to be coded as a <code>factor</code> then you have to transform it manually, preferably with functions from the package <code>forcats</code>.</p>
 <p>Let’s have a brief look at the data set.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">emissions</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="import-visualize-and-explore-data.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emissions)</span></code></pre></div>
 <pre><code>##      unit              airpol            vehicle              geo           
 ##  Length:2871        Length:2871        Length:2871        Length:2871       
 ##  Class :character   Class :character   Class :character   Class :character  
@@ -167,220 +167,169 @@ Plot 5 frequently used types of graphics
 ##  Mean   :2004-01-01   Mean   :  8.52836  
 ##  3rd Qu.:2011-01-01   3rd Qu.:  6.93899  
 ##  Max.   :2018-01-01   Max.   :119.77824  
-##                       NA's   :232</code></pre>
-<p>For character variables, <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> does not count the frequency of different values. However, we can get this information with the function <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code>.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">emissions</span><span class="op">$</span><span class="va">geo</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+##                       NA&#39;s   :232</code></pre>
+<p>For character variables, <code>summary()</code> does not count the frequency of different values. However, we can get this information with the function <code>unique()</code>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="import-visualize-and-explore-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(emissions<span class="sc">$</span>geo))</span></code></pre></div>
 <pre><code>## [1] 33</code></pre>
 <p>The data set contains measurements for 33 EU countries. We can also ask which different types of vehicle are recorded.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">emissions</span><span class="op">$</span><span class="va">vehicle</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "Fuel combustion in cars"                       
-## [2] "Fuel combustion in heavy duty trucks and buses"
-## [3] "Fuel combustion in railways"</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="import-visualize-and-explore-data.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(emissions<span class="sc">$</span>vehicle)</span></code></pre></div>
+<pre><code>## [1] &quot;Fuel combustion in cars&quot;                       
+## [2] &quot;Fuel combustion in heavy duty trucks and buses&quot;
+## [3] &quot;Fuel combustion in railways&quot;</code></pre>
 </div>
 <div id="visualization-with-the-library-ggplot2" class="section level2" number="4.2">
-<h2>
-<span class="header-section-number">4.2</span> Visualization with the library <code>ggplot2</code><a class="anchor" aria-label="anchor" href="#visualization-with-the-library-ggplot2"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.2</span> Visualization with the library <code>ggplot2</code></h2>
 <p>The library <code>ggplot2</code> is a powerful package for data visualization. The name comes from <strong>the grammar of graphics</strong> and hints at a systematic approach to visualization. In a nutshell, <code>ggplot2</code> defines a statistical graphic as follows:</p>
 <blockquote>
 <p>A statistical graphic is a <code>mapping</code> of variables in a <code>data</code> set to <code>aes</code>thetic attributes of <code>geom</code>etric objects.</p>
 </blockquote>
-<p>In <code>ggplot2</code>, a graphic is built up step by step, starting with a call to the core function <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>. We have to specify the following elements:</p>
+<p>In <code>ggplot2</code>, a graphic is built up step by step, starting with a call to the core function <code>ggplot()</code>. We have to specify the following elements:</p>
 <ul>
 <li><p><code>data</code>: the data set containing the variables to be visualized.</p></li>
 <li><p><code>aes</code>: (aesthetic) attributes for the geometric object to be visualized. This can be the x and y variables, colour, shape, grouping variable etc.</p></li>
 <li><p><code>geom</code>: the geometric object we want to plot, i.e. lines, points, bars, boxes etc.</p></li>
 </ul>
 <div id="line-plot" class="section level3" number="4.2.1">
-<h3>
-<span class="header-section-number">4.2.1</span> Line plot<a class="anchor" aria-label="anchor" href="#line-plot"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.2.1</span> Line plot</h3>
 <p>We start with the line plot that is particularly suited for time series. Because plotting 33 countries in one graph is too much, we first filter for France and emissions from cars.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">emissions_france</span> <span class="op">&lt;-</span> <span class="va">emissions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">geo</span> <span class="op">==</span> <span class="st">'France'</span> <span class="op">&amp;</span> <span class="va">vehicle</span> <span class="op">==</span> <span class="st">'Fuel combustion in cars'</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions_france</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">values</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-46-1.png" width="90%"></div>
-<p>This call to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> prepares the plotting area as requested, but does not show anything because we did not specify any geometric object. All geometric objects begin with <code>geom_</code>. Every further step in building up the plot is appended to the core call by a <code>+</code>.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions_france</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-47-1.png" width="90%"></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="import-visualize-and-explore-data.html#cb30-1" aria-hidden="true" tabindex="-1"></a>emissions_france <span class="ot">&lt;-</span> emissions <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="import-visualize-and-explore-data.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(geo <span class="sc">==</span> <span class="st">&#39;France&#39;</span> <span class="sc">&amp;</span> vehicle <span class="sc">==</span> <span class="st">&#39;Fuel combustion in cars&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="import-visualize-and-explore-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions_france, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> values))</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-46-1.png" width="90%" /></p>
+<p>This call to <code>ggplot()</code> prepares the plotting area as requested, but does not show anything because we did not specify any geometric object. All geometric objects begin with <code>geom_</code>. Every further step in building up the plot is appended to the core call by a <code>+</code>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="import-visualize-and-explore-data.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions_france, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> values)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="import-visualize-and-explore-data.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-47-1.png" width="90%" /></p>
 <p>This call can be verbalized like following:</p>
 <ul>
-<li>
-<p>Take the data set <code>emissions</code> and map the following attributes:</p>
+<li><p>Take the data set <code>emissions</code> and map the following attributes:</p>
 <ul>
-<li>on the <span class="math inline">\(x\)</span>-axis, the variable <code>time</code>
-</li>
-<li>on the <span class="math inline">\(y\)</span>-axis, the variable <code>values</code>
-</li>
+<li>on the <span class="math inline">\(x\)</span>-axis, the variable <code>time</code></li>
+<li>on the <span class="math inline">\(y\)</span>-axis, the variable <code>values</code></li>
+</ul></li>
+<li><p>Plot the data as a line (<code>geom_line()</code>)</p></li>
 </ul>
-</li>
-<li><p>Plot the data as a line (<code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code>)</p></li>
-</ul>
-<p>In order for the plot to be useful, we should label the axes correctly (and give it a title, if no figure caption is shown). This is done by adding the function <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code>.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions_france</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Emissions (Mio tons)'</span>, title <span class="op">=</span> <span class="st">'Emissions in France'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-48-1.png" width="90%"></div>
+<p>In order for the plot to be useful, we should label the axes correctly (and give it a title, if no figure caption is shown). This is done by adding the function <code>labs()</code>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="import-visualize-and-explore-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions_france, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> values)) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="import-visualize-and-explore-data.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb33-3"><a href="import-visualize-and-explore-data.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Emissions (Mio tons)&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Emissions in France&#39;</span>)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-48-1.png" width="90%" /></p>
 </div>
 <div id="point-plot" class="section level3" number="4.2.2">
-<h3>
-<span class="header-section-number">4.2.2</span> Point plot<a class="anchor" aria-label="anchor" href="#point-plot"><i class="fas fa-link"></i></a>
-</h3>
-<p>We can add points to this plot with <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>. Normally, I wouldn’t do it for this time series, but I want to show this geom 😄.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions_france</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Emissions (Mio tons)'</span>, title <span class="op">=</span> <span class="st">'Emissions in France'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-49-1.png" width="90%"></div>
+<h3><span class="header-section-number">4.2.2</span> Point plot</h3>
+<p>We can add points to this plot with <code>geom_point()</code>. Normally, I wouldn’t do it for this time series, but I want to show this geom 😄.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="import-visualize-and-explore-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions_france, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> values)) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="import-visualize-and-explore-data.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb34-3"><a href="import-visualize-and-explore-data.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-4"><a href="import-visualize-and-explore-data.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Emissions (Mio tons)&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Emissions in France&#39;</span>)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-49-1.png" width="90%" /></p>
 <p>If we select two countries, then a further aesthetic will be required to distinguish the time series. Let’s select France and Italy.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">emissions_france_italy</span> <span class="op">&lt;-</span> <span class="va">emissions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">geo</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'France'</span>, <span class="st">'Italy'</span><span class="op">)</span> <span class="op">&amp;</span> <span class="va">vehicle</span> <span class="op">==</span> <span class="st">'Fuel combustion in cars'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="import-visualize-and-explore-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a>emissions_france_italy <span class="ot">&lt;-</span> emissions <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="import-visualize-and-explore-data.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(geo <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;France&#39;</span>, <span class="st">&#39;Italy&#39;</span>) <span class="sc">&amp;</span> vehicle <span class="sc">==</span> <span class="st">&#39;Fuel combustion in cars&#39;</span>)</span></code></pre></div>
 <p>We plot the countries using different colours. Note that we do not (yet) select the colours manually, but specify the variable that will be used to distinguish the time series. The colours are chosen one by country automatically.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions_france_italy</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">values</span>, colour <span class="op">=</span> <span class="va">geo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Emissions (Mio tons)'</span>, title <span class="op">=</span> <span class="st">'Emissions in France and Italy'</span>, colour <span class="op">=</span> <span class="st">'Country'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-51-1.png" width="90%"></div>
-<p>The legend comes for free! We can change the title of the legend by setting <code>colour = 'Country'</code> in the call to <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="import-visualize-and-explore-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions_france_italy, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> values, <span class="at">colour =</span> geo)) <span class="sc">+</span> </span>
+<span id="cb36-2"><a href="import-visualize-and-explore-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb36-3"><a href="import-visualize-and-explore-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb36-4"><a href="import-visualize-and-explore-data.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Emissions (Mio tons)&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Emissions in France and Italy&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;Country&#39;</span>)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-51-1.png" width="90%" /></p>
+<p>The legend comes for free! We can change the title of the legend by setting <code>colour = 'Country'</code> in the call to <code>labs()</code>.</p>
 </div>
 </div>
 <div id="histogram" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.3</span> Histogram</h2>
 <p>Let’s have a look at the distribution of emissions in the year 2018. We have to filter the data first.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">emissions_2018</span> <span class="op">&lt;-</span> <span class="va">emissions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">'2018-01-01'</span><span class="op">)</span></code></pre></div>
-<p>We plot the data in a histogram that shows the absolute frequencies of the data (i.e. how many data points fall in a particular interval of emissions). It shows the distribution of a continuous variable. For a histogram, we only specify the x variable, the frequencies are calculated by <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> directly. We specify 25 bins (intervals). If you are not familiar with this kind of statistical summaries, please have a look at the Appendix A in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span> and read the part A.1.5 Distribution.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions_2018</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="import-visualize-and-explore-data.html#cb37-1" aria-hidden="true" tabindex="-1"></a>emissions_2018 <span class="ot">&lt;-</span> emissions <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="import-visualize-and-explore-data.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">==</span> <span class="st">&#39;2018-01-01&#39;</span>)</span></code></pre></div>
+<p>We plot the data in a histogram that shows the absolute frequencies of the data (i.e. how many data points fall in a particular interval of emissions). It shows the distribution of a continuous variable. For a histogram, we only specify the x variable, the frequencies are calculated by <code>geom_histogram()</code> directly. We specify 25 bins (intervals). If you are not familiar with this kind of statistical summaries, please have a look at the Appendix A in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span> and read the part A.1.5 Distribution.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="import-visualize-and-explore-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions_2018, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> values)) <span class="sc">+</span></span>
+<span id="cb38-2"><a href="import-visualize-and-explore-data.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">25</span>)</span></code></pre></div>
 <pre><code>## Warning: Removed 8 rows containing non-finite values (stat_bin).</code></pre>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-53-1.png" width="672"></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 </div>
 <div id="boxplot" class="section level2" number="4.4">
-<h2>
-<span class="header-section-number">4.4</span> Boxplot<a class="anchor" aria-label="anchor" href="#boxplot"><i class="fas fa-link"></i></a>
-</h2>
-<p>A boxplot calculates some prominent statistics of a data set and plots them in the form of a box with ‘whiskers’ (thus also called box-and-whiskers plot). Basically, it is the same as calculating the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> (five-numbers: min, max, 25%, 50% and 75% quantiles), but as a figure. If you are not familiar with this kind of statistical summaries, please have a look at the Appendix A in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span> and read the part A.1.4 Five-number summary.</p>
+<h2><span class="header-section-number">4.4</span> Boxplot</h2>
+<p>A boxplot calculates some prominent statistics of a data set and plots them in the form of a box with ‘whiskers’ (thus also called box-and-whiskers plot). Basically, it is the same as calculating the <code>summary()</code> (five-numbers: min, max, 25%, 50% and 75% quantiles), but as a figure. If you are not familiar with this kind of statistical summaries, please have a look at the Appendix A in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span> and read the part A.1.4 Five-number summary.</p>
 <p>Let’s have a look at this kind of summary plot. How are the emissions distributed by year? We have to convert <code>time</code> to a factor variable to display the data correctly (try out what happens if you don’t convert it).</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="import-visualize-and-explore-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(time), <span class="at">y =</span> values)) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="import-visualize-and-explore-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 232 rows containing non-finite values (stat_boxplot).</code></pre>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-54-1.png" width="90%"></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-54-1.png" width="90%" /></p>
 <p>Hmmm, the labels on the <span class="math inline">\(x\)</span>-axis are ugly. Let’s tune them a little (we will do more tuning in later sessions).</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="import-visualize-and-explore-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(time), <span class="at">y =</span> values)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="import-visualize-and-explore-data.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb42-3"><a href="import-visualize-and-explore-data.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
 <pre><code>## Warning: Removed 232 rows containing non-finite values (stat_boxplot).</code></pre>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-55-1.png" width="90%"></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-55-1.png" width="90%" /></p>
 <div id="barplot" class="section level3" number="4.4.1">
-<h3>
-<span class="header-section-number">4.4.1</span> Barplot<a class="anchor" aria-label="anchor" href="#barplot"><i class="fas fa-link"></i></a>
-</h3>
-<p>The last geom we want to see is <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>. We would like to know how many data entries does <code>emissions</code> contain per vehicle.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">emissions</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">vehicle</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-56-1.png" width="90%"></div>
+<h3><span class="header-section-number">4.4.1</span> Barplot</h3>
+<p>The last geom we want to see is <code>geom_bar()</code>. We would like to know how many data entries does <code>emissions</code> contain per vehicle.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="import-visualize-and-explore-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> emissions, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> vehicle)) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="import-visualize-and-explore-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-56-1.png" width="90%" /></p>
 <p>Admittedly, a boring plot 😄, the number of entries is identical.</p>
 </div>
 </div>
 <div id="practice-on-your-own-3" class="section level2" number="4.5">
-<h2>
-<span class="header-section-number">4.5</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-3"><i class="fas fa-link"></i></a>
-</h2>
-<ol class="exercises"><ol style="list-style-type: decimal">
+<h2><span class="header-section-number">4.5</span> Practice on your own!</h2>
+<ol class="exercises">
+<ol style="list-style-type: decimal">
 <li><p>The histogram, the boxplot and the barplot plotted above are not labelled correctly. Correct the axis labels and find good titles for the graphs.</p></li>
 <li><p>Plot the time series of GDP from the data set <code>gapminder</code> for France and Germany. Filter the data like this:
-<br><code>france_germany &lt;- gapminder %&gt;% filter(country %in% c('France', 'Germany'))</code></p></li>
+<br>
+<code>france_germany &lt;- gapminder %&gt;% filter(country %in% c('France', 'Germany'))</code></p></li>
 <li><p>Plot the life expectancy vs. GDP in 2007, use the data set <code>gapminder</code>. Pick the code for filtering the data in task <a href="additional-exercises.html#firstplot">C.1.3</a>. Use the aesthetics colour and size. Have an educated guess on how to change the title of the legends (or google for it 😄).</p></li>
 <li><p>How is the GDP distributed in Africa and Europe in 2007? Use the data set <code>gapminder</code>. Filter the data like this:
-<br><code>africa_europe &lt;- gapminder2007 %&gt;% filter(continent %in% c('Africa', 'Europe'))</code>.
+<br>
+<code>africa_europe &lt;- gapminder2007 %&gt;% filter(continent %in% c('Africa', 'Europe'))</code>.
 <br>
 Plot the data as a histogram and use the aesthetic fill instead of colour to distinguish between continents.</p></li>
 <li><p>How is the GDP distributed on different continents in 2007? Use the data set <code>gapminder</code>. Plot the data as a boxplot.</p></li>
 <li><p>How many data points does <code>gapminder</code> contain per continent? Visualize in a barplot.</p></li>
-</ol></ol>
+</ol>
+</ol>
 </div>
 <div id="reading-assignment-2" class="section level2" number="4.6">
-<h2>
-<span class="header-section-number">4.6</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-2"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.6</span> Reading assignment</h2>
 <p>Chapter 2.1 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
 </div>
 <div id="turning-in-your-work-3" class="section level2" number="4.7">
-<h2>
-<span class="header-section-number">4.7</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-3"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.7</span> Turning in your work</h2>
 <ul>
 <li>Save your R Notebook as an *.Rmd file.</li>
 <li>Upload your R Notebook to ILIAS. You don’t need to upload the .nb.html file. You will find an upload option in today’s session.</li>
-<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong>
-</li>
+<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong></li>
 </ul>
 </div>
 <div id="additional-reading-1" class="section level2" number="4.8">
-<h2>
-<span class="header-section-number">4.8</span> Additional reading<a class="anchor" aria-label="anchor" href="#additional-reading-1"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.8</span> Additional reading</h2>
 <p>Chapters 2.2 to 2.9 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></div>
-<div class="next"><a href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#import-visualize-and-explore-data"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
-<li><a class="nav-link" href="#data-import-from-text-files"><span class="header-section-number">4.1</span> Data import from text files</a></li>
-<li>
-<a class="nav-link" href="#visualization-with-the-library-ggplot2"><span class="header-section-number">4.2</span> Visualization with the library ggplot2</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#line-plot"><span class="header-section-number">4.2.1</span> Line plot</a></li>
-<li><a class="nav-link" href="#point-plot"><span class="header-section-number">4.2.2</span> Point plot</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#histogram"><span class="header-section-number">4.3</span> Histogram</a></li>
-<li>
-<a class="nav-link" href="#boxplot"><span class="header-section-number">4.4</span> Boxplot</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#barplot"><span class="header-section-number">4.4.1</span> Barplot</a></li></ul>
-</li>
-<li><a class="nav-link" href="#practice-on-your-own-3"><span class="header-section-number">4.5</span> Practice on your own!</a></li>
-<li><a class="nav-link" href="#reading-assignment-2"><span class="header-section-number">4.6</span> Reading assignment</a></li>
-<li><a class="nav-link" href="#turning-in-your-work-3"><span class="header-section-number">4.7</span> Turning in your work</a></li>
-<li><a class="nav-link" href="#additional-reading-1"><span class="header-section-number">4.8</span> Additional reading</a></li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/04-import-explore-visualize.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/04-import-explore-visualize.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-31.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -388,7 +337,11 @@ Plot the data as a histogram and use the aesthetic fill instead of colour to dis
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -400,7 +353,8 @@ Plot the data as a histogram and use the aesthetic fill instead of colour to dis
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
 for (let popover of popovers) {
   const div = document.createElement('div');
   div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
@@ -418,4 +372,5 @@ for (let popover of popovers) {
 }
 </script>
 </body>
+
 </html>

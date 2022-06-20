@@ -1,28 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>A Statistics refresher | Environmental Statistics</title>
-<meta name="author" content="Christina Bogner">
-<meta name="description" content="Refresh basic statistics  This chapter is a short refresher on the basic statistics and does not replace a statistics book. I will use the penguins data set to calculate the examples.  Figure A.1:...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="A Statistics refresher | Environmental Statistics">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Refresh basic statistics  This chapter is a short refresher on the basic statistics and does not replace a statistics book. I will use the penguins data set to calculate the examples.  Figure A.1:...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A Statistics refresher | Environmental Statistics">
-<meta name="twitter:description" content="Refresh basic statistics  This chapter is a short refresher on the basic statistics and does not replace a statistics book. I will use the penguins data set to calculate the examples.  Figure A.1:...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>A Statistics refresher | Environmental Statistics</title>
+
+    <meta name="author" content="Christina Bogner" />
+  
+   <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="A Statistics refresher | Environmental Statistics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Statistics refresher | Environmental Statistics" />
+  
+  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<style type="text/css">
+    <style type="text/css">
     /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
     div.csl-bib-body { }
     div.csl-entry {
@@ -44,14 +66,17 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="font-awesome.min.css">
+      <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="font-awesome.min.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -64,41 +89,22 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface</a></li>
-<li class="book-part">Part I: Explore data</li>
-<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
-<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
-<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
-<li class="book-part">Part II: Statistical inference</li>
-<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
-<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
-<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
-<li class="book-part">Part III: Statistical modelling</li>
-<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="active" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
-<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
-<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
-<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
-<li><a class="" href="literature-1.html">Literature</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="stat-background" class="section level1" number="11">
-<h1>
-<span class="header-section-number">A</span> Statistics refresher<a class="anchor" aria-label="anchor" href="#stat-background"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="stat-background" class="section level1" number="12">
+<h1><span class="header-section-number">A</span> Statistics refresher</h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
@@ -107,180 +113,136 @@ Refresh basic statistics
 </ul>
 </div>
 <p>This chapter is a short refresher on the basic statistics and does not replace a statistics book. I will use the penguins data set to calculate the examples.</p>
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-149"></span>
-<img src="figures/lter_penguins.png" alt="Artwork by `@allison_horst`" width="100%"><p class="caption">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-167"></span>
+<img src="figures/lter_penguins.png" alt="Artwork by `@allison_horst`" width="100%" />
+<p class="caption">
 Figure A.1: Artwork by <code>@allison_horst</code>
 </p>
 </div>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<div id="descriptive-statistics" class="section level2" number="11.1">
-<h2>
-<span class="header-section-number">A.1</span> Descriptive statistics<a class="anchor" aria-label="anchor" href="#descriptive-statistics"><i class="fas fa-link"></i></a>
-</h2>
-<div id="mean" class="section level3" number="11.1.1">
-<h3>
-<span class="header-section-number">A.1.1</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
-</h3>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="stat-background.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb193-2"><a href="stat-background.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div id="descriptive-statistics" class="section level2" number="12.1">
+<h2><span class="header-section-number">A.1</span> Descriptive statistics</h2>
+<div id="mean" class="section level3" number="12.1.1">
+<h3><span class="header-section-number">A.1.1</span> Mean</h3>
 <p>The mean is one of the common summary statistics you can calculate for your data. To calculate the mean you sum all the values in your data set and divide the sum by the number of values.</p>
 <p><span class="math display">\[\bar{x} = \sum_{i = 1}^{i = n} \frac{x_i}{n}\]</span>
 where:</p>
 <ul>
-<li>
-<span class="math inline">\(\bar{x}\)</span>: mean value of data set <span class="math inline">\(x\)</span>
-</li>
-<li>
-<span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data (sample size)</li>
-<li>
-<span class="math inline">\(x_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span>
-</li>
+<li><span class="math inline">\(\bar{x}\)</span>: mean value of data set <span class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data (sample size)</li>
+<li><span class="math inline">\(x_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span></li>
 </ul>
-<p>A simple example first, before we turn to the penguins. Let’s calculate the mean of the data set <code>a</code> containing the values 2, 4.3, 5 and 10 by hand and compare it to the values obtained with the function <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>.</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4.3</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>
-
-<span class="va">hand_mean</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">4.3</span> <span class="op">+</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">10</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span>
-<span class="va">r_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>
-
-<span class="va">hand_mean</span></code></pre></div>
+<p>A simple example first, before we turn to the penguins. Let’s calculate the mean of the data set <code>a</code> containing the values 2, 4.3, 5 and 10 by hand and compare it to the values obtained with the function <code>mean()</code>.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="stat-background.html#cb194-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">4.3</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb194-2"><a href="stat-background.html#cb194-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-3"><a href="stat-background.html#cb194-3" aria-hidden="true" tabindex="-1"></a>hand_mean <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">+</span> <span class="fl">4.3</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">10</span>)<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb194-4"><a href="stat-background.html#cb194-4" aria-hidden="true" tabindex="-1"></a>r_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(a)</span>
+<span id="cb194-5"><a href="stat-background.html#cb194-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-6"><a href="stat-background.html#cb194-6" aria-hidden="true" tabindex="-1"></a>hand_mean</span></code></pre></div>
 <pre><code>## [1] 5.325</code></pre>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">r_mean</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="stat-background.html#cb196-1" aria-hidden="true" tabindex="-1"></a>r_mean</span></code></pre></div>
 <pre><code>## [1] 5.325</code></pre>
 <p>As expected, the values are identical. Let’s now calculate the mean bill length of the penguins.</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="stat-background.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> penguins<span class="sc">$</span>bill_length_mm)</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<p>The function <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> returns NA if there are missing values in the data set. Remember to exclude NAs with <code>na.rm = TRUE</code> to get a meaningful result.</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>The function <code>mean()</code> returns NA if there are missing values in the data set. Remember to exclude NAs with <code>na.rm = TRUE</code> to get a meaningful result.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="stat-background.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> penguins<span class="sc">$</span>bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 43.92193</code></pre>
 </div>
-<div id="variance-and-standard-deviation" class="section level3" number="11.1.2">
-<h3>
-<span class="header-section-number">A.1.2</span> Variance and standard deviation<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
-</h3>
+<div id="variance-and-standard-deviation" class="section level3" number="12.1.2">
+<h3><span class="header-section-number">A.1.2</span> Variance and standard deviation</h3>
 <p>Variance and standard deviation are both measures of variability in your data. They show how far the data <em>deviates</em> from its mean value on the average. This <em>deviation</em> is defined as the squared difference between a data point and the mean of the data. The variance is defined as:</p>
 <p><span class="math display">\[v = \frac{1}{n-1} \sum_{i = 1}^{i = n} (x_i - \bar{x})^2\]</span></p>
 <p>The standard deviation is the square root of the variance and is defined as:</p>
 <p><span class="math display">\[s = \sqrt{\frac{1}{n-1} \sum_{i = 1}^{i = n} (x_i - \bar{x})^2}\]</span>
 where:</p>
 <ul>
-<li>
-<span class="math inline">\(\bar{x}\)</span>: mean value of data set <span class="math inline">\(x\)</span>
-</li>
-<li>
-<span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data points (sample size)</li>
-<li>
-<span class="math inline">\(x_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span>
-</li>
+<li><span class="math inline">\(\bar{x}\)</span>: mean value of data set <span class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data points (sample size)</li>
+<li><span class="math inline">\(x_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span></li>
 </ul>
-<p>How large is the standard deviation in the data set <code>a</code>? Again, we compare the results of by-hand calculation and the output of the function <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>.</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sd_hand</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="fl">2</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">4.3</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">5</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">10</span> <span class="op">-</span> <span class="va">r_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">4</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">r_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>
-
-<span class="va">sd_hand</span></code></pre></div>
+<p>How large is the standard deviation in the data set <code>a</code>? Again, we compare the results of by-hand calculation and the output of the function <code>sd()</code>.</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="stat-background.html#cb202-1" aria-hidden="true" tabindex="-1"></a>sd_hand <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((<span class="dv">2</span> <span class="sc">-</span> r_mean)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="fl">4.3</span> <span class="sc">-</span> r_mean)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">5</span> <span class="sc">-</span> r_mean)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">10</span> <span class="sc">-</span> r_mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">4</span> <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb202-2"><a href="stat-background.html#cb202-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-3"><a href="stat-background.html#cb202-3" aria-hidden="true" tabindex="-1"></a>r_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(a)</span>
+<span id="cb202-4"><a href="stat-background.html#cb202-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-5"><a href="stat-background.html#cb202-5" aria-hidden="true" tabindex="-1"></a>sd_hand</span></code></pre></div>
 <pre><code>## [1] 3.369842</code></pre>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">r_sd</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="stat-background.html#cb204-1" aria-hidden="true" tabindex="-1"></a>r_sd</span></code></pre></div>
 <pre><code>## [1] 3.369842</code></pre>
 <p>Again, identical 😄. How large is the standard deviation of penguins’ bill lengths? Don’t forget to exclude the missing values!</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="stat-background.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="at">x =</span> penguins<span class="sc">$</span>bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 5.459584</code></pre>
 </div>
 </div>
-<div id="measures-of-association" class="section level2" number="11.2">
-<h2>
-<span class="header-section-number">A.2</span> Measures of association<a class="anchor" aria-label="anchor" href="#measures-of-association"><i class="fas fa-link"></i></a>
-</h2>
-<div id="linear-correlation-coefficent" class="section level3" number="11.2.1">
-<h3>
-<span class="header-section-number">A.2.1</span> Linear correlation coefficent<a class="anchor" aria-label="anchor" href="#linear-correlation-coefficent"><i class="fas fa-link"></i></a>
-</h3>
+<div id="measures-of-association" class="section level2" number="12.2">
+<h2><span class="header-section-number">A.2</span> Measures of association</h2>
+<div id="linear-correlation-coefficent" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">A.2.1</span> Linear correlation coefficent</h3>
 <p>Aka Pearson correlation coefficient and Pearson product-moment correlation coefficient measures the linear association between two numeric variables:</p>
 <p><span class="math display">\[ r = \frac{\sum_{i = 1}^{i = n} (x_i - \bar{x})(y_i - \bar{y})}{ \sqrt{\sum_{i = 1}^{i = n} (x_i - \bar{x})^2} \sqrt{\sum_{i = 1}^{i = n} (y_i - \bar{y})^2}}\]</span>
 where:</p>
 <ul>
-<li>
-<span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span>: mean values of data set <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, respectively</li>
-<li>
-<span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data points (sample size)</li>
-<li>
-<span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, respectively</li>
+<li><span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span>: mean values of data set <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, respectively</li>
+<li><span class="math inline">\(i\)</span>: index running from 1 to <span class="math inline">\(n\)</span>, the number of your data points (sample size)</li>
+<li><span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span>: single data points in the data sets <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, respectively</li>
 </ul>
 <p>The Pearson correlation coefficients varies between -1 (perfect negative correlation) and 1 (perfect positive correlation). A value around zero shows no <strong>linear</strong> correlation. However, a different kind of assiciation might exist in the data. Remember to always plot your data!</p>
 How large is the correlation coefficient between the bill length and the bill depth for the species Adélie?
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-156"></span>
-<img src="figures/culmen_depth.png" alt="Artwork by `@allison_horst`" width="100%"><p class="caption">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-174"></span>
+<img src="figures/culmen_depth.png" alt="Artwork by `@allison_horst`" width="100%" />
+<p class="caption">
 Figure A.2: Artwork by <code>@allison_horst</code>
 </p>
 </div>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">adelie</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">'Adelie'</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">adelie</span><span class="op">$</span><span class="va">bill_length_mm</span>, <span class="va">adelie</span><span class="op">$</span><span class="va">bill_depth_mm</span>, method <span class="op">=</span> <span class="st">'pearson'</span>, use <span class="op">=</span> <span class="st">'pairwise.complete.obs'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="stat-background.html#cb208-1" aria-hidden="true" tabindex="-1"></a>adelie <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb208-2"><a href="stat-background.html#cb208-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&#39;Adelie&#39;</span>)</span>
+<span id="cb208-3"><a href="stat-background.html#cb208-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-4"><a href="stat-background.html#cb208-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(adelie<span class="sc">$</span>bill_length_mm, adelie<span class="sc">$</span>bill_depth_mm, <span class="at">method =</span> <span class="st">&#39;pearson&#39;</span>, <span class="at">use =</span> <span class="st">&#39;pairwise.complete.obs&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3914917</code></pre>
 <p>We need to distinguish between species because the correlations differ between them.</p>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span>, method <span class="op">=</span> <span class="st">'pearson'</span>, use <span class="op">=</span> <span class="st">'pairwise.complete.obs'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="stat-background.html#cb210-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb210-2"><a href="stat-background.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb210-3"><a href="stat-background.html#cb210-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cor =</span> <span class="fu">cor</span>(bill_length_mm, bill_depth_mm, <span class="at">method =</span> <span class="st">&#39;pearson&#39;</span>, <span class="at">use =</span> <span class="st">&#39;pairwise.complete.obs&#39;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   species     cor
 ##   &lt;fct&gt;     &lt;dbl&gt;
 ## 1 Adelie    0.391
 ## 2 Chinstrap 0.654
 ## 3 Gentoo    0.643</code></pre>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">bill_depth_mm</span>, col <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="va">lm</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-159-1.png" width="90%"></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="stat-background.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm, <span class="at">col =</span> species)) <span class="sc">+</span></span>
+<span id="cb212-2"><a href="stat-background.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb212-3"><a href="stat-background.html#cb212-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> lm)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-177-1.png" width="90%" /></p>
 
 </div>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></div>
-<div class="next"><a href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#stat-background"><span class="header-section-number">A</span> Statistics refresher</a></li>
-<li>
-<a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">A.1</span> Descriptive statistics</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#mean"><span class="header-section-number">A.1.1</span> Mean</a></li>
-<li><a class="nav-link" href="#variance-and-standard-deviation"><span class="header-section-number">A.1.2</span> Variance and standard deviation</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#measures-of-association"><span class="header-section-number">A.2</span> Measures of association</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#linear-correlation-coefficent"><span class="header-section-number">A.2.1</span> Linear correlation coefficent</a></li></ul>
-</li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/17-statistical-background.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/17-statistical-background.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-05-31.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -288,7 +250,11 @@ Figure A.2: Artwork by <code>@allison_horst</code>
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -300,7 +266,8 @@ Figure A.2: Artwork by <code>@allison_horst</code>
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
 for (let popover of popovers) {
   const div = document.createElement('div');
   div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
@@ -318,4 +285,5 @@ for (let popover of popovers) {
 }
 </script>
 </body>
+
 </html>

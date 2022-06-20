@@ -1,0 +1,204 @@
+# (PART) Part IV: Additional topics {-}
+# Introduction to time series analysis {#tsa}
+
+## What are time series?
+Time series are sequences of values ordered by time. The order of the values is very important. Often, subsequent values are similar to each other, i.e. correlated. This implies that many statistical techniques which require independent observations do not work.
+
+## An example from the German Meteorological Service (DWD)
+We will analyse daily temperature and precipitation data. The goal is to see whether (i) we can detect a trend in the data and (ii) how the data fluctuates through the year. A **trend** is any long-term change in the data which is not due to obvious cyclic processes like the yearly fluctuation. In contrast, **seasonality** shows exactly this, a (more or less) regular fluctuation which repeats itself in a certain time.
+
+I downloaded the data with the help of the library 
+`rdwd` (https://bookdown.org/brry/rdwd/) on 20 June 2022. The data was measured daily at the station "Koeln-Bonn" starting from 1957 to end of 2021. You can find the complete data description here:
+
+```{r, echo = F}
+xfun::embed_file(path = 'data/DESCRIPTION_obsgermany_climate_daily_kl_historical_en.pdf', name = 'Data_description.pdf', text = "Data description")
+```
+
+We will need the following variables:
+
+Variable | Description | Format/Unit |
+:---------|:----------|:-----------|
+`MESS_DATUM` | the date of measurements | yyyymmdd |
+`TMK` | daily mean of temperature | °C |
+`RSK` | daily precipitation height | mm |
+
+We load the necessary libraries.
+```{r setup}
+library(tidyverse)
+library(lubridate)
+library(Kendall)
+library(ggfortify)
+```
+
+`rdwd`downloads a zipped file. First, we need to unzip it and then to read it in. Note that the NAs are coded as "-999".
+```{r}
+unzip('data/daily_kl_historical_tageswerte_KL_02667_19570701_20211231_hist.zip', exdir = "data")
+
+
+clim <- read_delim('data/produkt_klima_tag_19570701_20211231_02667.txt', delim = ';', na = '-999', trim_ws = TRUE)
+
+clim
+```
+
+The date of the measurement is not a proper date format and we must convert it first.
+```{r}
+clim <- clim %>% 
+  mutate(MESS_DATUM = ymd(MESS_DATUM))
+
+clim
+```
+
+We plot the temperature data.
+```{r, out.width = "95%", warning=FALSE}
+ggplot(data = clim, aes(x = MESS_DATUM, y = TMK)) +
+  geom_line() +
+  labs(y = 'Daily mean temperature (°C)', 
+       x = 'Date')
+```
+
+We want to analyse complete years only. Which years should be deleted because of too few data points?
+```{r}
+clim %>% 
+  group_by(year(MESS_DATUM)) %>% 
+  tally()
+```
+
+The year 1957 is incomplete and we exclude it.
+```{r}
+clim <- clim %>% 
+  filter(year(MESS_DATUM) != '1957')
+```
+
+## Trend analysis of yearly data
+We summarize the temperature to yearly values to exclude the seasonal fluctuations. This helps to analyse the trend.
+```{r}
+temp_yearly <- clim %>% 
+  group_by(year(MESS_DATUM)) %>% 
+  summarize(mean_temp = mean(TMK, na.rm = T)) %>% 
+  rename(year = `year(MESS_DATUM)`)
+
+temp_yearly
+```
+
+Plot of yearly mean temperature data.
+```{r, out.width = "95%"}
+ggplot(temp_yearly, aes(x = year, y = mean_temp)) +
+  geom_line() +
+  geom_smooth(formula = 'y ~ x', method = 'loess', se = FALSE) +
+  ylim(5, 15) +
+  labs(y = 'Yearly mean temperature (°C)', 
+       x = 'Date')
+```
+
+There seem to be an upward trend, but is it significant or due to chance. To answer this question we use the Mann-Kendall test for trend. The null and alternative hypothesis of the test are:
+
+- $H_0$: data does not have a trend.
+- $H_1$: data has a trend.
+
+The test calculates a statistics called $\tau$. It is based on a comparison of all possible pairs of variables and their succeeding neighbours. If $\tau < 0$, then more neighbouring points are smaller, and the data has a negative trend. If $\tau > 0$ more neighbouring points are larger, and the data has a positive trend. If $\tau \approx 0$, then the smaller and larger neighbouring points are in balance, and there is no trend.
+```{r}
+MannKendall(temp_yearly$mean_temp)
+```
+The $p$ value is very small. It is plausible to conclude that there is a positive trend because $\tau > 0$.
+
+By how much did the mean temperature increase per year? We calculated differences of yearly temperature of consecutive years.
+```{r}
+temp_diff <- temp_yearly %>% 
+  summarize(temp_diff = diff(mean_temp)) %>% 
+  mutate(year = temp_yearly$year[-1])
+
+mean_diff <- temp_diff %>% 
+  summarise(mean = mean(temp_diff))
+```
+
+
+Plot the distribution of differences.
+```{r, out.width = "95%"}
+ggplot(temp_diff, aes(x = temp_diff)) +
+  geom_histogram(bins = 15, col = 'white')
+```
+
+We see a mean increase of `r round(as.numeric(mean_diff$mean), 2)` degrees per year.
+
+## Analysis of seasonality
+
+Summarize by month
+```{r}
+temp_monthly <- clim %>% 
+  group_by(year(MESS_DATUM), month(MESS_DATUM)) %>% 
+  summarize(mean_temp = mean(TMK, na.rm = T)) %>% 
+  rename(year = `year(MESS_DATUM)`, month = `month(MESS_DATUM)`) %>% 
+  mutate(date = ymd(paste(year, month, '15', sep = '-'))) %>% 
+  relocate(date)
+
+temp_monthly
+```
+
+Plot monthly values. The seasonality seems rather constant over time.
+```{r, out.width = "95%"}
+ggplot(temp_monthly, aes(x = date, y = mean_temp)) +
+  geom_line() +
+  labs(x = 'Date',
+       y = 'Mean daily tempearture (°C)')
+```
+
+The overall seasonality.
+```{r, out.width = "95%"}
+ggplot(temp_monthly, aes(x = as_factor(month), y = mean_temp)) +
+  geom_boxplot() +
+  scale_x_discrete(labels = month.abb) +
+  labs(x = 'Month',
+       y = 'Variation of the mean yearly temperature (°C)')
+```
+
+## Advanced: Simulataneous analysis of trend and seasonality
+
+We can use a model to decompose the time series into a trend, seasonality and a rest (remainder) component. This model is additive, meaning that when you sum the components you get back your original time series. The model assume that the seasonality remains stable over time, i.e. it is inappropriate for climate change studies. However, it is still a good starting point.
+
+We need to convert the data to a `ts` (time series) object first. This type of objects keeps the data along with the time.
+```{r, out.width = "95%", out.height = '150%'}
+time_series <- ts(temp_monthly$mean_temp, start = c(1958, 1), end = c(2021, 12), frequency = 12)
+
+str(time_series)
+```
+
+We use the function `decompose()` to decompose the time series.
+```{r}
+components <- decompose(time_series)
+
+plot(components)
+```
+
+Plot the trend using `ggfortify`. This library helps to transform the complicated object created by `decompose()` to a `data.frame` which can be easily plotted with `ggplot()`.
+
+```{r, out.width = "95%", warning=F}
+ggplot(data = fortify(components), aes(x = Index, y = trend)) +
+  geom_line() +
+  annotate('rect', xmin = as.Date('2006-01-01'), xmax = as.Date('2007-12-31'), ymin = -Inf, ymax = Inf, fill = 'red', alpha = 1/3) +
+  ylim(5, 15) +
+  labs(x = 'Date',
+       y = 'Trend component of the temperature (°C)',
+       title = 'Red bar highlights the year 2007.')
+```
+
+The large peak is due to the highest monthly mean in July 2007, don't over-interpret this as a change in the trend!
+
+General advice:
+
+- If you want to analyse the trend, you need to get rid of the seasonality. The most simple way is to calcualte yearly data (if not already provided) and then do the Mann-Kendall test to test for a trend.
+- Calculate the mean change over years or analyse changes in more details. Report obout those changes and the $p$ value of the test.
+- If you have seasonality, you can use either `decompose()` or `stl()` to decompose the data and estimate trend and seasonality. However, beware of artefacts of the methods.
+
+## Practice on your own!
+<ol class ="exercises">
+1. Select another location and repete the analysis of temperature.
+
+2. Analyse the precipitation data. Is there a trend? Instead of calculating mean values, you must sum the precipitations! Analyse the yearly sums only, no decomposition because seasonality is less important.
+</ol>
+
+## Turning in your work
+- Save your R Notebook as an *.Rmd file. 
+- Upload your R Notebook to ILIAS. You don't need to upload the .nb.html file. You will find an upload option in today's session.
+- You should receive a solution file after your upload. **Be sure to upload before the deadline!**
+
+
