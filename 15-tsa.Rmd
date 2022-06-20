@@ -2,12 +2,12 @@
 # Introduction to time series analysis {#tsa}
 
 ## What are time series?
-Time series are sequences of values ordered by time. The order of the values is very important. Often, subsequent values are similar to each other, i.e. correlated. This implies that many statistical techniques which require independent observations do not work.
+Time series are sequences of values ordered by time. The order of the values is crucial. Often, subsequent values are similar to each other, i.e. correlated. This implies that many statistical techniques which require independent observations do not work.
 
 ## An example from the German Meteorological Service (DWD)
 We will analyse daily temperature and precipitation data. The goal is to see whether (i) we can detect a trend in the data and (ii) how the data fluctuates through the year. A **trend** is any long-term change in the data which is not due to obvious cyclic processes like the yearly fluctuation. In contrast, **seasonality** shows exactly this, a (more or less) regular fluctuation which repeats itself in a certain time.
 
-I downloaded the data with the help of the library 
+I downloaded the data using the library 
 `rdwd` (https://bookdown.org/brry/rdwd/) on 20 June 2022. The data was measured daily at the station "Koeln-Bonn" starting from 1957 to end of 2021. You can find the complete data description here:
 
 ```{r, echo = F}
@@ -99,7 +99,7 @@ The test calculates a statistics called $\tau$. It is based on a comparison of a
 ```{r}
 MannKendall(temp_yearly$mean_temp)
 ```
-The $p$ value is very small. It is plausible to conclude that there is a positive trend because $\tau > 0$.
+The $p$ value is small. It is plausible to conclude that there is a positive trend because $\tau > 0$.
 
 By how much did the mean temperature increase per year? We calculated differences of yearly temperature of consecutive years.
 ```{r}
@@ -151,9 +151,9 @@ ggplot(temp_monthly, aes(x = as_factor(month), y = mean_temp)) +
        y = 'Variation of the mean yearly temperature (°C)')
 ```
 
-## Advanced: Simulataneous analysis of trend and seasonality
+## Advanced: Simultaneous analysis of trend and seasonality
 
-We can use a model to decompose the time series into a trend, seasonality and a rest (remainder) component. This model is additive, meaning that when you sum the components you get back your original time series. The model assume that the seasonality remains stable over time, i.e. it is inappropriate for climate change studies. However, it is still a good starting point.
+We can use a model to decompose the time series into a trend, seasonality and a rest (remainder) component. This model is additive, meaning that when you sum the components, you get back your original time series. The model assumes that the seasonality remains stable over time, i.e. it is inappropriate for climate change studies. However, it is still a good starting point.
 
 We need to convert the data to a `ts` (time series) object first. This type of objects keeps the data along with the time.
 ```{r, out.width = "95%", out.height = '150%'}
@@ -163,7 +163,7 @@ str(time_series)
 ```
 
 We use the function `decompose()` to decompose the time series.
-```{r}
+```{r, out.width = "95%"}
 components <- decompose(time_series)
 
 plot(components)
@@ -185,9 +185,9 @@ The large peak is due to the highest monthly mean in July 2007, don't over-inter
 
 General advice:
 
-- If you want to analyse the trend, you need to get rid of the seasonality. The most simple way is to calcualte yearly data (if not already provided) and then do the Mann-Kendall test to test for a trend.
-- Calculate the mean change over years or analyse changes in more details. Report obout those changes and the $p$ value of the test.
-- If you have seasonality, you can use either `decompose()` or `stl()` to decompose the data and estimate trend and seasonality. However, beware of artefacts of the methods.
+- If you want to analyse the trend, you need to get rid of the seasonality. The most simple way is to calculate yearly data (if not already provided) and then do the Mann-Kendall test to test for a trend.
+- Calculate the mean change over years or analyse changes in more details. Report about those changes and the $p$ value of the test.
+- If you have seasonality, you can use `decompose()` to decompose the data and estimate trend and seasonality. However, remember that the model assumes that the seasonality remains stable over time.
 
 ## Practice on your own!
 <ol class ="exercises">
@@ -200,5 +200,3 @@ General advice:
 - Save your R Notebook as an *.Rmd file. 
 - Upload your R Notebook to ILIAS. You don't need to upload the .nb.html file. You will find an upload option in today's session.
 - You should receive a solution file after your upload. **Be sure to upload before the deadline!**
-
-

@@ -1,50 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>6 Sampling and variability | Environmental Statistics</title>
-
-    <meta name="author" content="Christina Bogner" />
-  
-   <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-   <meta name="generator" content="placeholder" />
-  <meta property="og:title" content="6 Sampling and variability | Environmental Statistics" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Sampling and variability | Environmental Statistics" />
-  
-  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  
-  <!-- JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
-    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
-    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
-    <script src="libs/bs3compat-0.3.1/transition.js"></script>
-    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
-    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
-    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
-    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
-    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
-
-  <!-- CSS -->
-  <style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>6 Sampling and variability | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<meta name="description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter, we start our journey into...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="6 Sampling and variability | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter, we start our journey into...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6 Sampling and variability | Environmental Statistics">
+<meta name="twitter:description" content="Conduct random sampling using a computer  Explain variability in random sampling  Calculate sampling distributions  Calculate the standard error  With this chapter, we start our journey into...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-    <style type="text/css">
+<style type="text/css">
     /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
     div.csl-bib-body { }
     div.csl-entry {
@@ -66,17 +44,14 @@
       margin-left: 2em;
     }
   </style>
-      <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="font-awesome.min.css" />
-  
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
 </head>
-
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
-    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -89,22 +64,43 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-      </form>
+</form>
 
-      <nav aria-label="Table of contents">
-        <h2>Table of contents</h2>
-        <div id="book-toc"></div>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="active" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li class="book-part">Part IV: Additional topics</li>
+<li><a class="" href="tsa.html"><span class="header-section-number">11</span> Introduction to time series analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
-    </div>
-  </header>
-
-  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
-<div id="sampling" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Sampling and variability</h1>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="sampling" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Sampling and variability<a class="anchor" aria-label="anchor" href="#sampling"><i class="fas fa-link"></i></a>
+</h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
@@ -126,47 +122,57 @@ Calculate the standard error
 <p>We will do inference based on data science and a computer. Nowadays, computational power is usually no longer a problem and cool statistical inference can be done based on computer simulations and so called <strong>resampling</strong> techniques.</p>
 <p>In this chapter, you will learn how to use a computer experiment to draw samples from a simulated data set. You will see that every random sample is different. This experience should elucidate the concept of randomness or chance and variability.</p>
 <div id="random-sampling-of-data" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Random sampling of data</h2>
+<h2>
+<span class="header-section-number">6.1</span> Random sampling of data<a class="anchor" aria-label="anchor" href="#random-sampling-of-data"><i class="fas fa-link"></i></a>
+</h2>
 <p>We will use the following libraries. The library <code>infer</code> is a dedicated package for <em>tidy</em> inference.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="sampling.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb83-2"><a href="sampling.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moderndive)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://moderndive.github.io/moderndive/">moderndive</a></span><span class="op">)</span></code></pre></div>
 <p>We will simulate our own data set, our own population, and invent the <em>getsmarter university</em> with 12000 students. The code below draws random numbers and simulates the following variables:</p>
 <ul>
-<li><code>student_id</code>: 1 to 12000</li>
-<li><code>gender</code>: <em>m</em>ale or <em>f</em>emale</li>
-<li><code>travel_time</code>: time students travel to the university in minutes</li>
-<li><code>residence</code>: type of place of residents, either town = urban or countryside = rural</li>
-<li><code>transport</code>: how students travel/come to the university</li>
-<li><code>time_lib</code>: time students spend in the university library in minutes</li>
+<li>
+<code>student_id</code>: 1 to 12000</li>
+<li>
+<code>gender</code>: <em>m</em>ale or <em>f</em>emale</li>
+<li>
+<code>travel_time</code>: time students travel to the university in minutes</li>
+<li>
+<code>residence</code>: type of place of residents, either town = urban or countryside = rural</li>
+<li>
+<code>transport</code>: how students travel/come to the university</li>
+<li>
+<code>time_lib</code>: time students spend in the university library in minutes</li>
 </ul>
 <p>We organize all these variables in a <code>tibble</code> that we call <code>getsmarter_pop</code>.</p>
-<p>Because we draw random numbers using R, every time we rerun the code, new numbers will be generated. To have a reproducible population, we use the function <code>set.seed()</code>. It accepts as a parameter an integer. Which integer we use does not really matter as long as we use the same every time we rerun the code. By <em>setting the seed</em>, we set the random number generate in R to a certain reproducible state. The numbers are still random, but reproducible 😄.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sampling.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb84-2"><a href="sampling.html#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="sampling.html#cb84-3" aria-hidden="true" tabindex="-1"></a>student_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12000</span></span>
-<span id="cb84-4"><a href="sampling.html#cb84-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb84-5"><a href="sampling.html#cb84-5" aria-hidden="true" tabindex="-1"></a>travel_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">12000</span> <span class="sc">*</span> <span class="fl">0.8</span>, <span class="at">min =</span> <span class="dv">5</span>, <span class="at">max =</span> <span class="dv">40</span>),</span>
-<span id="cb84-6"><a href="sampling.html#cb84-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">12000</span> <span class="sc">*</span> <span class="fl">0.2</span>, <span class="at">min =</span> <span class="dv">60</span>, <span class="at">max =</span> <span class="dv">120</span>))</span>
-<span id="cb84-7"><a href="sampling.html#cb84-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-8"><a href="sampling.html#cb84-8" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;m&#39;</span>, <span class="st">&#39;f&#39;</span>), <span class="at">size =</span> <span class="dv">12000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb84-9"><a href="sampling.html#cb84-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-10"><a href="sampling.html#cb84-10" aria-hidden="true" tabindex="-1"></a>residence <span class="ot">&lt;-</span> <span class="fu">sapply</span>(travel_time, <span class="cf">function</span>(x) {</span>
-<span id="cb84-11"><a href="sampling.html#cb84-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="st">&#39;urban&#39;</span></span>
-<span id="cb84-12"><a href="sampling.html#cb84-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="st">&#39;rural&#39;</span></span>
-<span id="cb84-13"><a href="sampling.html#cb84-13" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb84-14"><a href="sampling.html#cb84-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-15"><a href="sampling.html#cb84-15" aria-hidden="true" tabindex="-1"></a>transport <span class="ot">&lt;-</span> <span class="fu">sapply</span>(travel_time, <span class="cf">function</span>(x) {</span>
-<span id="cb84-16"><a href="sampling.html#cb84-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="st">&#39;foot&#39;</span></span>
-<span id="cb84-17"><a href="sampling.html#cb84-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">15</span>) <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;foot&#39;</span>, <span class="st">&#39;bike&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb84-18"><a href="sampling.html#cb84-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">45</span>) <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;bus&#39;</span>, <span class="st">&#39;bike&#39;</span>, <span class="st">&#39;car&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb84-19"><a href="sampling.html#cb84-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;bus&#39;</span>, <span class="st">&#39;car&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb84-20"><a href="sampling.html#cb84-20" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb84-21"><a href="sampling.html#cb84-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-22"><a href="sampling.html#cb84-22" aria-hidden="true" tabindex="-1"></a>time_lib <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">60</span> <span class="sc">-</span> <span class="fl">0.7</span> <span class="sc">*</span> travel_time <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(travel_time), <span class="dv">0</span>, <span class="dv">20</span>)</span>
-<span id="cb84-23"><a href="sampling.html#cb84-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-24"><a href="sampling.html#cb84-24" aria-hidden="true" tabindex="-1"></a>getsmarter_pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>(student_id, gender, residence, transport, travel_time, time_lib)</span>
-<span id="cb84-25"><a href="sampling.html#cb84-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-26"><a href="sampling.html#cb84-26" aria-hidden="true" tabindex="-1"></a>getsmarter_pop</span></code></pre></div>
+<p>Because we draw random numbers using R, every time we rerun the code, new numbers will be generated. To have a reproducible population, we use the function <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>. It accepts as a parameter an integer. Which integer we use does not really matter as long as we use the same every time we rerun the code. By <em>setting the seed</em>, we set the random number generate in R to a certain reproducible state. The numbers are still random, but reproducible 😄.</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+
+<span class="va">student_id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12000</span>
+  
+<span class="va">travel_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.8</span>, min <span class="op">=</span> <span class="fl">5</span>, max <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,
+             <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.2</span>, min <span class="op">=</span> <span class="fl">60</span>, max <span class="op">=</span> <span class="fl">120</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'m'</span>, <span class="st">'f'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">12000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="va">residence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span> <span class="st">'urban'</span>
+  <span class="kw">else</span> <span class="st">'rural'</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="va">transport</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="st">'foot'</span>
+  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">15</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'foot'</span>, <span class="st">'bike'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">45</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'bike'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="va">time_lib</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">-</span> <span class="fl">0.7</span> <span class="op">*</span> <span class="va">travel_time</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>
+
+<span class="va">getsmarter_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">student_id</span>, <span class="va">gender</span>, <span class="va">residence</span>, <span class="va">transport</span>, <span class="va">travel_time</span>, <span class="va">time_lib</span><span class="op">)</span>
+
+<span class="va">getsmarter_pop</span></code></pre></div>
 <pre><code>## # A tibble: 12,000 × 6
 ##    student_id gender residence transport travel_time time_lib
 ##         &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
@@ -181,15 +187,17 @@ Calculate the standard error
 ##  9          9 m      urban     bike            24.3      299.
 ## 10         10 f      urban     bus             21.0      282.
 ## # … with 11,990 more rows</code></pre>
-<p>We conduct a survey among the students of getsmarter and record the values of the variables listed above. We select the students randomly. Therefore, the data set that we generate through our survey will be a <strong>random sample</strong>. To simulate such a survey, we use the function <code>rep_sample_n()</code>. It <em>sample</em>s <em>rep</em>eatedly <em>n</em> data points (students in our case) from a given data set (our population <code>getsmarter_pop</code>).</p>
-<p>Because we sample randomly (and use the random number generator in R to do so), we need to set the seed again for reproducibility. We will simulate a survey of 50 students and define the survey size by <code>survey_size &lt;- 50</code>. The survey will be done once, parameter <code>reps = 1</code>, and students can be interviewed only once, parameter <code>replace = FALSE</code>, in the function <code>rep_sample_n()</code>.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="sampling.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
-<span id="cb86-2"><a href="sampling.html#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-3"><a href="sampling.html#cb86-3" aria-hidden="true" tabindex="-1"></a>survey_size <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb86-4"><a href="sampling.html#cb86-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-5"><a href="sampling.html#cb86-5" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">rep_sample_n</span>(getsmarter_pop, <span class="at">size =</span> survey_size, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">reps =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>We conduct a survey among the students of getsmarter and record the values of the variables listed above. We select the students randomly. Therefore, the data set that we generate through our survey will be a <strong>random sample</strong>. To simulate such a survey, we use the function <code><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n()</a></code>. It <em>sample</em>s <em>rep</em>eatedly <em>n</em> data points (students in our case) from a given data set (our population <code>getsmarter_pop</code>).</p>
+<p>Because we sample randomly (and use the random number generator in R to do so), we need to set the seed again for reproducibility. We will simulate a survey of 50 students and define the survey size by <code>survey_size &lt;- 50</code>. The survey will be done once, parameter <code>reps = 1</code>, and students can be interviewed only once, parameter <code>replace = FALSE</code>, in the function <code><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n()</a></code>.</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
+
+<span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">50</span>
+
+<span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>The function <code>rep_sample_n</code> returns a grouped <code>tibble</code>. The variable <code>replicate</code> contained only the number 1 because <code>rep = 1</code>. It is an indicator variable of the replication.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="sampling.html#cb87-1" aria-hidden="true" tabindex="-1"></a>survey</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey</span></code></pre></div>
 <pre><code>## # A tibble: 50 × 7
 ## # Groups:   replicate [1]
 ##    replicate student_id gender residence transport travel_time time_lib
@@ -206,9 +214,10 @@ Calculate the standard error
 ## 10         1       8153 f      urban     foot             8.06     297.
 ## # … with 40 more rows</code></pre>
 <p>How many students from the survey live in the town and how many in the countryside?</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="sampling.html#cb89-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb89-2"><a href="sampling.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb89-3"><a href="sampling.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ## # Groups:   residence [2]
 ##   residence     n
@@ -216,9 +225,10 @@ Calculate the standard error
 ## 1 rural        21
 ## 2 urban        29</code></pre>
 <p>Instead of actual numbers, we want to express <code>residence</code> as proportions.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="sampling.html#cb91-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb91-2"><a href="sampling.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb91-3"><a href="sampling.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">n</span>()<span class="sc">/</span>survey_size)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence  prop
 ##   &lt;chr&gt;     &lt;dbl&gt;
@@ -226,11 +236,13 @@ Calculate the standard error
 ## 2 urban      0.58</code></pre>
 <p>42% of survey students live in the countryside and 58% in town.</p>
 <p>But which proportions would we obtain if we repeated the survey? Let’s repeat the survey 33 times and observe the variability in <code>residence</code>. This is an unrealistic scenario for real life, however, for a computer experiment, no problem. We set <code>reps = 33.</code></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="sampling.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
-<span id="cb93-2"><a href="sampling.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-3"><a href="sampling.html#cb93-3" aria-hidden="true" tabindex="-1"></a>survey_reps <span class="ot">&lt;-</span> <span class="fu">rep_sample_n</span>(getsmarter_pop, <span class="at">size =</span> survey_size, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">reps =</span> <span class="dv">33</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
+
+<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></code></pre></div>
 <p>Now <code>survey_reps</code> shows 33 replicates and the variable <code>replicate</code> ranges from 1 to 33. The data set has 1650 = 33 <span class="math inline">\(\times\)</span> <code>survey_size</code> rows.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="sampling.html#cb94-1" aria-hidden="true" tabindex="-1"></a>survey_reps</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">survey_reps</span></code></pre></div>
 <pre><code>## # A tibble: 1,650 × 7
 ## # Groups:   replicate [33]
 ##    replicate student_id gender residence transport travel_time time_lib
@@ -247,11 +259,12 @@ Calculate the standard error
 ## 10         1       3127 m      urban     bike             29.6     271.
 ## # … with 1,640 more rows</code></pre>
 <p>How do the proportions in <code>residence</code> vary from survey to survey? Now we must group by <code>residence</code> and <code>replicate</code>.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="sampling.html#cb96-1" aria-hidden="true" tabindex="-1"></a>residence_props <span class="ot">&lt;-</span> survey_reps <span class="sc">%&gt;%</span> </span>
-<span id="cb96-2"><a href="sampling.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate, residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb96-3"><a href="sampling.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">n</span>()<span class="sc">/</span>survey_size)</span>
-<span id="cb96-4"><a href="sampling.html#cb96-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-5"><a href="sampling.html#cb96-5" aria-hidden="true" tabindex="-1"></a>residence_props</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
+
+<span class="va">residence_props</span></code></pre></div>
 <pre><code>## # A tibble: 66 × 3
 ## # Groups:   replicate [33]
 ##    replicate residence  prop
@@ -268,37 +281,42 @@ Calculate the standard error
 ## 10         5 urban      0.6 
 ## # … with 56 more rows</code></pre>
 <p>The numbers vary from replicate to replicate because in every survey replicate different students were drawn at random. Let’s look at the distribution of the proportions in a histogram.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="sampling.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> residence_props, <span class="fu">aes</span>(<span class="at">x =</span> prop)) <span class="sc">+</span> </span>
-<span id="cb98-2"><a href="sampling.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">boundary =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">&#39;white&#39;</span>) <span class="sc">+</span></span>
-<span id="cb98-3"><a href="sampling.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> residence) <span class="sc">+</span></span>
-<span id="cb98-4"><a href="sampling.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Proportion of residence&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Distribution of residences&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Frequency&#39;</span>)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-92-1.png" width="90%" /></p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.05</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-92-1.png" width="90%"></div>
 <p>The most frequent proportions for <code>rural</code> are around 40% and for <code>urban</code> around 60%. Because we have chosen <code>binwidth = 0.05</code>, i.e. the width of the columns is 5%, we can be more precise. Among the surveyed students, 35–40% live in the countryside and 55–60% in town.</p>
 </div>
 <div id="number-of-replications-and-variability" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Number of replications and variability</h2>
+<h2>
+<span class="header-section-number">6.2</span> Number of replications and variability<a class="anchor" aria-label="anchor" href="#number-of-replications-and-variability"><i class="fas fa-link"></i></a>
+</h2>
 <p>Our histograms show that proportions of residence vary from survey to survey. 33 is a large number in real life, but a small number in statistics. Which patterns will we observe in our histograms if we repeat the survey 1000 times? We use a variable <code>reps_num</code> to define the number of repetitions.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="sampling.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
-<span id="cb99-2"><a href="sampling.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-3"><a href="sampling.html#cb99-3" aria-hidden="true" tabindex="-1"></a>reps_num <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb99-4"><a href="sampling.html#cb99-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-5"><a href="sampling.html#cb99-5" aria-hidden="true" tabindex="-1"></a>survey_reps <span class="ot">&lt;-</span> <span class="fu">rep_sample_n</span>(getsmarter_pop, <span class="at">size =</span> survey_size, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">reps =</span> reps_num)</span>
-<span id="cb99-6"><a href="sampling.html#cb99-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-7"><a href="sampling.html#cb99-7" aria-hidden="true" tabindex="-1"></a>residence_props <span class="ot">&lt;-</span> survey_reps <span class="sc">%&gt;%</span> </span>
-<span id="cb99-8"><a href="sampling.html#cb99-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate, residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-9"><a href="sampling.html#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">n</span>()<span class="sc">/</span>survey_size)</span>
-<span id="cb99-10"><a href="sampling.html#cb99-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-11"><a href="sampling.html#cb99-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> residence_props, <span class="fu">aes</span>(<span class="at">x =</span> prop)) <span class="sc">+</span> </span>
-<span id="cb99-12"><a href="sampling.html#cb99-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">boundary =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">&#39;white&#39;</span>) <span class="sc">+</span></span>
-<span id="cb99-13"><a href="sampling.html#cb99-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> residence, <span class="at">scales =</span> <span class="st">&#39;free_x&#39;</span>) <span class="sc">+</span></span>
-<span id="cb99-14"><a href="sampling.html#cb99-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Proportion of residence&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Distribution of residences&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Frequency&#39;</span>)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-93-1.png" width="90%" /></p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span>
+
+<span class="va">reps_num</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
+
+<span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
+
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-93-1.png" width="90%"></div>
 <p>The histograms show now a nice symmetrical pattern around 40–42% for <code>rural</code> and 58–60% for <code>urban</code> residences. The parameter <code>scales = 'free_x'</code> allows scaling each histogram’s <span class="math inline">\(x\)</span> axis separately. Such a distribution is called a <strong>sampling distribution</strong>. It shows the distribution of possible values of a statistics (“proportions of residence” in our case) that one obtains by a repeated sampling from a population.</p>
 <p>The statistics “proportion of residence” is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occur if we survey our students randomly.</p>
 <p>To summarize a sampling distribution, we can calculate its mean value and standard deviation. The latter has a special name, <strong>standard error</strong>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="sampling.html#cb100-1" aria-hidden="true" tabindex="-1"></a>residence_props <span class="sc">%&gt;%</span> </span>
-<span id="cb100-2"><a href="sampling.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-3"><a href="sampling.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_sd =</span> <span class="fu">sd</span>(prop))</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
@@ -307,66 +325,76 @@ Calculate the standard error
 <p>The standard errors for <code>rural</code> and <code>urban</code> are identical because they are dependent: <code>rural</code> = 1 - <code>urban</code>.</p>
 </div>
 <div id="sample-size" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Sample size</h2>
+<h2>
+<span class="header-section-number">6.3</span> Sample size<a class="anchor" aria-label="anchor" href="#sample-size"><i class="fas fa-link"></i></a>
+</h2>
 <p>The standard error depends on the sample size. Let’s repeat our survey for 25, 50 and 100 students, respectively and observe how the standard error vary.</p>
 <p>For repetitive tasks like this, it is better to define a function that does the job instead of copy-pasting the code to vary the sample size. I will define such a function without many comments. We will talk about functions later, if time allows.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="sampling.html#cb102-1" aria-hidden="true" tabindex="-1"></a>calculate_props <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">population =</span> getsmarter_pop, survey_size, <span class="at">reps_num =</span> <span class="dv">1000</span>) {</span>
-<span id="cb102-2"><a href="sampling.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb102-3"><a href="sampling.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  survey <span class="ot">&lt;-</span> <span class="fu">rep_sample_n</span>(population, <span class="at">size =</span> survey_size, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">reps =</span> reps_num)</span>
-<span id="cb102-4"><a href="sampling.html#cb102-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-5"><a href="sampling.html#cb102-5" aria-hidden="true" tabindex="-1"></a>residence_props <span class="ot">&lt;-</span> survey <span class="sc">%&gt;%</span> </span>
-<span id="cb102-6"><a href="sampling.html#cb102-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate, residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb102-7"><a href="sampling.html#cb102-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">n</span>()<span class="sc">/</span>survey_size)</span>
-<span id="cb102-8"><a href="sampling.html#cb102-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-9"><a href="sampling.html#cb102-9" aria-hidden="true" tabindex="-1"></a>residence_props</span>
-<span id="cb102-10"><a href="sampling.html#cb102-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">calculate_props</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">population</span> <span class="op">=</span> <span class="va">getsmarter_pop</span>, <span class="va">survey_size</span>, <span class="va">reps_num</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">population</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
+
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
+
+<span class="va">residence_props</span>
+<span class="op">}</span></code></pre></div>
 <p>Let’s survey.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="sampling.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb103-2"><a href="sampling.html#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-3"><a href="sampling.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size 25</span></span>
-<span id="cb103-4"><a href="sampling.html#cb103-4" aria-hidden="true" tabindex="-1"></a>residence_props_25 <span class="ot">&lt;-</span> <span class="fu">calculate_props</span>(<span class="at">population =</span> getsmarter_pop, <span class="at">survey_size =</span> <span class="dv">25</span>, <span class="at">reps_num =</span> <span class="dv">1000</span>)</span>
-<span id="cb103-5"><a href="sampling.html#cb103-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb103-6"><a href="sampling.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size 50</span></span>
-<span id="cb103-7"><a href="sampling.html#cb103-7" aria-hidden="true" tabindex="-1"></a>residence_props_50 <span class="ot">&lt;-</span> <span class="fu">calculate_props</span>(<span class="at">population =</span> getsmarter_pop, <span class="at">survey_size =</span> <span class="dv">50</span>, <span class="at">reps_num =</span> <span class="dv">1000</span>)</span>
-<span id="cb103-8"><a href="sampling.html#cb103-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-9"><a href="sampling.html#cb103-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size 100</span></span>
-<span id="cb103-10"><a href="sampling.html#cb103-10" aria-hidden="true" tabindex="-1"></a>residence_props_100 <span class="ot">&lt;-</span> <span class="fu">calculate_props</span>(<span class="at">population =</span> getsmarter_pop, <span class="at">survey_size =</span> <span class="dv">100</span>, <span class="at">reps_num =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+
+<span class="co"># Sample size 25</span>
+<span class="va">residence_props_25</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">25</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
+  
+<span class="co"># Sample size 50</span>
+<span class="va">residence_props_50</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">50</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
+
+<span class="co"># Sample size 100</span>
+<span class="va">residence_props_100</span> <span class="op">&lt;-</span> <span class="fu">calculate_props</span><span class="op">(</span>population <span class="op">=</span> <span class="va">getsmarter_pop</span>, survey_size <span class="op">=</span> <span class="fl">100</span>, reps_num <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
 <p>We plot the resulting sampling distributions.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="sampling.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> residence_props_25, <span class="fu">aes</span>(<span class="at">x =</span> prop)) <span class="sc">+</span> </span>
-<span id="cb104-2"><a href="sampling.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.04</span>, <span class="at">boundary =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">&#39;white&#39;</span>) <span class="sc">+</span></span>
-<span id="cb104-3"><a href="sampling.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> residence, <span class="at">scales =</span> <span class="st">&#39;free_x&#39;</span>) <span class="sc">+</span></span>
-<span id="cb104-4"><a href="sampling.html#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Proportion of residence&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Distribution of residences, sample size = 25&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Frequency&#39;</span>)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-97-1.png" width="90%" /></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="sampling.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> residence_props_50, <span class="fu">aes</span>(<span class="at">x =</span> prop)) <span class="sc">+</span> </span>
-<span id="cb105-2"><a href="sampling.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">boundary =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">&#39;white&#39;</span>) <span class="sc">+</span></span>
-<span id="cb105-3"><a href="sampling.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> residence, <span class="at">scales =</span> <span class="st">&#39;free_x&#39;</span>) <span class="sc">+</span></span>
-<span id="cb105-4"><a href="sampling.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Proportion of residence&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Distribution of residences, sample size = 50&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Frequency&#39;</span>)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-97-2.png" width="90%" /></p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="sampling.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> residence_props_100, <span class="fu">aes</span>(<span class="at">x =</span> prop)) <span class="sc">+</span> </span>
-<span id="cb106-2"><a href="sampling.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">boundary =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">&#39;white&#39;</span>) <span class="sc">+</span></span>
-<span id="cb106-3"><a href="sampling.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> residence, <span class="at">scales =</span> <span class="st">&#39;free_x&#39;</span>) <span class="sc">+</span></span>
-<span id="cb106-4"><a href="sampling.html#cb106-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Proportion of residence&#39;</span>, <span class="at">title =</span> <span class="st">&#39;Distribution of residences, sample size = 100&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Frequency&#39;</span>)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-97-3.png" width="90%" /></p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_25</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.04</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 25'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-1.png" width="90%"></div>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_50</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 50'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-2.png" width="90%"></div>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props_100</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.02</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">residence</span>, scales <span class="op">=</span> <span class="st">'free_x'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Proportion of residence'</span>, title <span class="op">=</span> <span class="st">'Distribution of residences, sample size = 100'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-3.png" width="90%"></div>
 <p>We compare the standard errors of the three sampling distributions.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="sampling.html#cb107-1" aria-hidden="true" tabindex="-1"></a>residence_props_25 <span class="sc">%&gt;%</span> </span>
-<span id="cb107-2"><a href="sampling.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb107-3"><a href="sampling.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_sd =</span> <span class="fu">sd</span>(prop))</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props_25</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural       0.102
 ## 2 urban       0.102</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="sampling.html#cb109-1" aria-hidden="true" tabindex="-1"></a>residence_props_50 <span class="sc">%&gt;%</span> </span>
-<span id="cb109-2"><a href="sampling.html#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb109-3"><a href="sampling.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_sd =</span> <span class="fu">sd</span>(prop))</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props_50</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
 ## 1 rural      0.0679
 ## 2 urban      0.0679</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="sampling.html#cb111-1" aria-hidden="true" tabindex="-1"></a>residence_props_100 <span class="sc">%&gt;%</span> </span>
-<span id="cb111-2"><a href="sampling.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(residence) <span class="sc">%&gt;%</span> </span>
-<span id="cb111-3"><a href="sampling.html#cb111-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_sd =</span> <span class="fu">sd</span>(prop))</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">residence_props_100</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
 ##   &lt;chr&gt;       &lt;dbl&gt;
@@ -409,51 +437,62 @@ size</strong>.
 <p><span class="math inline">\(^*\)</span> Sometimes, random sampling is not appropriate and stratified sampling or more complex sampling designs should be used. This is the case, when subgroups with different properties relevant for the sampling, statistics exist in the population. However, this topic is beyond the scope of this course.</p>
 </div>
 <div id="practice-on-your-own-5" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> Practice on your own!</h2>
-<ol class="exercises">
-<ol style="list-style-type: decimal">
+<h2>
+<span class="header-section-number">6.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-5"><i class="fas fa-link"></i></a>
+</h2>
+<ol class="exercises"><ol style="list-style-type: decimal">
 <li><p>How large are the proportions of <code>rural</code> and <code>urban</code> in the population of students from getsmarter. How large are the mean values from the sampling distributions with sample sizes 25, 50 and 100. Compare these figures to the population parameters and comment.</p></li>
 <li><p>The student representatives would like to see more students using a bike or a bus instead of a car. As a first step, they need to know how many students actually use a car.
 <br>
-Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion? Compare to the proportion in the population. Hint: Before you calculate the mean of all proportions estimated in the 1000 replicates, use <code>ungroup()</code> to delete the grouping by replicates.</p></li>
-</ol>
-</ol>
+Conduct a repeated survey (1000 repetitions) of 50 students and estimate the proportion of people using a car. How large is the standard error of this proportion? Compare to the proportion in the population. Hint: Before you calculate the mean of all proportions estimated in the 1000 replicates, use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> to delete the grouping by replicates.</p></li>
+</ol></ol>
 </div>
 <div id="reading-assignment-4" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> Reading assignment</h2>
+<h2>
+<span class="header-section-number">6.5</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-4"><i class="fas fa-link"></i></a>
+</h2>
 <p>Chapter 7 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
 </div>
 <div id="turning-in-your-work-4" class="section level2" number="6.6">
-<h2><span class="header-section-number">6.6</span> Turning in your work</h2>
+<h2>
+<span class="header-section-number">6.6</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-4"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>Save your R Notebook as an *.Rmd file.</li>
 <li>Upload your R Notebook to ILIAS. You don’t need to upload the .nb.html file. You will find an upload option in today’s session.</li>
-<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong></li>
+<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong>
+</li>
 </ul>
-
 </div>
 </div>
-  </main>
-
-  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page">
-      <h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+  <div class="chapter-nav">
+<div class="prev"><a href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></div>
+<div class="next"><a href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sampling"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="nav-link" href="#random-sampling-of-data"><span class="header-section-number">6.1</span> Random sampling of data</a></li>
+<li><a class="nav-link" href="#number-of-replications-and-variability"><span class="header-section-number">6.2</span> Number of replications and variability</a></li>
+<li><a class="nav-link" href="#sample-size"><span class="header-section-number">6.3</span> Sample size</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-5"><span class="header-section-number">6.4</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#reading-assignment-4"><span class="header-section-number">6.5</span> Reading assignment</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-4"><span class="header-section-number">6.6</span> Turning in your work</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/06-sampling.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/06-sampling.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-      </div>
+</div>
     </nav>
-  </div>
+</div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5">
-  <div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-20.</p>
@@ -464,11 +503,7 @@ Conduct a repeated survey (1000 repetitions) of 50 students and estimate the pro
   </div>
 
 </div></div>
-</footer>
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -480,8 +515,7 @@ Conduct a repeated survey (1000 repetitions) of 50 students and estimate the pro
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script>
-<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
 for (let popover of popovers) {
   const div = document.createElement('div');
   div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
@@ -499,5 +533,4 @@ for (let popover of popovers) {
 }
 </script>
 </body>
-
 </html>

@@ -108,7 +108,7 @@ what-are-time-series
 an-example-from-the-german-meteorological-service-dwd
 trend-analysis-of-yearly-data
 analysis-of-seasonality
-advanced-simulataneous-analysis-of-trend-and-seasonality
+advanced-simultaneous-analysis-of-trend-and-seasonality
 practice-on-your-own-10
 turning-in-your-work-8
 stat-background

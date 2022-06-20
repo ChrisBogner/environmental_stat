@@ -1,50 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>3 What is data? | Environmental Statistics</title>
-
-    <meta name="author" content="Christina Bogner" />
-  
-   <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-   <meta name="generator" content="placeholder" />
-  <meta property="og:title" content="3 What is data? | Environmental Statistics" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 What is data? | Environmental Statistics" />
-  
-  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  
-  <!-- JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
-    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
-    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
-    <script src="libs/bs3compat-0.3.1/transition.js"></script>
-    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
-    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
-    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
-    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
-    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
-
-  <!-- CSS -->
-  <style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>3 What is data? | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<meta name="description" content="Install an R package  Load an installed data set  Explore a data set and recognize the type of its variables  Data can be anything 😄. Usually, we will store data in a rectangular form,...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="3 What is data? | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Install an R package  Load an installed data set  Explore a data set and recognize the type of its variables  Data can be anything 😄. Usually, we will store data in a rectangular form,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3 What is data? | Environmental Statistics">
+<meta name="twitter:description" content="Install an R package  Load an installed data set  Explore a data set and recognize the type of its variables  Data can be anything 😄. Usually, we will store data in a rectangular form,...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-    <style type="text/css">
+<style type="text/css">
     /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
     div.csl-bib-body { }
     div.csl-entry {
@@ -66,17 +44,14 @@
       margin-left: 2em;
     }
   </style>
-      <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="font-awesome.min.css" />
-  
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
 </head>
-
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
-    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -89,22 +64,43 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-      </form>
+</form>
 
-      <nav aria-label="Table of contents">
-        <h2>Table of contents</h2>
-        <div id="book-toc"></div>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
+<li><a class="active" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li class="book-part">Part IV: Additional topics</li>
+<li><a class="" href="tsa.html"><span class="header-section-number">11</span> Introduction to time series analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
-    </div>
-  </header>
-
-  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
-<div id="what-is-data" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> What is data?</h1>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="what-is-data" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> What is data?<a class="anchor" aria-label="anchor" href="#what-is-data"><i class="fas fa-link"></i></a>
+</h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
@@ -118,27 +114,35 @@ Explore a data set and recognize the type of its variables
 </li>
 </ul>
 </div>
-<p>Data can be anything 😄. Usually, we will store data in a rectangular form, i.e. variables in columns and observations in rows. There are two dedicated object formats to store data, namely <code>data.frame()</code> and <code>tibble()</code>. They have both similar characteristics, however, the tibble is considered the modern form of a data frame and offers some advantages (details later).</p>
+<p>Data can be anything 😄. Usually, we will store data in a rectangular form, i.e. variables in columns and observations in rows. There are two dedicated object formats to store data, namely <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> and <code>tibble()</code>. They have both similar characteristics, however, the tibble is considered the modern form of a data frame and offers some advantages (details later).</p>
 <p>In this chapter, we will have a look at a data set called <code>palmerpenguins</code>. It is provided in a dedicated package, so let’s install this package first.</p>
 <div id="installing-r-packages" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Installing R packages</h2>
+<h2>
+<span class="header-section-number">3.1</span> Installing R packages<a class="anchor" aria-label="anchor" href="#installing-r-packages"><i class="fas fa-link"></i></a>
+</h2>
 <p>Packages that are available on the official <a href="https://www.r-project.org/">CRAN</a> (Comprehensive R Archive Network) can be installed with function <code>install.packages('name_of_the_package')</code>. It is important to provide the name of the package in quotes (single or double).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="what-is-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;palmerpenguins&#39;</span>)</span></code></pre></div>
-<p>To load a package, use the function <code>library(name_of_the_package)</code>, this time without quotes!</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="what-is-data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'palmerpenguins'</span><span class="op">)</span></code></pre></div>
+<p>To load a package, use the function <code><a href="https://rdrr.io/r/base/library.html">library(name_of_the_package)</a></code>, this time without quotes!</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="welcome-the-penguins" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Welcome the penguins!</h2>
-<div class="figure"><span style="display:block;" id="fig:penguins"></span>
-<img src="figures/lter_penguins.png" alt="Artwork by `@allison_horst`" width="100%" />
-<p class="caption">
+<h2>
+<span class="header-section-number">3.2</span> Welcome the penguins!<a class="anchor" aria-label="anchor" href="#welcome-the-penguins"><i class="fas fa-link"></i></a>
+</h2>
+<div class="figure">
+<span style="display:block;" id="fig:penguins"></span>
+<img src="figures/lter_penguins.png" alt="Artwork by `@allison_horst`" width="100%"><p class="caption">
 Figure 3.1: Artwork by <code>@allison_horst</code>
 </p>
 </div>
 <p>The package has a dedicated <a href="https://allisonhorst.github.io/palmerpenguins/">website</a> that is really worth visiting. The package contains two data sets, we will explore the shorter one, called <code>penguins</code>. To load a data set installed with a package, use the function <code>data("name_of_data_set")</code>. Be sure to put the name of the data set in quotes (single or double).</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="what-is-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;penguins&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></code></pre></div>
 <p>Let’s have a look at the object <code>penguins</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="what-is-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a>penguins</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
@@ -154,12 +158,14 @@ Figure 3.1: Artwork by <code>@allison_horst</code>
 ## 10 Adelie  Torgersen           42            20.2               190        4250
 ## # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <p>This object is a tibble and contains a data set with 344 rows and 8 columns, meaning we have 8 variables measured on 344 animals. The first column contains the variable <code>species</code> that, you guessed it, shows the species of the animal. This variable is a so-called <code>factor</code> (indicated by <code>&lt;fct&gt;</code> below species). It means, it contains categorical information and has a certain number (usually a small one) of distinct values called <code>levels</code>. The levels in this case are</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="what-is-data.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(penguins<span class="sc">$</span>species)</span></code></pre></div>
-<pre><code>## [1] &quot;Adelie&quot;    &quot;Chinstrap&quot; &quot;Gentoo&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "Adelie"    "Chinstrap" "Gentoo"</code></pre>
 <p>The above code uses the <strong><code>$</code> sign to access a whole column</strong> (i.e. variable) in the data set. This is very handy and an alternative to the square bracket method. The syntax is <code>name_of_data_set$name_of_variable</code>.</p>
 <p>There are also numerical variables in the tibble. A numerical variable can be continuous, e.g. <code>bill_length_mm</code> (indicated by <code>&lt;dbl&gt;</code> meaning double), meaning that it contains decimal numbers or discrete, e.g. <code>year</code> (indicated by <code>&lt;int&gt;</code> meaning integer), meaning that it contains integers (whole numbers).</p>
-<p>To summarize the data set, we can use the function <code>summary()</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="what-is-data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins)</span></code></pre></div>
+<p>To summarize the data set, we can use the function <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></code></pre></div>
 <pre><code>##       species          island    bill_length_mm  bill_depth_mm  
 ##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
 ##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
@@ -167,87 +173,109 @@ Figure 3.1: Artwork by <code>@allison_horst</code>
 ##                                  Mean   :43.92   Mean   :17.15  
 ##                                  3rd Qu.:48.50   3rd Qu.:18.70  
 ##                                  Max.   :59.60   Max.   :21.50  
-##                                  NA&#39;s   :2       NA&#39;s   :2      
+##                                  NA's   :2       NA's   :2      
 ##  flipper_length_mm  body_mass_g       sex           year     
 ##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
 ##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
-##  Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
+##  Median :197.0     Median :4050   NA's  : 11   Median :2008  
 ##  Mean   :200.9     Mean   :4202                Mean   :2008  
 ##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
 ##  Max.   :231.0     Max.   :6300                Max.   :2009  
-##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+##  NA's   :2         NA's   :2</code></pre>
 </div>
 <div id="the-square-braces-revisited" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> The square braces revisited</h2>
+<h2>
+<span class="header-section-number">3.3</span> The square braces revisited<a class="anchor" aria-label="anchor" href="#the-square-braces-revisited"><i class="fas fa-link"></i></a>
+</h2>
 <p>You already know how to access a certain position inside a vector. A tibble is a tow-dimensional object, it has rows and columns. To access a particular measurement, you need to provide both, its row and its column index. The following code picks the value in the first row and third column:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="what-is-data.html#cb16-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="dv">1</span>, <span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##   bill_length_mm
 ##            &lt;dbl&gt;
 ## 1           39.1</code></pre>
 </div>
 <div id="lets-look-at-them" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Let’s look at them</h2>
+<h2>
+<span class="header-section-number">3.4</span> Let’s look at them<a class="anchor" aria-label="anchor" href="#lets-look-at-them"><i class="fas fa-link"></i></a>
+</h2>
 <p>We will talk much more about data visualization later. For now, just use the code below to visualize the relationship between the flipper length and the body mass of the animals.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="what-is-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb18-2"><a href="what-is-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="what-is-data.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">col =</span> species)) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="what-is-data.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-5"><a href="what-is-data.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;Flipper length (mm)&#39;</span>) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="what-is-data.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&#39;Body mass (g)&#39;</span>)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-36-1.png" width="90%" /></p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, col <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">'Flipper length (mm)'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">'Body mass (g)'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-36-1.png" width="90%"></div>
 </div>
 <div id="practice-on-your-own-2" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Practice on your own!</h2>
-<ol class="exercises">
-<ol style="list-style-type: decimal">
+<h2>
+<span class="header-section-number">3.5</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-2"><i class="fas fa-link"></i></a>
+</h2>
+<ol class="exercises"><ol style="list-style-type: decimal">
 <li><p>How many categorical and how many numerical variables are there? Consult help.</p></li>
 <li><p>How many Gentoo penguins are present in the data set?</p></li>
 <li><p>What is the time span of the measurements?</p></li>
 <li><p>Find the levels of the variable <code>island</code>.</p></li>
 <li><p>This is a challenge 🤓. Take the code that produced the visualization of flipper length and the body mass of the animals. Make an educated guess how to change the code such that it produces the visualization of the bill depth vs. body mass. Can you also guess how to adjust the label on the <span class="math inline">\(x\)</span>-axis?</p></li>
-</ol>
-</ol>
+</ol></ol>
 </div>
 <div id="reading-assignment-1" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Reading assignment</h2>
+<h2>
+<span class="header-section-number">3.6</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-1"><i class="fas fa-link"></i></a>
+</h2>
 <p>Chapter 1.3 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span>.</p>
 </div>
 <div id="turning-in-your-work-2" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> Turning in your work</h2>
+<h2>
+<span class="header-section-number">3.7</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-2"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>Save your R Notebook as an *.Rmd file.</li>
 <li>Upload your R Notebook to ILIAS. You don’t need to upload the .nb.html file. You will find an upload option in today’s session.</li>
-<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong></li>
+<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong>
+</li>
 </ul>
 </div>
 <div id="additional-reading" class="section level2" number="3.8">
-<h2><span class="header-section-number">3.8</span> Additional reading</h2>
+<h2>
+<span class="header-section-number">3.8</span> Additional reading<a class="anchor" aria-label="anchor" href="#additional-reading"><i class="fas fa-link"></i></a>
+</h2>
 <p>In case you prefer flights to penguins, you can have a look at data exploration in Chapter 1.4 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
 
 </div>
 </div>
-  </main>
-
-  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page">
-      <h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+  <div class="chapter-nav">
+<div class="prev"><a href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></div>
+<div class="next"><a href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#what-is-data"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="nav-link" href="#installing-r-packages"><span class="header-section-number">3.1</span> Installing R packages</a></li>
+<li><a class="nav-link" href="#welcome-the-penguins"><span class="header-section-number">3.2</span> Welcome the penguins!</a></li>
+<li><a class="nav-link" href="#the-square-braces-revisited"><span class="header-section-number">3.3</span> The square braces revisited</a></li>
+<li><a class="nav-link" href="#lets-look-at-them"><span class="header-section-number">3.4</span> Let’s look at them</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-2"><span class="header-section-number">3.5</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#reading-assignment-1"><span class="header-section-number">3.6</span> Reading assignment</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-2"><span class="header-section-number">3.7</span> Turning in your work</a></li>
+<li><a class="nav-link" href="#additional-reading"><span class="header-section-number">3.8</span> Additional reading</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/03-data.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/03-data.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-      </div>
+</div>
     </nav>
-  </div>
+</div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5">
-  <div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-20.</p>
@@ -258,11 +286,7 @@ Figure 3.1: Artwork by <code>@allison_horst</code>
   </div>
 
 </div></div>
-</footer>
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -274,8 +298,7 @@ Figure 3.1: Artwork by <code>@allison_horst</code>
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script>
-<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
 for (let popover of popovers) {
   const div = document.createElement('div');
   div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
@@ -293,5 +316,4 @@ for (let popover of popovers) {
 }
 </script>
 </body>
-
 </html>

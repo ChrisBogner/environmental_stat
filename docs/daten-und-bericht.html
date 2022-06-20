@@ -1,50 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>B Data sources and final report | Environmental Statistics</title>
-
-    <meta name="author" content="Christina Bogner" />
-  
-   <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-   <meta name="generator" content="placeholder" />
-  <meta property="og:title" content="B Data sources and final report | Environmental Statistics" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="B Data sources and final report | Environmental Statistics" />
-  
-  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  
-  <!-- JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
-    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
-    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
-    <script src="libs/bs3compat-0.3.1/transition.js"></script>
-    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
-    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
-    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
-    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
-    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
-
-  <!-- CSS -->
-  <style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>B Data sources and final report | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner">
+<meta name="description" content="Know different data sources  Use libraries for direct access to databases   B.1 Data sources In this chapter, I will introduce some interesting data sources (databases) that you can use for your...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="B Data sources and final report | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Know different data sources  Use libraries for direct access to databases   B.1 Data sources In this chapter, I will introduce some interesting data sources (databases) that you can use for your...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="B Data sources and final report | Environmental Statistics">
+<meta name="twitter:description" content="Know different data sources  Use libraries for direct access to databases   B.1 Data sources In this chapter, I will introduce some interesting data sources (databases) that you can use for your...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-    <style type="text/css">
+<style type="text/css">
     /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
     div.csl-bib-body { }
     div.csl-entry {
@@ -66,17 +44,14 @@
       margin-left: 2em;
     }
   </style>
-      <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="font-awesome.min.css" />
-  
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
 </head>
-
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
-    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -89,22 +64,43 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-      </form>
+</form>
 
-      <nav aria-label="Table of contents">
-        <h2>Table of contents</h2>
-        <div id="book-toc"></div>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li class="book-part">Part IV: Additional topics</li>
+<li><a class="" href="tsa.html"><span class="header-section-number">11</span> Introduction to time series analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="active" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
-    </div>
-  </header>
-
-  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
-<div id="daten-und-bericht" class="section level1" number="13">
-<h1><span class="header-section-number">B</span> Data sources and final report</h1>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="daten-und-bericht" class="section level1" number="13">
+<h1>
+<span class="header-section-number">B</span> Data sources and final report<a class="anchor" aria-label="anchor" href="#daten-und-bericht"><i class="fas fa-link"></i></a>
+</h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
@@ -116,27 +112,39 @@ Use libraries for direct access to databases
 </ul>
 </div>
 <div id="data-sources" class="section level2" number="13.1">
-<h2><span class="header-section-number">B.1</span> Data sources</h2>
+<h2>
+<span class="header-section-number">B.1</span> Data sources<a class="anchor" aria-label="anchor" href="#data-sources"><i class="fas fa-link"></i></a>
+</h2>
 <p>In this chapter, I will introduce some interesting data sources (databases) that you can use for your final report. I offer technical assistance for the package <code>eurostat</code>. You can discover other packages on your own (this could be a possible challenge for the final report, see below 😄).</p>
 <div id="federal-statistical-office" class="section level3" number="13.1.1">
-<h3><span class="header-section-number">B.1.1</span> Federal Statistical Office</h3>
+<h3>
+<span class="header-section-number">B.1.1</span> Federal Statistical Office<a class="anchor" aria-label="anchor" href="#federal-statistical-office"><i class="fas fa-link"></i></a>
+</h3>
 <p>The <a href="https://www.destatis.de/EN/Home/_node.html">Federal Statistical Office</a> offers data about Germany in different areas through their database
 <a href="https://www-genesis.destatis.de/genesis/online?operation=previous&amp;levelindex=&amp;step=&amp;titel=&amp;levelid=&amp;acceptscookies=false">GENESIS</a>. You can navigate to the data sets and download them. Pay attention to select the format <strong>flat</strong> when downloading to get a <em>tidy</em> data set.</p>
 </div>
 <div id="eurostat" class="section level3" number="13.1.2">
-<h3><span class="header-section-number">B.1.2</span> eurostat</h3>
+<h3>
+<span class="header-section-number">B.1.2</span> eurostat<a class="anchor" aria-label="anchor" href="#eurostat"><i class="fas fa-link"></i></a>
+</h3>
 <p><a href="https://ec.europa.eu/eurostat">eurostat</a> is the statistical office of the European Union. You will find many different data sets about Europe there. However, I strongly recommend using the dedicated R library <a href="http://ropengov.github.io/eurostat/index.html">eurostat</a> to download the data. My experience shows that students underestimate how error-prone manual download from a large database can be! The R library eurostat has an informative web site with many tutorials. Some of the show how to use the eurostat data to visualize maps (possible report challenge).</p>
 </div>
 <div id="gapminder" class="section level3" number="13.1.3">
-<h3><span class="header-section-number">B.1.3</span> gapminder</h3>
+<h3>
+<span class="header-section-number">B.1.3</span> gapminder<a class="anchor" aria-label="anchor" href="#gapminder"><i class="fas fa-link"></i></a>
+</h3>
 <p>You already worked with an excerpt of data by <a href="https://www.gapminder.org">gapminder</a>. The complete data set contains much more. You can download more data <a href="https://www.gapminder.org/data/">here</a>. gapminder organises their data in a so-called DDF Format (data description format) as <em>tidy</em> .csv files. A possible report challenge could be to understand this format. A complete data set is availagle via GitHub <a href="https://github.com/open-numbers/ddf--gapminder--systema_globalis">here</a>.</p>
 </div>
 <div id="national-oceanic-and-atmospheric-administration-noaa" class="section level3" number="13.1.4">
-<h3><span class="header-section-number">B.1.4</span> National Oceanic and Atmospheric Administration (NOAA)</h3>
+<h3>
+<span class="header-section-number">B.1.4</span> National Oceanic and Atmospheric Administration (NOAA)<a class="anchor" aria-label="anchor" href="#national-oceanic-and-atmospheric-administration-noaa"><i class="fas fa-link"></i></a>
+</h3>
 <p><a href="https://www.noaa.gov/">NOAA</a> offers data on oceans, climate and weather. You can download the data sets via the library <a href="https://docs.ropensci.org/rnoaa/">rnoaa</a>.</p>
 </div>
 <div id="more-data-sources" class="section level3" number="13.1.5">
-<h3><span class="header-section-number">B.1.5</span> More data sources</h3>
+<h3>
+<span class="header-section-number">B.1.5</span> More data sources<a class="anchor" aria-label="anchor" href="#more-data-sources"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li><a href="https://data.worldbank.org/">World Bank Open Data</a></li>
 <li><a href="https://worldhappiness.report/ed/2021/">World Happiness Report</a></li>
@@ -144,36 +152,50 @@ Use libraries for direct access to databases
 <ul>
 <li><a href="https://essd.copernicus.org/articles/12/3269/2020/">Publication and data set</a></li>
 <li><a href="https://www.globalcarbonproject.org/index.htm">Global Carbon Project</a></li>
-</ul></li>
+</ul>
+</li>
 <li>Soil organic carbon contents from sites under perennial cultivation
 <ul>
 <li><a href="https://www.nature.com/articles/s41597-019-0062-1">Publication</a></li>
 <li><a href="https://figshare.com/articles/dataset/A_global_empirical_harmonised_dataset_of_Soil_Organic_Carbon_under_Perennial_Crops/7637210">Data set</a></li>
-</ul></li>
-<li><a href="https://www.pangaea.de/">PANGAEA</a>: one of the largest databases for environmental datasets</li>
+</ul>
+</li>
+<li>
+<a href="https://www.pangaea.de/">PANGAEA</a>: one of the largest databases for environmental datasets</li>
 <li>Overview of data and libraries on <a href="https://ropensci.org/">ROpenScie</a>:
 <a href="https://github.com/ropensci-archive/opendata">Data</a>
-<a href="https://ropensci.org/packages/data-access/">Libraries</a></li>
+<a href="https://ropensci.org/packages/data-access/">Libraries</a>
+</li>
 </ul>
 </div>
 </div>
 <div id="research-proposal" class="section level2" number="13.2">
-<h2><span class="header-section-number">B.2</span> Research proposal</h2>
+<h2>
+<span class="header-section-number">B.2</span> Research proposal<a class="anchor" aria-label="anchor" href="#research-proposal"><i class="fas fa-link"></i></a>
+</h2>
 <p>Before you write your final report, you need to submit a research proposal on ILIAS. <strong>Be sure to upload before the deadline!</strong>. You will receive feedback on it. This should avoid any misunderstanding about your final report. Please use the template provided on ILIAS for the research proposal.</p>
 </div>
 <div id="structure-of-the-final-report" class="section level2" number="13.3">
-<h2><span class="header-section-number">B.3</span> Structure of the final report</h2>
+<h2>
+<span class="header-section-number">B.3</span> Structure of the final report<a class="anchor" aria-label="anchor" href="#structure-of-the-final-report"><i class="fas fa-link"></i></a>
+</h2>
 <div id="sturcture-of-the-working-directory" class="section level3" number="13.3.1">
-<h3><span class="header-section-number">B.3.1</span> Sturcture of the working directory</h3>
+<h3>
+<span class="header-section-number">B.3.1</span> Sturcture of the working directory<a class="anchor" aria-label="anchor" href="#sturcture-of-the-working-directory"><i class="fas fa-link"></i></a>
+</h3>
 <p>Create a new <strong>R project</strong> for your final report. You can find more about using projects <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">here</a>. A project helps you to structure your work properly.</p>
 <p>Inside your project folder, create a folder for data, figures and (help) scripts (if appropriate). Save your notebooks in the root directory of your project.</p>
 </div>
 <div id="download-and-save-data" class="section level3" number="13.3.2">
-<h3><span class="header-section-number">B.3.2</span> Download and save data</h3>
+<h3>
+<span class="header-section-number">B.3.2</span> Download and save data<a class="anchor" aria-label="anchor" href="#download-and-save-data"><i class="fas fa-link"></i></a>
+</h3>
 <p>If you want to use libraries to download data, then create a notebook for this task. Don’t download and analyse the data on-the-fly. Data can change and there will be a time delay between your analysis and my assessment of your report. Download and save your data in the data folder. Use the saved data for the analysis. This will ensure that your report is <strong>fully reproducible</strong>.</p>
 </div>
 <div id="structure-of-the-report" class="section level3" number="13.3.3">
-<h3><span class="header-section-number">B.3.3</span> Structure of the report</h3>
+<h3>
+<span class="header-section-number">B.3.3</span> Structure of the report<a class="anchor" aria-label="anchor" href="#structure-of-the-report"><i class="fas fa-link"></i></a>
+</h3>
 <p>Please structure your report as follows:</p>
 <ul>
 <li>Introduction (with research question at the end)</li>
@@ -182,12 +204,14 @@ Use libraries for direct access to databases
 <li>Data description:
 date of download, <strong>reproducibility</strong> is crucial), description of variables and their units</li>
 <li>Description of the method with references, description of the research area if appropriate</li>
-</ul></li>
+</ul>
+</li>
 <li>Results:
 <ul>
 <li>Explorative data analysis (mandatory!)</li>
 <li>Further analysis to respond to your research question(s)</li>
-</ul></li>
+</ul>
+</li>
 <li>Discussion: use peer-reviewed literature to discuss your results</li>
 <li>Conclusions</li>
 <li>Bibliography</li>
@@ -205,7 +229,9 @@ Submit the compressed project to ILIAS before the deadline.
 </div>
 </div>
 <div id="evaluation-critera" class="section level2" number="13.4">
-<h2><span class="header-section-number">B.4</span> Evaluation critera</h2>
+<h2>
+<span class="header-section-number">B.4</span> Evaluation critera<a class="anchor" aria-label="anchor" href="#evaluation-critera"><i class="fas fa-link"></i></a>
+</h2>
 <p>I will evaluate your report along the following criteria:</p>
 <ol style="list-style-type: decimal">
 <li>Does the notebook run without errors?</li>
@@ -224,27 +250,46 @@ Submit the compressed project to ILIAS before the deadline.
 
 </div>
 </div>
-  </main>
-
-  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page">
-      <h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+  <div class="chapter-nav">
+<div class="prev"><a href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></div>
+<div class="next"><a href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#daten-und-bericht"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li>
+<a class="nav-link" href="#data-sources"><span class="header-section-number">B.1</span> Data sources</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#federal-statistical-office"><span class="header-section-number">B.1.1</span> Federal Statistical Office</a></li>
+<li><a class="nav-link" href="#eurostat"><span class="header-section-number">B.1.2</span> eurostat</a></li>
+<li><a class="nav-link" href="#gapminder"><span class="header-section-number">B.1.3</span> gapminder</a></li>
+<li><a class="nav-link" href="#national-oceanic-and-atmospheric-administration-noaa"><span class="header-section-number">B.1.4</span> National Oceanic and Atmospheric Administration (NOAA)</a></li>
+<li><a class="nav-link" href="#more-data-sources"><span class="header-section-number">B.1.5</span> More data sources</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#research-proposal"><span class="header-section-number">B.2</span> Research proposal</a></li>
+<li>
+<a class="nav-link" href="#structure-of-the-final-report"><span class="header-section-number">B.3</span> Structure of the final report</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sturcture-of-the-working-directory"><span class="header-section-number">B.3.1</span> Sturcture of the working directory</a></li>
+<li><a class="nav-link" href="#download-and-save-data"><span class="header-section-number">B.3.2</span> Download and save data</a></li>
+<li><a class="nav-link" href="#structure-of-the-report"><span class="header-section-number">B.3.3</span> Structure of the report</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#evaluation-critera"><span class="header-section-number">B.4</span> Evaluation critera</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/18-data-and-report.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/18-data-and-report.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-      </div>
+</div>
     </nav>
-  </div>
+</div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5">
-  <div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-20.</p>
@@ -255,11 +300,7 @@ Submit the compressed project to ILIAS before the deadline.
   </div>
 
 </div></div>
-</footer>
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -271,8 +312,7 @@ Submit the compressed project to ILIAS before the deadline.
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script>
-<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
 for (let popover of popovers) {
   const div = document.createElement('div');
   div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
@@ -290,5 +330,4 @@ for (let popover of popovers) {
 }
 </script>
 </body>
-
 </html>
