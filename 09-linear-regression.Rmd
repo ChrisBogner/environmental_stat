@@ -43,7 +43,7 @@ Components of the model:
 In a regression model, we are not after the exact values of the dependent variable, but after the systematic influence of predictors on the mean value of the dependent variable. Because of the error term (which can contain random fluctuations, measurement errors etc.), the dependent variable $y$ is a **random variable**.  
 
 ## Simple linear regression
-In case we have one predictor only, the model is a simple linear regression model and its geometric form is a line. A line is defined by its intercept (the point where it cuts the $y$ axis) and its slope. This is exactly the form of a simple linear regression model:
+In case we have one predictor only, the model is a simple linear regression model and its geometric form is a line. A line is defined by its intercept (the point where it cuts the $y$ axis) and its slope. This is precisely the form of a simple linear regression model:
 
 ```{block, type='rmddef'}
 Given **data** pairs: $(y_i,x_i), \quad i=1,\dots,n$
@@ -136,16 +136,16 @@ ggplot(data = survey, aes(x = travel_time, y = time_lib)) +
   labs(x = 'Travel time (min)', y = 'Time in the library (min)')
 ```
 
-This looks reasonably linear and we can proceed with the modelling.
+This looks reasonably linear, and we can proceed with the modelling.
 
-To fit a linear model in R, we use the function `lm()`. The dependent and the independent varialbes are joined in a `formula` by a tilde sign `~`. You can also omit the word formula and just type `time_lib ~ travel_time`.
+To fit a linear model in R, we use the function `lm()`. The dependent and the independent variables are joined in a `formula` by a tilde sign `~`. You can also omit the word formula and just type `time_lib ~ travel_time`.
 ```{r}
 lin_mod <- lm(formula = time_lib ~ travel_time, data = survey)
 ```
 
 That's it `r emo::ji('smile')`.
 
-Let's have a look at the estimated intercept and the slope. The function `get_regression_table` provides a tidy form of the model results and the function `kable()` layouts them nicely.
+Let's have a look at the estimated intercept and the slope. The function `get_regression_table` provides a tidy form of the model results, and the function `kable()` layouts them nicely.
 ```{r}
 get_regression_table(lin_mod) %>% kable()
 ```
@@ -153,7 +153,7 @@ get_regression_table(lin_mod) %>% kable()
 The estimated intercept equals 302.094 minutes and the slope -0.766 minutes, respectively. We can write our model as:
 
 $$\widehat{\text{time_lib}_i} = 302.094 - 0.766 \cdot \text{travel_time}_i + \varepsilon_i$$
-The model estimates a `time_lib` value for every student $i$, with $i$ being an arbitrary student index running from 1 to 200 because we have surveyed 200 students. The "hat" above $\text{time_lib}_i$ indicates that this is an estimate. The estimated time in the library is the systematic component of the model, namely $302.094 - 0.766 \cdot \text{travel_time}_i$. The difference of the actual time in the library and this estimated value is the error term or the residuum $\varepsilon_i$.
+The model estimates a `time_lib` value for every student $i$, with $i$ being an arbitrary student index running from 1 to 200 because we have surveyed 200 students. The “hat” above $\text{time_lib}_i$ indicates that this is an estimate. The estimated time in the library is the systematic component of the model, namely $302.094 - 0.766 \cdot \text{travel_time}_i$. The difference of the actual time in the library and this estimated value is the error term or the residuum $\varepsilon_i$.
 
 To simplify our analysis, we put the original data, estimated values (also called fitted values) and the residuals in one tibble. The respective values can be extracted from the model object `lin_mod` with the functions `fitted()` and `residuals()`.
 ```{r}
@@ -179,7 +179,7 @@ ggplot(model_res, aes(x = travel_time, y = time_lib)) +
 ### Model assumptions
 Before we interpret the meaning of the model parameters *intercept* and *slope*, we have to check the model assumptions. We already saw that the relationship is reasonably linear. Let's look at the rest of the assumptions. 
 
-**Independent residuals**. This is difficult to check and should come with the study design. If you have like in our example independently surveyed students, you can reasonably assume that the both, the data and the residuals are independent. Conversely it means that you cannot use a normal linear regression model for time depenend data (time series) or spatially dependent data. The line you fit will still be correct, but the confidence intervals won't.
+**Independent residuals**. This is difficult to check and should come with the study design. If you have, like in our example, independently surveyed students, you can reasonably assume that  both, the data and the residuals are independent. Conversely, it means that you cannot use a normal linear regression model for time -dependent data (time series) or spatially dependent data. The line you fit will still be correct, but the confidence intervals won't.
 
 **Normal residuals.** To check for normality of residuals, we use a graphical tool, namely the so-called qq-plot. It compares random data from a normal distribution with our residuals. If the data fall on strait line (at least approximately) then we can conclude that our residuals are normally distributed.
 ```{r, out.width = '90%'}
@@ -200,7 +200,7 @@ ggplot(data = model_res, aes(x = fitted, y = residuals)) +
   labs(x = 'Fitted values', y = 'Residuals')
 ```
 
-We have slightly larger residuals for larger fitted values. However, we also have more larger than smaller fitted values (i.e. travel times). This distorts the picture a bit. Overall, there is no serious problem there. 
+We have slightly larger residuals for larger fitted values. However, we also have more large than small fitted values (i.e., travel times). This distorts the picture a bit. Overall, there is no serious problem there. 
 
 ### Interprete your model
 We can conclude that our model meets all the assumptions. Therefore, we can interpret the estimated parameters and their confidence intervals now.

@@ -186,7 +186,7 @@ component (error term, residuals)
 <h2>
 <span class="header-section-number">9.2</span> Simple linear regression<a class="anchor" aria-label="anchor" href="#simple-linear-regression"><i class="fas fa-link"></i></a>
 </h2>
-<p>In case we have one predictor only, the model is a simple linear regression model and its geometric form is a line. A line is defined by its intercept (the point where it cuts the <span class="math inline">\(y\)</span> axis) and its slope. This is exactly the form of a simple linear regression model:</p>
+<p>In case we have one predictor only, the model is a simple linear regression model and its geometric form is a line. A line is defined by its intercept (the point where it cuts the <span class="math inline">\(y\)</span> axis) and its slope. This is precisely the form of a simple linear regression model:</p>
 <div class="rmddef">
 <p>
 Given <strong>data</strong> pairs: <span class="math inline"><span class="math inline">\((y_i,x_i), \quad i=1,\dots,n\)</span></span>
@@ -302,12 +302,12 @@ i.e. the residuals are normally distributed, we call the model a
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Travel time (min)'</span>, y <span class="op">=</span> <span class="st">'Time in the library (min)'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-129-1.png" width="90%"></div>
-<p>This looks reasonably linear and we can proceed with the modelling.</p>
-<p>To fit a linear model in R, we use the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. The dependent and the independent varialbes are joined in a <code>formula</code> by a tilde sign <code>~</code>. You can also omit the word formula and just type <code>time_lib ~ travel_time</code>.</p>
+<p>This looks reasonably linear, and we can proceed with the modelling.</p>
+<p>To fit a linear model in R, we use the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. The dependent and the independent variables are joined in a <code>formula</code> by a tilde sign <code>~</code>. You can also omit the word formula and just type <code>time_lib ~ travel_time</code>.</p>
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lin_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">time_lib</span> <span class="op">~</span> <span class="va">travel_time</span>, data <span class="op">=</span> <span class="va">survey</span><span class="op">)</span></code></pre></div>
 <p>That’s it 😄.</p>
-<p>Let’s have a look at the estimated intercept and the slope. The function <code>get_regression_table</code> provides a tidy form of the model results and the function <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable()</a></code> layouts them nicely.</p>
+<p>Let’s have a look at the estimated intercept and the slope. The function <code>get_regression_table</code> provides a tidy form of the model results, and the function <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable()</a></code> layouts them nicely.</p>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="moderndive.github.io/moderndive//reference/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
@@ -425,7 +425,7 @@ The model estimates a <code>time_lib</code> value for every student <span class=
 <span class="header-section-number">9.3.2</span> Model assumptions<a class="anchor" aria-label="anchor" href="#model-assumptions"><i class="fas fa-link"></i></a>
 </h3>
 <p>Before we interpret the meaning of the model parameters <em>intercept</em> and <em>slope</em>, we have to check the model assumptions. We already saw that the relationship is reasonably linear. Let’s look at the rest of the assumptions.</p>
-<p><strong>Independent residuals</strong>. This is difficult to check and should come with the study design. If you have like in our example independently surveyed students, you can reasonably assume that the both, the data and the residuals are independent. Conversely it means that you cannot use a normal linear regression model for time depenend data (time series) or spatially dependent data. The line you fit will still be correct, but the confidence intervals won’t.</p>
+<p><strong>Independent residuals</strong>. This is difficult to check and should come with the study design. If you have, like in our example, independently surveyed students, you can reasonably assume that both, the data and the residuals are independent. Conversely, it means that you cannot use a normal linear regression model for time -dependent data (time series) or spatially dependent data. The line you fit will still be correct, but the confidence intervals won’t.</p>
 <p><strong>Normal residuals.</strong> To check for normality of residuals, we use a graphical tool, namely the so-called qq-plot. It compares random data from a normal distribution with our residuals. If the data fall on strait line (at least approximately) then we can conclude that our residuals are normally distributed.</p>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">model_res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -442,7 +442,7 @@ The model estimates a <code>time_lib</code> value for every student <span class=
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>, col <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Fitted values'</span>, y <span class="op">=</span> <span class="st">'Residuals'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-135-1.png" width="90%"></div>
-<p>We have slightly larger residuals for larger fitted values. However, we also have more larger than smaller fitted values (i.e. travel times). This distorts the picture a bit. Overall, there is no serious problem there.</p>
+<p>We have slightly larger residuals for larger fitted values. However, we also have more large than small fitted values (i.e., travel times). This distorts the picture a bit. Overall, there is no serious problem there.</p>
 </div>
 <div id="interprete-your-model" class="section level3" number="9.3.3">
 <h3>
@@ -583,7 +583,7 @@ travel_time
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-20.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
