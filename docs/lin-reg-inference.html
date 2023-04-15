@@ -55,8 +55,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Summer term 2022">Environmental Statistics</a>:
-        <small class="text-muted">Summer term 2022</small>
+        <a href="index.html" title="Summer term 2023">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2023</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -157,7 +157,7 @@ Use bootstrap for confidence intervals
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lin_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">time_lib</span> <span class="op">~</span> <span class="va">travel_time</span>, data <span class="op">=</span> <span class="va">survey</span><span class="op">)</span>
 
-<span class="fu"><a href="moderndive.github.io/moderndive//reference/get_regression_summaries.html">get_regression_summaries</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="moderndive.github.io/moderndive/reference/get_regression_summaries.html">get_regression_summaries</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:right;">
@@ -275,7 +275,7 @@ nobs
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-145-1.png" width="90%"></div>
 <p>Compared to the standard confidence interval based on the normality and homoscedasticity assumptions, the bootstrap confidence interval is similar.</p>
 <div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="moderndive.github.io/moderndive//reference/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="fu"><a href="moderndive.github.io/moderndive/reference/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span> 
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">==</span> <span class="st">'travel_time'</span><span class="op">)</span> <span class="op"><a href="https://infer.tidymodels.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
@@ -394,7 +394,7 @@ travel_time
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-28.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2023" was written by Christina Bogner. It was last built on 2023-04-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

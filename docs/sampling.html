@@ -55,8 +55,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Summer term 2022">Environmental Statistics</a>:
-        <small class="text-muted">Summer term 2022</small>
+        <a href="index.html" title="Summer term 2023">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2023</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -215,8 +215,8 @@ Calculate the standard error
 ## # … with 40 more rows</code></pre>
 <p>How many students from the survey live in the town and how many in the countryside?</p>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ## # Groups:   residence [2]
@@ -226,8 +226,8 @@ Calculate the standard error
 ## 2 urban        29</code></pre>
 <p>Instead of actual numbers, we want to express <code>residence</code> as proportions.</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence  prop
@@ -260,8 +260,8 @@ Calculate the standard error
 ## # … with 1,640 more rows</code></pre>
 <p>How do the proportions in <code>residence</code> vary from survey to survey? Now we must group by <code>residence</code> and <code>replicate</code>.</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
 <span class="va">residence_props</span></code></pre></div>
@@ -301,8 +301,8 @@ Calculate the standard error
 
 <span class="va">survey_reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
 
-<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey_reps</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">residence_props</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -314,8 +314,8 @@ Calculate the standard error
 <p>The statistics “proportion of residence” is a random variable. Every new survey brings new values. The sampling distribution can tell us which values are frequent, i.e. more probable to occur if we survey our students randomly.</p>
 <p>To summarize a sampling distribution, we can calculate its mean value and standard deviation. The latter has a special name, <strong>standard error</strong>.</p>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
@@ -335,8 +335,8 @@ Calculate the standard error
   
   <span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">population</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span>
 
-<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<span class="va">residence_props</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="va">survey_size</span><span class="op">)</span>
 
 <span class="va">residence_props</span>
@@ -374,8 +374,8 @@ Calculate the standard error
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-97-3.png" width="90%"></div>
 <p>We compare the standard errors of the three sampling distributions.</p>
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props_25</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props_25</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
@@ -383,8 +383,8 @@ Calculate the standard error
 ## 1 rural       0.102
 ## 2 urban       0.102</code></pre>
 <div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props_50</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props_50</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
@@ -392,8 +392,8 @@ Calculate the standard error
 ## 1 rural      0.0679
 ## 2 urban      0.0679</code></pre>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">residence_props_100</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive//reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">residence_props_100</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">residence</span><span class="op">)</span> <span class="op"><a href="moderndive.github.io/moderndive/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>prop_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   residence prop_sd
@@ -495,7 +495,7 @@ Conduct a repeated survey (1000 repetitions) of 50 students and estimate the pro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2022" was written by Christina Bogner. It was last built on 2022-06-28.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2023" was written by Christina Bogner. It was last built on 2023-04-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
