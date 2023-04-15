@@ -417,7 +417,7 @@ Use functions from <code>dplyr</code> for data wrangling
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-70-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-69-1.png" width="90%"></div>
 </div>
 <div id="create-new-variables-with-mutate" class="section level3" number="5.2.6">
 <h3>
@@ -524,7 +524,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span>, color <span class="op">=</span> <span class="st">'Meteo station'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-76-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-75-1.png" width="90%"></div>
 <p>We can also visualize the standard deviations.</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -532,7 +532,7 @@ Use functions from <code>dplyr</code> for data wrangling
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-77-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-76-1.png" width="90%"></div>
 <p>Or use a semi-transparent band to show the variability (standard deviation).</p>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -540,7 +540,7 @@ Use functions from <code>dplyr</code> for data wrangling
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-78-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-77-1.png" width="90%"></div>
 <p>One last detail. The titles on top of the facets show the station IDs. When you are not an employee of German Meteorological Service, you probably do not know them by hart. It is better to use the city names. The vector <code>station_ids</code> is a so called named vector and has the right structure to change the titles in the facets: it assigns to every id its city name, i.e. 2261 = ‘Hof’.</p>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">station_ids</span></code></pre></div>
@@ -553,7 +553,7 @@ Use functions from <code>dplyr</code> for data wrangling
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span>, labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html">labeller</a></span><span class="op">(</span>STATIONS_ID <span class="op">=</span> <span class="va">station_ids</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-80-1.png" width="90%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-79-1.png" width="90%"></div>
 </div>
 </div>
 <div id="practice-on-your-own-4" class="section level2" number="5.3">

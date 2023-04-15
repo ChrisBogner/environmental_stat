@@ -204,7 +204,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">'Daily mean temperature (°C)'</span>, 
        x <span class="op">=</span> <span class="st">'Date'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-151-1.png" width="95%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-150-1.png" width="95%"></div>
 <p>We want to analyse complete years only. Which years should be deleted because of too few data points?</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">clim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -263,7 +263,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">15</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">'Yearly mean temperature (°C)'</span>, 
        x <span class="op">=</span> <span class="st">'Date'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-155-1.png" width="95%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-154-1.png" width="95%"></div>
 <p>There seem to be an upward trend, but is it significant or due to chance. To answer this question we use the Mann-Kendall test for trend. The null and alternative hypothesis of the test are:</p>
 <ul>
 <li>
@@ -288,7 +288,7 @@
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">temp_diff</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">temp_diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">15</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-158-1.png" width="95%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-157-1.png" width="95%"></div>
 <p>We see a mean increase of 0.01 degrees per year.</p>
 </div>
 <div id="analysis-of-seasonality" class="section level2" number="11.4">
@@ -328,7 +328,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Date'</span>,
        y <span class="op">=</span> <span class="st">'Mean daily tempearture (°C)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-160-1.png" width="95%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-159-1.png" width="95%"></div>
 <p>The overall seasonality.</p>
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">temp_monthly</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">mean_temp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -336,7 +336,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">month.abb</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Month'</span>,
        y <span class="op">=</span> <span class="st">'Variation of the mean yearly temperature (°C)'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-161-1.png" width="95%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-160-1.png" width="95%"></div>
 </div>
 <div id="advanced-simultaneous-analysis-of-trend-and-seasonality" class="section level2" number="11.5">
 <h2>
@@ -354,7 +354,7 @@
 <code class="sourceCode R"><span class="va">components</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/decompose.html">decompose</a></span><span class="op">(</span><span class="va">time_series</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">components</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-163-1.png" width="95%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-162-1.png" width="95%"></div>
 <p>Plot the trend using <code>ggfortify</code>. This library helps to transform the complicated object created by <code><a href="https://rdrr.io/r/stats/decompose.html">decompose()</a></code> to a <code>data.frame</code> which can be easily plotted with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>.</p>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html">fortify</a></span><span class="op">(</span><span class="va">components</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Index</span>, y <span class="op">=</span> <span class="va">trend</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -364,7 +364,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Date'</span>,
        y <span class="op">=</span> <span class="st">'Trend component of the temperature (°C)'</span>,
        title <span class="op">=</span> <span class="st">'Red bar highlights the year 2007.'</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-164-1.png" width="95%"></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-163-1.png" width="95%"></div>
 <p>The large peak is due to the highest monthly mean in July 2007, don’t over-interpret this as a change in the trend!</p>
 <p>General advice:</p>
 <ul>
