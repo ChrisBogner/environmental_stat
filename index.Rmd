@@ -18,11 +18,6 @@ description: "Lecture notes for the course Environmental Statistics in IMES (UoC
 > The most exciting phrase to hear in science, the one that heralds new discoveries, is not 'Eureka!' but 'That's funny...' 
 `r tufte::quote_footer('--- Isaac Asimov')`
 
-## Back to in-person teaching {-}
-
-```{block, type='rmdinfo'}
-The corona virus pandemic still impacts our lives and changes the way we teach and learn. This course will be held in person, I hope we are back to nearly normal. We learnt a lot during the online-teaching phase and some of the tools proved useful. Thus, I will try to move some of them into the in-person phase.
-```
 
 In this course, we will use the following tools:
 
