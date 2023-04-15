@@ -1,7 +1,7 @@
 ---
 knit: "bookdown::render_book"
 title: "Environmental Statistics"
-subtitle: "Summer term 2022"
+subtitle: "Summer term 2023"
 author: "Christina Bogner"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 site: bookdown::bookdown_site
