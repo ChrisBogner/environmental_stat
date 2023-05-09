@@ -100,11 +100,10 @@ We want to know how many measurements per station the data set contains.
 
 ```{r}
 temp_humid %>% 
-  group_by(STATIONS_ID) %>% 
-  count()
+  count(STATIONS_ID)
 ```
 
-The operator `%>%` is called **pipe** and is pronounced as **and then**. The code `temp_humid %>% group_by(STATIONS_ID) %>% count()` can be read as: take the object `temp_humid`, group it by `STATIONS_ID` and count the measurements in each group. The pipe operator comes from the package `magrittr` (https://magrittr.tidyverse.org/). It is a core operator in `tidyverse` and makes the code more readable and easier to follow for humans. Perhaps not in the beginning, but very soon `r emo::ji('nerd_face')`.
+The operator `%>%` is called **pipe** and is pronounced as **and then**. The code `temp_humid %>% count(STATIONS_ID)` can be read as: take the object `temp_humid`, group it by `STATIONS_ID` and count the measurements in each group. The pipe operator comes from the package `magrittr` (https://magrittr.tidyverse.org/). It is a core operator in `tidyverse` and makes the code more readable and easier to follow for humans. Perhaps not in the beginning, but very soon `r emo::ji('nerd_face')`.
 
 ### The grammar of data manipulation -- `dplyr`
 The function `count()` is part of the library `dplyr`, a collection of functions all named after verbs. Thus, it is easy to imagine what the function does `r emo::ji('smile')`). The 5 core functions are:
@@ -139,24 +138,21 @@ We can combine several tests with the operator **or** `|`, for example. Here, we
 ```{r}
 temp_humid %>% 
   filter(STATIONS_ID == '2667' | STATIONS_ID == '2261') %>%
-  group_by(STATIONS_ID) %>% 
-  count()
+  count(STATIONS_ID)
 ```
 
 The same can be achieved by excluding the third station:
 ```{r}
 temp_humid %>% 
   filter(STATIONS_ID != '1420') %>%
-  group_by(STATIONS_ID) %>% 
-  count()
+  count(STATIONS_ID)
 ```
 
 As an alternative, we can use the operator `%in%` which checks whether the row contains one of the entries in a vector.
 ```{r}
 temp_humid %>% 
   filter(STATIONS_ID %in% c('2667', '2261')) %>%
-  group_by(STATIONS_ID) %>% 
-  count()
+  count(STATIONS_ID)
 ```
 
 ### Visualize
