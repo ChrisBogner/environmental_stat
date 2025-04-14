@@ -76,14 +76,17 @@ getsmarter_pop <- tibble(student_id, gender, residence, transport, travel_time, 
 getsmarter_pop
 ```
 
-We survey 200 students.
+We survey 200 students using the function `rep_sample_n`, with one replicate and without replacement. This function adds a new variable called `replicate` to the dataset. Later we will use the same function for bootstrapping, which will generate another `replicate` variable. To prevent conflicts from having duplicate variable names, we need to remvoe the existing `replicate` variable now. We do this using `select(!...)`, which drops a variable from the dataset. 
 ```{r}
 set.seed(345)
 
 survey_size <- 200
 
-survey <- rep_sample_n(getsmarter_pop, size = survey_size, replace = FALSE, reps = 1)
+survey <- rep_sample_n(getsmarter_pop, size = survey_size, replace = FALSE, reps = 1) %>%
+  ungroup() %>%
+  select(!replicate)
 ```
+
 
 The true mean travel time to the university and the mean from the survey equal
 ```{r}
