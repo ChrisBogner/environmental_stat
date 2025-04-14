@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>5 Explorative workflow with tidyverse | Environmental Statistics</title>
-<meta name="author" content="Christina Bogner">
+<meta name="author" content="Christina Bogner, Marijn van der Meij">
 <meta name="description" content="Name core packages in tidyverse  Apply a simple explorative workflow (read, summarize, plot) with tidyverse  Use functions from dplyr for data wrangling  tidyverse is a collection of R packages...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
 <meta property="og:title" content="5 Explorative workflow with tidyverse | Environmental Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Name core packages in tidyverse  Apply a simple explorative workflow (read, summarize, plot) with tidyverse  Use functions from dplyr for data wrangling  tidyverse is a collection of R packages...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Name core packages in tidyverse  Apply a simple explorative workflow (read, summarize, plot) with tidyverse  Use functions from dplyr for data wrangling  tidyverse is a collection of R packages...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -27,6 +27,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -55,8 +56,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Summer term 2023">Environmental Statistics</a>:
-        <small class="text-muted">Summer term 2023</small>
+        <a href="index.html" title="Summer term 2025">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2025</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -116,7 +117,7 @@ Use functions from <code>dplyr</code> for data wrangling
 </ul>
 </div>
 <p><code>tidyverse</code> is a collection of R packages for data analysis (<a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>). It shares a common philosophy about how data should be structure and grammar of data manipulation and visualization. Although it might sound like something alien, <code>tidyverse</code> is a regular part of R and its functions can be mixed with base R functions.</p>
-<p>The best introduction to <code>tidyverse</code> is <strong>r4ds</strong>: “R for Data Science” <span class="citation">(<a href="literature-1.html#ref-r4ds" role="doc-biblioref">Wickham and Grolemund 2021</a>)</span>. You can read it for free here (<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>).</p>
+<p>The best introduction to <code>tidyverse</code> is <strong>r4ds</strong>: “R for Data Science” <span class="citation">(<a href="literature-1.html#ref-r4ds">Wickham and Grolemund 2021</a>)</span>. You can read it for free here (<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>).</p>
 <div id="core-packages" class="section level2" number="5.1">
 <h2>
 <span class="header-section-number">5.1</span> Core packages<a class="anchor" aria-label="anchor" href="#core-packages"><i class="fas fa-link"></i></a>
@@ -184,11 +185,11 @@ Use functions from <code>dplyr</code> for data wrangling
 </h3>
 <p>We load the library <code>tidyverse</code> first.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <p>Last time we used the function <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> to import data into R. This function is the most general from a whole family of functions, all starting with <code>read_*</code>: <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>, <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv2()</a></code> etc. They all have their own parameters that you need to verify on the respective help pages if you want to use them.</p>
 <p>For this exploratory data analysis, we will use data from the German Meteorological Service (Deutscher Wetterdienst) that I downloaded on 2020-05-24 (<a href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/klimadatendeutschland.html" class="uri">https://www.dwd.de/DE/leistungen/klimadatendeutschland/klimadatendeutschland.html</a>). The data set contains hourly measurements of the relative air humidity (%), and air temperature (°C) for three weather stations, namely Hof, Frankfurt and Köln-Bonn. The data is named <span style="font-family: sans-serif; font-size: 12pt">meteo.csv</span>.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">'data/meteo.csv'</span>, delim <span class="op">=</span> <span class="st">';'</span>,    trim_ws <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">'data/meteo.csv'</span>, delim <span class="op">=</span> <span class="st">';'</span>,    trim_ws <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Rows: 39600 Columns: 6
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ";"
@@ -200,7 +201,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <p><code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> reports on reading the data about the variables it recognizes. This is a good hint to spot for possible problems. Are numerical variables read as <code>&lt;dbl&gt;</code>? Are characters recognized as <code>&lt;char&gt;</code> etc. In the code above, the parameter <code>trim_ws = T</code> removes leading zeroes.</p>
 <p>Let’s have a short glimpse of the data.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span></span></code></pre></div>
 <pre><code>## # A tibble: 39,600 × 6
 ##    STATIONS_ID MESS_DATUM  QN_9 TT_TU RF_TU eor  
 ##          &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
@@ -214,7 +215,7 @@ Use functions from <code>dplyr</code> for data wrangling
 ##  8        2261 2018111907     3  -1.5    99 eor  
 ##  9        2261 2018111908     3  -1.1    99 eor  
 ## 10        2261 2018111909     3  -0.6    97 eor  
-## # … with 39,590 more rows</code></pre>
+## # ℹ 39,590 more rows</code></pre>
 <p>The data set contains the following variables:</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -254,7 +255,7 @@ Use functions from <code>dplyr</code> for data wrangling
 </table></div>
 <p><code>read_*</code> always returns a <code>tibble</code>.</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">temp_humid</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">temp_humid</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame"</code></pre>
 </div>
 <div id="date-and-time-made-easy" class="section level3" number="5.2.2">
@@ -264,11 +265,11 @@ Use functions from <code>dplyr</code> for data wrangling
 <p>A very useful package to handle date and time is called <code>lubridate</code>. It is not part of core packages in <code>tidyverse</code> but is installed with the long list of additional packages. We will use it to convert the variable <code>MESS_DATUM</code> to a real date-time variable.</p>
 <p>The function <code><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_h()</a></code> converts character vectors to date-time objects provided they have the format <strong>y</strong>ear, <strong>m</strong>onth, <strong>d</strong>ay, <strong>h</strong>our. There are other function for different other formats; consult help.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
-
-<span class="va">temp_humid</span><span class="op">$</span><span class="va">MESS_DATUM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_h</a></span><span class="op">(</span><span class="va">temp_humid</span><span class="op">$</span><span class="va">MESS_DATUM</span><span class="op">)</span>
-
-<span class="va">temp_humid</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">temp_humid</span><span class="op">$</span><span class="va">MESS_DATUM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_h</a></span><span class="op">(</span><span class="va">temp_humid</span><span class="op">$</span><span class="va">MESS_DATUM</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">temp_humid</span></span></code></pre></div>
 <pre><code>## # A tibble: 39,600 × 6
 ##    STATIONS_ID MESS_DATUM           QN_9 TT_TU RF_TU eor  
 ##          &lt;dbl&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
@@ -282,7 +283,7 @@ Use functions from <code>dplyr</code> for data wrangling
 ##  8        2261 2018-11-19 07:00:00     3  -1.5    99 eor  
 ##  9        2261 2018-11-19 08:00:00     3  -1.1    99 eor  
 ## 10        2261 2018-11-19 09:00:00     3  -0.6    97 eor  
-## # … with 39,590 more rows</code></pre>
+## # ℹ 39,590 more rows</code></pre>
 <p>After conversion, the variables is recognized as <code>&lt;dttm&gt;</code> for date-time.</p>
 </div>
 <div id="summarize" class="section level3" number="5.2.3">
@@ -291,11 +292,11 @@ Use functions from <code>dplyr</code> for data wrangling
 </h3>
 <p>The three weather station have the following IDs:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">station_ids</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'2261'</span> <span class="op">=</span> <span class="st">'Hof'</span>, <span class="st">'1420'</span> <span class="op">=</span> <span class="st">'Frankfurt'</span>, <span class="st">'2667'</span> <span class="op">=</span> <span class="st">'Koeln'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">station_ids</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'2261'</span> <span class="op">=</span> <span class="st">'Hof'</span>, <span class="st">'1420'</span> <span class="op">=</span> <span class="st">'Frankfurt'</span>, <span class="st">'2667'</span> <span class="op">=</span> <span class="st">'Koeln'</span><span class="op">)</span></span></code></pre></div>
 <p>We want to know how many measurements per station the data set contains.</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   STATIONS_ID     n
 ##         &lt;dbl&gt; &lt;int&gt;
@@ -339,9 +340,9 @@ Use functions from <code>dplyr</code> for data wrangling
 </table></div>
 <p>If we want to know how many measurements were recorded for a particular weather station, we first filter for its ID:</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op">==</span> <span class="st">'2667'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op">==</span> <span class="st">'2667'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##       n
 ##   &lt;int&gt;
@@ -370,9 +371,9 @@ Use functions from <code>dplyr</code> for data wrangling
 <p>More logical and boolean operators are handled in the tutorials (see below) and on help pages of <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>.</p>
 <p>We can combine several tests with the operator <strong>or</strong> <code>|</code>, for example. Here, we want to filter all rows containing either ID 2667 or ID 2261:</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op">==</span> <span class="st">'2667'</span> <span class="op">|</span> <span class="va">STATIONS_ID</span> <span class="op">==</span> <span class="st">'2261'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op">==</span> <span class="st">'2667'</span> <span class="op">|</span> <span class="va">STATIONS_ID</span> <span class="op">==</span> <span class="st">'2261'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   STATIONS_ID     n
 ##         &lt;dbl&gt; &lt;int&gt;
@@ -380,9 +381,9 @@ Use functions from <code>dplyr</code> for data wrangling
 ## 2        2667 13200</code></pre>
 <p>The same can be achieved by excluding the third station:</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op">!=</span> <span class="st">'1420'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op">!=</span> <span class="st">'1420'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   STATIONS_ID     n
 ##         &lt;dbl&gt; &lt;int&gt;
@@ -390,9 +391,9 @@ Use functions from <code>dplyr</code> for data wrangling
 ## 2        2667 13200</code></pre>
 <p>As an alternative, we can use the operator <code>%in%</code> which checks whether the row contains one of the entries in a vector.</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'2667'</span>, <span class="st">'2261'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">STATIONS_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'2667'</span>, <span class="st">'2261'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   STATIONS_ID     n
 ##         &lt;dbl&gt; &lt;int&gt;
@@ -405,10 +406,10 @@ Use functions from <code>dplyr</code> for data wrangling
 </h3>
 <p>We plot the time series and use a trick to split them along three different plots with the function <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code>. It needs a variable to separate the data into plots, and we chose <code>STATIONS_ID</code>. The splitting variable must be preceded by <code>~</code>.</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">temp_humid</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">MESS_DATUM</span>, y <span class="op">=</span> <span class="va">TT_TU</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">temp_humid</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">MESS_DATUM</span>, y <span class="op">=</span> <span class="va">TT_TU</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-69-1.png" width="90%"></div>
 </div>
 <div id="create-new-variables-with-mutate" class="section level3" number="5.2.6">
@@ -417,11 +418,11 @@ Use functions from <code>dplyr</code> for data wrangling
 </h3>
 <p>We want to calculate the monthly means and standard deviations of the air temperature and humidity. First, we need to generate the temporal information, namely year and month, that will be used to group the temperature values to calculate <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> and <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>. This can be achieved with the functions <code><a href="https://lubridate.tidyverse.org/reference/year.html">year()</a></code>and <code><a href="https://lubridate.tidyverse.org/reference/month.html">month()</a></code> from library <code>lubridate</code>. The function <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> can create new variables in a data object.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_humid</span> <span class="op">&lt;-</span> <span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">MESS_DATUM</span><span class="op">)</span>,
-         month <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">MESS_DATUM</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">temp_humid</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">temp_humid</span> <span class="op">&lt;-</span> <span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">MESS_DATUM</span><span class="op">)</span>,</span>
+<span>         month <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">MESS_DATUM</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">temp_humid</span></span></code></pre></div>
 <pre><code>## # A tibble: 39,600 × 8
 ##    STATIONS_ID MESS_DATUM           QN_9 TT_TU RF_TU eor    year month
 ##          &lt;dbl&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -435,17 +436,17 @@ Use functions from <code>dplyr</code> for data wrangling
 ##  8        2261 2018-11-19 07:00:00     3  -1.5    99 eor    2018    11
 ##  9        2261 2018-11-19 08:00:00     3  -1.1    99 eor    2018    11
 ## 10        2261 2018-11-19 09:00:00     3  -0.6    97 eor    2018    11
-## # … with 39,590 more rows</code></pre>
+## # ℹ 39,590 more rows</code></pre>
 <p>In the next step, we create a new data set and calculate the means and standard deviations. To get them <em>by station, year and month</em>, we group the data accordingly. To group by several variables, just enumerate them with a comma (no quotation or <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> necessary).</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">monthly_means</span> <span class="op">&lt;-</span> <span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">STATIONS_ID</span>, <span class="va">year</span>, <span class="va">month</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean_T <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">TT_TU</span><span class="op">)</span>, mean_RH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">RF_TU</span><span class="op">)</span>,
-            sd_T <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">TT_TU</span><span class="op">)</span>, sd_RH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">RF_TU</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">monthly_means</span> <span class="op">&lt;-</span> <span class="va">temp_humid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">STATIONS_ID</span>, <span class="va">year</span>, <span class="va">month</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean_T <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">TT_TU</span><span class="op">)</span>, mean_RH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">RF_TU</span><span class="op">)</span>,</span>
+<span>            sd_T <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">TT_TU</span><span class="op">)</span>, sd_RH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">RF_TU</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by 'STATIONS_ID', 'year'. You can override
 ## using the `.groups` argument.</code></pre>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">monthly_means</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">monthly_means</span></span></code></pre></div>
 <pre><code>## # A tibble: 57 × 7
 ## # Groups:   STATIONS_ID, year [9]
 ##    STATIONS_ID  year month mean_T mean_RH  sd_T sd_RH
@@ -460,10 +461,10 @@ Use functions from <code>dplyr</code> for data wrangling
 ##  8        1420  2019     6  21.4     60.6  6.05 21.2 
 ##  9        1420  2019     7  21.6     55.6  5.90 21.8 
 ## 10        1420  2019     8  20.7     65.6  4.94 20.8 
-## # … with 47 more rows</code></pre>
+## # ℹ 47 more rows</code></pre>
 <p>The new object <code>monthly_means</code> is a grouped <code>tibble</code>, indicated by <em>grouped_df</em> in the output of <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> that shows the structure of an object.</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">monthly_means</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">monthly_means</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## gropd_df [57 × 7] (S3: grouped_df/tbl_df/tbl/data.frame)
 ##  $ STATIONS_ID: num [1:57] 1420 1420 1420 1420 1420 1420 1420 1420 1420 1420 ...
 ##  $ year       : num [1:57] 2018 2018 2019 2019 2019 ...
@@ -489,14 +490,14 @@ Use functions from <code>dplyr</code> for data wrangling
 ##   ..- attr(*, ".drop")= logi TRUE</code></pre>
 <p>Some calculations are better done on ungrouped data. Therefore, we remove the grouping. This does not change the data itself.</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">monthly_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="va">monthly_means</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">monthly_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="va">monthly_means</span><span class="op">)</span></span></code></pre></div>
 <p>To plot the monthly data, we need a proper monthly date object. We will attribute the monthly means to the first of the respective month. Again, <code>lubridate</code> helps with this task. The function <code>parse_dat_time()</code> is a general function taking a character string and returning a date-time object. We need to “glue” the variables <code>year</code> and <code>month</code> together with <code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> (yes, it is a zero, not an O!) to form such a string and specify that <code>orders = 'ym'</code>, i.e. year before month. Finally, we <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate()</a></code> the new variable <code>year_month</code> before the variable <code>year</code> for convenience (if not, it will be created as the last variable in the data set).</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">monthly_means</span> <span class="op">&lt;-</span> <span class="va">monthly_means</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year_month <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/parse_date_time.html">parse_date_time</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">month</span><span class="op">)</span>, orders <span class="op">=</span> <span class="st">'ym'</span>, tz <span class="op">=</span> <span class="st">'CET'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">year_month</span>, .before <span class="op">=</span> <span class="va">year</span><span class="op">)</span>
-
-<span class="va">monthly_means</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">monthly_means</span> <span class="op">&lt;-</span> <span class="va">monthly_means</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year_month <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/parse_date_time.html">parse_date_time</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">month</span><span class="op">)</span>, orders <span class="op">=</span> <span class="st">'ym'</span>, tz <span class="op">=</span> <span class="st">'CET'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">year_month</span>, .before <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">monthly_means</span></span></code></pre></div>
 <pre><code>## # A tibble: 57 × 8
 ##    STATIONS_ID year_month           year month mean_T mean_RH  sd_T sd_RH
 ##          &lt;dbl&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -510,41 +511,41 @@ Use functions from <code>dplyr</code> for data wrangling
 ##  8        1420 2019-06-01 00:00:00  2019     6  21.4     60.6  6.05 21.2 
 ##  9        1420 2019-07-01 00:00:00  2019     7  21.6     55.6  5.90 21.8 
 ## 10        1420 2019-08-01 00:00:00  2019     8  20.7     65.6  4.94 20.8 
-## # … with 47 more rows</code></pre>
+## # ℹ 47 more rows</code></pre>
 <p>Now, we can plot the mean air temperature.</p>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span>, color <span class="op">=</span> <span class="st">'Meteo station'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">STATIONS_ID</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span>, color <span class="op">=</span> <span class="st">'Meteo station'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-75-1.png" width="90%"></div>
 <p>We can also visualize the standard deviations.</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-76-1.png" width="90%"></div>
 <p>Or use a semi-transparent band to show the variability (standard deviation).</p>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-77-1.png" width="90%"></div>
 <p>One last detail. The titles on top of the facets show the station IDs. When you are not an employee of German Meteorological Service, you probably do not know them by hart. It is better to use the city names. The vector <code>station_ids</code> is a so called named vector and has the right structure to change the titles in the facets: it assigns to every id its city name, i.e. 2261 = ‘Hof’.</p>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">station_ids</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">station_ids</span></span></code></pre></div>
 <pre><code>##        2261        1420        2667 
 ##       "Hof" "Frankfurt"     "Koeln"</code></pre>
 <p>We use <code>station_ids</code> to change the titles:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span>, labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html">labeller</a></span><span class="op">(</span>STATIONS_ID <span class="op">=</span> <span class="va">station_ids</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">monthly_means</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year_month</span>, y <span class="op">=</span> <span class="va">mean_T</span>, ymin <span class="op">=</span> <span class="va">mean_T</span> <span class="op">-</span> <span class="va">sd_T</span>, ymax <span class="op">=</span> <span class="va">mean_T</span> <span class="op">+</span> <span class="va">sd_T</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">STATIONS_ID</span>, nrow <span class="op">=</span> <span class="fl">3</span>, labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html">labeller</a></span><span class="op">(</span>STATIONS_ID <span class="op">=</span> <span class="va">station_ids</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Time'</span>, y <span class="op">=</span> <span class="st">'Temperature (°C)'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-79-1.png" width="90%"></div>
 </div>
 </div>
@@ -562,7 +563,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <h2>
 <span class="header-section-number">5.4</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-3"><i class="fas fa-link"></i></a>
 </h2>
-<p>Read chapter 3 (to 3.5) in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive" role="doc-biblioref">2021</a>)</span></p>
+<p>Read chapter 3 (to 3.5) in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive">2021</a>)</span></p>
 <!-- ## Turning in your work -->
 <!-- - Save your R Notebook as an *.Rmd file.  -->
 <!-- - Upload your R Notebook to ILIAS. You don't need to upload the .nb.html file. You will find an upload option in today's session. -->
@@ -573,7 +574,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <span class="header-section-number">5.5</span> Additional reading and videos<a class="anchor" aria-label="anchor" href="#additional-reading-and-videos"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li><p>More information on statistical graphical summaries and geoms: R4DS <span class="citation">Wickham and Grolemund (<a href="literature-1.html#ref-r4ds" role="doc-biblioref">2021</a>)</span>: Chapter 5 “Data transformation”</p></li>
+<li><p>More information on statistical graphical summaries and geoms: R4DS <span class="citation">Wickham and Grolemund (<a href="literature-1.html#ref-r4ds">2021</a>)</span>: Chapter 5 “Data transformation”</p></li>
 <li><p>A <a href="https://www.youtube.com/watch?v=go5Au01Jrvs">live exploratory data analysis</a> by the main author of <code>tidyverse</code>, Hadley Wickham. Really informative, but Dr. Wickham types too fast 😄.</p></li>
 </ul>
 </div>
@@ -619,7 +620,7 @@ Use functions from <code>dplyr</code> for data wrangling
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2023" was written by Christina Bogner. It was last built on 2023-05-09.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-04-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -632,7 +633,7 @@ Use functions from <code>dplyr</code> for data wrangling
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>2 Using R Markdown for reproducible research | Environmental Statistics</title>
-<meta name="author" content="Christina Bogner">
+<meta name="author" content="Christina Bogner, Marijn van der Meij">
 <meta name="description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research Usually, analysing data and generating the report are two separate tasks. First, you analyse your...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
 <meta property="og:title" content="2 Using R Markdown for reproducible research | Environmental Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research Usually, analysing data and generating the report are two separate tasks. First, you analyse your...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Opening and saving an R Notebook  Basic layout in R Markdown   2.1 Reproducibility in research Usually, analysing data and generating the report are two separate tasks. First, you analyse your...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -27,6 +27,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -55,8 +56,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Summer term 2023">Environmental Statistics</a>:
-        <small class="text-muted">Summer term 2023</small>
+        <a href="index.html" title="Summer term 2025">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2025</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -116,7 +117,7 @@ Basic layout in R Markdown
 <span class="header-section-number">2.1</span> Reproducibility in research<a class="anchor" aria-label="anchor" href="#reproducibility-in-research"><i class="fas fa-link"></i></a>
 </h2>
 <p>Usually, analysing data and generating the report are two separate tasks. First, you analyse your data (hopefully in R 😄), and then you describe your methods, results and conclusions in a text document. However, this procedure is error-prone and not reproducible. You have to copy-paste results from R into tables or include figures in your word processor. The connection between the analysis code, the results and the report is lost.</p>
-<p>Donald Knuth, the creator of TEX, suggested the idea of <em>literate programming</em>, where analysis code and the report are combined in one document <span class="citation">(<a href="literature-1.html#ref-Knuth1984" role="doc-biblioref">Knuth 1984</a>)</span>. This kind of document is human-centred and allows to better understand the analysis. It helps to generate completely reproducible data analyses.</p>
+<p>Donald Knuth, the creator of TEX, suggested the idea of <em>literate programming</em>, where analysis code and the report are combined in one document <span class="citation">(<a href="literature-1.html#ref-Knuth1984">Knuth 1984</a>)</span>. This kind of document is human-centred and allows to better understand the analysis. It helps to generate completely reproducible data analyses.</p>
 </div>
 <div id="combining-code-and-report-in-one-document" class="section level2" number="2.2">
 <h2>
@@ -188,7 +189,7 @@ folder.
 <p>In contrast to text, headings etc. R code is typed in special boxes called <strong>chunks</strong>. To create an empty chunk to type code, click the little green C on top or type <code>Str + Alt + i</code>. On an international keyboard, <code>Str</code> equals <code>Control</code> and on a Mac the <code>Command</code> key.</p>
 <p>Using your first code chunk, type the following command to create a new variable called <code>x</code> with the value of 42.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">42</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">42</span></span></code></pre></div>
 <p>Remember that the arrow <code>&lt;-</code> is the <strong>assignment operator</strong>. It generates (or overwrites, if it already exists) the object <code>x</code> and assigns it the value of 42.</p>
 <div class="rmdinfo">
 <p>
@@ -220,17 +221,17 @@ Figure 2.3: Global environment contains the variable x now
 <p>You have created a numeric variable <code>x</code>. However, you are not restricted to numbers. R can also handle other types of objects, like characters, for example. To tell R that you want to generate a variable containing characters in contrast to numbers, you need to enclose the assigned content in quotes.</p>
 <p>Create the following chunk in your notebook and let it run.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">day_of_week</span> <span class="op">&lt;-</span> <span class="st">"Sunday"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">day_of_week</span> <span class="op">&lt;-</span> <span class="st">"Sunday"</span></span></code></pre></div>
 <p>To generate a more complicated object, namely a numeric <strong>vector</strong>, we use the command <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> to <em>concatenate</em> several numbers.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.5</span>, <span class="fl">6.234</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.5</span>, <span class="fl">6.234</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>Note in the Environment pane that your vector <code>v</code> contains numbers (listed as <code>num</code>). The information [1:3] shows you that your vector has three elements, indexed from 1 to 3. Indices indicate the place of an element in the vector. To access and change a particular element, we use its index like</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4.5</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">v</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4.5</span></span></code></pre></div>
 <p>Now the second element of your vector equals 4.5. Remember that R will not warn you when changing your objects!</p>
 <p>You can calculate with objects as you can with numbers. Let’s divide evely single element of v by 2.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v</span> <span class="op">/</span> <span class="fl">2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">v</span> <span class="op">/</span> <span class="fl">2</span></span></code></pre></div>
 </div>
 <div id="practice-on-your-own-1" class="section level2" number="2.5">
 <h2>
@@ -344,7 +345,7 @@ A superscript: R<sup>2</sup></p></li>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2023" was written by Christina Bogner. It was last built on 2023-05-09.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-04-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -357,7 +358,7 @@ A superscript: R<sup>2</sup></p></li>
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
