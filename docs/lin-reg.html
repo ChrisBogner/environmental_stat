@@ -1,107 +1,394 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>9 Linear regression | Environmental Statistics</title>
-<meta name="author" content="Christina Bogner, Marijn van der Meij">
-<meta name="description" content="Explain the general structure of a linear model.  Name the assumption of a linear model.  Calculate a simple linear regression in R.  With this chapter, we start our journey to statistical...">
-<meta name="generator" content="bookdown 0.42 with bs4_book()">
-<meta property="og:title" content="9 Linear regression | Environmental Statistics">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Explain the general structure of a linear model.  Name the assumption of a linear model.  Calculate a simple linear regression in R.  With this chapter, we start our journey to statistical...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="9 Linear regression | Environmental Statistics">
-<meta name="twitter:description" content="Explain the general structure of a linear model.  Name the assumption of a linear model.  Calculate a simple linear regression in R.  With this chapter, we start our journey to statistical...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Linear regression | Environmental Statistics</title>
+  <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Linear regression | Environmental Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+  <meta name="github-repo" content="https://github.com/ChrisBogner/environmental_stat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Linear regression | Environmental Statistics" />
+  
+  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
+  
+
+<meta name="author" content="Christina Bogner, Marijn van der Meij" />
+
+
+<meta name="date" content="2025-04-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="hypothesis.html"/>
+<link rel="next" href="lin-reg-inference.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
 <style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-          margin-bottom: 0em;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="font-awesome.min.css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="css/all.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Summer term 2025">Environmental Statistics</a>:
-        <small class="text-muted">Summer term 2025</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface</a></li>
-<li class="book-part">Part I: Explore data</li>
-<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
-<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
-<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
-<li class="book-part">Part II: Statistical inference</li>
-<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
-<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
-<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
-<li class="book-part">Part III: Statistical modelling</li>
-<li><a class="active" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
-<li class="book-part">Part IV: Additional topics</li>
-<li><a class="" href="tsa.html"><span class="header-section-number">11</span> Introduction to time series analysis</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
-<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
-<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
-<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
-<li><a class="" href="literature-1.html">Literature</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Datenanalyse mit R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#intended-learning-outcomes-ilos"><i class="fa fa-check"></i>Intended learning outcomes (ILOs)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#literature"><i class="fa fa-check"></i>Literature</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-these-lecture-notes"><i class="fa fa-check"></i>Why these lecture notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#reproducibility"><i class="fa fa-check"></i>Reproducibility</a></li>
+</ul></li>
+<li class="part"><span><b>I Part I: Explore data</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Introduction to R and RStudio</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#what-is"><i class="fa fa-check"></i><b>1.1</b> What is <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>?</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#organize-your-work"><i class="fa fa-check"></i><b>1.3</b> Organize your work</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#practice-on-your-own"><i class="fa fa-check"></i><b>1.4</b> Practice on your own!</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#turning-in-your-work"><i class="fa fa-check"></i><b>1.5</b> Turning in your work</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#reading-assignment"><i class="fa fa-check"></i><b>1.6</b> Reading assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html"><i class="fa fa-check"></i><b>2</b> Using R Markdown for reproducible research</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#reproducibility-in-research"><i class="fa fa-check"></i><b>2.1</b> Reproducibility in research</a></li>
+<li class="chapter" data-level="2.2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#combining-code-and-report-in-one-document"><i class="fa fa-check"></i><b>2.2</b> Combining code and report in one document</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#create-a-new-r-notebook"><i class="fa fa-check"></i><b>2.2.1</b> Create a new R Notebook</a></li>
+<li class="chapter" data-level="2.2.2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#customize-the-header"><i class="fa fa-check"></i><b>2.2.2</b> Customize the header</a></li>
+<li class="chapter" data-level="2.2.3" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#structure-your-notebook"><i class="fa fa-check"></i><b>2.2.3</b> Structure your notebook</a></li>
+<li class="chapter" data-level="2.2.4" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#preview"><i class="fa fa-check"></i><b>2.2.4</b> Preview</a></li>
+<li class="chapter" data-level="2.2.5" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#other-output-options"><i class="fa fa-check"></i><b>2.2.5</b> Other output options</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#entering-and-running-commands"><i class="fa fa-check"></i><b>2.3</b> Entering and running commands</a></li>
+<li class="chapter" data-level="2.4" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#a-brief-recap-of-data-types"><i class="fa fa-check"></i><b>2.4</b> A brief recap of data types</a></li>
+<li class="chapter" data-level="2.5" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#practice-on-your-own-1"><i class="fa fa-check"></i><b>2.5</b> Practice on your own!</a></li>
+<li class="chapter" data-level="2.6" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#turning-in-your-work-1"><i class="fa fa-check"></i><b>2.6</b> Turning in your work</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="what-is-data.html"><a href="what-is-data.html"><i class="fa fa-check"></i><b>3</b> What is data?</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="what-is-data.html"><a href="what-is-data.html#installing-r-packages"><i class="fa fa-check"></i><b>3.1</b> Installing R packages</a></li>
+<li class="chapter" data-level="3.2" data-path="what-is-data.html"><a href="what-is-data.html#welcome-the-penguins"><i class="fa fa-check"></i><b>3.2</b> Welcome the penguins!</a></li>
+<li class="chapter" data-level="3.3" data-path="what-is-data.html"><a href="what-is-data.html#the-square-braces-revisited"><i class="fa fa-check"></i><b>3.3</b> The square braces revisited</a></li>
+<li class="chapter" data-level="3.4" data-path="what-is-data.html"><a href="what-is-data.html#lets-look-at-them"><i class="fa fa-check"></i><b>3.4</b> Let’s look at them</a></li>
+<li class="chapter" data-level="3.5" data-path="what-is-data.html"><a href="what-is-data.html#practice-on-your-own-2"><i class="fa fa-check"></i><b>3.5</b> Practice on your own!</a></li>
+<li class="chapter" data-level="3.6" data-path="what-is-data.html"><a href="what-is-data.html#reading-assignment-1"><i class="fa fa-check"></i><b>3.6</b> Reading assignment</a></li>
+<li class="chapter" data-level="3.7" data-path="what-is-data.html"><a href="what-is-data.html#turning-in-your-work-2"><i class="fa fa-check"></i><b>3.7</b> Turning in your work</a></li>
+<li class="chapter" data-level="3.8" data-path="what-is-data.html"><a href="what-is-data.html#additional-reading"><i class="fa fa-check"></i><b>3.8</b> Additional reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html"><i class="fa fa-check"></i><b>4</b> Import, visualize and explore data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#data-import-from-text-files"><i class="fa fa-check"></i><b>4.1</b> Data import from text files</a></li>
+<li class="chapter" data-level="4.2" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#visualization-with-the-library-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Visualization with the library <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#line-plot"><i class="fa fa-check"></i><b>4.2.1</b> Line plot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#point-plot"><i class="fa fa-check"></i><b>4.2.2</b> Point plot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#histogram"><i class="fa fa-check"></i><b>4.3</b> Histogram</a></li>
+<li class="chapter" data-level="4.4" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#boxplot"><i class="fa fa-check"></i><b>4.4</b> Boxplot</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#barplot"><i class="fa fa-check"></i><b>4.4.1</b> Barplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#practice-on-your-own-3"><i class="fa fa-check"></i><b>4.5</b> Practice on your own!</a></li>
+<li class="chapter" data-level="4.6" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#reading-assignment-2"><i class="fa fa-check"></i><b>4.6</b> Reading assignment</a></li>
+<li class="chapter" data-level="4.7" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#turning-in-your-work-3"><i class="fa fa-check"></i><b>4.7</b> Turning in your work</a></li>
+<li class="chapter" data-level="4.8" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#additional-reading-1"><i class="fa fa-check"></i><b>4.8</b> Additional reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>5</b> Explorative workflow with <code>tidyverse</code></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tidyverse.html"><a href="tidyverse.html#core-packages"><i class="fa fa-check"></i><b>5.1</b> Core packages</a></li>
+<li class="chapter" data-level="5.2" data-path="tidyverse.html"><a href="tidyverse.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory data analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tidyverse.html"><a href="tidyverse.html#read-data-revisited"><i class="fa fa-check"></i><b>5.2.1</b> Read data, revisited</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tidyverse.html"><a href="tidyverse.html#date-and-time-made-easy"><i class="fa fa-check"></i><b>5.2.2</b> Date and time made easy</a></li>
+<li class="chapter" data-level="5.2.3" data-path="tidyverse.html"><a href="tidyverse.html#summarize"><i class="fa fa-check"></i><b>5.2.3</b> Summarize</a></li>
+<li class="chapter" data-level="5.2.4" data-path="tidyverse.html"><a href="tidyverse.html#the-grammar-of-data-manipulation-dplyr"><i class="fa fa-check"></i><b>5.2.4</b> The grammar of data manipulation – <code>dplyr</code></a></li>
+<li class="chapter" data-level="5.2.5" data-path="tidyverse.html"><a href="tidyverse.html#visualize"><i class="fa fa-check"></i><b>5.2.5</b> Visualize</a></li>
+<li class="chapter" data-level="5.2.6" data-path="tidyverse.html"><a href="tidyverse.html#create-new-variables-with-mutate"><i class="fa fa-check"></i><b>5.2.6</b> Create new variables with <code>mutate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tidyverse.html"><a href="tidyverse.html#practice-on-your-own-4"><i class="fa fa-check"></i><b>5.3</b> Practice on your own!</a></li>
+<li class="chapter" data-level="5.4" data-path="tidyverse.html"><a href="tidyverse.html#reading-assignment-3"><i class="fa fa-check"></i><b>5.4</b> Reading assignment</a></li>
+<li class="chapter" data-level="5.5" data-path="tidyverse.html"><a href="tidyverse.html#additional-reading-and-videos"><i class="fa fa-check"></i><b>5.5</b> Additional reading and videos</a></li>
+</ul></li>
+<li class="part"><span><b>II Part II: Statistical inference</b></span></li>
+<li class="chapter" data-level="6" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>6</b> Sampling and variability</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="sampling.html"><a href="sampling.html#random-sampling-of-data"><i class="fa fa-check"></i><b>6.1</b> Random sampling of data</a></li>
+<li class="chapter" data-level="6.2" data-path="sampling.html"><a href="sampling.html#number-of-replications-and-variability"><i class="fa fa-check"></i><b>6.2</b> Number of replications and variability</a></li>
+<li class="chapter" data-level="6.3" data-path="sampling.html"><a href="sampling.html#sample-size"><i class="fa fa-check"></i><b>6.3</b> Sample size</a></li>
+<li class="chapter" data-level="6.4" data-path="sampling.html"><a href="sampling.html#practice-on-your-own-5"><i class="fa fa-check"></i><b>6.4</b> Practice on your own!</a></li>
+<li class="chapter" data-level="6.5" data-path="sampling.html"><a href="sampling.html#reading-assignment-4"><i class="fa fa-check"></i><b>6.5</b> Reading assignment</a></li>
+<li class="chapter" data-level="6.6" data-path="sampling.html"><a href="sampling.html#turning-in-your-work-4"><i class="fa fa-check"></i><b>6.6</b> Turning in your work</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>7</b> Bootstrap and confidence intervals</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="bootstrap.html"><a href="bootstrap.html#the-formulas"><i class="fa fa-check"></i><b>7.1</b> The formulas</a></li>
+<li class="chapter" data-level="7.2" data-path="bootstrap.html"><a href="bootstrap.html#bootstrap-use-your-computer"><i class="fa fa-check"></i><b>7.2</b> Bootstrap – use your computer</a></li>
+<li class="chapter" data-level="7.3" data-path="bootstrap.html"><a href="bootstrap.html#confidence-intervals-for-the-mean-travel-time"><i class="fa fa-check"></i><b>7.3</b> Confidence intervals for the mean travel time</a></li>
+<li class="chapter" data-level="7.4" data-path="bootstrap.html"><a href="bootstrap.html#bootstrap-with-the-library-infer"><i class="fa fa-check"></i><b>7.4</b> Bootstrap with the library <code>infer</code></a></li>
+<li class="chapter" data-level="7.5" data-path="bootstrap.html"><a href="bootstrap.html#interpreting-the-confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Interpreting the confidence intervals</a></li>
+<li class="chapter" data-level="7.6" data-path="bootstrap.html"><a href="bootstrap.html#practice-on-your-own-6"><i class="fa fa-check"></i><b>7.6</b> Practice on your own!</a></li>
+<li class="chapter" data-level="7.7" data-path="bootstrap.html"><a href="bootstrap.html#reading-assignment-5"><i class="fa fa-check"></i><b>7.7</b> Reading assignment</a></li>
+<li class="chapter" data-level="7.8" data-path="bootstrap.html"><a href="bootstrap.html#turning-in-your-work-5"><i class="fa fa-check"></i><b>7.8</b> Turning in your work</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="hypothesis.html"><a href="hypothesis.html"><i class="fa fa-check"></i><b>8</b> Hypothesis tests versus effect size estimation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="hypothesis.html"><a href="hypothesis.html#hypothesis-tests-with-infer"><i class="fa fa-check"></i><b>8.1</b> Hypothesis tests with <code>infer</code></a></li>
+<li class="chapter" data-level="8.2" data-path="hypothesis.html"><a href="hypothesis.html#there-is-only-one-test"><i class="fa fa-check"></i><b>8.2</b> There is only one test!</a></li>
+<li class="chapter" data-level="8.3" data-path="hypothesis.html"><a href="hypothesis.html#hypothesis-test-versus-effect-size-estimation"><i class="fa fa-check"></i><b>8.3</b> Hypothesis test versus effect size estimation</a></li>
+<li class="chapter" data-level="8.4" data-path="hypothesis.html"><a href="hypothesis.html#practice-on-your-own-7"><i class="fa fa-check"></i><b>8.4</b> Practice on your own!</a></li>
+<li class="chapter" data-level="8.5" data-path="hypothesis.html"><a href="hypothesis.html#reading-assignment-6"><i class="fa fa-check"></i><b>8.5</b> Reading assignment</a></li>
+<li class="chapter" data-level="8.6" data-path="hypothesis.html"><a href="hypothesis.html#additional-resources"><i class="fa fa-check"></i><b>8.6</b> Additional resources</a></li>
+<li class="chapter" data-level="8.7" data-path="hypothesis.html"><a href="hypothesis.html#turning-in-your-work-6"><i class="fa fa-check"></i><b>8.7</b> Turning in your work</a></li>
+</ul></li>
+<li class="part"><span><b>III Part III: Statistical modelling</b></span></li>
+<li class="chapter" data-level="9" data-path="lin-reg.html"><a href="lin-reg.html"><i class="fa fa-check"></i><b>9</b> Linear regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="lin-reg.html"><a href="lin-reg.html#what-is-a-linear-regression-model"><i class="fa fa-check"></i><b>9.1</b> What is a linear regression model?</a></li>
+<li class="chapter" data-level="9.2" data-path="lin-reg.html"><a href="lin-reg.html#simple-linear-regression"><i class="fa fa-check"></i><b>9.2</b> Simple linear regression</a></li>
+<li class="chapter" data-level="9.3" data-path="lin-reg.html"><a href="lin-reg.html#example-relationship-between-the-time-in-the-library-and-the-travel-time"><i class="fa fa-check"></i><b>9.3</b> Example: Relationship between the time in the library and the travel time</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="lin-reg.html"><a href="lin-reg.html#fit-a-simple-normal-regression-model"><i class="fa fa-check"></i><b>9.3.1</b> Fit a simple normal regression model</a></li>
+<li class="chapter" data-level="9.3.2" data-path="lin-reg.html"><a href="lin-reg.html#model-assumptions"><i class="fa fa-check"></i><b>9.3.2</b> Model assumptions</a></li>
+<li class="chapter" data-level="9.3.3" data-path="lin-reg.html"><a href="lin-reg.html#interprete-your-model"><i class="fa fa-check"></i><b>9.3.3</b> Interprete your model</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="lin-reg.html"><a href="lin-reg.html#practice-on-your-own-8"><i class="fa fa-check"></i><b>9.4</b> Practice on your own!</a></li>
+<li class="chapter" data-level="9.5" data-path="lin-reg.html"><a href="lin-reg.html#reading-assignment-7"><i class="fa fa-check"></i><b>9.5</b> Reading assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html"><i class="fa fa-check"></i><b>10</b> Inference in linear regression</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#how-good-is-the-model"><i class="fa fa-check"></i><b>10.1</b> How good is the model?</a></li>
+<li class="chapter" data-level="10.2" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#bootstrap-with-infer-confidence-interval-for-the-slope"><i class="fa fa-check"></i><b>10.2</b> Bootstrap with <code>infer</code>: Confidence interval for the slope</a></li>
+<li class="chapter" data-level="10.3" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#practice-on-your-own-9"><i class="fa fa-check"></i><b>10.3</b> Practice on your own!</a></li>
+<li class="chapter" data-level="10.4" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#reading-assignment-8"><i class="fa fa-check"></i><b>10.4</b> Reading assignment</a></li>
+<li class="chapter" data-level="10.5" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#turning-in-your-work-7"><i class="fa fa-check"></i><b>10.5</b> Turning in your work</a></li>
+</ul></li>
+<li class="part"><span><b>IV Part IV: Additional topics</b></span></li>
+<li class="chapter" data-level="11" data-path="tsa.html"><a href="tsa.html"><i class="fa fa-check"></i><b>11</b> Introduction to time series analysis</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="tsa.html"><a href="tsa.html#what-are-time-series"><i class="fa fa-check"></i><b>11.1</b> What are time series?</a></li>
+<li class="chapter" data-level="11.2" data-path="tsa.html"><a href="tsa.html#an-example-from-the-german-meteorological-service-dwd"><i class="fa fa-check"></i><b>11.2</b> An example from the German Meteorological Service (DWD)</a></li>
+<li class="chapter" data-level="11.3" data-path="tsa.html"><a href="tsa.html#trend-analysis-of-yearly-data"><i class="fa fa-check"></i><b>11.3</b> Trend analysis of yearly data</a></li>
+<li class="chapter" data-level="11.4" data-path="tsa.html"><a href="tsa.html#analysis-of-seasonality"><i class="fa fa-check"></i><b>11.4</b> Analysis of seasonality</a></li>
+<li class="chapter" data-level="11.5" data-path="tsa.html"><a href="tsa.html#advanced-simultaneous-analysis-of-trend-and-seasonality"><i class="fa fa-check"></i><b>11.5</b> Advanced: Simultaneous analysis of trend and seasonality</a></li>
+<li class="chapter" data-level="11.6" data-path="tsa.html"><a href="tsa.html#practice-on-your-own-10"><i class="fa fa-check"></i><b>11.6</b> Practice on your own!</a></li>
+<li class="chapter" data-level="11.7" data-path="tsa.html"><a href="tsa.html#turning-in-your-work-8"><i class="fa fa-check"></i><b>11.7</b> Turning in your work</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="stat-background.html"><a href="stat-background.html"><i class="fa fa-check"></i><b>A</b> Statistics refresher</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="stat-background.html"><a href="stat-background.html#descriptive-statistics"><i class="fa fa-check"></i><b>A.1</b> Descriptive statistics</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="stat-background.html"><a href="stat-background.html#mean"><i class="fa fa-check"></i><b>A.1.1</b> Mean</a></li>
+<li class="chapter" data-level="A.1.2" data-path="stat-background.html"><a href="stat-background.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>A.1.2</b> Variance and standard deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="stat-background.html"><a href="stat-background.html#measures-of-association"><i class="fa fa-check"></i><b>A.2</b> Measures of association</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="stat-background.html"><a href="stat-background.html#linear-correlation-coefficent"><i class="fa fa-check"></i><b>A.2.1</b> Linear correlation coefficent</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html"><i class="fa fa-check"></i><b>B</b> Data sources and final report</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#data-sources"><i class="fa fa-check"></i><b>B.1</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#federal-statistical-office"><i class="fa fa-check"></i><b>B.1.1</b> Federal Statistical Office</a></li>
+<li class="chapter" data-level="B.1.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#eurostat"><i class="fa fa-check"></i><b>B.1.2</b> eurostat</a></li>
+<li class="chapter" data-level="B.1.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#gapminder"><i class="fa fa-check"></i><b>B.1.3</b> gapminder</a></li>
+<li class="chapter" data-level="B.1.4" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#national-oceanic-and-atmospheric-administration-noaa"><i class="fa fa-check"></i><b>B.1.4</b> National Oceanic and Atmospheric Administration (NOAA)</a></li>
+<li class="chapter" data-level="B.1.5" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#more-data-sources"><i class="fa fa-check"></i><b>B.1.5</b> More data sources</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#research-proposal"><i class="fa fa-check"></i><b>B.2</b> Research proposal</a></li>
+<li class="chapter" data-level="B.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#structure-of-the-final-report"><i class="fa fa-check"></i><b>B.3</b> Structure of the final report</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#sturcture-of-the-working-directory"><i class="fa fa-check"></i><b>B.3.1</b> Sturcture of the working directory</a></li>
+<li class="chapter" data-level="B.3.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#download-and-save-data"><i class="fa fa-check"></i><b>B.3.2</b> Download and save data</a></li>
+<li class="chapter" data-level="B.3.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#structure-of-the-report"><i class="fa fa-check"></i><b>B.3.3</b> Structure of the report</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#evaluation-critera"><i class="fa fa-check"></i><b>B.4</b> Evaluation critera</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="additional-exercises.html"><a href="additional-exercises.html"><i class="fa fa-check"></i><b>C</b> Additional exercises</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="additional-exercises.html"><a href="additional-exercises.html#introduction-to-r-and-rstudio-1"><i class="fa fa-check"></i><b>C.1</b> Introduction to R and RStudio</a>
+<ul>
+<li class="chapter" data-level="C.1.1" data-path="additional-exercises.html"><a href="additional-exercises.html#rob1"><i class="fa fa-check"></i><b>C.1.1</b> Rob’s account book</a></li>
+<li class="chapter" data-level="C.1.2" data-path="additional-exercises.html"><a href="additional-exercises.html#rob2"><i class="fa fa-check"></i><b>C.1.2</b> Missing values</a></li>
+<li class="chapter" data-level="C.1.3" data-path="additional-exercises.html"><a href="additional-exercises.html#firstplot"><i class="fa fa-check"></i><b>C.1.3</b> Your very first plot</a></li>
+</ul></li>
+<li class="chapter" data-level="C.2" data-path="additional-exercises.html"><a href="additional-exercises.html#the-big-practical-importing-wrangling-summerizing-and-plotting"><i class="fa fa-check"></i><b>C.2</b> The big practical: importing, wrangling, summerizing and plotting</a>
+<ul>
+<li class="chapter" data-level="C.2.1" data-path="additional-exercises.html"><a href="additional-exercises.html#temperature-along-the-dutch-coast"><i class="fa fa-check"></i><b>C.2.1</b> Temperature along the Dutch coast</a></li>
+<li class="chapter" data-level="C.2.2" data-path="additional-exercises.html"><a href="additional-exercises.html#temperature-along-the-dutch-coast-revisited"><i class="fa fa-check"></i><b>C.2.2</b> Temperature along the Dutch coast, revisited</a></li>
+<li class="chapter" data-level="C.2.3" data-path="additional-exercises.html"><a href="additional-exercises.html#excel-data-turns-tidy"><i class="fa fa-check"></i><b>C.2.3</b> Excel data turns tidy</a></li>
+</ul></li>
+<li class="chapter" data-level="C.3" data-path="additional-exercises.html"><a href="additional-exercises.html#the-big-practical-statistical-inference"><i class="fa fa-check"></i><b>C.3</b> The big practical: statistical inference</a>
+<ul>
+<li class="chapter" data-level="C.3.1" data-path="additional-exercises.html"><a href="additional-exercises.html#species-richness-in-grasslands"><i class="fa fa-check"></i><b>C.3.1</b> Species richness in grasslands</a></li>
+<li class="chapter" data-level="C.3.2" data-path="additional-exercises.html"><a href="additional-exercises.html#soil-compaction"><i class="fa fa-check"></i><b>C.3.2</b> Soil compaction</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>D</b> Frequently and not-so-frequently asked questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="faq.html"><a href="faq.html#what-is-the-difference-between-double-and-single-quotes"><i class="fa fa-check"></i>What is the difference between double <code>""</code> and single <code>''</code> quotes?</a></li>
+<li class="chapter" data-level="" data-path="faq.html"><a href="faq.html#when-do-we-use-the-pipe-operator-and-when-the-plus-sign-to-connect-lines-of-code"><i class="fa fa-check"></i>When do we use the pipe operator <code>%&gt;%</code> and when the plus sign <code>+</code> to connect lines of code?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="literature-1.html"><a href="literature-1.html"><i class="fa fa-check"></i>Literature</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="lin-reg" class="section level1" number="9">
-<h1>
-<span class="header-section-number">9</span> Linear regression<a class="anchor" aria-label="anchor" href="#lin-reg"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Environmental Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lin-reg" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Linear regression<a href="lin-reg.html#lin-reg" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
@@ -117,17 +404,13 @@ Calculate a simple linear regression in R.
 </div>
 <p>With this chapter, we start our journey to statistical modelling. Basically, there are two main reasons why one would like to build a statistical model.</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Explicative modelling</strong>: We suppose that there is a relationship between variables and would like to quantify it.</li>
-<li>
-<strong>Predictive modelling</strong>: We want to build a model that can (as accurately as possible) predict future values.</li>
+<li><strong>Explicative modelling</strong>: We suppose that there is a relationship between variables and would like to quantify it.</li>
+<li><strong>Predictive modelling</strong>: We want to build a model that can (as accurately as possible) predict future values.</li>
 </ol>
 <p>In this course, we will focus on explicative modelling and work with linear regression models.</p>
-<div id="what-is-a-linear-regression-model" class="section level2" number="9.1">
-<h2>
-<span class="header-section-number">9.1</span> What is a linear regression model?<a class="anchor" aria-label="anchor" href="#what-is-a-linear-regression-model"><i class="fas fa-link"></i></a>
-</h2>
-<p>The term <strong>regression</strong> was coined by Francis Galton (1822-1911) who studied the relationship between the height of parents and their children <span class="citation">(<a href="literature-1.html#ref-Fahrmeir2009">Fahrmeir, Kneib, and Lang 2009</a>)</span>. He showed that taller-than-average parents tended to have children who were smaller than their parents (more towards the average) and smaller-than-average parents tended to have taller children. He called this phenomenon <strong>regression towards the mean</strong>.</p>
+<div id="what-is-a-linear-regression-model" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> What is a linear regression model?<a href="lin-reg.html#what-is-a-linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The term <strong>regression</strong> was coined by Francis Galton (1822-1911) who studied the relationship between the height of parents and their children <span class="citation">(<a href="#ref-Fahrmeir2009">Fahrmeir, Kneib, and Lang 2009</a>)</span>. He showed that taller-than-average parents tended to have children who were smaller than their parents (more towards the average) and smaller-than-average parents tended to have taller children. He called this phenomenon <strong>regression towards the mean</strong>.</p>
 <p>A regression model estimates the relationship between a dependent variable, often called <span class="math inline">\(y\)</span> and independent variables (or predictors) often termed <span class="math inline">\(X\)</span>. Note the capital letter <span class="math inline">\(X\)</span> to indicate that it can be a collection of independent variables (a matrix). We try a definition:</p>
 <div class="rmddef">
 <p>
@@ -183,10 +466,8 @@ component (error term, residuals)
 </div>
 <p>In a regression model, we are not after the exact values of the dependent variable, but after the systematic influence of predictors on the mean value of the dependent variable. Because of the error term (which can contain random fluctuations, measurement errors etc.), the dependent variable <span class="math inline">\(y\)</span> is a <strong>random variable</strong>.</p>
 </div>
-<div id="simple-linear-regression" class="section level2" number="9.2">
-<h2>
-<span class="header-section-number">9.2</span> Simple linear regression<a class="anchor" aria-label="anchor" href="#simple-linear-regression"><i class="fas fa-link"></i></a>
-</h2>
+<div id="simple-linear-regression" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Simple linear regression<a href="lin-reg.html#simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In case we have one predictor only, the model is a simple linear regression model and its geometric form is a line. A line is defined by its intercept (the point where it cuts the <span class="math inline">\(y\)</span> axis) and its slope. This is precisely the form of a simple linear regression model:</p>
 <div class="rmddef">
 <p>
@@ -223,55 +504,47 @@ i.e. the residuals are normally distributed, we call the model a
 </div>
 <p>The assumptions of the normal linear regression model can be summarized as LINE:</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>L</strong>inear relationship between variables</li>
-<li>
-<strong>I</strong>ndependence of residuals</li>
-<li>
-<strong>N</strong>ormal residuals</li>
-<li>
-<strong>E</strong>quality of variance (called homoscedasticity) and a mean of zero in residuals</li>
+<li><strong>L</strong>inear relationship between variables</li>
+<li><strong>I</strong>ndependence of residuals</li>
+<li><strong>N</strong>ormal residuals</li>
+<li><strong>E</strong>quality of variance (called homoscedasticity) and a mean of zero in residuals</li>
 </ol>
 <p>Before you look at the model results, the confidence intervals of the slope or the intercept, you have to ensure that those assumptions are met!</p>
 </div>
-<div id="example-relationship-between-the-time-in-the-library-and-the-travel-time" class="section level2" number="9.3">
-<h2>
-<span class="header-section-number">9.3</span> Example: Relationship between the time in the library and the travel time<a class="anchor" aria-label="anchor" href="#example-relationship-between-the-time-in-the-library-and-the-travel-time"><i class="fas fa-link"></i></a>
-</h2>
+<div id="example-relationship-between-the-time-in-the-library-and-the-travel-time" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Example: Relationship between the time in the library and the travel time<a href="lin-reg.html#example-relationship-between-the-time-in-the-library-and-the-travel-time" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We come back to our lovely getsmarter university and want to study the relationship between the time a student needs to come to the university and the time she spends in the library.</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://moderndive.github.io/moderndive/">moderndive</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="lin-reg.html#cb145-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb145-2"><a href="lin-reg.html#cb145-2" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
+<span id="cb145-3"><a href="lin-reg.html#cb145-3" tabindex="-1"></a><span class="fu">library</span>(moderndive)</span>
+<span id="cb145-4"><a href="lin-reg.html#cb145-4" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
 <p>Let’s generate the population.</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">student_id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12000</span></span>
-<span>  </span>
-<span><span class="va">travel_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.8</span>, min <span class="op">=</span> <span class="fl">5</span>, max <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,</span>
-<span>             <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.2</span>, min <span class="op">=</span> <span class="fl">60</span>, max <span class="op">=</span> <span class="fl">120</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'m'</span>, <span class="st">'f'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">12000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">residence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span> <span class="st">'urban'</span></span>
-<span>  <span class="kw">else</span> <span class="st">'rural'</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">transport</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="st">'foot'</span></span>
-<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">15</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'foot'</span>, <span class="st">'bike'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">45</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'bike'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">time_lib</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">-</span> <span class="fl">0.7</span> <span class="op">*</span> <span class="va">travel_time</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">getsmarter_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">student_id</span>, <span class="va">gender</span>, <span class="va">residence</span>, <span class="va">transport</span>, <span class="va">travel_time</span>, <span class="va">time_lib</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">getsmarter_pop</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="lin-reg.html#cb146-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb146-2"><a href="lin-reg.html#cb146-2" tabindex="-1"></a></span>
+<span id="cb146-3"><a href="lin-reg.html#cb146-3" tabindex="-1"></a>student_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12000</span></span>
+<span id="cb146-4"><a href="lin-reg.html#cb146-4" tabindex="-1"></a>  </span>
+<span id="cb146-5"><a href="lin-reg.html#cb146-5" tabindex="-1"></a>travel_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">12000</span> <span class="sc">*</span> <span class="fl">0.8</span>, <span class="at">min =</span> <span class="dv">5</span>, <span class="at">max =</span> <span class="dv">40</span>),</span>
+<span id="cb146-6"><a href="lin-reg.html#cb146-6" tabindex="-1"></a>             <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">12000</span> <span class="sc">*</span> <span class="fl">0.2</span>, <span class="at">min =</span> <span class="dv">60</span>, <span class="at">max =</span> <span class="dv">120</span>))</span>
+<span id="cb146-7"><a href="lin-reg.html#cb146-7" tabindex="-1"></a></span>
+<span id="cb146-8"><a href="lin-reg.html#cb146-8" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;m&#39;</span>, <span class="st">&#39;f&#39;</span>), <span class="at">size =</span> <span class="dv">12000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb146-9"><a href="lin-reg.html#cb146-9" tabindex="-1"></a></span>
+<span id="cb146-10"><a href="lin-reg.html#cb146-10" tabindex="-1"></a>residence <span class="ot">&lt;-</span> <span class="fu">sapply</span>(travel_time, <span class="cf">function</span>(x) {</span>
+<span id="cb146-11"><a href="lin-reg.html#cb146-11" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="st">&#39;urban&#39;</span></span>
+<span id="cb146-12"><a href="lin-reg.html#cb146-12" tabindex="-1"></a>  <span class="cf">else</span> <span class="st">&#39;rural&#39;</span></span>
+<span id="cb146-13"><a href="lin-reg.html#cb146-13" tabindex="-1"></a>})</span>
+<span id="cb146-14"><a href="lin-reg.html#cb146-14" tabindex="-1"></a></span>
+<span id="cb146-15"><a href="lin-reg.html#cb146-15" tabindex="-1"></a>transport <span class="ot">&lt;-</span> <span class="fu">sapply</span>(travel_time, <span class="cf">function</span>(x) {</span>
+<span id="cb146-16"><a href="lin-reg.html#cb146-16" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="st">&#39;foot&#39;</span></span>
+<span id="cb146-17"><a href="lin-reg.html#cb146-17" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">15</span>) <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;foot&#39;</span>, <span class="st">&#39;bike&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb146-18"><a href="lin-reg.html#cb146-18" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">45</span>) <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;bus&#39;</span>, <span class="st">&#39;bike&#39;</span>, <span class="st">&#39;car&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb146-19"><a href="lin-reg.html#cb146-19" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;bus&#39;</span>, <span class="st">&#39;car&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb146-20"><a href="lin-reg.html#cb146-20" tabindex="-1"></a>})</span>
+<span id="cb146-21"><a href="lin-reg.html#cb146-21" tabindex="-1"></a></span>
+<span id="cb146-22"><a href="lin-reg.html#cb146-22" tabindex="-1"></a>time_lib <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">60</span> <span class="sc">-</span> <span class="fl">0.7</span> <span class="sc">*</span> travel_time <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(travel_time), <span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb146-23"><a href="lin-reg.html#cb146-23" tabindex="-1"></a></span>
+<span id="cb146-24"><a href="lin-reg.html#cb146-24" tabindex="-1"></a>getsmarter_pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>(student_id, gender, residence, transport, travel_time, time_lib)</span>
+<span id="cb146-25"><a href="lin-reg.html#cb146-25" tabindex="-1"></a></span>
+<span id="cb146-26"><a href="lin-reg.html#cb146-26" tabindex="-1"></a>getsmarter_pop</span></code></pre></div>
 <pre><code>## # A tibble: 12,000 × 6
 ##    student_id gender residence transport travel_time time_lib
 ##         &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
@@ -287,41 +560,36 @@ i.e. the residuals are normally distributed, we call the model a
 ## 10         10 f      urban     bus             21.0      282.
 ## # ℹ 11,990 more rows</code></pre>
 <p>We survey 200 students.</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
-<span></span>
-<span><span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div id="fit-a-simple-normal-regression-model" class="section level3" number="9.3.1">
-<h3>
-<span class="header-section-number">9.3.1</span> Fit a simple normal regression model<a class="anchor" aria-label="anchor" href="#fit-a-simple-normal-regression-model"><i class="fas fa-link"></i></a>
-</h3>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="lin-reg.html#cb148-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
+<span id="cb148-2"><a href="lin-reg.html#cb148-2" tabindex="-1"></a></span>
+<span id="cb148-3"><a href="lin-reg.html#cb148-3" tabindex="-1"></a>survey_size <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb148-4"><a href="lin-reg.html#cb148-4" tabindex="-1"></a></span>
+<span id="cb148-5"><a href="lin-reg.html#cb148-5" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">rep_sample_n</span>(getsmarter_pop, <span class="at">size =</span> survey_size, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">reps =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div id="fit-a-simple-normal-regression-model" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Fit a simple normal regression model<a href="lin-reg.html#fit-a-simple-normal-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We first check that the linear model makes sense and the relationship between the two variables is (approximately) linear.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">survey</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">travel_time</span>, y <span class="op">=</span> <span class="va">time_lib</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Travel time (min)'</span>, y <span class="op">=</span> <span class="st">'Time in the library (min)'</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-128-1.png" width="90%"></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="lin-reg.html#cb149-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> survey, <span class="fu">aes</span>(<span class="at">x =</span> travel_time, <span class="at">y =</span> time_lib)) <span class="sc">+</span></span>
+<span id="cb149-2"><a href="lin-reg.html#cb149-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb149-3"><a href="lin-reg.html#cb149-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Travel time (min)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Time in the library (min)&#39;</span>)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-128-1.png" width="90%" /></p>
 <p>This looks reasonably linear, and we can proceed with the modelling.</p>
-<p>To fit a linear model in R, we use the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. The dependent and the independent variables are joined in a <code>formula</code> by a tilde sign <code>~</code>. You can also omit the word formula and just type <code>time_lib ~ travel_time</code>.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lin_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">time_lib</span> <span class="op">~</span> <span class="va">travel_time</span>, data <span class="op">=</span> <span class="va">survey</span><span class="op">)</span></span></code></pre></div>
+<p>To fit a linear model in R, we use the function <code>lm()</code>. The dependent and the independent variables are joined in a <code>formula</code> by a tilde sign <code>~</code>. You can also omit the word formula and just type <code>time_lib ~ travel_time</code>.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="lin-reg.html#cb150-1" tabindex="-1"></a>lin_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> time_lib <span class="sc">~</span> travel_time, <span class="at">data =</span> survey)</span></code></pre></div>
 <p>That’s it 😄.</p>
-<p>Let’s have a look at the estimated intercept and the slope. The function <code>get_regression_table</code> provides a tidy form of the model results, and the function <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable()</a></code> layouts them nicely.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="moderndive.github.io/moderndive/reference/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-table"><table class="table table-sm">
+<p>Let’s have a look at the estimated intercept and the slope. The function <code>get_regression_table</code> provides a tidy form of the model results, and the function <code>kable()</code> layouts them nicely.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="lin-reg.html#cb151-1" tabindex="-1"></a><span class="fu">get_regression_table</span>(lin_mod) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<table>
 <colgroup>
-<col width="17%">
-<col width="13%">
-<col width="14%">
-<col width="14%">
-<col width="11%">
-<col width="13%">
-<col width="13%">
+<col width="17%" />
+<col width="13%" />
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="13%" />
+<col width="13%" />
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th align="left">term</th>
 <th align="right">estimate</th>
 <th align="right">std_error</th>
@@ -329,7 +597,8 @@ i.e. the residuals are normally distributed, we call the model a
 <th align="right">p_value</th>
 <th align="right">lower_ci</th>
 <th align="right">upper_ci</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td align="left">intercept</td>
@@ -350,87 +619,78 @@ i.e. the residuals are normally distributed, we call the model a
 <td align="right">-0.665</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 <p>The estimated intercept equals 302.094 minutes and the slope -0.766 minutes, respectively. We can write our model as:</p>
 <p><span class="math display">\[\widehat{\text{time_lib}_i} = 302.094 - 0.766 \cdot \text{travel_time}_i + \varepsilon_i\]</span>
 The model estimates a <code>time_lib</code> value for every student <span class="math inline">\(i\)</span>, with <span class="math inline">\(i\)</span> being an arbitrary student index running from 1 to 200 because we have surveyed 200 students. The “hat” above <span class="math inline">\(\text{time_lib}_i\)</span> indicates that this is an estimate. The estimated time in the library is the systematic component of the model, namely <span class="math inline">\(302.094 - 0.766 \cdot \text{travel_time}_i\)</span>. The difference of the actual time in the library and this estimated value is the error term or the residuum <span class="math inline">\(\varepsilon_i\)</span>.</p>
-<p>To simplify our analysis, we put the original data, estimated values (also called fitted values) and the residuals in one tibble. The respective values can be extracted from the model object <code>lin_mod</code> with the functions <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code> and <code><a href="https://rdrr.io/r/stats/residuals.html">residuals()</a></code>.</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model_res</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fitted <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span>, residuals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">model_res</span></span></code></pre></div>
+<p>To simplify our analysis, we put the original data, estimated values (also called fitted values) and the residuals in one tibble. The respective values can be extracted from the model object <code>lin_mod</code> with the functions <code>fitted()</code> and <code>residuals()</code>.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="lin-reg.html#cb152-1" tabindex="-1"></a>model_res <span class="ot">&lt;-</span> survey <span class="sc">%&gt;%</span></span>
+<span id="cb152-2"><a href="lin-reg.html#cb152-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">fitted</span>(lin_mod), <span class="at">residuals =</span> <span class="fu">residuals</span>(lin_mod))</span>
+<span id="cb152-3"><a href="lin-reg.html#cb152-3" tabindex="-1"></a></span>
+<span id="cb152-4"><a href="lin-reg.html#cb152-4" tabindex="-1"></a>model_res</span></code></pre></div>
 <pre><code>## # A tibble: 200 × 9
 ## # Groups:   replicate [1]
-##    replicate student_id gender residence transport travel_time time_lib fitted
-##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-##  1         1       1623 m      urban     foot             7.06     299.   297.
-##  2         1       9171 m      urban     bike            11.3      278.   293.
-##  3         1      10207 f      rural     bus            107.       199.   220.
-##  4         1       3506 f      urban     bus             25.0      326.   283.
-##  5         1       8892 f      urban     bus             28.1      259.   281.
-##  6         1       5460 m      urban     bus             23.6      299.   284.
-##  7         1       6120 f      urban     bus             20.0      268.   287.
-##  8         1        865 f      urban     bike            26.6      290.   282.
-##  9         1      11586 m      rural     bus            114.       207.   215.
-## 10         1       8153 f      urban     foot             8.06     297.   296.
-## # ℹ 190 more rows
-## # ℹ 1 more variable: residuals &lt;dbl&gt;</code></pre>
+##    replicate student_id gender residence transport travel_time time_lib fitted residuals
+##        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+##  1         1       1623 m      urban     foot             7.06     299.   297.      2.55
+##  2         1       9171 m      urban     bike            11.3      278.   293.    -15.3 
+##  3         1      10207 f      rural     bus            107.       199.   220.    -21.3 
+##  4         1       3506 f      urban     bus             25.0      326.   283.     42.6 
+##  5         1       8892 f      urban     bus             28.1      259.   281.    -21.2 
+##  6         1       5460 m      urban     bus             23.6      299.   284.     14.8 
+##  7         1       6120 f      urban     bus             20.0      268.   287.    -18.8 
+##  8         1        865 f      urban     bike            26.6      290.   282.      8.03
+##  9         1      11586 m      rural     bus            114.       207.   215.     -7.44
+## 10         1       8153 f      urban     foot             8.06     297.   296.      1.19
+## # ℹ 190 more rows</code></pre>
 <p>Let’s have a look at the residuals and the fitted values.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">model_res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">travel_time</span>, y <span class="op">=</span> <span class="va">time_lib</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xend <span class="op">=</span> <span class="va">travel_time</span>, yend <span class="op">=</span> <span class="va">fitted</span>, lty <span class="op">=</span> <span class="st">'Residuals'</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>  <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, slope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, color <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">'observed'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">fitted</span>, col <span class="op">=</span> <span class="st">'fitted'</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Travel time (min)'</span>, y <span class="op">=</span> <span class="st">'Time in the library (min)'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">''</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>observed <span class="op">=</span> <span class="st">'black'</span>, fitted <span class="op">=</span> <span class="st">'blue'</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'observed'</span>, <span class="st">'fitted'</span><span class="op">)</span>, label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Observed values'</span>, <span class="st">'Fitted values'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_linetype_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">''</span>, values <span class="op">=</span> <span class="op">(</span><span class="st">'Residuals'</span> <span class="op">=</span> <span class="st">'solid'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-132-1.png" width="90%"></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="lin-reg.html#cb154-1" tabindex="-1"></a><span class="fu">ggplot</span>(model_res, <span class="fu">aes</span>(<span class="at">x =</span> travel_time, <span class="at">y =</span> time_lib)) <span class="sc">+</span></span>
+<span id="cb154-2"><a href="lin-reg.html#cb154-2" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> travel_time, <span class="at">yend =</span> fitted, <span class="at">lty =</span> <span class="st">&#39;Residuals&#39;</span>), <span class="at">alpha =</span> <span class="fl">0.2</span>)  <span class="sc">+</span> </span>
+<span id="cb154-3"><a href="lin-reg.html#cb154-3" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(lin_mod)[<span class="dv">1</span>], <span class="at">slope =</span> <span class="fu">coef</span>(lin_mod)[<span class="dv">2</span>], <span class="at">color =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb154-4"><a href="lin-reg.html#cb154-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> <span class="st">&#39;observed&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb154-5"><a href="lin-reg.html#cb154-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> fitted, <span class="at">col =</span> <span class="st">&#39;fitted&#39;</span>), <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb154-6"><a href="lin-reg.html#cb154-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Travel time (min)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Time in the library (min)&#39;</span>) <span class="sc">+</span></span>
+<span id="cb154-7"><a href="lin-reg.html#cb154-7" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">&#39;&#39;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="at">observed =</span> <span class="st">&#39;black&#39;</span>, <span class="at">fitted =</span> <span class="st">&#39;blue&#39;</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&#39;observed&#39;</span>, <span class="st">&#39;fitted&#39;</span>), <span class="at">label =</span> <span class="fu">c</span>(<span class="st">&#39;Observed values&#39;</span>, <span class="st">&#39;Fitted values&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb154-8"><a href="lin-reg.html#cb154-8" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">name =</span> <span class="st">&#39;&#39;</span>, <span class="at">values =</span> (<span class="st">&#39;Residuals&#39;</span> <span class="ot">=</span> <span class="st">&#39;solid&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb154-9"><a href="lin-reg.html#cb154-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&#39;bottom&#39;</span>)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-132-1.png" width="90%" /></p>
 </div>
-<div id="model-assumptions" class="section level3" number="9.3.2">
-<h3>
-<span class="header-section-number">9.3.2</span> Model assumptions<a class="anchor" aria-label="anchor" href="#model-assumptions"><i class="fas fa-link"></i></a>
-</h3>
+<div id="model-assumptions" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Model assumptions<a href="lin-reg.html#model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Before we interpret the meaning of the model parameters <em>intercept</em> and <em>slope</em>, we have to check the model assumptions. We already saw that the relationship is reasonably linear. Let’s look at the rest of the assumptions.</p>
 <p><strong>Independent residuals</strong>. This is difficult to check and should come with the study design. If you have, like in our example, independently surveyed students, you can reasonably assume that both, the data and the residuals are independent. Conversely, it means that you cannot use a normal linear regression model for time -dependent data (time series) or spatially dependent data. The line you fit will still be correct, but the confidence intervals won’t.</p>
 <p><strong>Normal residuals.</strong> To check for normality of residuals, we use a graphical tool, namely the so-called qq-plot. It compares random data from a normal distribution with our residuals. If the data fall on strait line (at least approximately) then we can conclude that our residuals are normally distributed.</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">model_res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Quantiles of the normal distribution'</span>,</span>
-<span>       y <span class="op">=</span> <span class="st">'Qauntiles of the residuals'</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-133-1.png" width="90%"></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="lin-reg.html#cb155-1" tabindex="-1"></a><span class="fu">ggplot</span>(model_res, <span class="fu">aes</span>(<span class="at">sample =</span> residuals)) <span class="sc">+</span> </span>
+<span id="cb155-2"><a href="lin-reg.html#cb155-2" tabindex="-1"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> </span>
+<span id="cb155-3"><a href="lin-reg.html#cb155-3" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb155-4"><a href="lin-reg.html#cb155-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Quantiles of the normal distribution&#39;</span>,</span>
+<span id="cb155-5"><a href="lin-reg.html#cb155-5" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&#39;Qauntiles of the residuals&#39;</span>)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-133-1.png" width="90%" /></p>
 <p>This looks good 😄. You will need some practice to judge the qq-plots. You need to worry if you see large deviations from the line for small and large values.</p>
 <p><strong>Equal variance and zero mean.</strong> For the last assumption, we plot the residuals versus fitted values. It is important that the residuals remain (approximately) equally large for small and large fitted values and fluctuate around zero.</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">model_res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">fitted</span>, y <span class="op">=</span> <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>, col <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Fitted values'</span>, y <span class="op">=</span> <span class="st">'Residuals'</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-134-1.png" width="90%"></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="lin-reg.html#cb156-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> model_res, <span class="fu">aes</span>(<span class="at">x =</span> fitted, <span class="at">y =</span> residuals)) <span class="sc">+</span> </span>
+<span id="cb156-2"><a href="lin-reg.html#cb156-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb156-3"><a href="lin-reg.html#cb156-3" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb156-4"><a href="lin-reg.html#cb156-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Fitted values&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Residuals&#39;</span>)</span></code></pre></div>
+<p><img src="environmental_stat_files/figure-html/unnamed-chunk-134-1.png" width="90%" /></p>
 <p>We have slightly larger residuals for larger fitted values. However, we also have more large than small fitted values (i.e., travel times). This distorts the picture a bit. Overall, there is no serious problem there.</p>
 </div>
-<div id="interprete-your-model" class="section level3" number="9.3.3">
-<h3>
-<span class="header-section-number">9.3.3</span> Interprete your model<a class="anchor" aria-label="anchor" href="#interprete-your-model"><i class="fas fa-link"></i></a>
-</h3>
+<div id="interprete-your-model" class="section level3 hasAnchor" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> Interprete your model<a href="lin-reg.html#interprete-your-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can conclude that our model meets all the assumptions. Therefore, we can interpret the estimated parameters and their confidence intervals now.</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="moderndive.github.io/moderndive/reference/get_regression_table.html">get_regression_table</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-table"><table class="table table-sm">
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="lin-reg.html#cb157-1" tabindex="-1"></a><span class="fu">get_regression_table</span>(lin_mod) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<table>
 <colgroup>
-<col width="17%">
-<col width="13%">
-<col width="14%">
-<col width="14%">
-<col width="11%">
-<col width="13%">
-<col width="13%">
+<col width="17%" />
+<col width="13%" />
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="13%" />
+<col width="13%" />
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th align="left">term</th>
 <th align="right">estimate</th>
 <th align="right">std_error</th>
@@ -438,7 +698,8 @@ The model estimates a <code>time_lib</code> value for every student <span class=
 <th align="right">p_value</th>
 <th align="right">lower_ci</th>
 <th align="right">upper_ci</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td align="left">intercept</td>
@@ -459,24 +720,22 @@ The model estimates a <code>time_lib</code> value for every student <span class=
 <td align="right">-0.665</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 <p>We see that the time a student spend in the library decreases with increasing travel time. More precisely, if the travel time increases by one minute, the time spent in the library changes by -0.8 [-0.9, -0.7]. The confidence interval is narrow. This means that the estimation is precise.</p>
 <p>Now, we need to frame our result. A decrease by less than a minute per minute travel time sounds rather small. However, if a student needs one hour more to come to the university, she spends roughly 45 minutes less in the library. Basically, the time spent for travelling cannot be spent working in the library. Stated like this, the result is important for students’ time management.</p>
 </div>
 </div>
-<div id="practice-on-your-own-8" class="section level2" number="9.4">
-<h2>
-<span class="header-section-number">9.4</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-8"><i class="fas fa-link"></i></a>
-</h2>
-<ol class="exercises"><ol style="list-style-type: decimal">
-<li>Predictors do not need to be numeric. Work through Chapter 5.2 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive">2021</a>)</span> to see an example of a categorical predictor.</li>
-</ol></ol>
+<div id="practice-on-your-own-8" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Practice on your own!<a href="lin-reg.html#practice-on-your-own-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol class="exercises">
+<ol style="list-style-type: decimal">
+<li>Predictors do not need to be numeric. Work through Chapter 5.2 in <span class="citation">Ismay and Kim (<a href="#ref-ModernDive">2021</a>)</span> to see an example of a categorical predictor.</li>
+</ol>
+</ol>
 </div>
-<div id="reading-assignment-7" class="section level2" number="9.5">
-<h2>
-<span class="header-section-number">9.5</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-7"><i class="fas fa-link"></i></a>
-</h2>
-<p>Chapter 5 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive">2021</a>)</span></p>
+<div id="reading-assignment-7" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Reading assignment<a href="lin-reg.html#reading-assignment-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Chapter 5 in <span class="citation">Ismay and Kim (<a href="#ref-ModernDive">2021</a>)</span></p>
 <!-- ## Turning in your work -->
 <!-- - Save your R Notebook as an *.Rmd file.  -->
 <!-- - Upload your R Notebook to ILIAS. You don't need to upload the .nb.html file. You will find an upload option in today's session. -->
@@ -484,50 +743,77 @@ The model estimates a <code>time_lib</code> value for every student <span class=
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></div>
-<div class="next"><a href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#lin-reg"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="nav-link" href="#what-is-a-linear-regression-model"><span class="header-section-number">9.1</span> What is a linear regression model?</a></li>
-<li><a class="nav-link" href="#simple-linear-regression"><span class="header-section-number">9.2</span> Simple linear regression</a></li>
-<li>
-<a class="nav-link" href="#example-relationship-between-the-time-in-the-library-and-the-travel-time"><span class="header-section-number">9.3</span> Example: Relationship between the time in the library and the travel time</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#fit-a-simple-normal-regression-model"><span class="header-section-number">9.3.1</span> Fit a simple normal regression model</a></li>
-<li><a class="nav-link" href="#model-assumptions"><span class="header-section-number">9.3.2</span> Model assumptions</a></li>
-<li><a class="nav-link" href="#interprete-your-model"><span class="header-section-number">9.3.3</span> Interprete your model</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#practice-on-your-own-8"><span class="header-section-number">9.4</span> Practice on your own!</a></li>
-<li><a class="nav-link" href="#reading-assignment-7"><span class="header-section-number">9.5</span> Reading assignment</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/09-linear-regression.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/09-linear-regression.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-Fahrmeir2009" class="csl-entry">
+Fahrmeir, L., T. Kneib, and S. Lang. 2009. <em>Regression</em>. <span>Springer</span>. <a href="http://link.springer.com/book/10.1007/978-3-642-01837-4">http://link.springer.com/book/10.1007/978-3-642-01837-4</a>.
 </div>
-    </nav>
+<div id="ref-ModernDive" class="csl-entry">
+Ismay, Chester, and Albert Y. Kim. 2021. <em><span>ModernDive</span>: <span>Statistical Inference</span> via <span>Data Science</span></em>. <a href="https://moderndive.com/">https://moderndive.com/</a>.
 </div>
-
 </div>
-</div> <!-- .container -->
+            </section>
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-04-14.</p>
+          </div>
+        </div>
+      </div>
+<a href="hypothesis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lin-reg-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -539,22 +825,7 @@ The model estimates a <code>time_lib</code> value for every student <span class=
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>
