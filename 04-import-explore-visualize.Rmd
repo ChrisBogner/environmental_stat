@@ -16,9 +16,15 @@ library(tidyverse)
 
 Let's assume that the data is stored in the folder `data`. If this is not your case, change the path accordingly. To load the data, we can choose among several functions that all start with `read_`. The most generic one is `read_delim()` where we can specify how the columns are separated (delimited) in the data file.
 
+
 ```{r}
 emissions <- read_delim(file = 'data/emissions.csv', delim = ';')
 ```
+
+The path above looks for a folder called `data` in your working directory. The working directory is the local folder on your computer that that R will use for reading and writing files. Working with working directories is very ueful, because you don't have the write the full path to a data file, for example `C:/Users/...`. These file directories will be different for each user and computer. The code chunk above here uses a relative directory, which starts in the working directory. This makes sharing code very easy, as long as everyone is using the same folder structure, because you don't have to specify the folder where the data is stored. 
+
+If the folder `data` is not stored in your current working directory, but in a folder one level up, you should add two dots to the directory above: `emissions <- read_delim(file = '../data/emissions.csv', delim = ';')`. This will R to search for the folder named `data` at another location. 
+
 
 Let's have a look at the data. This is a data set on greenhouse gas emissions by source sector in the EU that I downloaded from [eurostat](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=env_air_gge&lang=en) on 2021-04-30. It contains the greenhouse gas emissions in CO~2~ equivalent, in Mio tonnes, per vehicle type. The database could be a great source for data in your reports `r emo::ji('smile')`.
 

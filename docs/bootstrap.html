@@ -1,394 +1,107 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Bootstrap and confidence intervals | Environmental Statistics</title>
-  <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="7 Bootstrap and confidence intervals | Environmental Statistics" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  <meta name="github-repo" content="https://github.com/ChrisBogner/environmental_stat" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Bootstrap and confidence intervals | Environmental Statistics" />
-  
-  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  
-
-<meta name="author" content="Christina Bogner, Marijn van der Meij" />
-
-
-<meta name="date" content="2025-04-15" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="sampling.html"/>
-<link rel="next" href="hypothesis.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>7 Bootstrap and confidence intervals | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner, Marijn van der Meij">
+<meta name="description" content="Explain the idea behind the bootstrap  Calculate bootstrap confidence intervals for the mean  In chapter 6 we studied the variability of repeated random sampling from a population. We did computer...">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="7 Bootstrap and confidence intervals | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Explain the idea behind the bootstrap  Calculate bootstrap confidence intervals for the mean  In chapter 6 we studied the variability of repeated random sampling from a population. We did computer...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7 Bootstrap and confidence intervals | Environmental Statistics">
+<meta name="twitter:description" content="Explain the idea behind the bootstrap  Calculate bootstrap confidence intervals for the mean  In chapter 6 we studied the variability of repeated random sampling from a population. We did computer...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
-<link rel="stylesheet" href="css/all.css" type="text/css" />
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Datenanalyse mit R</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#intended-learning-outcomes-ilos"><i class="fa fa-check"></i>Intended learning outcomes (ILOs)</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#literature"><i class="fa fa-check"></i>Literature</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-these-lecture-notes"><i class="fa fa-check"></i>Why these lecture notes</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#reproducibility"><i class="fa fa-check"></i>Reproducibility</a></li>
-</ul></li>
-<li class="part"><span><b>I Part I: Explore data</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Introduction to R and RStudio</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#what-is"><i class="fa fa-check"></i><b>1.1</b> What is <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>?</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#organize-your-work"><i class="fa fa-check"></i><b>1.3</b> Organize your work</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#practice-on-your-own"><i class="fa fa-check"></i><b>1.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="1.5" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#turning-in-your-work"><i class="fa fa-check"></i><b>1.5</b> Turning in your work</a></li>
-<li class="chapter" data-level="1.6" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#reading-assignment"><i class="fa fa-check"></i><b>1.6</b> Reading assignment</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html"><i class="fa fa-check"></i><b>2</b> Using R Markdown for reproducible research</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#reproducibility-in-research"><i class="fa fa-check"></i><b>2.1</b> Reproducibility in research</a></li>
-<li class="chapter" data-level="2.2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#combining-code-and-report-in-one-document"><i class="fa fa-check"></i><b>2.2</b> Combining code and report in one document</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#create-a-new-r-notebook"><i class="fa fa-check"></i><b>2.2.1</b> Create a new R Notebook</a></li>
-<li class="chapter" data-level="2.2.2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#customize-the-header"><i class="fa fa-check"></i><b>2.2.2</b> Customize the header</a></li>
-<li class="chapter" data-level="2.2.3" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#structure-your-notebook"><i class="fa fa-check"></i><b>2.2.3</b> Structure your notebook</a></li>
-<li class="chapter" data-level="2.2.4" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#preview"><i class="fa fa-check"></i><b>2.2.4</b> Preview</a></li>
-<li class="chapter" data-level="2.2.5" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#other-output-options"><i class="fa fa-check"></i><b>2.2.5</b> Other output options</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#entering-and-running-commands"><i class="fa fa-check"></i><b>2.3</b> Entering and running commands</a></li>
-<li class="chapter" data-level="2.4" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#a-brief-recap-of-data-types"><i class="fa fa-check"></i><b>2.4</b> A brief recap of data types</a></li>
-<li class="chapter" data-level="2.5" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#practice-on-your-own-1"><i class="fa fa-check"></i><b>2.5</b> Practice on your own!</a></li>
-<li class="chapter" data-level="2.6" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#turning-in-your-work-1"><i class="fa fa-check"></i><b>2.6</b> Turning in your work</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="what-is-data.html"><a href="what-is-data.html"><i class="fa fa-check"></i><b>3</b> What is data?</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="what-is-data.html"><a href="what-is-data.html#installing-r-packages"><i class="fa fa-check"></i><b>3.1</b> Installing R packages</a></li>
-<li class="chapter" data-level="3.2" data-path="what-is-data.html"><a href="what-is-data.html#welcome-the-penguins"><i class="fa fa-check"></i><b>3.2</b> Welcome the penguins!</a></li>
-<li class="chapter" data-level="3.3" data-path="what-is-data.html"><a href="what-is-data.html#the-square-braces-revisited"><i class="fa fa-check"></i><b>3.3</b> The square braces revisited</a></li>
-<li class="chapter" data-level="3.4" data-path="what-is-data.html"><a href="what-is-data.html#lets-look-at-them"><i class="fa fa-check"></i><b>3.4</b> Let’s look at them</a></li>
-<li class="chapter" data-level="3.5" data-path="what-is-data.html"><a href="what-is-data.html#practice-on-your-own-2"><i class="fa fa-check"></i><b>3.5</b> Practice on your own!</a></li>
-<li class="chapter" data-level="3.6" data-path="what-is-data.html"><a href="what-is-data.html#reading-assignment-1"><i class="fa fa-check"></i><b>3.6</b> Reading assignment</a></li>
-<li class="chapter" data-level="3.7" data-path="what-is-data.html"><a href="what-is-data.html#turning-in-your-work-2"><i class="fa fa-check"></i><b>3.7</b> Turning in your work</a></li>
-<li class="chapter" data-level="3.8" data-path="what-is-data.html"><a href="what-is-data.html#additional-reading"><i class="fa fa-check"></i><b>3.8</b> Additional reading</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html"><i class="fa fa-check"></i><b>4</b> Import, visualize and explore data</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#data-import-from-text-files"><i class="fa fa-check"></i><b>4.1</b> Data import from text files</a></li>
-<li class="chapter" data-level="4.2" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#visualization-with-the-library-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Visualization with the library <code>ggplot2</code></a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#line-plot"><i class="fa fa-check"></i><b>4.2.1</b> Line plot</a></li>
-<li class="chapter" data-level="4.2.2" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#point-plot"><i class="fa fa-check"></i><b>4.2.2</b> Point plot</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#histogram"><i class="fa fa-check"></i><b>4.3</b> Histogram</a></li>
-<li class="chapter" data-level="4.4" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#boxplot"><i class="fa fa-check"></i><b>4.4</b> Boxplot</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#barplot"><i class="fa fa-check"></i><b>4.4.1</b> Barplot</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#practice-on-your-own-3"><i class="fa fa-check"></i><b>4.5</b> Practice on your own!</a></li>
-<li class="chapter" data-level="4.6" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#reading-assignment-2"><i class="fa fa-check"></i><b>4.6</b> Reading assignment</a></li>
-<li class="chapter" data-level="4.7" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#turning-in-your-work-3"><i class="fa fa-check"></i><b>4.7</b> Turning in your work</a></li>
-<li class="chapter" data-level="4.8" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#additional-reading-1"><i class="fa fa-check"></i><b>4.8</b> Additional reading</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>5</b> Explorative workflow with <code>tidyverse</code></a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="tidyverse.html"><a href="tidyverse.html#core-packages"><i class="fa fa-check"></i><b>5.1</b> Core packages</a></li>
-<li class="chapter" data-level="5.2" data-path="tidyverse.html"><a href="tidyverse.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory data analysis</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="tidyverse.html"><a href="tidyverse.html#read-data-revisited"><i class="fa fa-check"></i><b>5.2.1</b> Read data, revisited</a></li>
-<li class="chapter" data-level="5.2.2" data-path="tidyverse.html"><a href="tidyverse.html#date-and-time-made-easy"><i class="fa fa-check"></i><b>5.2.2</b> Date and time made easy</a></li>
-<li class="chapter" data-level="5.2.3" data-path="tidyverse.html"><a href="tidyverse.html#summarize"><i class="fa fa-check"></i><b>5.2.3</b> Summarize</a></li>
-<li class="chapter" data-level="5.2.4" data-path="tidyverse.html"><a href="tidyverse.html#the-grammar-of-data-manipulation-dplyr"><i class="fa fa-check"></i><b>5.2.4</b> The grammar of data manipulation – <code>dplyr</code></a></li>
-<li class="chapter" data-level="5.2.5" data-path="tidyverse.html"><a href="tidyverse.html#visualize"><i class="fa fa-check"></i><b>5.2.5</b> Visualize</a></li>
-<li class="chapter" data-level="5.2.6" data-path="tidyverse.html"><a href="tidyverse.html#create-new-variables-with-mutate"><i class="fa fa-check"></i><b>5.2.6</b> Create new variables with <code>mutate()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="tidyverse.html"><a href="tidyverse.html#practice-on-your-own-4"><i class="fa fa-check"></i><b>5.3</b> Practice on your own!</a></li>
-<li class="chapter" data-level="5.4" data-path="tidyverse.html"><a href="tidyverse.html#reading-assignment-3"><i class="fa fa-check"></i><b>5.4</b> Reading assignment</a></li>
-<li class="chapter" data-level="5.5" data-path="tidyverse.html"><a href="tidyverse.html#additional-reading-and-videos"><i class="fa fa-check"></i><b>5.5</b> Additional reading and videos</a></li>
-</ul></li>
-<li class="part"><span><b>II Part II: Statistical inference</b></span></li>
-<li class="chapter" data-level="6" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>6</b> Sampling and variability</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="sampling.html"><a href="sampling.html#random-sampling-of-data"><i class="fa fa-check"></i><b>6.1</b> Random sampling of data</a></li>
-<li class="chapter" data-level="6.2" data-path="sampling.html"><a href="sampling.html#number-of-replications-and-variability"><i class="fa fa-check"></i><b>6.2</b> Number of replications and variability</a></li>
-<li class="chapter" data-level="6.3" data-path="sampling.html"><a href="sampling.html#sample-size"><i class="fa fa-check"></i><b>6.3</b> Sample size</a></li>
-<li class="chapter" data-level="6.4" data-path="sampling.html"><a href="sampling.html#practice-on-your-own-5"><i class="fa fa-check"></i><b>6.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="6.5" data-path="sampling.html"><a href="sampling.html#reading-assignment-4"><i class="fa fa-check"></i><b>6.5</b> Reading assignment</a></li>
-<li class="chapter" data-level="6.6" data-path="sampling.html"><a href="sampling.html#turning-in-your-work-4"><i class="fa fa-check"></i><b>6.6</b> Turning in your work</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>7</b> Bootstrap and confidence intervals</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="bootstrap.html"><a href="bootstrap.html#the-formulas"><i class="fa fa-check"></i><b>7.1</b> The formulas</a></li>
-<li class="chapter" data-level="7.2" data-path="bootstrap.html"><a href="bootstrap.html#bootstrap-use-your-computer"><i class="fa fa-check"></i><b>7.2</b> Bootstrap – use your computer</a></li>
-<li class="chapter" data-level="7.3" data-path="bootstrap.html"><a href="bootstrap.html#confidence-intervals-for-the-mean-travel-time"><i class="fa fa-check"></i><b>7.3</b> Confidence intervals for the mean travel time</a></li>
-<li class="chapter" data-level="7.4" data-path="bootstrap.html"><a href="bootstrap.html#bootstrap-with-the-library-infer"><i class="fa fa-check"></i><b>7.4</b> Bootstrap with the library <code>infer</code></a></li>
-<li class="chapter" data-level="7.5" data-path="bootstrap.html"><a href="bootstrap.html#interpreting-the-confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Interpreting the confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="bootstrap.html"><a href="bootstrap.html#practice-on-your-own-6"><i class="fa fa-check"></i><b>7.6</b> Practice on your own!</a></li>
-<li class="chapter" data-level="7.7" data-path="bootstrap.html"><a href="bootstrap.html#reading-assignment-5"><i class="fa fa-check"></i><b>7.7</b> Reading assignment</a></li>
-<li class="chapter" data-level="7.8" data-path="bootstrap.html"><a href="bootstrap.html#turning-in-your-work-5"><i class="fa fa-check"></i><b>7.8</b> Turning in your work</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="hypothesis.html"><a href="hypothesis.html"><i class="fa fa-check"></i><b>8</b> Hypothesis tests versus effect size estimation</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="hypothesis.html"><a href="hypothesis.html#hypothesis-tests-with-infer"><i class="fa fa-check"></i><b>8.1</b> Hypothesis tests with <code>infer</code></a></li>
-<li class="chapter" data-level="8.2" data-path="hypothesis.html"><a href="hypothesis.html#there-is-only-one-test"><i class="fa fa-check"></i><b>8.2</b> There is only one test!</a></li>
-<li class="chapter" data-level="8.3" data-path="hypothesis.html"><a href="hypothesis.html#hypothesis-test-versus-effect-size-estimation"><i class="fa fa-check"></i><b>8.3</b> Hypothesis test versus effect size estimation</a></li>
-<li class="chapter" data-level="8.4" data-path="hypothesis.html"><a href="hypothesis.html#practice-on-your-own-7"><i class="fa fa-check"></i><b>8.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="8.5" data-path="hypothesis.html"><a href="hypothesis.html#reading-assignment-6"><i class="fa fa-check"></i><b>8.5</b> Reading assignment</a></li>
-<li class="chapter" data-level="8.6" data-path="hypothesis.html"><a href="hypothesis.html#additional-resources"><i class="fa fa-check"></i><b>8.6</b> Additional resources</a></li>
-<li class="chapter" data-level="8.7" data-path="hypothesis.html"><a href="hypothesis.html#turning-in-your-work-6"><i class="fa fa-check"></i><b>8.7</b> Turning in your work</a></li>
-</ul></li>
-<li class="part"><span><b>III Part III: Statistical modelling</b></span></li>
-<li class="chapter" data-level="9" data-path="lin-reg.html"><a href="lin-reg.html"><i class="fa fa-check"></i><b>9</b> Linear regression</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="lin-reg.html"><a href="lin-reg.html#what-is-a-linear-regression-model"><i class="fa fa-check"></i><b>9.1</b> What is a linear regression model?</a></li>
-<li class="chapter" data-level="9.2" data-path="lin-reg.html"><a href="lin-reg.html#simple-linear-regression"><i class="fa fa-check"></i><b>9.2</b> Simple linear regression</a></li>
-<li class="chapter" data-level="9.3" data-path="lin-reg.html"><a href="lin-reg.html#example-relationship-between-the-time-in-the-library-and-the-travel-time"><i class="fa fa-check"></i><b>9.3</b> Example: Relationship between the time in the library and the travel time</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="lin-reg.html"><a href="lin-reg.html#fit-a-simple-normal-regression-model"><i class="fa fa-check"></i><b>9.3.1</b> Fit a simple normal regression model</a></li>
-<li class="chapter" data-level="9.3.2" data-path="lin-reg.html"><a href="lin-reg.html#model-assumptions"><i class="fa fa-check"></i><b>9.3.2</b> Model assumptions</a></li>
-<li class="chapter" data-level="9.3.3" data-path="lin-reg.html"><a href="lin-reg.html#interprete-your-model"><i class="fa fa-check"></i><b>9.3.3</b> Interprete your model</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="lin-reg.html"><a href="lin-reg.html#practice-on-your-own-8"><i class="fa fa-check"></i><b>9.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="9.5" data-path="lin-reg.html"><a href="lin-reg.html#reading-assignment-7"><i class="fa fa-check"></i><b>9.5</b> Reading assignment</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html"><i class="fa fa-check"></i><b>10</b> Inference in linear regression</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#how-good-is-the-model"><i class="fa fa-check"></i><b>10.1</b> How good is the model?</a></li>
-<li class="chapter" data-level="10.2" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#bootstrap-with-infer-confidence-interval-for-the-slope"><i class="fa fa-check"></i><b>10.2</b> Bootstrap with <code>infer</code>: Confidence interval for the slope</a></li>
-<li class="chapter" data-level="10.3" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#practice-on-your-own-9"><i class="fa fa-check"></i><b>10.3</b> Practice on your own!</a></li>
-<li class="chapter" data-level="10.4" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#reading-assignment-8"><i class="fa fa-check"></i><b>10.4</b> Reading assignment</a></li>
-<li class="chapter" data-level="10.5" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#turning-in-your-work-7"><i class="fa fa-check"></i><b>10.5</b> Turning in your work</a></li>
-</ul></li>
-<li class="part"><span><b>IV Part IV: Additional topics</b></span></li>
-<li class="chapter" data-level="11" data-path="tsa.html"><a href="tsa.html"><i class="fa fa-check"></i><b>11</b> Introduction to time series analysis</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="tsa.html"><a href="tsa.html#what-are-time-series"><i class="fa fa-check"></i><b>11.1</b> What are time series?</a></li>
-<li class="chapter" data-level="11.2" data-path="tsa.html"><a href="tsa.html#an-example-from-the-german-meteorological-service-dwd"><i class="fa fa-check"></i><b>11.2</b> An example from the German Meteorological Service (DWD)</a></li>
-<li class="chapter" data-level="11.3" data-path="tsa.html"><a href="tsa.html#trend-analysis-of-yearly-data"><i class="fa fa-check"></i><b>11.3</b> Trend analysis of yearly data</a></li>
-<li class="chapter" data-level="11.4" data-path="tsa.html"><a href="tsa.html#analysis-of-seasonality"><i class="fa fa-check"></i><b>11.4</b> Analysis of seasonality</a></li>
-<li class="chapter" data-level="11.5" data-path="tsa.html"><a href="tsa.html#advanced-simultaneous-analysis-of-trend-and-seasonality"><i class="fa fa-check"></i><b>11.5</b> Advanced: Simultaneous analysis of trend and seasonality</a></li>
-<li class="chapter" data-level="11.6" data-path="tsa.html"><a href="tsa.html#practice-on-your-own-10"><i class="fa fa-check"></i><b>11.6</b> Practice on your own!</a></li>
-<li class="chapter" data-level="11.7" data-path="tsa.html"><a href="tsa.html#turning-in-your-work-8"><i class="fa fa-check"></i><b>11.7</b> Turning in your work</a></li>
-</ul></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="stat-background.html"><a href="stat-background.html"><i class="fa fa-check"></i><b>A</b> Statistics refresher</a>
-<ul>
-<li class="chapter" data-level="A.1" data-path="stat-background.html"><a href="stat-background.html#descriptive-statistics"><i class="fa fa-check"></i><b>A.1</b> Descriptive statistics</a>
-<ul>
-<li class="chapter" data-level="A.1.1" data-path="stat-background.html"><a href="stat-background.html#mean"><i class="fa fa-check"></i><b>A.1.1</b> Mean</a></li>
-<li class="chapter" data-level="A.1.2" data-path="stat-background.html"><a href="stat-background.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>A.1.2</b> Variance and standard deviation</a></li>
-</ul></li>
-<li class="chapter" data-level="A.2" data-path="stat-background.html"><a href="stat-background.html#measures-of-association"><i class="fa fa-check"></i><b>A.2</b> Measures of association</a>
-<ul>
-<li class="chapter" data-level="A.2.1" data-path="stat-background.html"><a href="stat-background.html#linear-correlation-coefficent"><i class="fa fa-check"></i><b>A.2.1</b> Linear correlation coefficent</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html"><i class="fa fa-check"></i><b>B</b> Data sources and final report</a>
-<ul>
-<li class="chapter" data-level="B.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#data-sources"><i class="fa fa-check"></i><b>B.1</b> Data sources</a>
-<ul>
-<li class="chapter" data-level="B.1.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#federal-statistical-office"><i class="fa fa-check"></i><b>B.1.1</b> Federal Statistical Office</a></li>
-<li class="chapter" data-level="B.1.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#eurostat"><i class="fa fa-check"></i><b>B.1.2</b> eurostat</a></li>
-<li class="chapter" data-level="B.1.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#gapminder"><i class="fa fa-check"></i><b>B.1.3</b> gapminder</a></li>
-<li class="chapter" data-level="B.1.4" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#national-oceanic-and-atmospheric-administration-noaa"><i class="fa fa-check"></i><b>B.1.4</b> National Oceanic and Atmospheric Administration (NOAA)</a></li>
-<li class="chapter" data-level="B.1.5" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#more-data-sources"><i class="fa fa-check"></i><b>B.1.5</b> More data sources</a></li>
-</ul></li>
-<li class="chapter" data-level="B.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#research-proposal"><i class="fa fa-check"></i><b>B.2</b> Research proposal</a></li>
-<li class="chapter" data-level="B.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#structure-of-the-final-report"><i class="fa fa-check"></i><b>B.3</b> Structure of the final report</a>
-<ul>
-<li class="chapter" data-level="B.3.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#sturcture-of-the-working-directory"><i class="fa fa-check"></i><b>B.3.1</b> Sturcture of the working directory</a></li>
-<li class="chapter" data-level="B.3.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#download-and-save-data"><i class="fa fa-check"></i><b>B.3.2</b> Download and save data</a></li>
-<li class="chapter" data-level="B.3.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#structure-of-the-report"><i class="fa fa-check"></i><b>B.3.3</b> Structure of the report</a></li>
-</ul></li>
-<li class="chapter" data-level="B.4" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#evaluation-critera"><i class="fa fa-check"></i><b>B.4</b> Evaluation critera</a></li>
-</ul></li>
-<li class="chapter" data-level="C" data-path="additional-exercises.html"><a href="additional-exercises.html"><i class="fa fa-check"></i><b>C</b> Additional exercises</a>
-<ul>
-<li class="chapter" data-level="C.1" data-path="additional-exercises.html"><a href="additional-exercises.html#introduction-to-r-and-rstudio-1"><i class="fa fa-check"></i><b>C.1</b> Introduction to R and RStudio</a>
-<ul>
-<li class="chapter" data-level="C.1.1" data-path="additional-exercises.html"><a href="additional-exercises.html#rob1"><i class="fa fa-check"></i><b>C.1.1</b> Rob’s account book</a></li>
-<li class="chapter" data-level="C.1.2" data-path="additional-exercises.html"><a href="additional-exercises.html#rob2"><i class="fa fa-check"></i><b>C.1.2</b> Missing values</a></li>
-<li class="chapter" data-level="C.1.3" data-path="additional-exercises.html"><a href="additional-exercises.html#firstplot"><i class="fa fa-check"></i><b>C.1.3</b> Your very first plot</a></li>
-</ul></li>
-<li class="chapter" data-level="C.2" data-path="additional-exercises.html"><a href="additional-exercises.html#the-big-practical-importing-wrangling-summerizing-and-plotting"><i class="fa fa-check"></i><b>C.2</b> The big practical: importing, wrangling, summerizing and plotting</a>
-<ul>
-<li class="chapter" data-level="C.2.1" data-path="additional-exercises.html"><a href="additional-exercises.html#temperature-along-the-dutch-coast"><i class="fa fa-check"></i><b>C.2.1</b> Temperature along the Dutch coast</a></li>
-<li class="chapter" data-level="C.2.2" data-path="additional-exercises.html"><a href="additional-exercises.html#temperature-along-the-dutch-coast-revisited"><i class="fa fa-check"></i><b>C.2.2</b> Temperature along the Dutch coast, revisited</a></li>
-<li class="chapter" data-level="C.2.3" data-path="additional-exercises.html"><a href="additional-exercises.html#excel-data-turns-tidy"><i class="fa fa-check"></i><b>C.2.3</b> Excel data turns tidy</a></li>
-</ul></li>
-<li class="chapter" data-level="C.3" data-path="additional-exercises.html"><a href="additional-exercises.html#the-big-practical-statistical-inference"><i class="fa fa-check"></i><b>C.3</b> The big practical: statistical inference</a>
-<ul>
-<li class="chapter" data-level="C.3.1" data-path="additional-exercises.html"><a href="additional-exercises.html#species-richness-in-grasslands"><i class="fa fa-check"></i><b>C.3.1</b> Species richness in grasslands</a></li>
-<li class="chapter" data-level="C.3.2" data-path="additional-exercises.html"><a href="additional-exercises.html#soil-compaction"><i class="fa fa-check"></i><b>C.3.2</b> Soil compaction</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="D" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>D</b> Frequently and not-so-frequently asked questions</a>
-<ul>
-<li class="chapter" data-level="" data-path="faq.html"><a href="faq.html#what-is-the-difference-between-double-and-single-quotes"><i class="fa fa-check"></i>What is the difference between double <code>""</code> and single <code>''</code> quotes?</a></li>
-<li class="chapter" data-level="" data-path="faq.html"><a href="faq.html#when-do-we-use-the-pipe-operator-and-when-the-plus-sign-to-connect-lines-of-code"><i class="fa fa-check"></i>When do we use the pipe operator <code>%&gt;%</code> and when the plus sign <code>+</code> to connect lines of code?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="literature-1.html"><a href="literature-1.html"><i class="fa fa-check"></i>Literature</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Summer term 2025">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2025</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Environmental Statistics</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="active" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li class="book-part">Part IV: Additional topics</li>
+<li><a class="" href="tsa.html"><span class="header-section-number">11</span> Introduction to time series analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="bootstrap" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Bootstrap and confidence intervals<a href="bootstrap.html#bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="bootstrap" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Bootstrap and confidence intervals<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
+</h1>
 <div class="rmdoutcomes">
 <ul>
 <li>
@@ -401,69 +114,77 @@ Calculate bootstrap confidence intervals for the mean
 </div>
 <p>In chapter <a href="sampling.html#sampling">6</a> we studied the variability of <strong>repeated random sampling from a population</strong>. We did computer experiments and sampled from a simulated population repeatedly without replacement (i.e. the data could appear in the sample only once) and calculated a statistics, the proportion of rural and urban residents. Such a statistics is a <strong>random variable</strong>, and it is characterized by the <strong>sampling distribution</strong>. It shows which values you can expect by randomly sampling from a population.</p>
 <p>We learned that the shape of the sampling distribution and the size of its standard error depended on the sample size. In this chapter, we will learn how to quantify the standard error or to calculate plausible values (confidence intervals) for real-life applications, when you have one sample only.</p>
-<div id="the-formulas" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> The formulas<a href="bootstrap.html#the-formulas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-formulas" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> The formulas<a class="anchor" aria-label="anchor" href="#the-formulas"><i class="fas fa-link"></i></a>
+</h2>
 <p>You will never have the opportunity to sample/survey repeatedly to estimate the information (i.e. a statistics or parameter) about the population of interest. In real-life applications, you will have one (hopefully cleverly obtained) random sample. So, how can we have access to the shape of the sampling distribution? For several standard statistics, there are formulas that describe the standard error. You have probably learned that the standard error for the estimated mean equalled <span class="math inline">\(\sigma/\sqrt(n)\)</span>, <span class="math inline">\(\sigma\)</span> being the variance of the population and <span class="math inline">\(n\)</span> the sample size. If you don’t know the variance of the population, then you have to estimate it from the sample itself. But where does this formula come from? The crucial <strong>Central Limit Theorem</strong> tells us that the random variable <strong>mean</strong> that we can estimate from our random sample is normally distributed with a mean equalled to the true mean of the population and the standard deviation of, you guessed it, <span class="math inline">\(\sigma/\sqrt(n)\)</span>. Based on the normal distribution, we can calculate plausible values, a so-called <strong>confidence interval</strong>. Informally, we could define the confidence interval as follows:</p>
 <blockquote>
 <p>Is there a plausible range of values that we could obtain if we randomly sample from a population? Plausible means that if we repeated the sampling very often, this range would contain the true mean in let’s say 95% of the time. Such a plausible range is called a <strong>95% confidence interval</strong>.</p>
 </blockquote>
 <p>Because we know the theoretical distribution of the mean we can calculate the 95% confidence interval as <span class="math inline">\(\hat\mu \pm 1.96 \cdot SE\)</span>, with <span class="math inline">\(\hat\mu\)</span> being the estimated mean, <span class="math inline">\(SE\)</span> the standard error <span class="math inline">\(\sigma/\sqrt(n)\)</span> and the magic factor of 1.96 comes from the fact that in a normal distribution, 95% of all values fall into the interval <span class="math inline">\(\mu \pm 1.96 \cdot sd\)</span>, <span class="math inline">\(sd\)</span> being the standard deviation.</p>
 </div>
-<div id="bootstrap-use-your-computer" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Bootstrap – use your computer<a href="bootstrap.html#bootstrap-use-your-computer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Formulas date from the early time of statistics, where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using <strong>re-sampling</strong>, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure <a href="bootstrap.html#fig:meunch">7.1</a>). However, it has a solid mathematical foundation <span class="citation">(<a href="#ref-Efron1979">Efron 1979</a>)</span>.</p>
-<div class="figure"><span style="display:block;" id="fig:meunch"></span>
-<img src="figures/M%C3%BCnchhausen-Sumpf-Hosemann.png" alt="Münchhausen removes himself from the swamp using his own braids (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons) [Link to figure](https://upload.wikimedia.org/wikipedia/commons/a/ad/M%C3%BCnchhausen-Sumpf-Hosemann.png)" width="80%" />
-<p class="caption">
+<div id="bootstrap-use-your-computer" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Bootstrap – use your computer<a class="anchor" aria-label="anchor" href="#bootstrap-use-your-computer"><i class="fas fa-link"></i></a>
+</h2>
+<p>Formulas date from the early time of statistics, where computational power was limited or unavailable and approximations were the only tools one could use to estimate the variability. The Central Limit Theorem is very useful, but theoretical distributions do not always exist. In such cases, we can use our computer to calculate confidence intervals using <strong>re-sampling</strong>, i.e. repeated sampling from our random sample. This method is called bootstrap (or bootstrapping) and sounds like self-deception à la Baron Munchausen at first glance (Figure <a href="bootstrap.html#fig:meunch">7.1</a>). However, it has a solid mathematical foundation <span class="citation">(<a href="literature-1.html#ref-Efron1979">Efron 1979</a>)</span>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:meunch"></span>
+<img src="figures/M%C3%BCnchhausen-Sumpf-Hosemann.png" alt="Münchhausen removes himself from the swamp using his own braids (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons) [Link to figure](https://upload.wikimedia.org/wikipedia/commons/a/ad/M%C3%BCnchhausen-Sumpf-Hosemann.png)" width="80%"><p class="caption">
 Figure 7.1: Münchhausen removes himself from the swamp using his own braids (Theodor Hosemann (1807-1875), Public domain, via Wikimedia Commons) <a href="https://upload.wikimedia.org/wikipedia/commons/a/ad/M%C3%BCnchhausen-Sumpf-Hosemann.png">Link to figure</a>
 </p>
 </div>
 <p>Figure <a href="bootstrap.html#fig:sampling-world">7.2</a> shows the setup that we practised in chapter <a href="sampling.html#sampling">6</a>. We wanted to estimate a parameter (proportion of rural and urban residents) called <span class="math inline">\(\mu\)</span> in the figure, and we sampled randomly several times from the population. From all those random samples, we calculated our statistics and obtained the sampling distribution.</p>
-<div class="figure"><span style="display:block;" id="fig:sampling-world"></span>
-<img src="figures/sampling_world.png" alt="Calculation of a sampling distribution by repeated random sampling from a population. Figure by @Hesterberg2015, their Figure 4. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%" />
-<p class="caption">
-Figure 7.2: Calculation of a sampling distribution by repeated random sampling from a population. Figure by <span class="citation">Hesterberg (<a href="#ref-Hesterberg2015">2015</a>)</span>, their Figure 4. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
+<div class="figure">
+<span style="display:block;" id="fig:sampling-world"></span>
+<img src="figures/sampling_world.png" alt="Calculation of a sampling distribution by repeated random sampling from a population. Figure by @Hesterberg2015, their Figure 4. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%"><p class="caption">
+Figure 7.2: Calculation of a sampling distribution by repeated random sampling from a population. Figure by <span class="citation">Hesterberg (<a href="literature-1.html#ref-Hesterberg2015">2015</a>)</span>, their Figure 4. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
 </p>
 </div>
 <p>Figure <a href="bootstrap.html#fig:sampling-bootstrap">7.3</a> looks nearly the same, except one important difference. We don’t have access to several random samples from the population, but have one random sample only. And now we remember that we invested time and energy in thinking about the best way to obtain this sample, and we believe that it is representative of our population. Thus, we can think about this sample as our <em>mini</em> population. We replace the population by its miniature, i.e. our sample, and sample from this sample as if it were the true population. However, because the sample is limited in size, we have to sample <strong>with replacement</strong>. The random samples we obtain by sampling with replacement from the original random sample are called bootstrap samples. For each of those bootstrap samples, we calculate the statistics and obtain its bootstrap sampling distribution. The confidence intervals are most often calculated by the so-called percentile method: we take the 2.5% quantile and the 97.5% quantile from the sampling distribution. The range of values in-between equals the 95% bootstrap confidence interval.</p>
-<div class="figure"><span style="display:block;" id="fig:sampling-bootstrap"></span>
-<img src="figures/sampling_bootstrap.png" alt="Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by @Hesterberg2015, their Figure 5. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%" />
-<p class="caption">
-Figure 7.3: Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by <span class="citation">Hesterberg (<a href="#ref-Hesterberg2015">2015</a>)</span>, their Figure 5. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
+<div class="figure">
+<span style="display:block;" id="fig:sampling-bootstrap"></span>
+<img src="figures/sampling_bootstrap.png" alt="Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by @Hesterberg2015, their Figure 5. The publication is open-access and can be used for non-commercial purposes. [Link to licence](https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789)" width="80%"><p class="caption">
+Figure 7.3: Calculation of a sampling distribution by repeated random sampling with replacement from a sample. Figure by <span class="citation">Hesterberg (<a href="literature-1.html#ref-Hesterberg2015">2015</a>)</span>, their Figure 5. The publication is open-access and can be used for non-commercial purposes. <a href="https://www.tandfonline.com/action/showCopyRight?scroll=top&amp;doi=10.1080%2F00031305.2015.1089789">Link to licence</a>
 </p>
 </div>
 </div>
-<div id="confidence-intervals-for-the-mean-travel-time" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Confidence intervals for the mean travel time<a href="bootstrap.html#confidence-intervals-for-the-mean-travel-time" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="confidence-intervals-for-the-mean-travel-time" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Confidence intervals for the mean travel time<a class="anchor" aria-label="anchor" href="#confidence-intervals-for-the-mean-travel-time"><i class="fas fa-link"></i></a>
+</h2>
 <p>Let’s come back to our simulated getsmarter university population and estimate the mean travel time with its bootstrap confidence interval.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="bootstrap.html#cb113-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb113-2"><a href="bootstrap.html#cb113-2" tabindex="-1"></a><span class="fu">library</span>(infer)</span></code></pre></div>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="bootstrap.html#cb114-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb114-2"><a href="bootstrap.html#cb114-2" tabindex="-1"></a></span>
-<span id="cb114-3"><a href="bootstrap.html#cb114-3" tabindex="-1"></a>student_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12000</span></span>
-<span id="cb114-4"><a href="bootstrap.html#cb114-4" tabindex="-1"></a>  </span>
-<span id="cb114-5"><a href="bootstrap.html#cb114-5" tabindex="-1"></a>travel_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">12000</span> <span class="sc">*</span> <span class="fl">0.8</span>, <span class="at">min =</span> <span class="dv">5</span>, <span class="at">max =</span> <span class="dv">40</span>),</span>
-<span id="cb114-6"><a href="bootstrap.html#cb114-6" tabindex="-1"></a>             <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">12000</span> <span class="sc">*</span> <span class="fl">0.2</span>, <span class="at">min =</span> <span class="dv">60</span>, <span class="at">max =</span> <span class="dv">120</span>))</span>
-<span id="cb114-7"><a href="bootstrap.html#cb114-7" tabindex="-1"></a></span>
-<span id="cb114-8"><a href="bootstrap.html#cb114-8" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;m&#39;</span>, <span class="st">&#39;f&#39;</span>), <span class="at">size =</span> <span class="dv">12000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb114-9"><a href="bootstrap.html#cb114-9" tabindex="-1"></a></span>
-<span id="cb114-10"><a href="bootstrap.html#cb114-10" tabindex="-1"></a>residence <span class="ot">&lt;-</span> <span class="fu">sapply</span>(travel_time, <span class="cf">function</span>(x) {</span>
-<span id="cb114-11"><a href="bootstrap.html#cb114-11" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="st">&#39;urban&#39;</span></span>
-<span id="cb114-12"><a href="bootstrap.html#cb114-12" tabindex="-1"></a>  <span class="cf">else</span> <span class="st">&#39;rural&#39;</span></span>
-<span id="cb114-13"><a href="bootstrap.html#cb114-13" tabindex="-1"></a>})</span>
-<span id="cb114-14"><a href="bootstrap.html#cb114-14" tabindex="-1"></a></span>
-<span id="cb114-15"><a href="bootstrap.html#cb114-15" tabindex="-1"></a>transport <span class="ot">&lt;-</span> <span class="fu">sapply</span>(travel_time, <span class="cf">function</span>(x) {</span>
-<span id="cb114-16"><a href="bootstrap.html#cb114-16" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="st">&#39;foot&#39;</span></span>
-<span id="cb114-17"><a href="bootstrap.html#cb114-17" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">15</span>) <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;foot&#39;</span>, <span class="st">&#39;bike&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb114-18"><a href="bootstrap.html#cb114-18" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">45</span>) <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;bus&#39;</span>, <span class="st">&#39;bike&#39;</span>, <span class="st">&#39;car&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb114-19"><a href="bootstrap.html#cb114-19" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;bus&#39;</span>, <span class="st">&#39;car&#39;</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb114-20"><a href="bootstrap.html#cb114-20" tabindex="-1"></a>})</span>
-<span id="cb114-21"><a href="bootstrap.html#cb114-21" tabindex="-1"></a></span>
-<span id="cb114-22"><a href="bootstrap.html#cb114-22" tabindex="-1"></a>time_lib <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">60</span> <span class="sc">-</span> <span class="fl">0.7</span> <span class="sc">*</span> travel_time <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(travel_time), <span class="dv">0</span>, <span class="dv">20</span>)</span>
-<span id="cb114-23"><a href="bootstrap.html#cb114-23" tabindex="-1"></a></span>
-<span id="cb114-24"><a href="bootstrap.html#cb114-24" tabindex="-1"></a>getsmarter_pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>(student_id, gender, residence, transport, travel_time, time_lib)</span>
-<span id="cb114-25"><a href="bootstrap.html#cb114-25" tabindex="-1"></a></span>
-<span id="cb114-26"><a href="bootstrap.html#cb114-26" tabindex="-1"></a>getsmarter_pop</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">student_id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12000</span></span>
+<span>  </span>
+<span><span class="va">travel_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.8</span>, min <span class="op">=</span> <span class="fl">5</span>, max <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">12000</span> <span class="op">*</span> <span class="fl">0.2</span>, min <span class="op">=</span> <span class="fl">60</span>, max <span class="op">=</span> <span class="fl">120</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'m'</span>, <span class="st">'f'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">12000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">residence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span> <span class="st">'urban'</span></span>
+<span>  <span class="kw">else</span> <span class="st">'rural'</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">transport</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">travel_time</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="st">'foot'</span></span>
+<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">15</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'foot'</span>, <span class="st">'bike'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">45</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'bike'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'bus'</span>, <span class="st">'car'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">time_lib</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">-</span> <span class="fl">0.7</span> <span class="op">*</span> <span class="va">travel_time</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">getsmarter_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">student_id</span>, <span class="va">gender</span>, <span class="va">residence</span>, <span class="va">transport</span>, <span class="va">travel_time</span>, <span class="va">time_lib</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">getsmarter_pop</span></span></code></pre></div>
 <pre><code>## # A tibble: 12,000 × 6
 ##    student_id gender residence transport travel_time time_lib
 ##         &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
@@ -479,38 +200,42 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10         10 f      urban     bus             21.0      282.
 ## # ℹ 11,990 more rows</code></pre>
 <p>We survey 200 students using the function <code>rep_sample_n</code>, with one replicate and without replacement. This function adds a new variable called <code>replicate</code> to the dataset. Later we will use the same function for bootstrapping, which will generate another <code>replicate</code> variable. To prevent conflicts from having duplicate variable names, we need to remvoe the existing <code>replicate</code> variable now. We do this using <code>select(!...)</code>, which drops a variable from the dataset.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="bootstrap.html#cb116-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
-<span id="cb116-2"><a href="bootstrap.html#cb116-2" tabindex="-1"></a></span>
-<span id="cb116-3"><a href="bootstrap.html#cb116-3" tabindex="-1"></a>survey_size <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb116-4"><a href="bootstrap.html#cb116-4" tabindex="-1"></a></span>
-<span id="cb116-5"><a href="bootstrap.html#cb116-5" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">rep_sample_n</span>(getsmarter_pop, <span class="at">size =</span> survey_size, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">reps =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb116-6"><a href="bootstrap.html#cb116-6" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb116-7"><a href="bootstrap.html#cb116-7" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>replicate)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">survey_size</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
+<span></span>
+<span><span class="va">survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">getsmarter_pop</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">replicate</span><span class="op">)</span></span></code></pre></div>
 <p>The true mean travel time to the university and the mean from the survey equal</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="bootstrap.html#cb117-1" tabindex="-1"></a>mean_pop <span class="ot">&lt;-</span> getsmarter_pop <span class="sc">%&gt;%</span> </span>
-<span id="cb117-2"><a href="bootstrap.html#cb117-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(travel_time))</span>
-<span id="cb117-3"><a href="bootstrap.html#cb117-3" tabindex="-1"></a></span>
-<span id="cb117-4"><a href="bootstrap.html#cb117-4" tabindex="-1"></a>mean_pop</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mean_pop</span> <span class="op">&lt;-</span> <span class="va">getsmarter_pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mean_pop</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##    mean
 ##   &lt;dbl&gt;
 ## 1  36.0</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="bootstrap.html#cb119-1" tabindex="-1"></a>mean_survey <span class="ot">&lt;-</span> survey <span class="sc">%&gt;%</span> </span>
-<span id="cb119-2"><a href="bootstrap.html#cb119-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(travel_time))</span>
-<span id="cb119-3"><a href="bootstrap.html#cb119-3" tabindex="-1"></a></span>
-<span id="cb119-4"><a href="bootstrap.html#cb119-4" tabindex="-1"></a>mean_survey</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mean_survey</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mean_survey</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##    mean
 ##   &lt;dbl&gt;
 ## 1  34.1</code></pre>
 <p>To calculate the bootstrap distribution, we sample from the data set <code>survey</code> with replacement. The size of the bootstrap samples always equal the size of the original sample. We use the same function <code>rep_sample_n</code> as in chapter <a href="sampling.html#sampling">6</a>, but change <code>replace = TRUE</code>.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="bootstrap.html#cb121-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
-<span id="cb121-2"><a href="bootstrap.html#cb121-2" tabindex="-1"></a></span>
-<span id="cb121-3"><a href="bootstrap.html#cb121-3" tabindex="-1"></a>reps_num <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb121-4"><a href="bootstrap.html#cb121-4" tabindex="-1"></a></span>
-<span id="cb121-5"><a href="bootstrap.html#cb121-5" tabindex="-1"></a>survey_reps_bootstrap <span class="ot">&lt;-</span> <span class="fu">rep_sample_n</span>(survey, <span class="at">size =</span> survey_size, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">reps =</span> reps_num)</span>
-<span id="cb121-6"><a href="bootstrap.html#cb121-6" tabindex="-1"></a></span>
-<span id="cb121-7"><a href="bootstrap.html#cb121-7" tabindex="-1"></a>survey_reps_bootstrap</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps_num</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span></span>
+<span><span class="va">survey_reps_bootstrap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/rep_sample_n.html">rep_sample_n</a></span><span class="op">(</span><span class="va">survey</span>, size <span class="op">=</span> <span class="va">survey_size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, reps <span class="op">=</span> <span class="va">reps_num</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">survey_reps_bootstrap</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,000,000 × 7
 ## # Groups:   replicate [10,000]
 ##    replicate student_id gender residence transport travel_time time_lib
@@ -527,12 +252,13 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10         1        843 m      urban     bike            26.4      300.
 ## # ℹ 1,999,990 more rows</code></pre>
 <p>Because we sample with replacement, students can now appear several times in one and the same bootstrap sample. Let’s check this for the first 50 bootstrap samples. Student 4787 was sampled 8 times in the replicate 43, for example.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="bootstrap.html#cb123-1" tabindex="-1"></a>survey_reps_bootstrap <span class="sc">%&gt;%</span> </span>
-<span id="cb123-2"><a href="bootstrap.html#cb123-2" tabindex="-1"></a>  <span class="fu">filter</span>(replicate <span class="sc">%in%</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb123-3"><a href="bootstrap.html#cb123-3" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate, student_id) <span class="sc">%&gt;%</span> </span>
-<span id="cb123-4"><a href="bootstrap.html#cb123-4" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb123-5"><a href="bootstrap.html#cb123-5" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">!=</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb123-6"><a href="bootstrap.html#cb123-6" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">survey_reps_bootstrap</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">replicate</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">student_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">tally</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,657 × 3
 ## # Groups:   replicate [50]
 ##    replicate student_id     n
@@ -549,11 +275,12 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10         8      11425     5
 ## # ℹ 2,647 more rows</code></pre>
 <p>Now we can calculate the mean travel times from the bootstrap samples.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="bootstrap.html#cb125-1" tabindex="-1"></a>res_means_bootstrap <span class="ot">&lt;-</span> survey_reps_bootstrap <span class="sc">%&gt;%</span></span>
-<span id="cb125-2"><a href="bootstrap.html#cb125-2" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate) <span class="sc">%&gt;%</span> </span>
-<span id="cb125-3"><a href="bootstrap.html#cb125-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_tt =</span> <span class="fu">mean</span>(travel_time))</span>
-<span id="cb125-4"><a href="bootstrap.html#cb125-4" tabindex="-1"></a></span>
-<span id="cb125-5"><a href="bootstrap.html#cb125-5" tabindex="-1"></a>res_means_bootstrap</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res_means_bootstrap</span> <span class="op">&lt;-</span> <span class="va">survey_reps_bootstrap</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replicate</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_tt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res_means_bootstrap</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,000 × 2
 ##    replicate mean_tt
 ##        &lt;int&gt;   &lt;dbl&gt;
@@ -569,50 +296,63 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 ## 10        10    31.0
 ## # ℹ 9,990 more rows</code></pre>
 <p>The standard error and the 95% confidence interval based on the bootstrap are calculated as follows:</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="bootstrap.html#cb127-1" tabindex="-1"></a>stat_bootstrap <span class="ot">&lt;-</span> res_means_bootstrap <span class="sc">%&gt;%</span> </span>
-<span id="cb127-2"><a href="bootstrap.html#cb127-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_bootstrap =</span> <span class="fu">mean</span>(mean_tt), <span class="at">se =</span> <span class="fu">sd</span>(mean_tt), <span class="at">ci_2.5 =</span> <span class="fu">quantile</span>(mean_tt, <span class="at">probs =</span> <span class="fl">0.025</span>), <span class="at">ci_97.5 =</span> <span class="fu">quantile</span>(mean_tt, <span class="at">probs =</span> <span class="fl">0.975</span>))</span>
-<span id="cb127-3"><a href="bootstrap.html#cb127-3" tabindex="-1"></a></span>
-<span id="cb127-4"><a href="bootstrap.html#cb127-4" tabindex="-1"></a>stat_bootstrap</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stat_bootstrap</span> <span class="op">&lt;-</span> <span class="va">res_means_bootstrap</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean_bootstrap <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mean_tt</span><span class="op">)</span>, se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mean_tt</span><span class="op">)</span>, ci_2.5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">mean_tt</span>, probs <span class="op">=</span> <span class="fl">0.025</span><span class="op">)</span>, ci_97.5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">mean_tt</span>, probs <span class="op">=</span> <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">stat_bootstrap</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   mean_bootstrap    se ci_2.5 ci_97.5
 ##            &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
 ## 1           34.1  2.06   30.1    38.3</code></pre>
 </div>
-<div id="bootstrap-with-the-library-infer" class="section level2 hasAnchor" number="7.4">
-<h2><span class="header-section-number">7.4</span> Bootstrap with the library <code>infer</code><a href="bootstrap.html#bootstrap-with-the-library-infer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bootstrap-with-the-library-infer" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Bootstrap with the library <code>infer</code><a class="anchor" aria-label="anchor" href="#bootstrap-with-the-library-infer"><i class="fas fa-link"></i></a>
+</h2>
 <p>The library <code>infer</code> offers a convenient framework for calculating the bootstrap confidence intervals and to do hypothesis tests. We will talk about the latter in a later session. <code>infer</code> is a dedicated package for <em>tidy</em> inference and is organized around 5 verbs:</p>
 <ol style="list-style-type: decimal">
-<li><code>specify()</code> variables or relationships between them</li>
-<li><code>hypothesize()</code> define the null hypothesis (for hypothesis tests only)</li>
-<li><code>generate()</code> generate data either for the confidence intervals or under the null hypothesis</li>
-<li><code>calculate()</code> the sampling distribution</li>
-<li><code>visualize()</code> visualize the sampling distribution</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/specify.html">specify()</a></code> variables or relationships between them</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/hypothesize.html">hypothesize()</a></code> define the null hypothesis (for hypothesis tests only)</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/generate.html">generate()</a></code> generate data either for the confidence intervals or under the null hypothesis</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/calculate.html">calculate()</a></code> the sampling distribution</li>
+<li>
+<code><a href="https://infer.tidymodels.org/reference/visualize.html">visualize()</a></code> visualize the sampling distribution</li>
 </ol>
 <p>How does our example of calculating the bootstrap confidence intervals for the mean travel time look like in the <code>infer</code> workflow?</p>
 <p>We first calculate the bootstrap distribution.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="bootstrap.html#cb129-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
-<span id="cb129-2"><a href="bootstrap.html#cb129-2" tabindex="-1"></a></span>
-<span id="cb129-3"><a href="bootstrap.html#cb129-3" tabindex="-1"></a>bootstrap_distribution <span class="ot">&lt;-</span> survey <span class="sc">%&gt;%</span></span>
-<span id="cb129-4"><a href="bootstrap.html#cb129-4" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> travel_time) <span class="sc">%&gt;%</span> </span>
-<span id="cb129-5"><a href="bootstrap.html#cb129-5" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">10000</span>, <span class="at">type =</span> <span class="st">&#39;bootstrap&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb129-6"><a href="bootstrap.html#cb129-6" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">&#39;mean&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">345</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">bootstrap_distribution</span> <span class="op">&lt;-</span> <span class="va">survey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>response <span class="op">=</span> <span class="va">travel_time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/generate.html">generate</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fl">10000</span>, type <span class="op">=</span> <span class="st">'bootstrap'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">'mean'</span><span class="op">)</span></span></code></pre></div>
 <p>Then, we calculate the confidence intervals based on the percentile method.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="bootstrap.html#cb130-1" tabindex="-1"></a>percentile_ci <span class="ot">&lt;-</span> bootstrap_distribution <span class="sc">%&gt;%</span> </span>
-<span id="cb130-2"><a href="bootstrap.html#cb130-2" tabindex="-1"></a>  <span class="fu">get_confidence_interval</span>(<span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">type =</span> <span class="st">&quot;percentile&quot;</span>)</span>
-<span id="cb130-3"><a href="bootstrap.html#cb130-3" tabindex="-1"></a>percentile_ci</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">percentile_ci</span> <span class="op">&lt;-</span> <span class="va">bootstrap_distribution</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/get_confidence_interval.html">get_confidence_interval</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">0.95</span>, type <span class="op">=</span> <span class="st">"percentile"</span><span class="op">)</span></span>
+<span><span class="va">percentile_ci</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   lower_ci upper_ci
 ##      &lt;dbl&gt;    &lt;dbl&gt;
 ## 1     30.1     38.3</code></pre>
 <p>And then visualize all results. Because the function <code>visualize</code> is based on <code>ggplot2</code>, we can add custom axis labels.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="bootstrap.html#cb132-1" tabindex="-1"></a><span class="fu">visualize</span>(bootstrap_distribution) <span class="sc">+</span> </span>
-<span id="cb132-2"><a href="bootstrap.html#cb132-2" tabindex="-1"></a>  <span class="fu">shade_confidence_interval</span>(<span class="at">endpoints =</span> percentile_ci, <span class="at">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;khaki&quot;</span>) <span class="sc">+</span></span>
-<span id="cb132-3"><a href="bootstrap.html#cb132-3" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean_pop<span class="sc">$</span>mean, <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>) <span class="sc">+</span></span>
-<span id="cb132-4"><a href="bootstrap.html#cb132-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Mean trave time (min)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Frequency&#39;</span>)</span></code></pre></div>
-<p><img src="environmental_stat_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="va">bootstrap_distribution</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_confidence_interval.html">shade_confidence_interval</a></span><span class="op">(</span>endpoints <span class="op">=</span> <span class="va">percentile_ci</span>, color <span class="op">=</span> <span class="st">"orange"</span>, fill <span class="op">=</span> <span class="st">"khaki"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mean_pop</span><span class="op">$</span><span class="va">mean</span>, linetype <span class="op">=</span> <span class="st">'dashed'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Mean trave time (min)'</span>, y <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-111-1.png" width="672"></div>
 </div>
-<div id="interpreting-the-confidence-intervals" class="section level2 hasAnchor" number="7.5">
-<h2><span class="header-section-number">7.5</span> Interpreting the confidence intervals<a href="bootstrap.html#interpreting-the-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="interpreting-the-confidence-intervals" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Interpreting the confidence intervals<a class="anchor" aria-label="anchor" href="#interpreting-the-confidence-intervals"><i class="fas fa-link"></i></a>
+</h2>
 <p>The upper and lower limit of the confidence interval depend on the sample, i.e. they are themselves random variables. Definitely, random variables are everywhere 😄. It means that the confidence interval could fail to include the true population parameter. We are now ready for a more formal definition of a confidence interval:</p>
 <blockquote>
 <p>If we repeat the sampling very often and recalculate the 95% confidence intervals, we expect them to contain the true population parameters in about 95% of the time.</p>
@@ -620,103 +360,74 @@ Figure 7.3: Calculation of a sampling distribution by repeated random sampling w
 <p>It means that some confidence intervals won’t contain the true population parameter.</p>
 <p>The confidence interval is our best guess of plausible values for the population parameter. In case of a theoretical distribution of the statistics, the bootstrap and the theoretical confidence intervals coincide. Often, the interpretation is short-handed as: We are 95% confident that the confidence interval captures the true parameter. This is incorrect. It is better to state that in 95% of the time, the confidence interval captures the true population parameter. And now you know what is meant by “95% of the time” 😄.</p>
 </div>
-<div id="practice-on-your-own-6" class="section level2 hasAnchor" number="7.6">
-<h2><span class="header-section-number">7.6</span> Practice on your own!<a href="bootstrap.html#practice-on-your-own-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol class="exercises">
-<ol style="list-style-type: decimal">
+<div id="practice-on-your-own-6" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-6"><i class="fas fa-link"></i></a>
+</h2>
+<ol class="exercises"><ol style="list-style-type: decimal">
 <li><p>Repeat the analysis we did for the mean travel time now for the proportion of urban residents. Use the workflow in <code>infer</code>. Hint: <code>specify(response = residence, success = 'urban')</code>.</p></li>
 <li><p>How does the width of the confidence interval depend on the sample size? Repeat the analysis for the mean travel time for a survey of 30 students.</p></li>
-</ol>
-</ol>
+</ol></ol>
 </div>
-<div id="reading-assignment-5" class="section level2 hasAnchor" number="7.7">
-<h2><span class="header-section-number">7.7</span> Reading assignment<a href="bootstrap.html#reading-assignment-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Chapter 8 in <span class="citation">Ismay and Kim (<a href="#ref-ModernDive">2021</a>)</span></p>
+<div id="reading-assignment-5" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> Reading assignment<a class="anchor" aria-label="anchor" href="#reading-assignment-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Chapter 8 in <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive">2021</a>)</span></p>
 </div>
-<div id="turning-in-your-work-5" class="section level2 hasAnchor" number="7.8">
-<h2><span class="header-section-number">7.8</span> Turning in your work<a href="bootstrap.html#turning-in-your-work-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="turning-in-your-work-5" class="section level2" number="7.8">
+<h2>
+<span class="header-section-number">7.8</span> Turning in your work<a class="anchor" aria-label="anchor" href="#turning-in-your-work-5"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>Save your R Notebook as an *.Rmd file.</li>
 <li>Upload your R Notebook to ILIAS. You don’t need to upload the .nb.html file. You will find an upload option in today’s session.</li>
-<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong></li>
+<li>You should receive a solution file after your upload. <strong>Be sure to upload before the deadline!</strong>
+</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></div>
+<div class="next"><a href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bootstrap"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="nav-link" href="#the-formulas"><span class="header-section-number">7.1</span> The formulas</a></li>
+<li><a class="nav-link" href="#bootstrap-use-your-computer"><span class="header-section-number">7.2</span> Bootstrap – use your computer</a></li>
+<li><a class="nav-link" href="#confidence-intervals-for-the-mean-travel-time"><span class="header-section-number">7.3</span> Confidence intervals for the mean travel time</a></li>
+<li><a class="nav-link" href="#bootstrap-with-the-library-infer"><span class="header-section-number">7.4</span> Bootstrap with the library infer</a></li>
+<li><a class="nav-link" href="#interpreting-the-confidence-intervals"><span class="header-section-number">7.5</span> Interpreting the confidence intervals</a></li>
+<li><a class="nav-link" href="#practice-on-your-own-6"><span class="header-section-number">7.6</span> Practice on your own!</a></li>
+<li><a class="nav-link" href="#reading-assignment-5"><span class="header-section-number">7.7</span> Reading assignment</a></li>
+<li><a class="nav-link" href="#turning-in-your-work-5"><span class="header-section-number">7.8</span> Turning in your work</a></li>
 </ul>
 
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/07-bootstrap.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/07-bootstrap.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
 </div>
+    </nav>
 </div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div id="ref-Efron1979" class="csl-entry">
-Efron, B. 1979. <span>“Bootstrap <span>Methods</span>: <span>Another Look</span> at the <span>Jackknife</span>.”</span> <em>The Annals of Statistics</em> 7 (1): 1–26. <a href="https://doi.org/10.1214/aos/1176344552">https://doi.org/10.1214/aos/1176344552</a>.
-</div>
-<div id="ref-Hesterberg2015" class="csl-entry">
-Hesterberg, Tim C. 2015. <span>“What <span>Teachers Should Know About</span> the <span>Bootstrap</span>: <span>Resampling</span> in the <span>Undergraduate Statistics Curriculum</span>.”</span> <em>The American Statistician</em> 69 (4): 371–86. <a href="https://doi.org/10.1080/00031305.2015.1089789">https://doi.org/10.1080/00031305.2015.1089789</a>.
-</div>
-<div id="ref-ModernDive" class="csl-entry">
-Ismay, Chester, and Albert Y. Kim. 2021. <em><span>ModernDive</span>: <span>Statistical Inference</span> via <span>Data Science</span></em>. <a href="https://moderndive.com/">https://moderndive.com/</a>.
-</div>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="sampling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="hypothesis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-05-12.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -728,7 +439,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

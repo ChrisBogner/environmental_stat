@@ -1,400 +1,106 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Environmental Statistics</title>
-  <meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Environmental Statistics" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  <meta name="github-repo" content="https://github.com/ChrisBogner/environmental_stat" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Environmental Statistics" />
-  
-  <meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive" />
-  
-
-<meta name="author" content="Christina Bogner, Marijn van der Meij" />
-
-
-<meta name="date" content="2025-04-15" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-
-<link rel="next" href="introduction-to-r-and-rstudio.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Preface | Environmental Statistics</title>
+<meta name="author" content="Christina Bogner, Marijn van der Meij">
+<meta name="description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="Preface | Environmental Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Preface | Environmental Statistics">
+<meta name="twitter:description" content="Lecture notes for the course Environmental Statistics in IMES (UoC), based on the material by ModernDive">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
-<link rel="stylesheet" href="css/all.css" type="text/css" />
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="font-awesome.min.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Datenanalyse mit R</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#intended-learning-outcomes-ilos"><i class="fa fa-check"></i>Intended learning outcomes (ILOs)</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#literature"><i class="fa fa-check"></i>Literature</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-these-lecture-notes"><i class="fa fa-check"></i>Why these lecture notes</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#reproducibility"><i class="fa fa-check"></i>Reproducibility</a></li>
-</ul></li>
-<li class="part"><span><b>I Part I: Explore data</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Introduction to R and RStudio</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#what-is"><i class="fa fa-check"></i><b>1.1</b> What is <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>?</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#organize-your-work"><i class="fa fa-check"></i><b>1.3</b> Organize your work</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#practice-on-your-own"><i class="fa fa-check"></i><b>1.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="1.5" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#turning-in-your-work"><i class="fa fa-check"></i><b>1.5</b> Turning in your work</a></li>
-<li class="chapter" data-level="1.6" data-path="introduction-to-r-and-rstudio.html"><a href="introduction-to-r-and-rstudio.html#reading-assignment"><i class="fa fa-check"></i><b>1.6</b> Reading assignment</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html"><i class="fa fa-check"></i><b>2</b> Using R Markdown for reproducible research</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#reproducibility-in-research"><i class="fa fa-check"></i><b>2.1</b> Reproducibility in research</a></li>
-<li class="chapter" data-level="2.2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#combining-code-and-report-in-one-document"><i class="fa fa-check"></i><b>2.2</b> Combining code and report in one document</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#create-a-new-r-notebook"><i class="fa fa-check"></i><b>2.2.1</b> Create a new R Notebook</a></li>
-<li class="chapter" data-level="2.2.2" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#customize-the-header"><i class="fa fa-check"></i><b>2.2.2</b> Customize the header</a></li>
-<li class="chapter" data-level="2.2.3" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#structure-your-notebook"><i class="fa fa-check"></i><b>2.2.3</b> Structure your notebook</a></li>
-<li class="chapter" data-level="2.2.4" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#preview"><i class="fa fa-check"></i><b>2.2.4</b> Preview</a></li>
-<li class="chapter" data-level="2.2.5" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#other-output-options"><i class="fa fa-check"></i><b>2.2.5</b> Other output options</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#entering-and-running-commands"><i class="fa fa-check"></i><b>2.3</b> Entering and running commands</a></li>
-<li class="chapter" data-level="2.4" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#a-brief-recap-of-data-types"><i class="fa fa-check"></i><b>2.4</b> A brief recap of data types</a></li>
-<li class="chapter" data-level="2.5" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#practice-on-your-own-1"><i class="fa fa-check"></i><b>2.5</b> Practice on your own!</a></li>
-<li class="chapter" data-level="2.6" data-path="using-r-markdown-for-reproducible-research.html"><a href="using-r-markdown-for-reproducible-research.html#turning-in-your-work-1"><i class="fa fa-check"></i><b>2.6</b> Turning in your work</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="what-is-data.html"><a href="what-is-data.html"><i class="fa fa-check"></i><b>3</b> What is data?</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="what-is-data.html"><a href="what-is-data.html#installing-r-packages"><i class="fa fa-check"></i><b>3.1</b> Installing R packages</a></li>
-<li class="chapter" data-level="3.2" data-path="what-is-data.html"><a href="what-is-data.html#welcome-the-penguins"><i class="fa fa-check"></i><b>3.2</b> Welcome the penguins!</a></li>
-<li class="chapter" data-level="3.3" data-path="what-is-data.html"><a href="what-is-data.html#the-square-braces-revisited"><i class="fa fa-check"></i><b>3.3</b> The square braces revisited</a></li>
-<li class="chapter" data-level="3.4" data-path="what-is-data.html"><a href="what-is-data.html#lets-look-at-them"><i class="fa fa-check"></i><b>3.4</b> Let’s look at them</a></li>
-<li class="chapter" data-level="3.5" data-path="what-is-data.html"><a href="what-is-data.html#practice-on-your-own-2"><i class="fa fa-check"></i><b>3.5</b> Practice on your own!</a></li>
-<li class="chapter" data-level="3.6" data-path="what-is-data.html"><a href="what-is-data.html#reading-assignment-1"><i class="fa fa-check"></i><b>3.6</b> Reading assignment</a></li>
-<li class="chapter" data-level="3.7" data-path="what-is-data.html"><a href="what-is-data.html#turning-in-your-work-2"><i class="fa fa-check"></i><b>3.7</b> Turning in your work</a></li>
-<li class="chapter" data-level="3.8" data-path="what-is-data.html"><a href="what-is-data.html#additional-reading"><i class="fa fa-check"></i><b>3.8</b> Additional reading</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html"><i class="fa fa-check"></i><b>4</b> Import, visualize and explore data</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#data-import-from-text-files"><i class="fa fa-check"></i><b>4.1</b> Data import from text files</a></li>
-<li class="chapter" data-level="4.2" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#visualization-with-the-library-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Visualization with the library <code>ggplot2</code></a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#line-plot"><i class="fa fa-check"></i><b>4.2.1</b> Line plot</a></li>
-<li class="chapter" data-level="4.2.2" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#point-plot"><i class="fa fa-check"></i><b>4.2.2</b> Point plot</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#histogram"><i class="fa fa-check"></i><b>4.3</b> Histogram</a></li>
-<li class="chapter" data-level="4.4" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#boxplot"><i class="fa fa-check"></i><b>4.4</b> Boxplot</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#barplot"><i class="fa fa-check"></i><b>4.4.1</b> Barplot</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#practice-on-your-own-3"><i class="fa fa-check"></i><b>4.5</b> Practice on your own!</a></li>
-<li class="chapter" data-level="4.6" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#reading-assignment-2"><i class="fa fa-check"></i><b>4.6</b> Reading assignment</a></li>
-<li class="chapter" data-level="4.7" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#turning-in-your-work-3"><i class="fa fa-check"></i><b>4.7</b> Turning in your work</a></li>
-<li class="chapter" data-level="4.8" data-path="import-visualize-and-explore-data.html"><a href="import-visualize-and-explore-data.html#additional-reading-1"><i class="fa fa-check"></i><b>4.8</b> Additional reading</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>5</b> Explorative workflow with <code>tidyverse</code></a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="tidyverse.html"><a href="tidyverse.html#core-packages"><i class="fa fa-check"></i><b>5.1</b> Core packages</a></li>
-<li class="chapter" data-level="5.2" data-path="tidyverse.html"><a href="tidyverse.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory data analysis</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="tidyverse.html"><a href="tidyverse.html#read-data-revisited"><i class="fa fa-check"></i><b>5.2.1</b> Read data, revisited</a></li>
-<li class="chapter" data-level="5.2.2" data-path="tidyverse.html"><a href="tidyverse.html#date-and-time-made-easy"><i class="fa fa-check"></i><b>5.2.2</b> Date and time made easy</a></li>
-<li class="chapter" data-level="5.2.3" data-path="tidyverse.html"><a href="tidyverse.html#summarize"><i class="fa fa-check"></i><b>5.2.3</b> Summarize</a></li>
-<li class="chapter" data-level="5.2.4" data-path="tidyverse.html"><a href="tidyverse.html#the-grammar-of-data-manipulation-dplyr"><i class="fa fa-check"></i><b>5.2.4</b> The grammar of data manipulation – <code>dplyr</code></a></li>
-<li class="chapter" data-level="5.2.5" data-path="tidyverse.html"><a href="tidyverse.html#visualize"><i class="fa fa-check"></i><b>5.2.5</b> Visualize</a></li>
-<li class="chapter" data-level="5.2.6" data-path="tidyverse.html"><a href="tidyverse.html#create-new-variables-with-mutate"><i class="fa fa-check"></i><b>5.2.6</b> Create new variables with <code>mutate()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="tidyverse.html"><a href="tidyverse.html#practice-on-your-own-4"><i class="fa fa-check"></i><b>5.3</b> Practice on your own!</a></li>
-<li class="chapter" data-level="5.4" data-path="tidyverse.html"><a href="tidyverse.html#reading-assignment-3"><i class="fa fa-check"></i><b>5.4</b> Reading assignment</a></li>
-<li class="chapter" data-level="5.5" data-path="tidyverse.html"><a href="tidyverse.html#additional-reading-and-videos"><i class="fa fa-check"></i><b>5.5</b> Additional reading and videos</a></li>
-</ul></li>
-<li class="part"><span><b>II Part II: Statistical inference</b></span></li>
-<li class="chapter" data-level="6" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>6</b> Sampling and variability</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="sampling.html"><a href="sampling.html#random-sampling-of-data"><i class="fa fa-check"></i><b>6.1</b> Random sampling of data</a></li>
-<li class="chapter" data-level="6.2" data-path="sampling.html"><a href="sampling.html#number-of-replications-and-variability"><i class="fa fa-check"></i><b>6.2</b> Number of replications and variability</a></li>
-<li class="chapter" data-level="6.3" data-path="sampling.html"><a href="sampling.html#sample-size"><i class="fa fa-check"></i><b>6.3</b> Sample size</a></li>
-<li class="chapter" data-level="6.4" data-path="sampling.html"><a href="sampling.html#practice-on-your-own-5"><i class="fa fa-check"></i><b>6.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="6.5" data-path="sampling.html"><a href="sampling.html#reading-assignment-4"><i class="fa fa-check"></i><b>6.5</b> Reading assignment</a></li>
-<li class="chapter" data-level="6.6" data-path="sampling.html"><a href="sampling.html#turning-in-your-work-4"><i class="fa fa-check"></i><b>6.6</b> Turning in your work</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>7</b> Bootstrap and confidence intervals</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="bootstrap.html"><a href="bootstrap.html#the-formulas"><i class="fa fa-check"></i><b>7.1</b> The formulas</a></li>
-<li class="chapter" data-level="7.2" data-path="bootstrap.html"><a href="bootstrap.html#bootstrap-use-your-computer"><i class="fa fa-check"></i><b>7.2</b> Bootstrap – use your computer</a></li>
-<li class="chapter" data-level="7.3" data-path="bootstrap.html"><a href="bootstrap.html#confidence-intervals-for-the-mean-travel-time"><i class="fa fa-check"></i><b>7.3</b> Confidence intervals for the mean travel time</a></li>
-<li class="chapter" data-level="7.4" data-path="bootstrap.html"><a href="bootstrap.html#bootstrap-with-the-library-infer"><i class="fa fa-check"></i><b>7.4</b> Bootstrap with the library <code>infer</code></a></li>
-<li class="chapter" data-level="7.5" data-path="bootstrap.html"><a href="bootstrap.html#interpreting-the-confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Interpreting the confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="bootstrap.html"><a href="bootstrap.html#practice-on-your-own-6"><i class="fa fa-check"></i><b>7.6</b> Practice on your own!</a></li>
-<li class="chapter" data-level="7.7" data-path="bootstrap.html"><a href="bootstrap.html#reading-assignment-5"><i class="fa fa-check"></i><b>7.7</b> Reading assignment</a></li>
-<li class="chapter" data-level="7.8" data-path="bootstrap.html"><a href="bootstrap.html#turning-in-your-work-5"><i class="fa fa-check"></i><b>7.8</b> Turning in your work</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="hypothesis.html"><a href="hypothesis.html"><i class="fa fa-check"></i><b>8</b> Hypothesis tests versus effect size estimation</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="hypothesis.html"><a href="hypothesis.html#hypothesis-tests-with-infer"><i class="fa fa-check"></i><b>8.1</b> Hypothesis tests with <code>infer</code></a></li>
-<li class="chapter" data-level="8.2" data-path="hypothesis.html"><a href="hypothesis.html#there-is-only-one-test"><i class="fa fa-check"></i><b>8.2</b> There is only one test!</a></li>
-<li class="chapter" data-level="8.3" data-path="hypothesis.html"><a href="hypothesis.html#hypothesis-test-versus-effect-size-estimation"><i class="fa fa-check"></i><b>8.3</b> Hypothesis test versus effect size estimation</a></li>
-<li class="chapter" data-level="8.4" data-path="hypothesis.html"><a href="hypothesis.html#practice-on-your-own-7"><i class="fa fa-check"></i><b>8.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="8.5" data-path="hypothesis.html"><a href="hypothesis.html#reading-assignment-6"><i class="fa fa-check"></i><b>8.5</b> Reading assignment</a></li>
-<li class="chapter" data-level="8.6" data-path="hypothesis.html"><a href="hypothesis.html#additional-resources"><i class="fa fa-check"></i><b>8.6</b> Additional resources</a></li>
-<li class="chapter" data-level="8.7" data-path="hypothesis.html"><a href="hypothesis.html#turning-in-your-work-6"><i class="fa fa-check"></i><b>8.7</b> Turning in your work</a></li>
-</ul></li>
-<li class="part"><span><b>III Part III: Statistical modelling</b></span></li>
-<li class="chapter" data-level="9" data-path="lin-reg.html"><a href="lin-reg.html"><i class="fa fa-check"></i><b>9</b> Linear regression</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="lin-reg.html"><a href="lin-reg.html#what-is-a-linear-regression-model"><i class="fa fa-check"></i><b>9.1</b> What is a linear regression model?</a></li>
-<li class="chapter" data-level="9.2" data-path="lin-reg.html"><a href="lin-reg.html#simple-linear-regression"><i class="fa fa-check"></i><b>9.2</b> Simple linear regression</a></li>
-<li class="chapter" data-level="9.3" data-path="lin-reg.html"><a href="lin-reg.html#example-relationship-between-the-time-in-the-library-and-the-travel-time"><i class="fa fa-check"></i><b>9.3</b> Example: Relationship between the time in the library and the travel time</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="lin-reg.html"><a href="lin-reg.html#fit-a-simple-normal-regression-model"><i class="fa fa-check"></i><b>9.3.1</b> Fit a simple normal regression model</a></li>
-<li class="chapter" data-level="9.3.2" data-path="lin-reg.html"><a href="lin-reg.html#model-assumptions"><i class="fa fa-check"></i><b>9.3.2</b> Model assumptions</a></li>
-<li class="chapter" data-level="9.3.3" data-path="lin-reg.html"><a href="lin-reg.html#interprete-your-model"><i class="fa fa-check"></i><b>9.3.3</b> Interprete your model</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="lin-reg.html"><a href="lin-reg.html#practice-on-your-own-8"><i class="fa fa-check"></i><b>9.4</b> Practice on your own!</a></li>
-<li class="chapter" data-level="9.5" data-path="lin-reg.html"><a href="lin-reg.html#reading-assignment-7"><i class="fa fa-check"></i><b>9.5</b> Reading assignment</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html"><i class="fa fa-check"></i><b>10</b> Inference in linear regression</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#how-good-is-the-model"><i class="fa fa-check"></i><b>10.1</b> How good is the model?</a></li>
-<li class="chapter" data-level="10.2" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#bootstrap-with-infer-confidence-interval-for-the-slope"><i class="fa fa-check"></i><b>10.2</b> Bootstrap with <code>infer</code>: Confidence interval for the slope</a></li>
-<li class="chapter" data-level="10.3" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#practice-on-your-own-9"><i class="fa fa-check"></i><b>10.3</b> Practice on your own!</a></li>
-<li class="chapter" data-level="10.4" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#reading-assignment-8"><i class="fa fa-check"></i><b>10.4</b> Reading assignment</a></li>
-<li class="chapter" data-level="10.5" data-path="lin-reg-inference.html"><a href="lin-reg-inference.html#turning-in-your-work-7"><i class="fa fa-check"></i><b>10.5</b> Turning in your work</a></li>
-</ul></li>
-<li class="part"><span><b>IV Part IV: Additional topics</b></span></li>
-<li class="chapter" data-level="11" data-path="tsa.html"><a href="tsa.html"><i class="fa fa-check"></i><b>11</b> Introduction to time series analysis</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="tsa.html"><a href="tsa.html#what-are-time-series"><i class="fa fa-check"></i><b>11.1</b> What are time series?</a></li>
-<li class="chapter" data-level="11.2" data-path="tsa.html"><a href="tsa.html#an-example-from-the-german-meteorological-service-dwd"><i class="fa fa-check"></i><b>11.2</b> An example from the German Meteorological Service (DWD)</a></li>
-<li class="chapter" data-level="11.3" data-path="tsa.html"><a href="tsa.html#trend-analysis-of-yearly-data"><i class="fa fa-check"></i><b>11.3</b> Trend analysis of yearly data</a></li>
-<li class="chapter" data-level="11.4" data-path="tsa.html"><a href="tsa.html#analysis-of-seasonality"><i class="fa fa-check"></i><b>11.4</b> Analysis of seasonality</a></li>
-<li class="chapter" data-level="11.5" data-path="tsa.html"><a href="tsa.html#advanced-simultaneous-analysis-of-trend-and-seasonality"><i class="fa fa-check"></i><b>11.5</b> Advanced: Simultaneous analysis of trend and seasonality</a></li>
-<li class="chapter" data-level="11.6" data-path="tsa.html"><a href="tsa.html#practice-on-your-own-10"><i class="fa fa-check"></i><b>11.6</b> Practice on your own!</a></li>
-<li class="chapter" data-level="11.7" data-path="tsa.html"><a href="tsa.html#turning-in-your-work-8"><i class="fa fa-check"></i><b>11.7</b> Turning in your work</a></li>
-</ul></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="stat-background.html"><a href="stat-background.html"><i class="fa fa-check"></i><b>A</b> Statistics refresher</a>
-<ul>
-<li class="chapter" data-level="A.1" data-path="stat-background.html"><a href="stat-background.html#descriptive-statistics"><i class="fa fa-check"></i><b>A.1</b> Descriptive statistics</a>
-<ul>
-<li class="chapter" data-level="A.1.1" data-path="stat-background.html"><a href="stat-background.html#mean"><i class="fa fa-check"></i><b>A.1.1</b> Mean</a></li>
-<li class="chapter" data-level="A.1.2" data-path="stat-background.html"><a href="stat-background.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>A.1.2</b> Variance and standard deviation</a></li>
-</ul></li>
-<li class="chapter" data-level="A.2" data-path="stat-background.html"><a href="stat-background.html#measures-of-association"><i class="fa fa-check"></i><b>A.2</b> Measures of association</a>
-<ul>
-<li class="chapter" data-level="A.2.1" data-path="stat-background.html"><a href="stat-background.html#linear-correlation-coefficent"><i class="fa fa-check"></i><b>A.2.1</b> Linear correlation coefficent</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html"><i class="fa fa-check"></i><b>B</b> Data sources and final report</a>
-<ul>
-<li class="chapter" data-level="B.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#data-sources"><i class="fa fa-check"></i><b>B.1</b> Data sources</a>
-<ul>
-<li class="chapter" data-level="B.1.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#federal-statistical-office"><i class="fa fa-check"></i><b>B.1.1</b> Federal Statistical Office</a></li>
-<li class="chapter" data-level="B.1.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#eurostat"><i class="fa fa-check"></i><b>B.1.2</b> eurostat</a></li>
-<li class="chapter" data-level="B.1.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#gapminder"><i class="fa fa-check"></i><b>B.1.3</b> gapminder</a></li>
-<li class="chapter" data-level="B.1.4" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#national-oceanic-and-atmospheric-administration-noaa"><i class="fa fa-check"></i><b>B.1.4</b> National Oceanic and Atmospheric Administration (NOAA)</a></li>
-<li class="chapter" data-level="B.1.5" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#more-data-sources"><i class="fa fa-check"></i><b>B.1.5</b> More data sources</a></li>
-</ul></li>
-<li class="chapter" data-level="B.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#research-proposal"><i class="fa fa-check"></i><b>B.2</b> Research proposal</a></li>
-<li class="chapter" data-level="B.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#structure-of-the-final-report"><i class="fa fa-check"></i><b>B.3</b> Structure of the final report</a>
-<ul>
-<li class="chapter" data-level="B.3.1" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#sturcture-of-the-working-directory"><i class="fa fa-check"></i><b>B.3.1</b> Sturcture of the working directory</a></li>
-<li class="chapter" data-level="B.3.2" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#download-and-save-data"><i class="fa fa-check"></i><b>B.3.2</b> Download and save data</a></li>
-<li class="chapter" data-level="B.3.3" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#structure-of-the-report"><i class="fa fa-check"></i><b>B.3.3</b> Structure of the report</a></li>
-</ul></li>
-<li class="chapter" data-level="B.4" data-path="daten-und-bericht.html"><a href="daten-und-bericht.html#evaluation-critera"><i class="fa fa-check"></i><b>B.4</b> Evaluation critera</a></li>
-</ul></li>
-<li class="chapter" data-level="C" data-path="additional-exercises.html"><a href="additional-exercises.html"><i class="fa fa-check"></i><b>C</b> Additional exercises</a>
-<ul>
-<li class="chapter" data-level="C.1" data-path="additional-exercises.html"><a href="additional-exercises.html#introduction-to-r-and-rstudio-1"><i class="fa fa-check"></i><b>C.1</b> Introduction to R and RStudio</a>
-<ul>
-<li class="chapter" data-level="C.1.1" data-path="additional-exercises.html"><a href="additional-exercises.html#rob1"><i class="fa fa-check"></i><b>C.1.1</b> Rob’s account book</a></li>
-<li class="chapter" data-level="C.1.2" data-path="additional-exercises.html"><a href="additional-exercises.html#rob2"><i class="fa fa-check"></i><b>C.1.2</b> Missing values</a></li>
-<li class="chapter" data-level="C.1.3" data-path="additional-exercises.html"><a href="additional-exercises.html#firstplot"><i class="fa fa-check"></i><b>C.1.3</b> Your very first plot</a></li>
-</ul></li>
-<li class="chapter" data-level="C.2" data-path="additional-exercises.html"><a href="additional-exercises.html#the-big-practical-importing-wrangling-summerizing-and-plotting"><i class="fa fa-check"></i><b>C.2</b> The big practical: importing, wrangling, summerizing and plotting</a>
-<ul>
-<li class="chapter" data-level="C.2.1" data-path="additional-exercises.html"><a href="additional-exercises.html#temperature-along-the-dutch-coast"><i class="fa fa-check"></i><b>C.2.1</b> Temperature along the Dutch coast</a></li>
-<li class="chapter" data-level="C.2.2" data-path="additional-exercises.html"><a href="additional-exercises.html#temperature-along-the-dutch-coast-revisited"><i class="fa fa-check"></i><b>C.2.2</b> Temperature along the Dutch coast, revisited</a></li>
-<li class="chapter" data-level="C.2.3" data-path="additional-exercises.html"><a href="additional-exercises.html#excel-data-turns-tidy"><i class="fa fa-check"></i><b>C.2.3</b> Excel data turns tidy</a></li>
-</ul></li>
-<li class="chapter" data-level="C.3" data-path="additional-exercises.html"><a href="additional-exercises.html#the-big-practical-statistical-inference"><i class="fa fa-check"></i><b>C.3</b> The big practical: statistical inference</a>
-<ul>
-<li class="chapter" data-level="C.3.1" data-path="additional-exercises.html"><a href="additional-exercises.html#species-richness-in-grasslands"><i class="fa fa-check"></i><b>C.3.1</b> Species richness in grasslands</a></li>
-<li class="chapter" data-level="C.3.2" data-path="additional-exercises.html"><a href="additional-exercises.html#soil-compaction"><i class="fa fa-check"></i><b>C.3.2</b> Soil compaction</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="D" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>D</b> Frequently and not-so-frequently asked questions</a>
-<ul>
-<li class="chapter" data-level="" data-path="faq.html"><a href="faq.html#what-is-the-difference-between-double-and-single-quotes"><i class="fa fa-check"></i>What is the difference between double <code>""</code> and single <code>''</code> quotes?</a></li>
-<li class="chapter" data-level="" data-path="faq.html"><a href="faq.html#when-do-we-use-the-pipe-operator-and-when-the-plus-sign-to-connect-lines-of-code"><i class="fa fa-check"></i>When do we use the pipe operator <code>%&gt;%</code> and when the plus sign <code>+</code> to connect lines of code?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="literature-1.html"><a href="literature-1.html"><i class="fa fa-check"></i>Literature</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Summer term 2025">Environmental Statistics</a>:
+        <small class="text-muted">Summer term 2025</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Environmental Statistics</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html">Preface</a></li>
+<li class="book-part">Part I: Explore data</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="using-r-markdown-for-reproducible-research.html"><span class="header-section-number">2</span> Using R Markdown for reproducible research</a></li>
+<li><a class="" href="what-is-data.html"><span class="header-section-number">3</span> What is data?</a></li>
+<li><a class="" href="import-visualize-and-explore-data.html"><span class="header-section-number">4</span> Import, visualize and explore data</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">5</span> Explorative workflow with tidyverse</a></li>
+<li class="book-part">Part II: Statistical inference</li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling and variability</a></li>
+<li><a class="" href="bootstrap.html"><span class="header-section-number">7</span> Bootstrap and confidence intervals</a></li>
+<li><a class="" href="hypothesis.html"><span class="header-section-number">8</span> Hypothesis tests versus effect size estimation</a></li>
+<li class="book-part">Part III: Statistical modelling</li>
+<li><a class="" href="lin-reg.html"><span class="header-section-number">9</span> Linear regression</a></li>
+<li><a class="" href="lin-reg-inference.html"><span class="header-section-number">10</span> Inference in linear regression</a></li>
+<li class="book-part">Part IV: Additional topics</li>
+<li><a class="" href="tsa.html"><span class="header-section-number">11</span> Introduction to time series analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="stat-background.html"><span class="header-section-number">A</span> Statistics refresher</a></li>
+<li><a class="" href="daten-und-bericht.html"><span class="header-section-number">B</span> Data sources and final report</a></li>
+<li><a class="" href="additional-exercises.html"><span class="header-section-number">C</span> Additional exercises</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">D</span> Frequently and not-so-frequently asked questions</a></li>
+<li><a class="" href="literature-1.html">Literature</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ChrisBogner/environmental_stat">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Environmental Statistics</h1>
-<h2 class="subtitle"><em>Summer term 2025</em></h2>
-<p class="author"><em>Christina Bogner, Marijn van der Meij</em></p>
-<p class="date"><em>2025-04-15</em></p>
+      </nav>
 </div>
-<div id="preface" class="section level1 unnumbered hasAnchor">
-<h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="preface" class="section level1 unnumbered">
+<h1>Preface<a class="anchor" aria-label="anchor" href="#preface"><i class="fas fa-link"></i></a>
+</h1>
 <blockquote>
 The most exciting phrase to hear in science, the one that heralds new discoveries, is not ‘Eureka!’ but ‘That’s funny…’
 <footer>
@@ -404,8 +110,9 @@ The most exciting phrase to hear in science, the one that heralds new discoverie
 <p>In this course, we will use the following tools:</p>
 <p><strong>ILIAS</strong>: the moodle platform at the UoC. You should all be registered there already.</p>
 <p><strong>Campuswire</strong>: a chat platform to decrease the number of emails and allow for a more natural exchange between participants and lecturer. You should have received an invitation email, if not, email me, please.</p>
-<div id="intended-learning-outcomes-ilos" class="section level2 unnumbered hasAnchor">
-<h2>Intended learning outcomes (ILOs)<a href="index.html#intended-learning-outcomes-ilos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="intended-learning-outcomes-ilos" class="section level2 unnumbered">
+<h2>Intended learning outcomes (ILOs)<a class="anchor" aria-label="anchor" href="#intended-learning-outcomes-ilos"><i class="fas fa-link"></i></a>
+</h2>
 <p>At the end of this course you should be able to</p>
 <div class="rmdoutcomes">
 <ul>
@@ -431,12 +138,14 @@ write a reproducible report.
 </ul>
 </div>
 </div>
-<div id="literature" class="section level2 unnumbered hasAnchor">
-<h2>Literature<a href="index.html#literature" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We will be using the book <a href="https://moderndive.com/">ModernDive: Statistical Inference via Data Science</a> <span class="citation">(<a href="#ref-ModernDive">Ismay and Kim 2021</a>)</span> mainly. Additionally, I will recommend from time to time <a href="https://r4ds.had.co.nz/">R for Data Science</a> <span class="citation">(<a href="#ref-r4ds">Wickham and Grolemund 2021</a>)</span> and <a href="https://www.openintro.org/book/os/">OpenIntro Statistics</a> <span class="citation">(<a href="#ref-Diez2019">Diez, Çetinkaya-Rundel, and Barr 2019</a>)</span>. For your report, you will do an additional literature search depending on your topic.</p>
+<div id="literature" class="section level2 unnumbered">
+<h2>Literature<a class="anchor" aria-label="anchor" href="#literature"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will be using the book <a href="https://moderndive.com/">ModernDive: Statistical Inference via Data Science</a> <span class="citation">(<a href="literature-1.html#ref-ModernDive">Ismay and Kim 2021</a>)</span> mainly. Additionally, I will recommend from time to time <a href="https://r4ds.had.co.nz/">R for Data Science</a> <span class="citation">(<a href="literature-1.html#ref-r4ds">Wickham and Grolemund 2021</a>)</span> and <a href="https://www.openintro.org/book/os/">OpenIntro Statistics</a> <span class="citation">(<a href="literature-1.html#ref-Diez2019">Diez, Çetinkaya-Rundel, and Barr 2019</a>)</span>. For your report, you will do an additional literature search depending on your topic.</p>
 </div>
-<div id="why-these-lecture-notes" class="section level2 unnumbered hasAnchor">
-<h2>Why these lecture notes<a href="index.html#why-these-lecture-notes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="why-these-lecture-notes" class="section level2 unnumbered">
+<h2>Why these lecture notes<a class="anchor" aria-label="anchor" href="#why-these-lecture-notes"><i class="fas fa-link"></i></a>
+</h2>
 <p>This document is a working and live document that will be updated during the course. It is not comprehensive, but should help you to navigate through the introduction to R and statistics smoothly.</p>
 <p>I will use different colour boxes</p>
 <div class="rmdinfo">
@@ -471,30 +180,30 @@ This is an exercise inside a chapter.
 <!-- Zusammenfassung -->
 <!-- ``` -->
 </div>
-<div id="acknowledgements" class="section level2 unnumbered hasAnchor">
-<h2>Acknowledgements<a href="index.html#acknowledgements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="acknowledgements" class="section level2 unnumbered">
+<h2>Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"><i class="fas fa-link"></i></a>
+</h2>
 <p>This document draws on the free material provided by</p>
 <ul>
-<li><p>ModernDive: <span class="citation">Ismay and Kim (<a href="#ref-ModernDive">2021</a>)</span> and their free Problem Sets authored by Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay (<a href="https://moderndive.github.io/moderndive_labs/index.html" class="uri">https://moderndive.github.io/moderndive_labs/index.html</a>)</p></li>
-<li><p>R for Data Science (r4ds): <span class="citation">Wickham and Grolemund (<a href="#ref-r4ds">2021</a>)</span></p></li>
-<li><p>Data Science in a Box (<a href="https://datasciencebox.org/" class="uri">https://datasciencebox.org/</a>) and the free book by <span class="citation">Diez, Çetinkaya-Rundel, and Barr (<a href="#ref-Diez2019">2019</a>)</span></p></li>
+<li><p>ModernDive: <span class="citation">Ismay and Kim (<a href="literature-1.html#ref-ModernDive">2021</a>)</span> and their free Problem Sets authored by Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay (<a href="https://moderndive.github.io/moderndive_labs/index.html" class="uri">https://moderndive.github.io/moderndive_labs/index.html</a>)</p></li>
+<li><p>R for Data Science (r4ds): <span class="citation">Wickham and Grolemund (<a href="literature-1.html#ref-r4ds">2021</a>)</span></p></li>
+<li><p>Data Science in a Box (<a href="https://datasciencebox.org/" class="uri">https://datasciencebox.org/</a>) and the free book by <span class="citation">Diez, Çetinkaya-Rundel, and Barr (<a href="literature-1.html#ref-Diez2019">2019</a>)</span></p></li>
 </ul>
-<p>One cannot thank those people enough for their contribution to the <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> community <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/></svg>!</p>
-<p><img src="https://imgs.xkcd.com/comics/statistics.png" style="width:70.0%" /></p>
+<p>One cannot thank those people enough for their contribution to the <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> community <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"></path></svg>!</p>
+<div class="inline-figure"><img src="https://imgs.xkcd.com/comics/statistics.png" style="width:70.0%"></div>
 <p>Credit: <a href="https://xkcd.com/2400/" class="uri">https://xkcd.com/2400/</a></p>
 <p><br></p>
 </div>
-<div id="reproducibility" class="section level2 unnumbered hasAnchor">
-<h2>Reproducibility<a href="index.html#reproducibility" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="reproducibility" class="section level2 unnumbered">
+<h2>Reproducibility<a class="anchor" aria-label="anchor" href="#reproducibility"><i class="fas fa-link"></i></a>
+</h2>
 <p>This book was written in <a href="https://www.rstudio.com/products/rstudio/">RStudio</a> using <a href="https://bookdown.org/">Bookdown</a> and compiled in R version 4.4.3 (2025-02-28 ucrt). You will need the following packages to reproduce the examples and to work through the exercises:</p>
-<table>
-<thead>
-<tr class="header">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
 <th align="left">package</th>
 <th align="left">version</th>
 <th align="left">source</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left">dabestr</td>
@@ -537,7 +246,7 @@ This is an exercise inside a chapter.
 <td align="left">CRAN (R 4.4.0)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>The complete information on the last session to build the book:</p>
 <pre><code>## R version 4.4.3 (2025-02-28 ucrt)
 ## Platform: x86_64-w64-mingw32/x64
@@ -547,8 +256,10 @@ This is an exercise inside a chapter.
 ## 
 ## 
 ## locale:
-## [1] LC_COLLATE=English_United Kingdom.utf8  LC_CTYPE=English_United Kingdom.utf8   
-## [3] LC_MONETARY=English_United Kingdom.utf8 LC_NUMERIC=C                           
+## [1] LC_COLLATE=English_United Kingdom.utf8 
+## [2] LC_CTYPE=English_United Kingdom.utf8   
+## [3] LC_MONETARY=English_United Kingdom.utf8
+## [4] LC_NUMERIC=C                           
 ## [5] LC_TIME=English_United Kingdom.utf8    
 ## 
 ## time zone: Europe/Amsterdam
@@ -558,20 +269,26 @@ This is an exercise inside a chapter.
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] DT_0.33           lubridate_1.9.4   forcats_1.0.0     stringr_1.5.1     dplyr_1.1.4       purrr_1.0.4      
-##  [7] readr_2.1.5       tidyr_1.3.1       tibble_3.2.1      ggplot2_3.5.1     tidyverse_2.0.0   kableExtra_1.4.0 
+##  [1] DT_0.33           lubridate_1.9.4   forcats_1.0.0     stringr_1.5.1    
+##  [5] dplyr_1.1.4       purrr_1.0.4       readr_2.1.5       tidyr_1.3.1      
+##  [9] tibble_3.2.1      ggplot2_3.5.1     tidyverse_2.0.0   kableExtra_1.4.0 
 ## [13] fontawesome_0.5.3
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] sass_0.4.9        generics_0.1.3    xml2_1.3.8        stringi_1.8.7     hms_1.1.3         digest_0.6.35    
-##  [7] magrittr_2.0.3    evaluate_1.0.3    grid_4.4.3        timechange_0.3.0  bookdown_0.42     fastmap_1.2.0    
-## [13] jsonlite_2.0.0    sessioninfo_1.2.3 viridisLite_0.4.2 scales_1.3.0      jquerylib_0.1.4   cli_3.6.2        
-## [19] rlang_1.1.3       munsell_0.5.1     withr_3.0.2       cachem_1.1.0      yaml_2.3.8        tools_4.4.3      
-## [25] tzdb_0.5.0        colorspace_2.1-1  vctrs_0.6.5       R6_2.6.1          lifecycle_1.0.4   htmlwidgets_1.6.4
-## [31] desc_1.4.3        pkgconfig_2.0.3   pillar_1.10.2     bslib_0.9.0       gtable_0.3.6      glue_1.8.0       
-## [37] systemfonts_1.2.2 xfun_0.52         tidyselect_1.2.1  tufte_0.13        rstudioapi_0.17.1 knitr_1.50       
-## [43] htmltools_0.5.8.1 rmarkdown_2.29    svglite_2.1.3     compiler_4.4.3</code></pre>
-<p><img src="figures/Cc-by-nc-sa_icon.svg" style="width:30.0%" /></p>
+##  [1] sass_0.4.9        generics_0.1.3    xml2_1.3.8        stringi_1.8.7    
+##  [5] hms_1.1.3         digest_0.6.35     magrittr_2.0.3    evaluate_1.0.3   
+##  [9] grid_4.4.3        timechange_0.3.0  bookdown_0.42     fastmap_1.2.0    
+## [13] jsonlite_2.0.0    sessioninfo_1.2.3 viridisLite_0.4.2 scales_1.3.0     
+## [17] jquerylib_0.1.4   cli_3.6.2         rlang_1.1.3       munsell_0.5.1    
+## [21] withr_3.0.2       cachem_1.1.0      yaml_2.3.8        tools_4.4.3      
+## [25] tzdb_0.5.0        memoise_2.0.1     colorspace_2.1-1  vctrs_0.6.5      
+## [29] R6_2.6.1          lifecycle_1.0.4   htmlwidgets_1.6.4 fs_1.6.5         
+## [33] desc_1.4.3        pkgconfig_2.0.3   pillar_1.10.2     bslib_0.9.0      
+## [37] gtable_0.3.6      glue_1.8.0        systemfonts_1.2.2 xfun_0.52        
+## [41] tidyselect_1.2.1  tufte_0.13        rstudioapi_0.17.1 knitr_1.50       
+## [45] htmltools_0.5.8.1 rmarkdown_2.29    svglite_2.1.3     compiler_4.4.3   
+## [49] downlit_0.4.4</code></pre>
+<div class="inline-figure"><img src="figures/Cc-by-nc-sa_icon.svg" style="width:30.0%"></div>
 <p>This work is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a></p>
 
 </div>
@@ -579,80 +296,44 @@ This is an exercise inside a chapter.
 
 
 
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div id="ref-Diez2019" class="csl-entry">
-Diez, David M, Mine Çetinkaya-Rundel, and Christopher D Barr. 2019. <em><span>OpenIntro Statistics</span></em>. Fourth.
-</div>
-<div id="ref-ModernDive" class="csl-entry">
-Ismay, Chester, and Albert Y. Kim. 2021. <em><span>ModernDive</span>: <span>Statistical Inference</span> via <span>Data Science</span></em>. <a href="https://moderndive.com/">https://moderndive.com/</a>.
-</div>
-<div id="ref-r4ds" class="csl-entry">
-Wickham, Hadley, and Garrett Grolemund. 2021. <em>R for <span>Data Science</span></em>. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
-</div>
-</div>
-            </section>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preface">Preface</a></li>
+<li><a class="nav-link" href="#intended-learning-outcomes-ilos">Intended learning outcomes (ILOs)</a></li>
+<li><a class="nav-link" href="#literature">Literature</a></li>
+<li><a class="nav-link" href="#why-these-lecture-notes">Why these lecture notes</a></li>
+<li><a class="nav-link" href="#acknowledgements">Acknowledgements</a></li>
+<li><a class="nav-link" href="#reproducibility">Reproducibility</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ChrisBogner/environmental_stat/blob/master/docs/index.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ChrisBogner/environmental_stat/edit/master/docs/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
-<a href="introduction-to-r-and-rstudio.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-05-12.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -664,7 +345,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

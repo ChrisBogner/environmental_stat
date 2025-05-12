@@ -200,7 +200,7 @@ Some calculations are better done on ungrouped data. Therefore, we remove the gr
 monthly_means <- ungroup(monthly_means)
 ```
 
-To plot the monthly data, we need a proper monthly date object. We will attribute the monthly means to the first of the respective month. Again, `lubridate` helps with this task. The function `parse_dat_time()` is a general function taking a character string and returning a date-time object. We need to "glue" the variables `year` and `month` together with `paste0()` (yes, it is a zero, not an O!) to form such a string and specify that `orders = 'ym'`, i.e. year before month. Finally, we `relocate()` the new variable `year_month` before the variable `year` for convenience (if not, it will be created as the last variable in the data set).
+To plot the monthly data, we need a proper monthly date object. We will attribute the monthly means to the first of the respective month. Again, `lubridate` helps with this task. The function `parse_date_time()` is a general function taking a character string and returning a date-time object. We need to "glue" the variables `year` and `month` together with `paste0()` (yes, it is a zero, not an O!) to form such a string and specify that `orders = 'ym'`, i.e. year before month. Finally, we `relocate()` the new variable `year_month` before the variable `year` for convenience (if not, it will be created as the last variable in the data set).
 
 ```{r}
 monthly_means <- monthly_means %>%
@@ -255,9 +255,7 @@ ggplot(monthly_means, aes(x = year_month, y = mean_T, ymin = mean_T - sd_T, ymax
 <ol class ="exercises">
 1. Plot the means and standard deviations of the air humidity instead of air temperature.
 
-1. Do the tutorials "Work with data" from the Primers collection by RStudio Cloud. You can access the tutorials here: https://rstudio.cloud/learn/primers/2
-
-1. Do the tutorials "Visualize Data" from the Primers collection by RStudio Cloud. You can access the tutorials here:https://rstudio.cloud/learn/primers/3
+1. Work through Chapter 3 of @ModernDive (https://moderndive.com/3-wrangling.html) and do the following Learning Checks: 3.1, 3.3, 3.7, 3.8 & 3.9. If you're having fun, you can also try 3.10 & 3.11. 
 </ol>
 
 ## Reading assignment
