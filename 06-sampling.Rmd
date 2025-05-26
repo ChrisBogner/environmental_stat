@@ -20,6 +20,7 @@ In this chapter, you will learn how to use a computer experiment to draw samples
 We will use the following libraries. The library `infer` is a dedicated package for *tidy* inference.
 ```{r, message = F, error = F}
 library(tidyverse)
+library(infer)
 library(moderndive)
 ```
 
