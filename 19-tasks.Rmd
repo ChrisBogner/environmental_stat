@@ -90,7 +90,7 @@ The file `r file.name("Temperatur.csv")` from the book by @Zuur2009a contains me
 ### Temperature along the Dutch coast, revisited
 1. Calculate the monthly means and standard deviations per monitoring station. Hint `group_by(Station, Month)`.
 1. Plot the means with an error band in different plots. Hint: use `facet_wrap())`.
-1. Save you graph as a pdf file.
+1. Save you graph as a pdf file. Use `{r, fig.height = 20}` in the heading of your chunk to display the figure correctly.
 
 
 ### Excel data turns tidy
@@ -125,9 +125,11 @@ wdi
 
 ## The big practical: statistical inference
 ### Species richness in grasslands
-You will work with grassland species monitoring data from the Yellowstone National Park provided by @Zuur2009a and @Sikkink2007. You can download the data set [here](https://highstat.com/index.php/a-beginner-s-guide-to-r). The researchers monitored the changes in the grassland communities over time and related them to environmental factors. Biodiversity is expressed as the number of different species per site (variable `R`). Approximately 90 species were identified in 8 transects in monitoring campaigns repeated every 4 to 10 years, resulting in 58 observations. The data is saved in the file `r file.name("Vegetation2.xls")`.   
+You will work with grassland species monitoring data from the Yellowstone National Park provided by @Zuur2009a and @Sikkink2007. You can download the data set [here](https://highstat.com/index.php/a-beginner-s-guide-to-r), check the different download links. 
 
-1. Read the data and explore its structure. Describe the type of variables. Does the type correspond to your expectation for the respective variable? Remember to set the name of the table sheet you want to read in `read_xls()`.
+The researchers monitored the changes in the grassland communities over time and related them to environmental factors. Biodiversity is expressed as the number of different species per site (variable `R`). Approximately 90 species were identified in 8 transects in monitoring campaigns repeated every 4 to 10 years, resulting in 58 observations. The data is saved in the file `r file.name("Vegetation2.xls")`.   
+
+1. Read the data and explore its structure. Describe the type of variables. Does the type correspond to your expectation for the respective variable? Remember to set the name of the table sheet you want to read in using `read_xls()`.
 
 1. Short explorative data analysis: calculate the number of measurements, the mean and the standard deviations of species number `R` per transect.
 
@@ -143,7 +145,7 @@ You will work with grassland species monitoring data from the Yellowstone Nation
 
 1. Put both graphs side-by-side and save them as a pdf (`ggsave()`).
 
-1. Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in `infer`.
+1. Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework of `infer`.
 
 1. If you calculate the 90% confidence interval instead of the 95% confidence interval, does the confidence interval increase or decrease? Why?
 

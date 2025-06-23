@@ -305,7 +305,7 @@ NA
 <ol style="list-style-type: decimal">
 <li>Calculate the monthly means and standard deviations per monitoring station. Hint <code>group_by(Station, Month)</code>.</li>
 <li>Plot the means with an error band in different plots. Hint: use <code>facet_wrap())</code>.</li>
-<li>Save you graph as a pdf file.</li>
+<li>Save you graph as a pdf file. Use <code>{r, fig.height = 20}</code> in the heading of your chunk to display the figure correctly.</li>
 </ol>
 </div>
 <div id="excel-data-turns-tidy" class="section level3" number="14.2.3">
@@ -348,9 +348,10 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <h3>
 <span class="header-section-number">C.3.1</span> Species richness in grasslands<a class="anchor" aria-label="anchor" href="#species-richness-in-grasslands"><i class="fas fa-link"></i></a>
 </h3>
-<p>You will work with grassland species monitoring data from the Yellowstone National Park provided by <span class="citation">Zuur, Ieno, and Meesters (<a href="literature-1.html#ref-Zuur2009a">2009</a>)</span> and <span class="citation">Sikkink et al. (<a href="literature-1.html#ref-Sikkink2007">2007</a>)</span>. You can download the data set <a href="https://highstat.com/index.php/a-beginner-s-guide-to-r">here</a>. The researchers monitored the changes in the grassland communities over time and related them to environmental factors. Biodiversity is expressed as the number of different species per site (variable <code>R</code>). Approximately 90 species were identified in 8 transects in monitoring campaigns repeated every 4 to 10 years, resulting in 58 observations. The data is saved in the file <span style="font-family: sans-serif; font-size: 12pt">Vegetation2.xls</span>.</p>
+<p>You will work with grassland species monitoring data from the Yellowstone National Park provided by <span class="citation">Zuur, Ieno, and Meesters (<a href="literature-1.html#ref-Zuur2009a">2009</a>)</span> and <span class="citation">Sikkink et al. (<a href="literature-1.html#ref-Sikkink2007">2007</a>)</span>. You can download the data set <a href="https://highstat.com/index.php/a-beginner-s-guide-to-r">here</a>, check the different download links.</p>
+<p>The researchers monitored the changes in the grassland communities over time and related them to environmental factors. Biodiversity is expressed as the number of different species per site (variable <code>R</code>). Approximately 90 species were identified in 8 transects in monitoring campaigns repeated every 4 to 10 years, resulting in 58 observations. The data is saved in the file <span style="font-family: sans-serif; font-size: 12pt">Vegetation2.xls</span>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Read the data and explore its structure. Describe the type of variables. Does the type correspond to your expectation for the respective variable? Remember to set the name of the table sheet you want to read in <code>read_xls()</code>.</p></li>
+<li><p>Read the data and explore its structure. Describe the type of variables. Does the type correspond to your expectation for the respective variable? Remember to set the name of the table sheet you want to read in using <code>read_xls()</code>.</p></li>
 <li><p>Short explorative data analysis: calculate the number of measurements, the mean and the standard deviations of species number <code>R</code> per transect.</p></li>
 <li><p>Plot the species number versus the variable <code>BARESOIL</code> (proportion of bare soil). Colour the dots by transect. Hint: convert the transect <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor()</a></code>.</p></li>
 <li><p>Add a smoothing line without a confidence band (<code>geom_smooth(se = FALSE)</code>) through all points independently of the transect. You might want to consult <a href="(https://ggplot2-book.org/collective-geoms.html)">Section 4.2</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020">Wickham 2020</a>)</span>. Hint: set the colour aes in <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> instead of in <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>.</p></li>
@@ -358,7 +359,7 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <li><p>Plot the species number as a time series by transect. Add both, points and lines. The size of the points should reflect the proportion of bare soil. You might want to consult <a href="(https://ggplot2-book.org/scale-other.html?q=size#size)">Section 12.1</a> in the book ggplot2 <span class="citation">(<a href="literature-1.html#ref-Wickham2020">Wickham 2020</a>)</span>. Think about where to set the aesthetic <code>size</code> in order to scale the points only.</p></li>
 <li><p>Add labels to your graph and assign it to an object.</p></li>
 <li><p>Put both graphs side-by-side and save them as a pdf (<code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>).</p></li>
-<li><p>Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework in <code>infer</code>.</p></li>
+<li><p>Calculate the linear Pearson correlation coefficient between the species number and the proportion of bare soil. Calculate the 95% confidence interval. Use the framework of <code>infer</code>.</p></li>
 <li><p>If you calculate the 90% confidence interval instead of the 95% confidence interval, does the confidence interval increase or decrease? Why?</p></li>
 </ol>
 </div>
@@ -419,7 +420,7 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-05-26.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-06-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
