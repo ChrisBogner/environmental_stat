@@ -1,0 +1,7 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+2667;Köln-Bonn;7.12;50.86;68;.05;19570901;19700320;Minimumthermometer;Temperaturmessung, konv.;eor;
+2667;Köln-Bonn;7.14;50.87;73;.05;19700321;19891114;Minimumthermometer;Temperaturmessung, konv.;eor;
+2667;Köln-Bonn;7.16;50.86;92;.05;19891115;20030720;Minimumthermometer;Temperaturmessung, konv.;eor;
+2667;Köln-Bonn;7.16;50.86;92;.05;19931201;20040423;PT 100 (Luft);Temperaturmessung, elektr.;eor;
+2667;Köln-Bonn;7.16;50.86;92;.05;20040424;20220322;PT 100 (Luft);Temperaturmessung, elektr.;eor;
+generiert: 30.03.2022 --  Deutscher Wetterdienst  --

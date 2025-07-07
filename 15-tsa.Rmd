@@ -30,12 +30,12 @@ library(Kendall)
 library(ggfortify)
 ```
 
-`rdwd`downloads a zipped file. First, we need to unzip it and then to read it in. Note that the NAs are coded as "-999".
+`rdwd`downloads a zipped file. First, we need to unzip it and then to read it in. Note that the NAs are coded as "-999". We store the results in a subfolder called `data/Koeln-Bonn/`.
 ```{r}
-unzip('data/daily_kl_historical_tageswerte_KL_02667_19570701_20211231_hist.zip', exdir = "data")
+unzip('data/daily_kl_historical_tageswerte_KL_02667_19570701_20211231_hist.zip', exdir = "data/Koeln-Bonn")
 
 
-clim <- read_delim('data/produkt_klima_tag_19570701_20211231_02667.txt', delim = ';', na = '-999', trim_ws = TRUE)
+clim <- read_delim('data/Koeln-Bonn/produkt_klima_tag_19570701_20211231_02667.txt', delim = ';', na = '-999', trim_ws = TRUE)
 
 clim
 ```
@@ -101,10 +101,10 @@ MannKendall(temp_yearly$mean_temp)
 ```
 The $p$ value is small. It is plausible to conclude that there is a positive trend because $\tau > 0$.
 
-By how much did the mean temperature increase per year? We calculated differences of yearly temperature of consecutive years.
+By how much did the mean temperature increase per year? We calculated differences of yearly temperature of consecutive years. We use the function `reframe()` instead of `summarize()`, because we don't summarize the data based on groups, but because we calculate differences between years, which will decrease the number of rows. Check the help function for more information. 
 ```{r}
 temp_diff <- temp_yearly %>% 
-  summarize(temp_diff = diff(mean_temp)) %>% 
+  reframe(temp_diff = diff(mean_temp)) %>% 
   mutate(year = temp_yearly$year[-1])
 
 mean_diff <- temp_diff %>% 
@@ -115,10 +115,12 @@ mean_diff <- temp_diff %>%
 Plot the distribution of differences.
 ```{r, out.width = "95%"}
 ggplot(temp_diff, aes(x = temp_diff)) +
-  geom_histogram(bins = 15, col = 'white')
+  geom_histogram(bins = 15, col = 'white') + 
+  geom_vline(aes(xintercept = mean_diff$mean, color = "mean difference")) + 
+  labs(x = "Temperature difference (°C)", color = "Line")
 ```
 
-We see a mean increase of `r round(as.numeric(mean_diff$mean), 2)` degrees per year.
+We see a mean increase of `r round(as.numeric(mean_diff$mean), 2)` degrees per year. For a robust estimate of the mean, with confidence interval, we could use bootstrapping. 
 
 ## Analysis of seasonality
 
@@ -191,7 +193,7 @@ General advice:
 
 ## Practice on your own!
 <ol class ="exercises">
-1. Select another location and repete the analysis of temperature.
+1. Select another location and repeat the analysis of temperature. Use the functions from the `rdwd` library (https://bookdown.org/brry/rdwd/).
 
 2. Analyse the precipitation data. Is there a trend? Instead of calculating mean values, you must sum the precipitations! Analyse the yearly sums only, no decomposition because seasonality is less important.
 </ol>

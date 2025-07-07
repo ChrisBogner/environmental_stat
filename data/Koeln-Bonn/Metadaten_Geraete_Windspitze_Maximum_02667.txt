@@ -1,0 +1,11 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+2667;Köln-Wahn;7.08;50.85;50;10;19570701;19570718;Universal-Windmesser 82;Windmessung;eor;
+2667;Köln-Wahn;7.08;50.85;50;20;19570719;19570831;Universal-Windmesser 82;Windmessung;eor;
+2667;Köln-Bonn;7.12;50.86;68;20;19570901;19581107;Universal-Windmesser 82;Windmessung;eor;
+2667;Köln-Bonn;7.12;50.86;68;10;19581108;19700320;Universal-Windschreiber 90;Windmessung, elektromechanisch;eor;
+2667;Köln-Bonn;7.14;50.87;73;10;19700321;19891114;Universal-Windschreiber 90;Windmessung, elektromechanisch;eor;
+2667;Köln-Bonn;7.16;50.86;92;10;19891115;19921207;Universal-Windschreiber 90;Windmessung, elektromechanisch;eor;
+2667;Köln-Bonn;7.16;50.86;92;10;19921208;20040423;Windsensor Classic 4.3303;Windmessung, elektr.;eor;
+2667;Köln-Bonn;7.16;50.86;92;10;20040424;20180121;Windsensor Classic 4.3303;Windmessung, elektr.;eor;
+2667;Köln-Bonn;7.16;50.86;92;10;20180122;20220322;Windsensor Classic 4.3303 (DWDSYN);Windmessung, elektr.;eor;
+generiert: 30.03.2022 --  Deutscher Wetterdienst  --

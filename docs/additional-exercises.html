@@ -258,7 +258,7 @@ NA
 </h3>
 <p>In particular in the beginning of learning R you should not forget why you are doing it. Because R is really beautiful and you want to analyse and learn from real data.</p>
 <p>Even if you don’t fully understand the following code, just copy and paste it into your .R file and let it run!</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jennybc/gapminder">gapminder</a></span><span class="op">)</span></span>
 <span></span>
@@ -320,14 +320,14 @@ NA
 <li>Read the excel file into R. Call it <code>wdi</code>.</li>
 <li>This data set is not tidy. In particular, the year is coded as column name. Those column names contain the year twice, once as a number and once as [YR NUMBER]. We rename the columns first.</li>
 </ol>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wdi</span> <span class="op">&lt;-</span> <span class="va">wdi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>.fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">x</span>, start <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>, .cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'20'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>What does this code mean? Read the help pages for functions <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub()</a></code> and <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Pivot the data set to a tidy format: variables in columns and measurements in rows. Use <code>pivot_longer</code>.</li>
 </ol>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wdi</span> <span class="op">&lt;-</span> <span class="va">wdi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">'year'</span>, values_to <span class="op">=</span> <span class="st">'indicator_value'</span>, cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'20'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span>
@@ -420,7 +420,7 @@ Why is it necessary to convert <code>year</code> with <code><a href="https://rdr
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-06-23.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-07-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

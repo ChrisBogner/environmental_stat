@@ -147,12 +147,12 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.uwo.ca/faculty/aim">Kendall</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span></code></pre></div>
-<p><code>rdwd</code>downloads a zipped file. First, we need to unzip it and then to read it in. Note that the NAs are coded as “-999”.</p>
+<p><code>rdwd</code>downloads a zipped file. First, we need to unzip it and then to read it in. Note that the NAs are coded as “-999”. We store the results in a subfolder called <code>data/Koeln-Bonn/</code>.</p>
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="st">'data/daily_kl_historical_tageswerte_KL_02667_19570701_20211231_hist.zip'</span>, exdir <span class="op">=</span> <span class="st">"data"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="st">'data/daily_kl_historical_tageswerte_KL_02667_19570701_20211231_hist.zip'</span>, exdir <span class="op">=</span> <span class="st">"data/Koeln-Bonn"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="va">clim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">'data/produkt_klima_tag_19570701_20211231_02667.txt'</span>, delim <span class="op">=</span> <span class="st">';'</span>, na <span class="op">=</span> <span class="st">'-999'</span>, trim_ws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">clim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">'data/Koeln-Bonn/produkt_klima_tag_19570701_20211231_02667.txt'</span>, delim <span class="op">=</span> <span class="st">';'</span>, na <span class="op">=</span> <span class="st">'-999'</span>, trim_ws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Rows: 23560 Columns: 19
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ";"
@@ -279,34 +279,29 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html">MannKendall</a></span><span class="op">(</span><span class="va">temp_yearly</span><span class="op">$</span><span class="va">mean_temp</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## tau = 0.452, 2-sided pvalue =1.1921e-07</code></pre>
 <p>The <span class="math inline">\(p\)</span> value is small. It is plausible to conclude that there is a positive trend because <span class="math inline">\(\tau &gt; 0\)</span>.</p>
-<p>By how much did the mean temperature increase per year? We calculated differences of yearly temperature of consecutive years.</p>
+<p>By how much did the mean temperature increase per year? We calculated differences of yearly temperature of consecutive years. We use the function <code><a href="https://dplyr.tidyverse.org/reference/reframe.html">reframe()</a></code> instead of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>, because we don’t summarize the data based on groups, but because we calculate differences between years, which will decrease the number of rows. Check the help function for more information.</p>
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temp_diff</span> <span class="op">&lt;-</span> <span class="va">temp_yearly</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>temp_diff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">mean_temp</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">temp_yearly</span><span class="op">$</span><span class="va">year</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
-## dplyr 1.1.0.
-## ℹ Please use `reframe()` instead.
-## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
-##   always returns an ungrouped data frame and adjust accordingly.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mean_diff</span> <span class="op">&lt;-</span> <span class="va">temp_diff</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html">reframe</a></span><span class="op">(</span>temp_diff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">mean_temp</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">temp_yearly</span><span class="op">$</span><span class="va">year</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mean_diff</span> <span class="op">&lt;-</span> <span class="va">temp_diff</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">temp_diff</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Plot the distribution of differences.</p>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">temp_diff</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">temp_diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">15</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">15</span>, col <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mean_diff</span><span class="op">$</span><span class="va">mean</span>, color <span class="op">=</span> <span class="st">"mean difference"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Temperature difference (°C)"</span>, color <span class="op">=</span> <span class="st">"Line"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-157-1.png" width="95%"></div>
-<p>We see a mean increase of 0.01 degrees per year.</p>
+<p>We see a mean increase of 0.01 degrees per year. For a robust estimate of the mean, with confidence interval, we could use bootstrapping.</p>
 </div>
 <div id="analysis-of-seasonality" class="section level2" number="11.4">
 <h2>
 <span class="header-section-number">11.4</span> Analysis of seasonality<a class="anchor" aria-label="anchor" href="#analysis-of-seasonality"><i class="fas fa-link"></i></a>
 </h2>
 <p>Summarize by month</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temp_monthly</span> <span class="op">&lt;-</span> <span class="va">clim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">MESS_DATUM</span><span class="op">)</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">MESS_DATUM</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean_temp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">TMK</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -315,7 +310,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by 'year(MESS_DATUM)'. You can override using
 ## the `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temp_monthly</span></span></code></pre></div>
 <pre><code>## # A tibble: 768 × 4
 ## # Groups:   year [64]
@@ -333,14 +328,14 @@
 ## 10 1958-10-15  1958    10     10.4 
 ## # ℹ 758 more rows</code></pre>
 <p>Plot monthly values. The seasonality seems rather constant over time.</p>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">temp_monthly</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">mean_temp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Date'</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">'Mean daily tempearture (°C)'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-159-1.png" width="95%"></div>
 <p>The overall seasonality.</p>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">temp_monthly</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">mean_temp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">month.abb</span><span class="op">)</span> <span class="op">+</span></span>
@@ -354,19 +349,19 @@
 </h2>
 <p>We can use a model to decompose the time series into a trend, seasonality and a rest (remainder) component. This model is additive, meaning that when you sum the components, you get back your original time series. The model assumes that the seasonality remains stable over time, i.e. it is inappropriate for climate change studies. However, it is still a good starting point.</p>
 <p>We need to convert the data to a <code>ts</code> (time series) object first. This type of objects keeps the data along with the time.</p>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">time_series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">temp_monthly</span><span class="op">$</span><span class="va">mean_temp</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1958</span>, <span class="fl">1</span><span class="op">)</span>, end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2021</span>, <span class="fl">12</span><span class="op">)</span>, frequency <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">time_series</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  Time-Series [1:768] from 1958 to 2022: 2.08 4.46 1.89 6.74 13.82 ...</code></pre>
 <p>We use the function <code><a href="https://rdrr.io/r/stats/decompose.html">decompose()</a></code> to decompose the time series.</p>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">components</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/decompose.html">decompose</a></span><span class="op">(</span><span class="va">time_series</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">components</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="environmental_stat_files/figure-html/unnamed-chunk-162-1.png" width="95%"></div>
 <p>Plot the trend using <code>ggfortify</code>. This library helps to transform the complicated object created by <code><a href="https://rdrr.io/r/stats/decompose.html">decompose()</a></code> to a <code>data.frame</code> which can be easily plotted with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>.</p>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html">fortify</a></span><span class="op">(</span><span class="va">components</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Index</span>, y <span class="op">=</span> <span class="va">trend</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span><span class="st">'rect'</span>, xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">'2006-01-01'</span><span class="op">)</span>, xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">'2007-12-31'</span><span class="op">)</span>, ymin <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>, ymax <span class="op">=</span> <span class="cn">Inf</span>, fill <span class="op">=</span> <span class="st">'red'</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
@@ -388,7 +383,7 @@
 <span class="header-section-number">11.6</span> Practice on your own!<a class="anchor" aria-label="anchor" href="#practice-on-your-own-10"><i class="fas fa-link"></i></a>
 </h2>
 <ol class="exercises"><ol style="list-style-type: decimal">
-<li><p>Select another location and repete the analysis of temperature.</p></li>
+<li><p>Select another location and repeat the analysis of temperature. Use the functions from the <code>rdwd</code> library (<a href="https://bookdown.org/brry/rdwd/" class="uri">https://bookdown.org/brry/rdwd/</a>).</p></li>
 <li><p>Analyse the precipitation data. Is there a trend? Instead of calculating mean values, you must sum the precipitations! Analyse the yearly sums only, no decomposition because seasonality is less important.</p></li>
 </ol></ol>
 </div>
@@ -438,7 +433,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-06-23.</p>
+    <p>"<strong>Environmental Statistics</strong>: Summer term 2025" was written by Christina Bogner, Marijn van der Meij. It was last built on 2025-07-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

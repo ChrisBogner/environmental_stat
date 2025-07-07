@@ -1,0 +1,19 @@
+Stations_ID;Stations_Name;Parameter;Von_Datum;Bis_Datum;Anzahl_Fehlwerte;Beschreibung;eor;                                                                                                              
+2667;Köln-Bonn;FM;20.01.1971;10.03.1971;50;;eor;                                                                                                                                                        
+2667;Köln-Bonn;FM;23.03.1993;23.03.1993;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FM;08.12.1993;09.12.1993;2;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FM;08.09.2001;09.09.2001;2;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FM;15.02.2006;16.02.2006;2;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FM;03.06.2016;08.06.2016;6;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FM;24.03.2021;24.03.2021;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;20.01.1971;10.03.1971;50;;eor;                                                                                                                                                        
+2667;Köln-Bonn;FX;23.03.1993;23.03.1993;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;15.06.1999;15.06.1999;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;08.08.2001;08.08.2001;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;22.08.2001;22.08.2001;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;08.09.2001;09.09.2001;2;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;30.01.2002;30.01.2002;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;13.03.2002;13.03.2002;1;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;03.06.2016;07.06.2016;5;;eor;                                                                                                                                                         
+2667;Köln-Bonn;FX;24.03.2021;24.03.2021;1;;eor;                                                                                                                                                         
+generiert: 30.03.2022 --  Deutscher Wetterdienst  --                                                                                                                                                    
