@@ -45,7 +45,7 @@ Before you write your final report, you need to submit a research proposal on IL
 
 
 ## Structure of the final report
-### Sturcture of the working directory
+### Structure of the working directory
 Create a new **R project** for your final report. You can find more about using projects [here](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects). A project helps you to structure your work properly.
 
 Inside your project folder, create a folder for Data and Notebooks, and additional folders if required.
@@ -76,7 +76,8 @@ You can write your report in groups of two, I even recommend to do so. In this c
 
 I don't impose any particular length for your report. However, please be *concise*.
 
-Knit the final report to an html-document. Think about whether you need to show all chunks, avoid redundancy. **Compress the whole project and submit everything!** Your report and your analysis must run on my computer so observe the paths!
+### Submission
+Knit the final report to an html-document. Think about whether you need to show all chunks, avoid redundancy. **Compress the whole R project into a zip-file and submit the zip-file!** Your report and your analysis must run on my computer, so make sure you use relative path directories and test that the script runs on different computers. Also add your draft and final proposal to the Notebooks folder before you submit it.
 
 
 

@@ -126,9 +126,10 @@ national-oceanic-and-atmospheric-administration-noaa
 more-data-sources
 research-proposal
 structure-of-the-final-report
-sturcture-of-the-working-directory
+structure-of-the-working-directory
 download-and-save-data
 structure-of-the-report
+submission
 evaluation-critera
 additional-exercises
 introduction-to-r-and-rstudio-1
